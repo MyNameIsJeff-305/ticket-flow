@@ -1,5 +1,18 @@
 {
-  "dependencies": {
-    "express-validator": "^7.2.0"
-  }
+  "name": "ticket-flow",
+  "version": "1.0.0",
+  "description": "TicketFlow is an intuitive and powerful ticket management system designed specifically for IT businesses. With streamlined workflows, real-time tracking, and comprehensive reporting features, TicketFlow ensures that IT support teams can efficiently manage tasks, resolve issues faster, and provide exceptional service. From ticket creation to resolution, TicketFlow keeps your IT operations organized, helping you stay on top of all support requests and improve customer satisfaction.",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "install": "npm --prefix backend install backend",
+    "dev:backend": "npm install --prefix backend start",
+    "sequelize": "npm run --prefix backend sequelize",
+    "sequelize-cli": "npm run --prefix backend sequelize-cli",
+    "start": "npm start --prefix backend",
+    "build": "npm run --prefix backend build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
