@@ -6,7 +6,7 @@ TicketFlow is an intuitive and powerful ticket management system designed specif
 
 ![db-diagram]
 
-[db-diagram]: ./images/db_diagram.png
+[db-diagram]: ./images/diagram.png
 
 ## API Documentation
 
@@ -512,15 +512,15 @@ Updates and returns an existing ticket.
   }
   ```
 - Error Response: Couldn't find a Ticket based on the specified id
-    - Status Code: 404
-    - Headers:
-        - Content-Type: application/json
-    - Body:
-    ```json
-    {
-        "message": "Ticket couldn't be found
-    }
-    ```
+  - Status Code: 404
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+  ```json
+  {
+      "message": "Ticket couldn't be found
+  }
+  ```
 
 ### Delete a Ticket
 
@@ -529,28 +529,296 @@ Deletes an existing Ticket.
 - Require Authentication: true
 - Require proper Authorization: Ticket must belong to the current user
 - Request
-    - Method: DELETE
-    - URL: `/api/tickets/:ticketId`
-    - Body: none
+
+  - Method: DELETE
+  - URL: `/api/tickets/:ticketId`
+  - Body: none
 
 - Successful Response
-    - Status Code: 200
+
+  - Status Code: 200
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+
+  ```json
+  {
+    "message": "Successfully Deleted"
+  }
+  ```
+
+- Error Response: Couldn't find a TIcket with the specified id
+  - Status Code: 404
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+  ```json
+  {
+    "message": "Ticket couldn't be found"
+  }
+  ```
+
+## Parts
+
+### Get All Parts
+
+Returns all the Parts
+
+- Require Authentication: true
+- Request
+
+  - Method: GET
+  - URL: `/api/parts`
+  - Body: none
+
+- Successful Response
+  - Status Code: 200
+  - Headers: - Content-Type: application/json
+    Body:
+  ```json
+  {
+    "Parts": [
+      {
+        "id": 1,
+        "name": "Hard Drive",
+        "description": "512 Gb SSD Hard Drive",
+        "imageUrl": "https://www.westerndigital.com/content/dam/store/en-us/assets/products/internal-storage/wd-blue-desktop-sata-hdd/gallery/wd-blue-pc-desktop-hard-drive-500gb.png.thumb.1280.1280.png",
+        "Ticket": [
+          {
+            "title": "My printer doesn't work",
+            "description": "I am having a problem with my computer, it seems not be recognizing the printer, please I need your help",
+            "checkIn": null,
+            "checkOut": null,
+            "status": "Created",
+            "createdBy": 1,
+            "takenBy": 4
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "Keyboard",
+        "description": "Logitech wireless Keyboard",
+        "imageUrl": "https://www.bhphotovideo.com/images/images500x500/logitech_920_010547_mx_mechanical_wireless_keyboard_1653360638_1703337.jpg",
+        "Ticket": [
+          {
+            "title": "My printer doesn't work",
+            "description": "I am having a problem with my computer, it seems not be recognizing the printer, please I need your help",
+            "checkIn": null,
+            "checkOut": null,
+            "status": "Created",
+            "createdBy": 1,
+            "takenBy": 4
+          }
+        ]
+      }
+    ]
+  }
+  ```
+
+### Get all Parts by a Ticket's Id
+
+Returns all the Parts that belong to a spot specified by id
+
+- Require Authentication: false
+- Request
+  - Method: GET
+  - URL: `/api/tickets/:ticketId/parts`
+  - Body: none
+- Successful Response
+
+  - Status Code: 200
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+
+  ```json
+  {
+    "Parts": [
+      {
+        "id": 1,
+        "name": "Hard Drive",
+        "description": "512 Gb SSD Hard Drive",
+        "imageUrl": "https://www.westerndigital.com/content/dam/store/en-us/assets/products/internal-storage/wd-blue-desktop-sata-hdd/gallery/wd-blue-pc-desktop-hard-drive-500gb.png.thumb.1280.1280.png",
+        "ticketId": 1
+      },
+      {
+        "id": 2,
+        "name": "Keyboard",
+        "description": "Logitech wireless Keyboard",
+        "imageUrl": "https://www.bhphotovideo.com/images/images500x500/logitech_920_010547_mx_mechanical_wireless_keyboard_1653360638_1703337.jpg",
+        "ticketId": 2
+      }
+    ]
+  }
+  ```
+
+- Error Response: Couldn't find a Ticket based on the specified Id
+  - Status Code: 404
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+  ```json
+  {
+    "message": "Ticket couldn't be found"
+  }
+  ```
+
+### Create a Part for a Ticket based on Ticket'sId
+
+Create and returns a new part
+
+- Require Authentication: true
+- Request
+
+  - Mehotd: POST
+  - URL: `/api/tickets/:ticketId/parts`
+  - Headers
+    - Content-Type: application/json
+  - Body:
+
+  ```json
+  {
+    "name": "Mouse",
+    "description": "This is a gaming mouse",
+    "imageUrl": "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/9a1ef713-7749-4902-b7e9-beccb9793837.jpg"
+  }
+  ```
+
+- Successful Response
+
+  - Status Code: 201
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+
+  ```json
+  {
+    "id": 2,
+    "name": "Keyboard",
+    "description": "Logitech wireless Keyboard",
+    "imageUrl": "https://www.bhphotovideo.com/images/images500x500/logitech_920_010547_mx_mechanical_wireless_keyboard_1653360638_1703337.jpg",
+    "ticketId": 2
+  }
+  ```
+
+  - Error Response: Body Validation Errors
+    - Status Code: 400
     - Headers:
-        - Content-Type: application/json
+      - Content-Type: application/json
     - Body:
     ```json
     {
-        "message": "Successfully Deleted"
+      "message": "Bad Request",
+      "errors": {
+        "name": "Name is Required",
+        "imageUrl": "ImageUrl is required"
+      }
     }
     ```
 
-- Error Response: Couldn't find a TIcket with the specified id
-    - Status Code: 404
-    - Headers:
-        - Content-Type: application/json
-    - Body:
-    ```json
-    {
-        "message": "Ticket couldn't be found"
+- Error Response: Couldn't find a Ticket with the specified id
+  - Status Code: 404
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+  ```json
+  {
+    "message": "Ticket couldn't be found"
+  }
+  ```
+
+### Edit a Part
+
+Update and return an existing part
+
+- Require Authentication: true
+- Request
+
+  - Method: Put
+  - URL: `api/parts/:partId`
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+
+  ```json
+  {
+    "name": "Webcam",
+    "description": "A Dell HD Webcam",
+    "imageUrl": "https://i5.walmartimages.com/asr/b109f053-d441-4067-8e1f-3900cd130851.83347aafc41e87a584e0bb5147f8dc9b.jpeg?odnHeight=768&odnWidth=768&odnBg=FFFFFF"
+  }
+  ```
+
+- Successful Response
+
+  - Status Code: 200
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+
+  ```json
+  {
+    "id": 2,
+    "name": "Webcam",
+    "description": "A Dell HD Webcam",
+    "imageUrl": "https://i5.walmartimages.com/asr/b109f053-d441-4067-8e1f-3900cd130851.83347aafc41e87a584e0bb5147f8dc9b.jpeg?odnHeight=768&odnWidth=768&odnBg=FFFFFF",
+    "ticketId": 2
+  }
+  ```
+
+- Error Response: Body Validation Errors
+  - Status Code: 300
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+  ```json
+  {
+    "message": "Bad Request",
+    "errors": {
+      "name": "Name is Required",
+      "imageUrl": "Image URL is required"
     }
-    ```
+  }
+  ```
+- Error response: Couldn't find a Part with the specified id
+  - Status Code: 404
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+  ```json
+  {
+    "message": "Part couldn't be found"
+  }
+  ```
+
+### Delete a Part
+
+Delete an existing Part.
+
+- Require Authentication: true
+- Require Authorization: Ticket where Part belongs must belong to the current User
+- Request
+  - Method: DELETE
+  - URL: `/api/parts/:partId`
+  - Body: none
+- Successful Response
+  - Status Code: 200
+  - Headers:
+    - Content-Type: application/json
+  - Body
+  ```json
+  {
+    "message": "Successfully Deleted"
+  }
+  ```
+- Error Response: Couldn't find a Part with the specified Id
+  - Status Code: 404
+  - Headers:
+    - Content-Type: application/json
+  - Body
+  ```json
+  {
+    "message": "Part couldn't be found"
+  }
+  ```
+
