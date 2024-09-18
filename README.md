@@ -822,3 +822,216 @@ Delete an existing Part.
   }
   ```
 
+## Notes
+
+### Get all Notes of the Current User
+
+Returns all the notes written by the current user.
+
+- Require Authentication: true
+- Request
+    - Method: GET
+    - URL: `/api/notes/current`
+    - Body: none
+- Successful Response
+    - Status Code: 200
+    - Headers:
+        - Content-Type: application/json
+    - Body:
+    ```json
+    {
+        "Notes": [
+            {
+                "note": "This is a note for Processing the Ticket",
+                "ticketId": 1
+            },
+            {
+                "note": "This is a note for Processing the Ticket",
+                "ticketId": 2
+            },
+            {
+                "note": "This is a note for Processing the Ticket",
+                "ticketId": 3
+            }
+        ]
+    }
+    ```
+
+### Get All the Notes for a Specified Ticket
+
+Return all the Notes for a ticket specified by id
+
+- Require Authentication: true
+- Request
+    - Method: GET
+    - URL: `/api/tickets/:ticketId/notes`
+    - Body: none
+- Successful Response: 
+    - Status Code: 200
+    - Headers:
+        - Content-Type: application/json
+    - Body:
+    ```json
+    {
+        "Notes": [
+            {
+                "note": "This is a note for Processing the Ticket",
+                "userId": 1
+            },
+            {
+                "note": "This is a note for Processing the Ticket",
+                "userId": 2
+            },
+            {
+                "note": "This is a note for Processing the Ticket",
+                "userId": 1
+            }
+        ]
+    }
+    ```
+- Error Response: Couldn't find the Ticket
+    - Status Code: 404
+    - Headers:
+        - Content-Type: application/json
+    - Body:
+    ```json
+    {
+        "message": "Ticket couldn't be Found"
+    }
+    ```
+
+### Create a Note for a Ticket based on the Ticket's Id
+
+Create and return a new Note for a Ticket based on the specified id.
+- Require Authentication: true
+- Request
+    - Method: POST
+    - URL: `/api/tickets/:ticketId/notes`
+    - Headers:
+        - Content-Type: application/json
+    - Body:
+    ```json
+    {
+        "note": "I need urgent help with this"
+    }
+    ```
+- Successful Response
+    - Status Code: 201
+    - Headers:
+        - Content-Type: application/json
+    - Body:
+    ```json
+    {
+        "id": 1,
+        "userId": 1,
+        "ticketId": 1,
+        "note": "Hi! This is a note",
+    }
+    ```
+- Error Response: Body Validation Errors
+    - Status Code: 400
+    - Headers:
+        - Content-Type: application/json
+    - Body:
+    ```json
+    {
+        "message": "Bad Request",
+        "errors": {
+            "note": "Note text is required"
+        }
+    }
+    ```
+- Error Response: Couldn't find a Ticket with the specified id
+    - Status Code: 404
+    - Headers:
+        - Content-Type: application/json
+    - Body:
+    ```json
+    {
+        "message": "Ticket couldn't be found"
+    }
+    ```
+### Edit a Note
+
+Update and return an existing review
+- Require Authentication: true
+- Require proper Authorization: Note must belong to the current user
+- Request
+    - Method: PUT
+    - URL: `/api/notes/:noteId`
+    - Headers:
+        - Content-Type: application/json
+    - Body:
+    ```json
+    {
+        "note": "This is an awesome note"
+    }
+    ```
+- Successful Response
+    - Status Code: 200
+    - Headers
+        - Content-Type: application/json
+    - Body
+    ```json
+    {
+        "id": 1,
+        "note": "This is an awesome note",
+        "ticketId": 1,
+        "userId": 1
+    }
+    ```
+
+- Error Response: Body Validation Errors
+    - Status Code: 400
+    - Headers:
+        - Content-Type: application/json
+    - Body:
+    ```json
+    {
+        "message": "Bad Request",
+        "errors": {
+            "note": "Note Text is required"
+        }
+    }
+    ```
+
+- Error Response: Couldn't find a note with the specified id
+    - Status Code: 404
+    - Headers:
+        - Content-Type: application/json
+    - Body:
+    ```json
+    {
+        "message": "Note couldn't be found"
+    }
+    ```
+
+### Delete a Review
+
+Delete an existing review.
+- Require Authentication: true
+- Require Proper Authorization: Note must belong to the current user
+- Request:
+    - Method: DELETE
+    - URL: `/api/notes/:notesId`
+    - Body: none
+- Successful Response
+    - Status Code: 200
+    - Headers:
+        - Content-Type; application/json
+    - Body:
+    ```json
+    {
+        "message": "Successfully Deleted"
+    }
+    ```
+- Error Response: Couldn't find a Note with the specified id
+    - Status Code: 404
+    - Headers:
+        - Content-Type: application/json
+    - Body:
+    ```json
+    {
+        "message": "Note couldn't be found"
+    }
+    ```
