@@ -180,11 +180,9 @@ user's information.
     {
       "firstName": "John",
       "lastName": "Smith",
-      "companyName": "Company Name",
       "email": "john.smith@gmail.com",
       "username": "JohnSmith",
-      "password": "secret password",
-      "role": "employee"
+      "password": "secret password"
     }
     ```
 
@@ -201,10 +199,8 @@ user's information.
         "id": 1,
         "firstName": "John",
         "lastName": "Smith",
-        "companyName": "Company Name",
         "email": "john.smith@gmail.com",
-        "username": "JohnSmith",
-        "role": "employee"
+        "username": "JohnSmith"
       }
     }
     ```
@@ -255,8 +251,7 @@ user's information.
         "email": "Invalid email",
         "username": "Username is required",
         "firstName": "First Name is required",
-        "lastName": "Last Name is required",
-        "companyName": "Company Name is required"
+        "lastName": "Last Name is required"
       }
     }
     ```
@@ -285,7 +280,7 @@ Returns all the Tickets.
       {
         "id": 1,
         "createdBy": 1,
-        "takenBy": null,
+        "client": null,
         "title": "My printer doesn't work",
         "description": "I am having a problem with my computer, it seems not be recognizing the printer, please I need your help",
         "checkIn": null,
@@ -319,7 +314,7 @@ Returns all the Tickets taken by the Current User.
       {
         "id": 1,
         "createdBy": 1,
-        "takenBy": null,
+        "client": null,
         "title": "My printer doesn't work",
         "description": "I am having a problem with my computer, it seems not be recognizing the printer, please I need your help",
         "checkIn": null,
@@ -360,10 +355,11 @@ Returns the details of a Ticket specified by its id.
       "firstName": "Demo",
       "lastName": "User"
     },
-    "TakenBy": {
+    "Client": {
       "id": 4,
       "firstName": "Janet",
-      "lastName": "Doe"
+      "lastName": "Doe",
+      "companyName": "JD Tech"
     },
     "Parts": [
       {
@@ -378,7 +374,11 @@ Returns the details of a Ticket specified by its id.
         "description": "Logitech wireless Keyboard",
         "imageUrl": "https://www.bhphotovideo.com/images/images500x500/logitech_920_010547_mx_mechanical_wireless_keyboard_1653360638_1703337.jpg"
       }
-    ]
+    ],
+    "Status": {
+      "name": "Pending",
+      "color": "#00FF00"
+    }
   }
   ```
 
@@ -398,7 +398,8 @@ Creates and returns a new Ticket.
   ```json
   {
     "title": "My printer doesn't work",
-    "description": "I am having a problem with my computer, it seems not be recognizing the printer, please I need your help"
+    "description": "I am having a problem with my computer, it seems not be recognizing the printer, please I need your help",
+    "clientId": 1
   }
   ```
 
@@ -418,6 +419,12 @@ Creates and returns a new Ticket.
       "id": 1,
       "firstName": "Demo",
       "lastName": "User"
+    },
+    "Client": {
+      "id": 4,
+      "firstName": "Janet",
+      "lastName": "Doe",
+      "companyName": "JD Tech"
     }
   }
   ```
@@ -455,6 +462,19 @@ Create and return a new Part for a Spot specified by id.
     "imageUrl": "https://www.westerndigital.com/content/dam/store/en-us/assets/products/internal-storage/wd-blue-desktop-sata-hdd/gallery/wd-blue-pc-desktop-hard-drive-500gb.png.thumb.1280.1280.png"
   }
   ```
+- Successful Response
+  - Status Code: 200
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+  ```json
+  {
+    "name": "Hard Drive",
+    "description": "A 512 Gb SSD Drive",
+    "ticketId": 1,
+    "imageUrl": "https://www.westerndigital.com/content/dam/store/en-us/assets/products/internal-storage/wd-blue-desktop-sata-hdd/gallery/wd-blue-pc-desktop-hard-drive-500gb.png.thumb.1280.1280.png"
+  }
+  ```
 
 ### Edit a Ticket
 
@@ -473,7 +493,6 @@ Updates and returns an existing ticket.
     "title": "My printer doesn't work",
     "description": "I am having a problem with my computer, it seems not be recognizing the printer, please I need your help",
     "status": "Created",
-    "createdBy": 1,
     "checkIn": "2024-04-01",
     "checkOut": "2024-05-03",
     "status": "completed"
@@ -489,7 +508,6 @@ Updates and returns an existing ticket.
     "title": "My printer doesn't work",
     "description": "I am having a problem with my computer, it seems not be recognizing the printer, please I need your help",
     "status": "Created",
-    "createdBy": 1,
     "checkIn": "2024-04-01",
     "checkOut": "2024-05-03",
     "status": "completed"
@@ -518,7 +536,7 @@ Updates and returns an existing ticket.
   - Body:
   ```json
   {
-      "message": "Ticket couldn't be found
+    "message": "Ticket couldn't be found"
   }
   ```
 
@@ -581,36 +599,16 @@ Returns all the Parts
       {
         "id": 1,
         "name": "Hard Drive",
+        "ticketId": 1,
         "description": "512 Gb SSD Hard Drive",
-        "imageUrl": "https://www.westerndigital.com/content/dam/store/en-us/assets/products/internal-storage/wd-blue-desktop-sata-hdd/gallery/wd-blue-pc-desktop-hard-drive-500gb.png.thumb.1280.1280.png",
-        "Ticket": [
-          {
-            "title": "My printer doesn't work",
-            "description": "I am having a problem with my computer, it seems not be recognizing the printer, please I need your help",
-            "checkIn": null,
-            "checkOut": null,
-            "status": "Created",
-            "createdBy": 1,
-            "takenBy": 4
-          }
-        ]
+        "imageUrl": "https://www.westerndigital.com/content/dam/store/en-us/assets/products/internal-storage/wd-blue-desktop-sata-hdd/gallery/wd-blue-pc-desktop-hard-drive-500gb.png.thumb.1280.1280.png"
       },
       {
         "id": 2,
         "name": "Keyboard",
+        "ticketId": 2,
         "description": "Logitech wireless Keyboard",
-        "imageUrl": "https://www.bhphotovideo.com/images/images500x500/logitech_920_010547_mx_mechanical_wireless_keyboard_1653360638_1703337.jpg",
-        "Ticket": [
-          {
-            "title": "My printer doesn't work",
-            "description": "I am having a problem with my computer, it seems not be recognizing the printer, please I need your help",
-            "checkIn": null,
-            "checkOut": null,
-            "status": "Created",
-            "createdBy": 1,
-            "takenBy": 4
-          }
-        ]
+        "imageUrl": "https://www.bhphotovideo.com/images/images500x500/logitech_920_010547_mx_mechanical_wireless_keyboard_1653360638_1703337.jpg"
       }
     ]
   }
@@ -647,7 +645,7 @@ Returns all the Parts that belong to a spot specified by id
         "name": "Keyboard",
         "description": "Logitech wireless Keyboard",
         "imageUrl": "https://www.bhphotovideo.com/images/images500x500/logitech_920_010547_mx_mechanical_wireless_keyboard_1653360638_1703337.jpg",
-        "ticketId": 2
+        "ticketId": 1
       }
     ]
   }
@@ -664,14 +662,14 @@ Returns all the Parts that belong to a spot specified by id
   }
   ```
 
-### Create a Part for a Ticket based on Ticket'sId
+### Create a Part for a Ticket based on Ticket's Id
 
 Create and returns a new part
 
 - Require Authentication: true
 - Request
 
-  - Mehotd: POST
+  - Method: POST
   - URL: `/api/tickets/:ticketId/parts`
   - Headers
     - Content-Type: application/json
@@ -830,32 +828,35 @@ Returns all the notes written by the current user.
 
 - Require Authentication: true
 - Request
-    - Method: GET
-    - URL: `/api/notes/current`
-    - Body: none
+  - Method: GET
+  - URL: `/api/notes/current`
+  - Body: none
 - Successful Response
-    - Status Code: 200
-    - Headers:
-        - Content-Type: application/json
-    - Body:
-    ```json
-    {
-        "Notes": [
-            {
-                "note": "This is a note for Processing the Ticket",
-                "ticketId": 1
-            },
-            {
-                "note": "This is a note for Processing the Ticket",
-                "ticketId": 2
-            },
-            {
-                "note": "This is a note for Processing the Ticket",
-                "ticketId": 3
-            }
-        ]
-    }
-    ```
+  - Status Code: 200
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+  ```json
+  {
+    "Notes": [
+      {
+        "note": "This is a note for Processing the Ticket",
+        "ticketId": 1,
+        "userId": 1
+      },
+      {
+        "note": "This is a note for Processing the Ticket",
+        "ticketId": 2,
+        "userId": 1
+      },
+      {
+        "note": "This is a note for Processing the Ticket",
+        "ticketId": 3,
+        "userId": 1
+      }
+    ]
+  }
+  ```
 
 ### Get All the Notes for a Specified Ticket
 
@@ -863,175 +864,433 @@ Return all the Notes for a ticket specified by id
 
 - Require Authentication: true
 - Request
-    - Method: GET
-    - URL: `/api/tickets/:ticketId/notes`
-    - Body: none
-- Successful Response: 
-    - Status Code: 200
-    - Headers:
-        - Content-Type: application/json
-    - Body:
-    ```json
-    {
-        "Notes": [
-            {
-                "note": "This is a note for Processing the Ticket",
-                "userId": 1
-            },
-            {
-                "note": "This is a note for Processing the Ticket",
-                "userId": 2
-            },
-            {
-                "note": "This is a note for Processing the Ticket",
-                "userId": 1
-            }
-        ]
-    }
-    ```
+  - Method: GET
+  - URL: `/api/tickets/:ticketId/notes`
+  - Body: none
+- Successful Response:
+  - Status Code: 200
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+  ```json
+  {
+    "Notes": [
+      {
+        "note": "This is a note for Processing the Ticket",
+        "ticketId": 1,
+        "userId": 1
+      },
+      {
+        "note": "This is a note for Processing the Ticket",
+        "ticketId": 1,
+        "userId": 2
+      },
+      {
+        "note": "This is a note for Processing the Ticket",
+        "ticketId": 1,
+        "userId": 1
+      }
+    ]
+  }
+  ```
 - Error Response: Couldn't find the Ticket
-    - Status Code: 404
-    - Headers:
-        - Content-Type: application/json
-    - Body:
-    ```json
-    {
-        "message": "Ticket couldn't be Found"
-    }
-    ```
+  - Status Code: 404
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+  ```json
+  {
+    "message": "Ticket couldn't be Found"
+  }
+  ```
 
 ### Create a Note for a Ticket based on the Ticket's Id
 
 Create and return a new Note for a Ticket based on the specified id.
+
 - Require Authentication: true
 - Request
-    - Method: POST
-    - URL: `/api/tickets/:ticketId/notes`
-    - Headers:
-        - Content-Type: application/json
-    - Body:
-    ```json
-    {
-        "note": "I need urgent help with this"
-    }
-    ```
+  - Method: POST
+  - URL: `/api/tickets/:ticketId/notes`
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+  ```json
+  {
+    "note": "I need urgent help with this"
+  }
+  ```
 - Successful Response
-    - Status Code: 201
-    - Headers:
-        - Content-Type: application/json
-    - Body:
-    ```json
-    {
-        "id": 1,
-        "userId": 1,
-        "ticketId": 1,
-        "note": "Hi! This is a note",
-    }
-    ```
+  - Status Code: 201
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+  ```json
+  {
+    "id": 1,
+    "userId": 1,
+    "ticketId": 1,
+    "note": "Hi! This is a note"
+  }
+  ```
 - Error Response: Body Validation Errors
-    - Status Code: 400
-    - Headers:
-        - Content-Type: application/json
-    - Body:
-    ```json
-    {
-        "message": "Bad Request",
-        "errors": {
-            "note": "Note text is required"
-        }
+  - Status Code: 400
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+  ```json
+  {
+    "message": "Bad Request",
+    "errors": {
+      "note": "Note text is required"
     }
-    ```
+  }
+  ```
 - Error Response: Couldn't find a Ticket with the specified id
-    - Status Code: 404
-    - Headers:
-        - Content-Type: application/json
-    - Body:
-    ```json
-    {
-        "message": "Ticket couldn't be found"
-    }
-    ```
+  - Status Code: 404
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+  ```json
+  {
+    "message": "Ticket couldn't be found"
+  }
+  ```
+
 ### Edit a Note
 
 Update and return an existing review
+
 - Require Authentication: true
 - Require proper Authorization: Note must belong to the current user
 - Request
-    - Method: PUT
-    - URL: `/api/notes/:noteId`
-    - Headers:
-        - Content-Type: application/json
-    - Body:
-    ```json
-    {
-        "note": "This is an awesome note"
-    }
-    ```
+  - Method: PUT
+  - URL: `/api/notes/:noteId`
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+  ```json
+  {
+    "note": "This is an awesome note"
+  }
+  ```
 - Successful Response
-    - Status Code: 200
-    - Headers
-        - Content-Type: application/json
-    - Body
-    ```json
-    {
-        "id": 1,
-        "note": "This is an awesome note",
-        "ticketId": 1,
-        "userId": 1
-    }
-    ```
+
+  - Status Code: 200
+  - Headers
+    - Content-Type: application/json
+  - Body
+
+  ```json
+  {
+    "id": 1,
+    "note": "This is an awesome note",
+    "ticketId": 1,
+    "userId": 1
+  }
+  ```
 
 - Error Response: Body Validation Errors
-    - Status Code: 400
-    - Headers:
-        - Content-Type: application/json
-    - Body:
-    ```json
-    {
-        "message": "Bad Request",
-        "errors": {
-            "note": "Note Text is required"
-        }
+
+  - Status Code: 400
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+
+  ```json
+  {
+    "message": "Bad Request",
+    "errors": {
+      "note": "Note Text is required"
     }
-    ```
+  }
+  ```
 
 - Error Response: Couldn't find a note with the specified id
-    - Status Code: 404
-    - Headers:
-        - Content-Type: application/json
-    - Body:
-    ```json
-    {
-        "message": "Note couldn't be found"
-    }
-    ```
+  - Status Code: 404
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+  ```json
+  {
+    "message": "Note couldn't be found"
+  }
+  ```
 
-### Delete a Review
+### Delete a Note
 
-Delete an existing review.
+Delete an existing Note.
+
 - Require Authentication: true
 - Require Proper Authorization: Note must belong to the current user
 - Request:
-    - Method: DELETE
-    - URL: `/api/notes/:notesId`
-    - Body: none
+  - Method: DELETE
+  - URL: `/api/notes/:notesId`
+  - Body: none
 - Successful Response
-    - Status Code: 200
-    - Headers:
-        - Content-Type; application/json
-    - Body:
-    ```json
-    {
-        "message": "Successfully Deleted"
-    }
-    ```
+  - Status Code: 200
+  - Headers:
+    - Content-Type; application/json
+  - Body:
+  ```json
+  {
+    "message": "Successfully Deleted"
+  }
+  ```
 - Error Response: Couldn't find a Note with the specified id
-    - Status Code: 404
-    - Headers:
-        - Content-Type: application/json
-    - Body:
-    ```json
-    {
-        "message": "Note couldn't be found"
+  - Status Code: 404
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+  ```json
+  {
+    "message": "Note couldn't be found"
+  }
+  ```
+
+## Clients
+
+### Get All Clients
+
+Returns a List of ALl Clients.
+
+- Require Authentication: true
+- Request:
+
+  - Method: GET
+  - URL: `/api/clients`
+  - Body: none
+
+- Response:
+  - Status Code: 200
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+  ```json
+  {
+    "Clients": [
+      {
+        "firstName": "Jane",
+        "lastName": "Smith",
+        "companyName": "",
+        "email": "janesmith@techsolutions.com",
+        "phone": "321-654-9870"
+      },
+      {
+        "firstName": "",
+        "lastName": "",
+        "companyName": "IT Innovators",
+        "email": "mjohnson@itinnovators.io",
+        "phone": "456-789-0123"
+      },
+      {
+        "firstName": "Emily",
+        "lastName": "Davis",
+        "companyName": "",
+        "email": "emilydavis@aa.io",
+        "phone": "789-123-4560"
+      }
+    ]
+  }
+  ```
+
+### Get a Client based on Client's ID
+
+Returns a Client's Details based on the Client's ID
+
+- Require Authentication: true
+- Request:
+
+  - Method: GET
+  - URL: `/api/clients/:clientId`
+  - Body: none
+
+- Successful Response
+
+  - Status Code: 200
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+
+  ```json
+  {
+    "firstName": "Jane",
+    "lastName": "Smith",
+    "companyName": "",
+    "email": "janesmith@techsolutions.com",
+    "phone": "321-654-9870"
+  }
+  ```
+
+- Error Response: Couldn't find a client
+  - Status Code: 404
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+  ```json
+  {
+    "message": "Couldn't find a client with the specified ID"
+  }
+  ```
+
+### Add a Client
+
+Adds and returns a new Clients
+
+- Require Authentication: true
+- Request:
+
+  - Method: POST
+  - URL: `/api/clients`
+  - Body:
+
+  ```json
+  {
+    "firstName": "Jane",
+    "lastName": "Smith",
+    "companyName": "",
+    "email": "janesmith@techsolutions.com",
+    "phone": "321-654-9870"
+  }
+  ```
+
+- Successful Response
+
+  - Status Code: 201
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+
+  ```json
+  {
+    "firstName": "Jane",
+    "lastName": "Smith",
+    "companyName": "",
+    "email": "janesmith@techsolutions.com",
+    "phone": "321-654-9870"
+  }
+  ```
+
+- Error Response: Validation Errors
+  - Status Code: 400
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+  ```json
+  {
+    "message": "Bad Request",
+    "errors": {
+      "firstName": "First Name is required",
+      "lastName": "Last Name is required",
+      "companyName": "Company Name is required",
+      "email": "Email Address is required",
+      "phone": "Phone Number is required"
     }
-    ```
+  }
+  ```
+
+### Edit a Client Information
+
+Edit the information of a client based on its ID
+
+- Require Authentication: true
+- Request:
+
+  - Method: PUT
+  - URL: `/api/clients/:clientId`
+  - Body:
+
+  ```json
+  {
+    "firstName": "Jane",
+    "lastName": "Smith",
+    "companyName": "",
+    "email": "janesmith@techsolutions.com",
+    "phone": "321-654-9870"
+  }
+  ```
+
+- Successful Response:
+
+  - Status Code: 200
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+
+  ```json
+  {
+    "firstName": "Jane",
+    "lastName": "Smith",
+    "companyName": "",
+    "email": "janesmith@techsolutions.com",
+    "phone": "321-654-9870"
+  }
+  ```
+
+- Error Response: Body Validation Errors
+
+  - Status Code: 400
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+
+  ```json
+  {
+    "message": "Bad Request",
+    "errors": {
+      "errors": {
+        "firstName": "First Name is required",
+        "lastName": "Last Name is required",
+        "companyName": "Company Name is required",
+        "email": "Email Address is required",
+        "phone": "Phone Number is required"
+      }
+    }
+  }
+  ```
+
+- Error Response: Couldn't find a client
+  - Status Code: 404
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+  ```json
+  {
+    "message": "Couldn't find a client with the specified ID"
+  }
+  ```
+
+### Delete a Client
+
+Delete a Client based on Client ID
+
+- Require Authentication: true
+- Request:
+
+  - Method: DELETE
+  - URL: `/api/clients/:clientId`
+  - Body: none
+
+- Successful Response
+
+  - Status Code: 200
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+
+  ```json
+  {
+    "message": "Successfully Deleted"
+  }
+  ```
+
+- Error Response: Couldn't find a client
+  - Status Code: 404
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+  ```json
+  {
+    "message": "Couldn't find a client with the specified ID"
+  }
+  ```

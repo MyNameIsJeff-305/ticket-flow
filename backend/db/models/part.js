@@ -25,7 +25,8 @@ module.exports = (sequelize, DataTypes) => {
       references: {
         model: 'Tickets',
         key: 'id'
-      }
+      },
+      onDelete: 'CASCADE'
     },
     imageUrl: {
       type: DataTypes.STRING(255),
