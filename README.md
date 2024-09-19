@@ -6,7 +6,7 @@ TicketFlow is an intuitive and powerful ticket management system designed specif
 
 ![db-diagram]
 
-[db-diagram]: ./images/db.png
+[db-diagram]: ./images/db-diagram.png
 
 ## API Documentation
 
