@@ -14,7 +14,7 @@ const validateLogin = [
     check('credential')
         .exists({ checkFalsy: true })
         .notEmpty()
-        .withMessage('Please provide a valid email or username.'),
+        .withMessage('Please provide a valid email or userName.'),
     check('password')
         .exists({ checkFalsy: true })
         .withMessage('Please provide a password.'),
@@ -37,7 +37,7 @@ router.get('/', async (req, res, next) => {
                 firstName: currentUser.firstName,
                 lastName: currentUser.lastName,
                 email: currentUser.email,
-                username: currentUser.username
+                userName: currentUser.userName
             }
         } || { user: null });
     } catch (error) {
@@ -55,7 +55,7 @@ router.post(
         const user = await User.unscoped().findOne({
             where: {
                 [Op.or]: {
-                    username: credential,
+                    userName: credential,
                     email: credential
                 }
             }
@@ -72,7 +72,9 @@ router.post(
         const safeUser = {
             id: user.id,
             email: user.email,
-            username: user.username,
+            userName: user.userName,
+            fistName: user.firstName,
+            lastName: user.lastName
         };
 
         await setTokenCookie(res, safeUser);
@@ -104,7 +106,7 @@ router.get(
             const safeUser = {
                 id: user.id,
                 email: user.email,
-                username: user.username,
+                userName: user.userName,
             };
             return res.json({
                 user: safeUser

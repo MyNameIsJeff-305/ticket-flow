@@ -1,5 +1,5 @@
 const { validationResult } = require('express-validator');
-const { Ticket } = require('../db/models');
+const { Ticket, Part } = require('../db/models');
 
 const handleValidationErrors = (req, _res, next) => {
     const validationErrors = validationResult(req);
@@ -45,7 +45,36 @@ const properUserValidation = async (req, res, next) => {
     }
 };
 
+const properPartValidation = async (req, res, next) => {
+    const { id } = req.user;
+
+    const partId = req.params.id;
+
+    try {
+        const part = await Part.findByPk(parseInt(partId));
+
+        if (!part) {
+            return res.status(404).json({
+                message: "Part couldn't be found"
+            })
+        }
+
+        const ticket = await Ticket.findByPk(part.ticketId);
+
+        if (ticket.createdBy !== id) {
+            const err = new Error('Unauthorized');
+            err.status = 403;
+            err.title = 'Forbidden';
+            return next(err);
+        }
+        next();
+    } catch (error) {
+        next(error);
+    }
+}
+
 module.exports = {
     handleValidationErrors,
-    properUserValidation
+    properUserValidation,
+    properPartValidation
 };

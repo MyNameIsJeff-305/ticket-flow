@@ -164,6 +164,30 @@ router.put('/:id', requireAuth, properUserValidation, async (req, res, next) => 
     }
 });
 
+//Get All Parts by a Ticket's Id
+router.get('/:id/parts', requireAuth, async (req, res, next) => {
+    try {
+        const ticket = await Ticket.findByPk(req.params.id);
+
+        if (!ticket) {
+            return res.status(404).json({ message: 'Ticket not found' });
+        }
+
+        const parts = await Part.findAll({
+            where: {
+                ticketId: ticket.id
+            }
+        });
+
+        return res.json({
+            Parts: parts
+        });
+
+    } catch (error) {
+        next(error);
+    }
+});
+
 // Add a Part to a Ticket based on the Ticket's Id
 router.post('/:id/parts', requireAuth, properUserValidation, async (req, res, next) => {
     try {
