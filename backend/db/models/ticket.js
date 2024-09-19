@@ -9,12 +9,12 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'createdBy',
         onDelete: 'CASCADE'
       }),
+        Ticket.belongsTo(models.Client, {
+          foreignKey: 'clientId',
+          onDelete: 'CASCADE'
+        })
       Ticket.belongsTo(models.Status, {
         foreignKey: 'statusId',
-        onDelete: 'CASCADE'
-      })
-      Ticket.belongsTo(models.Client, {
-        foreignKey: 'clientId',
         onDelete: 'CASCADE'
       })
       Ticket.hasMany(models.Note, {
@@ -43,7 +43,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     clientId: {
       type: DataTypes.INTEGER,
-      allowNull: true,
+      allowNull: false,
       references: {
         model: 'Clients',
         key: 'id',
@@ -51,15 +51,22 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: "CASCADE"
     },
     description: {
-      type: DataTypes.STRING(255)
+      type: DataTypes.STRING(255),
+      allowNull: true
     },
     checkIn: {
-      type: DataTypes.DATE,
       allowNull: true,
+      type: DataTypes.DATE,
+      validate: {
+        isDate: true
+      }
     },
     checkOut: {
+      allowNull: true,
       type: DataTypes.DATE,
-      allowNull: true
+      validate: {
+        isDate: true
+      }
     },
     statusId: {
       type: DataTypes.INTEGER,

@@ -36,7 +36,8 @@ module.exports = {
         onDelete: "CASCADE"
       },
       description: {
-        type: Sequelize.STRING(255)
+        type: Sequelize.STRING(255),
+        allowNull: true
       },
       checkIn: {
         type: Sequelize.DATE,

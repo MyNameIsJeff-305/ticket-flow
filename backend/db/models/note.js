@@ -17,13 +17,25 @@ module.exports = (sequelize, DataTypes) => {
   }
   Note.init({
     note: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING(255)
     },
     userId: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'Users',
+        key: 'id'
+      },
+      onDelete: "CASCADE"
     },
     ticketId: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'Tickets',
+        key: 'id'
+      },
+      onDelete: "CASCADE"
     }
   }, {
     sequelize,

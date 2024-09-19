@@ -12,19 +12,18 @@ module.exports = {
     await Status.bulkCreate([
       {
         name: "Open",
-        color: "#00FF00"
+        color: "#00FF00",
+        description: "The ticket is open and has not been assigned to anyone"
       },
       {
         name: "In Progress",
-        color: "#FFA500"
+        color: "#FFA500",
+        description: "The ticket is being worked on"
       },
       {
         name: "Closed",
-        color: "#0000FF"
-      },
-      {
-        name: "Cancelled",
-        color: "#333"
+        color: "#0000FF",
+        description: "The ticket has been resolved"
       }
     ], options);
   },
