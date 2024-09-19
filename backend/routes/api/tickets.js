@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { Ticket, Status, Client, User, Part } = require('../../db/models');
+const { Ticket, Status, Client, User, Part, Note } = require('../../db/models');
 
 const { requireAuth } = require('../../utils/auth');
 const { properUserValidation } = require('../../utils/validation');
@@ -213,6 +213,54 @@ router.post('/:id/parts', requireAuth, properUserValidation, async (req, res, ne
     }
 });
 
+//Get All the notes for a Ticket based on Ticket's Id
+router.get('/:id/notes', requireAuth, async (req, res, next) => {
+    try {
+        const ticket = await Ticket.findByPk(req.params.id);
+
+        if (!ticket) {
+            return res.status(404).json({ message: 'Ticket not found' });
+        }
+
+        const notes = await Note.findAll({
+            where: {
+                ticketId: ticket.id
+            }
+        });
+
+        return res.json({
+            Notes: notes
+        });
+
+    } catch (error) {
+        next(error);
+    }
+});
+
+//Add a Note to a Ticket based on the Ticket's Id
+router.post('/:id/notes', requireAuth, async (req, res, next) => {
+    try {
+        const ticket = await Ticket.findByPk(req.params.id);
+
+        if (!ticket) {
+            return res.status(404).json({ message: 'Ticket not found' });
+        }
+
+        const { note } = req.body;
+
+        const createdNote = await Note.create({
+            note,
+            userId: (parseInt(req.user.id)),
+            ticketId: ticket.id
+        });
+
+        return res.json(createdNote);
+
+    } catch (error) {
+        next(error);
+    }
+});
+
 //Delete a Ticket by Id
 router.delete('/:id', requireAuth, properUserValidation, async (req, res, next) => {
     try {
@@ -225,6 +273,24 @@ router.delete('/:id', requireAuth, properUserValidation, async (req, res, next) 
         await ticket.destroy();
 
         return res.json({ "message": "Successfully Deleted" });
+
+    } catch (error) {
+        next(error);
+    }
+});
+
+//Get the Status of a Ticket based on the Ticket's Id
+router.get('/:id/status', requireAuth, async (req, res, next) => {
+    try {
+        const ticket = await Ticket.findByPk(req.params.id);
+
+        if (!ticket) {
+            return res.status(404).json({ message: 'Ticket not found' });
+        }
+
+        const status = await Status.findByPk(ticket.statusId);
+
+        return res.json(status);
 
     } catch (error) {
         next(error);
