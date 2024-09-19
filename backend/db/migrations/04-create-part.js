@@ -27,6 +27,7 @@ module.exports = {
           model: 'Tickets',
           key: 'id'
         },
+        onDelete: 'CASCADE'
       },
       imageUrl: {
         type: Sequelize.STRING(255),
