@@ -967,19 +967,20 @@ Return all the Notes for a ticket specified by id
   {
     "Notes": [
       {
-        "note": "This is a note for Processing the Ticket",
+        "id": 1,
+        "note": "Printer is not working",
+        "userId": 1,
         "ticketId": 1,
-        "userId": 1
+        "createdAt": "2024-09-19T13:37:53.214Z",
+        "updatedAt": "2024-09-19T13:37:53.214Z"
       },
       {
-        "note": "This is a note for Processing the Ticket",
+        "id": 11,
+        "note": "Checked the power cord and is connected to the outlet",
+        "userId": 3,
         "ticketId": 1,
-        "userId": 2
-      },
-      {
-        "note": "This is a note for Processing the Ticket",
-        "ticketId": 1,
-        "userId": 1
+        "createdAt": "2024-09-19T13:37:53.214Z",
+        "updatedAt": "2024-09-19T13:37:53.214Z"
       }
     ]
   }
@@ -1000,6 +1001,7 @@ Return all the Notes for a ticket specified by id
 Create and return a new Note for a Ticket based on the specified id.
 
 - Require Authentication: true
+
 - Request
   - Method: POST
   - URL: `/api/tickets/:ticketId/notes`

@@ -2,7 +2,7 @@ const express = require('express');
 
 const { Part, Ticket } = require('../../db/models');
 const { requireAuth } = require('../../utils/auth');
-const { properUserValidation, properPartValidation } = require('../../utils/validation');
+const { properPartValidation } = require('../../utils/validation');
 
 
 const router = express.Router();
