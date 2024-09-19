@@ -277,28 +277,28 @@ Returns all the Tickets.
   ```json
   [
     {
-        "id": 1,
-        "title": "Network Connectivity Issues",
-        "createdBy": null,
-        "clientId": 1,
-        "description": "The office network is not working, can't connect to the internet.",
-        "checkIn": null,
-        "checkOut": null,
-        "statusId": 1,
-        "createdAt": "2024-09-19T13:37:53.193Z",
-        "updatedAt": "2024-09-19T13:37:53.193Z"
+      "id": 1,
+      "title": "Network Connectivity Issues",
+      "createdBy": null,
+      "clientId": 1,
+      "description": "The office network is not working, can't connect to the internet.",
+      "checkIn": null,
+      "checkOut": null,
+      "statusId": 1,
+      "createdAt": "2024-09-19T13:37:53.193Z",
+      "updatedAt": "2024-09-19T13:37:53.193Z"
     },
     {
-        "id": 2,
-        "title": "Slow Computer Performance",
-        "createdBy": null,
-        "clientId": 2,
-        "description": "My computer is very slow, it takes a long time to load applications.",
-        "checkIn": null,
-        "checkOut": null,
-        "statusId": 1,
-        "createdAt": "2024-09-19T13:37:53.193Z",
-        "updatedAt": "2024-09-19T13:37:53.193Z"
+      "id": 2,
+      "title": "Slow Computer Performance",
+      "createdBy": null,
+      "clientId": 2,
+      "description": "My computer is very slow, it takes a long time to load applications.",
+      "checkIn": null,
+      "checkOut": null,
+      "statusId": 1,
+      "createdAt": "2024-09-19T13:37:53.193Z",
+      "updatedAt": "2024-09-19T13:37:53.193Z"
     }
   ]
   ```
@@ -323,16 +323,16 @@ Returns all the Tickets taken by the Current User.
   ```json
   [
     {
-        "id": 2,
-        "title": "Slow Computer Performance",
-        "createdBy": 2,
-        "clientId": 2,
-        "description": "My computer is very slow, it takes a long time to load applications.",
-        "checkIn": null,
-        "checkOut": null,
-        "statusId": 1,
-        "createdAt": "2024-09-19T13:37:53.193Z",
-        "updatedAt": "2024-09-19T13:37:53.193Z"
+      "id": 2,
+      "title": "Slow Computer Performance",
+      "createdBy": 2,
+      "clientId": 2,
+      "description": "My computer is very slow, it takes a long time to load applications.",
+      "checkIn": null,
+      "checkOut": null,
+      "statusId": 1,
+      "createdAt": "2024-09-19T13:37:53.193Z",
+      "updatedAt": "2024-09-19T13:37:53.193Z"
     }
   ]
   ```
@@ -362,57 +362,57 @@ Returns the details of a Ticket specified by its id.
     "checkIn": null,
     "checkOut": null,
     "CreatedBy": {
-        "id": 1,
-        "firstName": "Demo",
-        "lastName": "User",
-        "role": "employee"
+      "id": 1,
+      "firstName": "Demo",
+      "lastName": "User",
+      "role": "employee"
     },
     "ClientInfo": {
-        "id": 1,
-        "firstName": "Jane",
-        "lastName": "Smith",
-        "companyName": "",
-        "email": "janesmith@techsolutions.com",
-        "phoneNumber": null,
-        "createdAt": "2024-09-19T13:37:53.185Z",
-        "updatedAt": "2024-09-19T13:37:53.185Z"
+      "id": 1,
+      "firstName": "Jane",
+      "lastName": "Smith",
+      "companyName": "",
+      "email": "janesmith@techsolutions.com",
+      "phoneNumber": null,
+      "createdAt": "2024-09-19T13:37:53.185Z",
+      "updatedAt": "2024-09-19T13:37:53.185Z"
     },
     "Parts": [
-        {
-            "id": 1,
-            "name": "Ethernet Cable",
-            "description": "Cat6 Ethernet cable for network connectivity",
-            "ticketId": 1,
-            "imageUrl": "https://media.startech.com/cms/products/gallery_large/n6patcxmbl.main.jpg",
-            "createdAt": "2024-09-19T13:37:53.201Z",
-            "updatedAt": "2024-09-19T13:37:53.201Z"
-        },
-        {
-            "id": 2,
-            "name": "Network Switch",
-            "description": "5-port Gigabit Network Switch for office network",
-            "ticketId": 1,
-            "imageUrl": "https://intellinetsolutions.com/cdn/shop/products/24-port-gigabit-ethernet-switch-561273-1_11790351-cb3d-41e5-b877-6424af02441c.jpg",
-            "createdAt": "2024-09-19T13:37:53.201Z",
-            "updatedAt": "2024-09-19T13:37:53.201Z"
-        },
-        {
-            "id": 21,
-            "name": "Backup Power Supply",
-            "description": "Uninterruptible Power Supply (UPS) for network devices",
-            "ticketId": 1,
-            "imageUrl": "https://i5.walmartimages.com.mx/mg/gm/3pp/asr/ebf7d5d3-9b04-4885-9eb3-160a4681e5d2.471379173e77c206d2cea3d05e307309.jpeg",
-            "createdAt": "2024-09-19T13:37:53.201Z",
-            "updatedAt": "2024-09-19T13:37:53.201Z"
-        }
+      {
+        "id": 1,
+        "name": "Ethernet Cable",
+        "description": "Cat6 Ethernet cable for network connectivity",
+        "ticketId": 1,
+        "imageUrl": "https://media.startech.com/cms/products/gallery_large/n6patcxmbl.main.jpg",
+        "createdAt": "2024-09-19T13:37:53.201Z",
+        "updatedAt": "2024-09-19T13:37:53.201Z"
+      },
+      {
+        "id": 2,
+        "name": "Network Switch",
+        "description": "5-port Gigabit Network Switch for office network",
+        "ticketId": 1,
+        "imageUrl": "https://intellinetsolutions.com/cdn/shop/products/24-port-gigabit-ethernet-switch-561273-1_11790351-cb3d-41e5-b877-6424af02441c.jpg",
+        "createdAt": "2024-09-19T13:37:53.201Z",
+        "updatedAt": "2024-09-19T13:37:53.201Z"
+      },
+      {
+        "id": 21,
+        "name": "Backup Power Supply",
+        "description": "Uninterruptible Power Supply (UPS) for network devices",
+        "ticketId": 1,
+        "imageUrl": "https://i5.walmartimages.com.mx/mg/gm/3pp/asr/ebf7d5d3-9b04-4885-9eb3-160a4681e5d2.471379173e77c206d2cea3d05e307309.jpeg",
+        "createdAt": "2024-09-19T13:37:53.201Z",
+        "updatedAt": "2024-09-19T13:37:53.201Z"
+      }
     ],
     "StatusInfo": {
-        "id": 1,
-        "name": "Open",
-        "color": "#00FF00",
-        "description": "The ticket is open and has not been assigned to anyone",
-        "createdAt": "2024-09-19T13:37:53.177Z",
-        "updatedAt": "2024-09-19T13:37:53.177Z"
+      "id": 1,
+      "name": "Open",
+      "color": "#00FF00",
+      "description": "The ticket is open and has not been assigned to anyone",
+      "createdAt": "2024-09-19T13:37:53.177Z",
+      "updatedAt": "2024-09-19T13:37:53.177Z"
     }
   }
   ```
@@ -642,40 +642,40 @@ Returns all the Parts
   ```json
   [
     {
+      "id": 1,
+      "name": "Ethernet Cable",
+      "description": "Cat6 Ethernet cable for network connectivity",
+      "imageUrl": "https://media.startech.com/cms/products/gallery_large/n6patcxmbl.main.jpg",
+      "Ticket": {
         "id": 1,
-        "name": "Ethernet Cable",
-        "description": "Cat6 Ethernet cable for network connectivity",
-        "imageUrl": "https://media.startech.com/cms/products/gallery_large/n6patcxmbl.main.jpg",
-        "Ticket": {
-            "id": 1,
-            "title": "Network Connectivity Issues",
-            "createdBy": 1,
-            "clientId": 1,
-            "description": "The office network is not working, can't connect to the internet.",
-            "checkIn": null,
-            "checkOut": null,
-            "statusId": 1,
-            "createdAt": "2024-09-19T13:37:53.193Z",
-            "updatedAt": "2024-09-19T13:37:53.193Z"
-        }
+        "title": "Network Connectivity Issues",
+        "createdBy": 1,
+        "clientId": 1,
+        "description": "The office network is not working, can't connect to the internet.",
+        "checkIn": null,
+        "checkOut": null,
+        "statusId": 1,
+        "createdAt": "2024-09-19T13:37:53.193Z",
+        "updatedAt": "2024-09-19T13:37:53.193Z"
+      }
     },
     {
-        "id": 2,
-        "name": "Network Switch",
-        "description": "5-port Gigabit Network Switch for office network",
-        "imageUrl": "https://intellinetsolutions.com/cdn/shop/products/24-port-gigabit-ethernet-switch-561273-1_11790351-cb3d-41e5-b877-6424af02441c.jpg",
-        "Ticket": {
-            "id": 1,
-            "title": "Network Connectivity Issues",
-            "createdBy": 1,
-            "clientId": 1,
-            "description": "The office network is not working, can't connect to the internet.",
-            "checkIn": null,
-            "checkOut": null,
-            "statusId": 1,
-            "createdAt": "2024-09-19T13:37:53.193Z",
-            "updatedAt": "2024-09-19T13:37:53.193Z"
-        }
+      "id": 2,
+      "name": "Network Switch",
+      "description": "5-port Gigabit Network Switch for office network",
+      "imageUrl": "https://intellinetsolutions.com/cdn/shop/products/24-port-gigabit-ethernet-switch-561273-1_11790351-cb3d-41e5-b877-6424af02441c.jpg",
+      "Ticket": {
+        "id": 1,
+        "title": "Network Connectivity Issues",
+        "createdBy": 1,
+        "clientId": 1,
+        "description": "The office network is not working, can't connect to the internet.",
+        "checkIn": null,
+        "checkOut": null,
+        "statusId": 1,
+        "createdAt": "2024-09-19T13:37:53.193Z",
+        "updatedAt": "2024-09-19T13:37:53.193Z"
+      }
     }
   ]
   ```
@@ -733,7 +733,7 @@ Returns all the Parts that belong to a spot specified by id
 Create and returns a new part
 
 - Require Authentication: true
-- Require Proper Authorization: Ticket where part belongs must belong to the Current User 
+- Require Proper Authorization: Ticket where part belongs must belong to the Current User
 - Request
 
   - Method: POST
@@ -783,10 +783,12 @@ Create and returns a new part
     ```
 
 - Error Response: Couldn't find a Ticket with the specified id
+
   - Status Code: 404
   - Headers:
     - Content-Type: application/json
   - Body:
+
   ```json
   {
     "message": "Ticket couldn't be found"
@@ -809,7 +811,7 @@ Create and returns a new part
 Update and return an existing part
 
 - Require Authentication: true
-- Require Proper Authorization: Ticket where part belongs must belong to the Current User 
+- Require Proper Authorization: Ticket where part belongs must belong to the Current User
 
 - Request
 
@@ -859,10 +861,12 @@ Update and return an existing part
   }
   ```
 - Error response: Couldn't find a Part with the specified id
+
   - Status Code: 404
   - Headers:
     - Content-Type: application/json
   - Body:
+
   ```json
   {
     "message": "Part couldn't be found"
@@ -885,7 +889,7 @@ Update and return an existing part
 Delete an existing Part.
 
 - Require Authentication: true
-- Require Proper Authorization: Ticket where part belongs must belong to the Current User 
+- Require Proper Authorization: Ticket where part belongs must belong to the Current User
 - Request
   - Method: DELETE
   - URL: `/api/parts/:partId`
@@ -1385,5 +1389,223 @@ Delete a Client based on Client ID
   ```json
   {
     "message": "Couldn't find a client with the specified ID"
+  }
+  ```
+
+## Statuses
+
+### Get all Satuses
+
+Get a list of all Statuses
+
+- Require Authentication: true
+- Request:
+
+  - Method: GET
+  - URL: `/api/status`
+  - Body: none
+
+- Successful Response
+  - Status Code: 200
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+  ```json
+  {
+    [
+      {
+        "id": 1,
+        "name": "Open",
+        "description": "All new Tickets",
+        "color": "00FF00"
+      },
+      {
+        "id": 2,
+        "name": "Open",
+        "description": "All new Tickets",
+        "color": "00FF00"
+      },
+      {
+        "id": 3,
+        "name": "Open",
+        "description": "All new Tickets",
+        "color": "00FF00"
+      }
+    ]
+  }
+  ```
+
+### Get the Status of a Ticket by its TicketId
+
+Get the Status of a Ticket based on its ticketId
+
+- Require Authentication: true
+- Request:
+
+  - Method: GET
+  - URL: `/api/tickets/:ticketId/status`
+  - Body: none
+
+- Successful Response
+  - Status Code: 200
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+  ```json
+  {
+    "Status": {
+      "id": 1,
+      "name": "Open",
+      "description": "All new Tickets",
+      "color": "00FF00"
+    }
+  }
+  ```
+
+### Add a new Status
+
+Add and returns a custom Status
+
+- Require Authentication: true
+- Request:
+
+  - Method: POST
+  - URL: `/api/status`
+  - Body:
+
+  ```json
+  {
+    "name": "Stuck",
+    "description": "All Tickets that are Stuck",
+    "color": "#A3F2A3"
+  }
+  ```
+
+- Successful Response
+
+  - Status Code: 201
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+
+  ```json
+  {
+    "Status": {
+      "id": 1,
+      "name": "Stuck",
+      "description": "All Tickets that are Stuck",
+      "color": "#A3F2A3"
+    }
+  }
+  ```
+
+- Error Response: Validation Errors
+  - Status Code: 400
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+  ```json
+  {
+    "message": "Validation Errors",
+    "errors": {
+      "name": "Name is required",
+      "color": "Color is required"
+    }
+  }
+  ```
+
+### Edit a Status
+
+Update a Status
+
+- Require Authentication: true
+- Request:
+
+  - Method: PUT
+  - URL: `/api/status/:statusId`
+  - Body:
+
+  ```json
+  {
+    "name": "Stuck",
+    "description": "All Tickets that are Stuck",
+    "color": "#A3F2A3"
+  }
+  ```
+
+- Successful Response
+  - Status Code: 200
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+  ```json
+  {
+    "id": 1,
+    "name": "Stuck",
+    "description": "All Tickets that are Stuck",
+    "color": "#A3F2A3"
+  }
+  ```
+
+- Error Response: Validation Errors
+  - Status Code: 400
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+  ```json
+  {
+    "message": "Bad Request",
+    "errors": {
+      "name": "Name is Required",
+      "color": "Color is Required"
+    }
+  }
+  ```
+
+- Error Response: Status Not Found
+  - Status Code: 404
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+  ```json
+  {
+    "message": "Status Not Found"
+  }
+  ```
+
+### Delete a Status
+
+Delete a Status
+
+- Require Authentication: true
+- Require Safe
+
+- Request:
+
+  - Method: DELETE
+  - URL: `/api/status/:statusId`
+  - Body: none
+
+- Successful Response
+
+  - Status Code: 200
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+
+  ```json
+  {
+    "message": "Successfully Deleted"
+  }
+  ```
+
+- Error Response: Couldn't find a Status
+  - Status Code: 404
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+  ```json
+  {
+    "message": "Couldn't find a Status with that specified Id"
   }
   ```
