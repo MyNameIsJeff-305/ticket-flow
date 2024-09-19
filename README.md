@@ -275,20 +275,32 @@ Returns all the Tickets.
     - Content-Type: application/json
   - Body:
   ```json
-  {
-    "Tickets": [
-      {
+  [
+    {
         "id": 1,
-        "createdBy": 1,
-        "client": null,
-        "title": "My printer doesn't work",
-        "description": "I am having a problem with my computer, it seems not be recognizing the printer, please I need your help",
+        "title": "Network Connectivity Issues",
+        "createdBy": null,
+        "clientId": 1,
+        "description": "The office network is not working, can't connect to the internet.",
         "checkIn": null,
         "checkOut": null,
-        "statusId": 1
-      }
-    ]
-  }
+        "statusId": 1,
+        "createdAt": "2024-09-19T13:37:53.193Z",
+        "updatedAt": "2024-09-19T13:37:53.193Z"
+    },
+    {
+        "id": 2,
+        "title": "Slow Computer Performance",
+        "createdBy": null,
+        "clientId": 2,
+        "description": "My computer is very slow, it takes a long time to load applications.",
+        "checkIn": null,
+        "checkOut": null,
+        "statusId": 1,
+        "createdAt": "2024-09-19T13:37:53.193Z",
+        "updatedAt": "2024-09-19T13:37:53.193Z"
+    }
+  ]
   ```
 
 ### Get All Tickets Taken By the Current User
@@ -309,20 +321,20 @@ Returns all the Tickets taken by the Current User.
     - Content-Type: application/json
   - Body:
   ```json
-  {
-    "Tickets": [
-      {
-        "id": 1,
-        "createdBy": 1,
-        "client": null,
-        "title": "My printer doesn't work",
-        "description": "I am having a problem with my computer, it seems not be recognizing the printer, please I need your help",
+  [
+    {
+        "id": 2,
+        "title": "Slow Computer Performance",
+        "createdBy": 2,
+        "clientId": 2,
+        "description": "My computer is very slow, it takes a long time to load applications.",
         "checkIn": null,
         "checkOut": null,
-        "statusId": 1
-      }
-    ]
-  }
+        "statusId": 1,
+        "createdAt": "2024-09-19T13:37:53.193Z",
+        "updatedAt": "2024-09-19T13:37:53.193Z"
+    }
+  ]
   ```
 
 ### Get Details of a Ticket from an Id
@@ -345,39 +357,62 @@ Returns the details of a Ticket specified by its id.
   ```json
   {
     "id": 1,
-    "title": "My printer doesn't work",
-    "description": "I am having a problem with my computer, it seems not be recognizing the printer, please I need your help",
+    "title": "Network Connectivity Issues",
+    "description": "The office network is not working, can't connect to the internet.",
     "checkIn": null,
     "checkOut": null,
-    "status": "Created",
     "CreatedBy": {
-      "id": 1,
-      "firstName": "Demo",
-      "lastName": "User"
+        "id": 1,
+        "firstName": "Demo",
+        "lastName": "User",
+        "role": "employee"
     },
-    "Client": {
-      "id": 4,
-      "firstName": "Janet",
-      "lastName": "Doe",
-      "companyName": "JD Tech"
+    "ClientInfo": {
+        "id": 1,
+        "firstName": "Jane",
+        "lastName": "Smith",
+        "companyName": "",
+        "email": "janesmith@techsolutions.com",
+        "phoneNumber": null,
+        "createdAt": "2024-09-19T13:37:53.185Z",
+        "updatedAt": "2024-09-19T13:37:53.185Z"
     },
     "Parts": [
-      {
-        "id": 1,
-        "name": "Hard Drive",
-        "description": "512 Gb SSD Hard Drive",
-        "imageUrl": "https://www.westerndigital.com/content/dam/store/en-us/assets/products/internal-storage/wd-blue-desktop-sata-hdd/gallery/wd-blue-pc-desktop-hard-drive-500gb.png.thumb.1280.1280.png"
-      },
-      {
-        "id": 2,
-        "name": "Keyboard",
-        "description": "Logitech wireless Keyboard",
-        "imageUrl": "https://www.bhphotovideo.com/images/images500x500/logitech_920_010547_mx_mechanical_wireless_keyboard_1653360638_1703337.jpg"
-      }
+        {
+            "id": 1,
+            "name": "Ethernet Cable",
+            "description": "Cat6 Ethernet cable for network connectivity",
+            "ticketId": 1,
+            "imageUrl": "https://media.startech.com/cms/products/gallery_large/n6patcxmbl.main.jpg",
+            "createdAt": "2024-09-19T13:37:53.201Z",
+            "updatedAt": "2024-09-19T13:37:53.201Z"
+        },
+        {
+            "id": 2,
+            "name": "Network Switch",
+            "description": "5-port Gigabit Network Switch for office network",
+            "ticketId": 1,
+            "imageUrl": "https://intellinetsolutions.com/cdn/shop/products/24-port-gigabit-ethernet-switch-561273-1_11790351-cb3d-41e5-b877-6424af02441c.jpg",
+            "createdAt": "2024-09-19T13:37:53.201Z",
+            "updatedAt": "2024-09-19T13:37:53.201Z"
+        },
+        {
+            "id": 21,
+            "name": "Backup Power Supply",
+            "description": "Uninterruptible Power Supply (UPS) for network devices",
+            "ticketId": 1,
+            "imageUrl": "https://i5.walmartimages.com.mx/mg/gm/3pp/asr/ebf7d5d3-9b04-4885-9eb3-160a4681e5d2.471379173e77c206d2cea3d05e307309.jpeg",
+            "createdAt": "2024-09-19T13:37:53.201Z",
+            "updatedAt": "2024-09-19T13:37:53.201Z"
+        }
     ],
-    "Status": {
-      "name": "Pending",
-      "color": "#00FF00"
+    "StatusInfo": {
+        "id": 1,
+        "name": "Open",
+        "color": "#00FF00",
+        "description": "The ticket is open and has not been assigned to anyone",
+        "createdAt": "2024-09-19T13:37:53.177Z",
+        "updatedAt": "2024-09-19T13:37:53.177Z"
     }
   }
   ```
@@ -412,20 +447,16 @@ Creates and returns a new Ticket.
 
   ```json
   {
-    "title": "My printer doesn't work",
-    "description": "I am having a problem with my computer, it seems not be recognizing the printer, please I need your help",
-    "status": "Created",
-    "CreatedBy": {
-      "id": 1,
-      "firstName": "Demo",
-      "lastName": "User"
-    },
-    "Client": {
-      "id": 4,
-      "firstName": "Janet",
-      "lastName": "Doe",
-      "companyName": "JD Tech"
-    }
+    "id": 11,
+    "title": "New Ticket",
+    "description": "New Ticket Description",
+    "checkIn": null,
+    "checkOut": null,
+    "clientId": 1,
+    "statusId": 1,
+    "createdBy": 2,
+    "updatedAt": "2024-09-19T14:16:14.371Z",
+    "createdAt": "2024-09-19T14:16:14.371Z"
   }
   ```
 
@@ -438,7 +469,8 @@ Creates and returns a new Ticket.
   {
     "message": "Bad Request",
     "errors": {
-      "title": "Title is required"
+      "title": "Title is required",
+      "clientId": "Client Id is required"
     }
   }
   ```
@@ -475,6 +507,16 @@ Create and return a new Part for a Spot specified by id.
     "imageUrl": "https://www.westerndigital.com/content/dam/store/en-us/assets/products/internal-storage/wd-blue-desktop-sata-hdd/gallery/wd-blue-pc-desktop-hard-drive-500gb.png.thumb.1280.1280.png"
   }
   ```
+- Error Response: Unauthorized
+  - Status Code: 403
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+  ```json
+  {
+    "message": "Unauthorized"
+  }
+  ```
 
 ### Edit a Ticket
 
@@ -505,12 +547,16 @@ Updates and returns an existing ticket.
   - Body:
   ```json
   {
-    "title": "My printer doesn't work",
-    "description": "I am having a problem with my computer, it seems not be recognizing the printer, please I need your help",
-    "status": "Created",
-    "checkIn": "2024-04-01",
-    "checkOut": "2024-05-03",
-    "status": "completed"
+    "id": 2,
+    "title": "Edited",
+    "createdBy": 2,
+    "clientId": 2,
+    "description": "My computer is very slow, it takes a long time to load applications.",
+    "checkIn": null,
+    "checkOut": null,
+    "statusId": 1,
+    "createdAt": "2024-09-19T13:37:53.193Z",
+    "updatedAt": "2024-09-19T14:19:10.435Z"
   }
   ```
 - Error Response: Body Validation Error
@@ -526,7 +572,7 @@ Updates and returns an existing ticket.
     "createdBy": 1,
     "checkIn": "2024-04-01",
     "checkOut": "2024-05-03",
-    "status": "completed"
+    "statusId": 1
   }
   ```
 - Error Response: Couldn't find a Ticket based on the specified id
@@ -594,24 +640,44 @@ Returns all the Parts
   - Headers: - Content-Type: application/json
     Body:
   ```json
-  {
-    "Parts": [
-      {
+  [
+    {
         "id": 1,
-        "name": "Hard Drive",
-        "ticketId": 1,
-        "description": "512 Gb SSD Hard Drive",
-        "imageUrl": "https://www.westerndigital.com/content/dam/store/en-us/assets/products/internal-storage/wd-blue-desktop-sata-hdd/gallery/wd-blue-pc-desktop-hard-drive-500gb.png.thumb.1280.1280.png"
-      },
-      {
+        "name": "Ethernet Cable",
+        "description": "Cat6 Ethernet cable for network connectivity",
+        "imageUrl": "https://media.startech.com/cms/products/gallery_large/n6patcxmbl.main.jpg",
+        "Ticket": {
+            "id": 1,
+            "title": "Network Connectivity Issues",
+            "createdBy": 1,
+            "clientId": 1,
+            "description": "The office network is not working, can't connect to the internet.",
+            "checkIn": null,
+            "checkOut": null,
+            "statusId": 1,
+            "createdAt": "2024-09-19T13:37:53.193Z",
+            "updatedAt": "2024-09-19T13:37:53.193Z"
+        }
+    },
+    {
         "id": 2,
-        "name": "Keyboard",
-        "ticketId": 2,
-        "description": "Logitech wireless Keyboard",
-        "imageUrl": "https://www.bhphotovideo.com/images/images500x500/logitech_920_010547_mx_mechanical_wireless_keyboard_1653360638_1703337.jpg"
-      }
-    ]
-  }
+        "name": "Network Switch",
+        "description": "5-port Gigabit Network Switch for office network",
+        "imageUrl": "https://intellinetsolutions.com/cdn/shop/products/24-port-gigabit-ethernet-switch-561273-1_11790351-cb3d-41e5-b877-6424af02441c.jpg",
+        "Ticket": {
+            "id": 1,
+            "title": "Network Connectivity Issues",
+            "createdBy": 1,
+            "clientId": 1,
+            "description": "The office network is not working, can't connect to the internet.",
+            "checkIn": null,
+            "checkOut": null,
+            "statusId": 1,
+            "createdAt": "2024-09-19T13:37:53.193Z",
+            "updatedAt": "2024-09-19T13:37:53.193Z"
+        }
+    }
+  ]
   ```
 
 ### Get all Parts by a Ticket's Id
@@ -667,6 +733,7 @@ Returns all the Parts that belong to a spot specified by id
 Create and returns a new part
 
 - Require Authentication: true
+- Require Proper Authorization: Ticket where part belongs must belong to the Current User 
 - Request
 
   - Method: POST
@@ -726,11 +793,24 @@ Create and returns a new part
   }
   ```
 
+- Error Response: User is not authorized to add a part
+  - Status Code: 403
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+  ```json
+  {
+    "message": "Unauthorized"
+  }
+  ```
+
 ### Edit a Part
 
 Update and return an existing part
 
 - Require Authentication: true
+- Require Proper Authorization: Ticket where part belongs must belong to the Current User 
+
 - Request
 
   - Method: Put
@@ -789,12 +869,23 @@ Update and return an existing part
   }
   ```
 
+- Error Response: Ticket doesn't belong to the Current User
+- Status Code: 403
+  - Headers:
+    - Content-Type: application/json
+  - Body:
+  ```json
+  {
+    "message": "Unauthorized"
+  }
+  ```
+
 ### Delete a Part
 
 Delete an existing Part.
 
 - Require Authentication: true
-- Require Authorization: Ticket where Part belongs must belong to the current User
+- Require Proper Authorization: Ticket where part belongs must belong to the Current User 
 - Request
   - Method: DELETE
   - URL: `/api/parts/:partId`
