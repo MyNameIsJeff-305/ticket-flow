@@ -58,7 +58,12 @@ module.exports = (sequelize, DataTypes) => {
     role: {
       type: DataTypes.STRING(50),
       allowNull: false,
-    }
+    },
+    profilePicUrl: {
+      type: DataTypes.STRING(256),
+      allowNull: false,
+      defaultValue: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png',
+    },
   }, {
     sequelize,
     modelName: 'User',

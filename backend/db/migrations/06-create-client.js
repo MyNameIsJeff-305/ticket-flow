@@ -31,6 +31,11 @@ module.exports = {
         type: Sequelize.STRING(256),
         unique: true
       },
+      profilePicUrl: {
+        type: Sequelize.STRING(256),
+        allowNull: false,
+        defaultValue: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png',
+      },
       phoneNumber: {
         type: Sequelize.INTEGER,
         unique: true

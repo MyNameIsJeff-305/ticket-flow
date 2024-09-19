@@ -17,7 +17,7 @@ module.exports = {
         lastName: "User",
         email: "demo@aa.io",
         hashedPassword: bcrypt.hashSync("password"),
-        role: "employee",
+        profilePicUrl: "https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg"
       },
       {
         username: "DemoEmp2",
@@ -25,7 +25,7 @@ module.exports = {
         lastName: "Holland",
         email: "demo2@aa.io",
         hashedPassword: bcrypt.hashSync("password"),
-        role: "employee",
+        profilePicUrl: "https://www.elitesingles.com/wp-content/uploads/sites/85/2020/06/elite_singles_slide_6-350x264.png"
       },
       {
         username: "DemoEmp3",
@@ -33,7 +33,7 @@ module.exports = {
         lastName: "Doe",
         email: "demo3@aa.io",
         hashedPassword: bcrypt.hashSync("password"),
-        role: "employee",
+        profilePicUrl: "https://img.freepik.com/free-photo/close-up-young-person-barbeque_23-2149271990.jpg"
       },
       {
         username: "DemoEmp4",
@@ -41,7 +41,7 @@ module.exports = {
         lastName: "Doe",
         email: "jane@aa.io",
         hashedPassword: bcrypt.hashSync("password"),
-        role: "client",
+        profilePicUrl: "https://img.freepik.com/free-photo/front-view-smiley-woman-with-earbuds_23-2148613052.jpg"
       },
       {
         username: "DemoEmp5",
@@ -49,7 +49,7 @@ module.exports = {
         lastName: "Smith",
         email: "gsmith@aa.io",
         hashedPassword: bcrypt.hashSync("password"),
-        role: "client",
+        profilePicUrl: "https://img.freepik.com/free-photo/portrait-man-laughing_23-2148859448.jpg"
       },
       {
         username: "DemoEmp6",
@@ -57,7 +57,7 @@ module.exports = {
         lastName: "Jobs",
         email: "democompany@aa.io",
         hashedPassword: bcrypt.hashSync("password"),
-        role: "client",
+        profilePicUrl: "https://cdn.vox-cdn.com/thumbor/yIoKynT0Jl-zE7yWwzmW2fy04xc=/0x0:706x644/1400x1400/filters:focal(353x322:354x323)/cdn.vox-cdn.com/uploads/chorus_asset/file/13874040/stevejobs.1419962539.png"
       },
     ], options);
   },
