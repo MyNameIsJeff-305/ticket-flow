@@ -1,44 +1,37 @@
 let options = {};
+options.tableName = 'Notes';
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // define your schema in options object
 }
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Users', {
+    await queryInterface.createTable('Notes', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      userName: {
-        type: Sequelize.STRING(30),
-        allowNull: false,
-        unique: true
-      },
-      firstName: {
-        type: Sequelize.STRING(50),
-        allowNull: false,
-        defaultValue: ' '
-      },
-      lastName: {
-        type: Sequelize.STRING(50),
-        allowNull: false,
-        defaultValue: ' '
-      },
-      email: {
-        type: Sequelize.STRING(256),
-        allowNull: false,
-        unique: true
-      },
-      hashedPassword: {
-        type: Sequelize.STRING.BINARY,
+      note: {
+        type: Sequelize.STRING(255),
         allowNull: false
       },
-      role: {
-        type: Sequelize.STRING(50),
+      userId: {
+        type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+          model: 'Users',
+          key: 'id'
+        },
+      },
+      ticketId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Tickets',
+          key: 'id'
+        },
       },
       createdAt: {
         allowNull: false,
@@ -53,7 +46,10 @@ module.exports = {
     }, options);
   },
   async down(queryInterface, Sequelize) {
-    options.tableName = "Users";
+    options.tableName = 'Notes';
+    if (process.env.NODE_ENV === 'production') {
+      options.schema = process.env.SCHEMA;
+    }
     return queryInterface.dropTable(options);
   }
 };

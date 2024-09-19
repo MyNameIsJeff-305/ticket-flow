@@ -5,7 +5,14 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
-      // define association here
+      User.hasMany(models.Ticket, {
+        foreignKey: 'createdBy',
+        onDelete: 'CASCADE'
+      }),
+      User.hasMany(models.Note, {
+        foreignKey: 'userId',
+        onDelete: 'CASCADE'
+      })
     }
   }
   User.init({
@@ -28,11 +35,6 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: ' '
     },
     lastName: {
-      type: DataTypes.STRING(50),
-      allowNull: false,
-      defaultValue: ' '
-    },
-    companyName: {
       type: DataTypes.STRING(50),
       allowNull: false,
       defaultValue: ' '

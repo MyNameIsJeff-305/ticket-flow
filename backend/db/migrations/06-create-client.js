@@ -5,40 +5,35 @@ if (process.env.NODE_ENV === 'production') {
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Users', {
+    await queryInterface.createTable('Clients', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      userName: {
-        type: Sequelize.STRING(30),
-        allowNull: false,
-        unique: true
-      },
       firstName: {
         type: Sequelize.STRING(50),
         allowNull: false,
-        defaultValue: ' '
+        defaultValue: ''
       },
       lastName: {
         type: Sequelize.STRING(50),
         allowNull: false,
-        defaultValue: ' '
+        defaultValue: ''
+      },
+      companyName: {
+        type: Sequelize.STRING(50),
+        allowNull: false,
+        defaultValue: ''
       },
       email: {
         type: Sequelize.STRING(256),
-        allowNull: false,
         unique: true
       },
-      hashedPassword: {
-        type: Sequelize.STRING.BINARY,
-        allowNull: false
-      },
-      role: {
-        type: Sequelize.STRING(50),
-        allowNull: false,
+      phoneNumber: {
+        type: Sequelize.INTEGER,
+        unique: true
       },
       createdAt: {
         allowNull: false,
@@ -53,7 +48,10 @@ module.exports = {
     }, options);
   },
   async down(queryInterface, Sequelize) {
-    options.tableName = "Users";
+    options.tableName = 'Clients';
+    if (process.env.NODE_ENV === 'production') {
+      options.schema = process.env.SCHEMA;
+    }
     return queryInterface.dropTable(options);
   }
 };

@@ -15,16 +15,14 @@ module.exports = {
         username: "DemoEmp1",
         firstName: "Demo",
         lastName: "User",
-        companyName: " ",
         email: "demo@aa.io",
         hashedPassword: bcrypt.hashSync("password"),
         role: "employee",
       },
       {
         username: "DemoEmp2",
-        firstName: "John",
-        lastName: "Doe",
-        companyName: " ",
+        firstName: "Tom",
+        lastName: "Holland",
         email: "demo2@aa.io",
         hashedPassword: bcrypt.hashSync("password"),
         role: "employee",
@@ -33,46 +31,44 @@ module.exports = {
         username: "DemoEmp3",
         firstName: "John",
         lastName: "Doe",
-        companyName: " ",
         email: "demo3@aa.io",
         hashedPassword: bcrypt.hashSync("password"),
         role: "employee",
       },
       {
-        username: "DemoClient1",
+        username: "DemoEmp4",
         firstName: "Jane",
         lastName: "Doe",
-        companyName: " ",
         email: "jane@aa.io",
         hashedPassword: bcrypt.hashSync("password"),
         role: "client",
       },
       {
-        username: "DemoClient2",
+        username: "DemoEmp5",
         firstName: "George",
         lastName: "Smith",
-        companyName: " ",
         email: "gsmith@aa.io",
         hashedPassword: bcrypt.hashSync("password"),
         role: "client",
       },
       {
-        username: "DemoCompany",
-        firstName: " ",
-        lastName: " ",
-        companyName: "Demo Company",
+        username: "DemoEmp6",
+        firstName: "Steve",
+        lastName: "Jobs",
         email: "democompany@aa.io",
         hashedPassword: bcrypt.hashSync("password"),
         role: "client",
       },
-    ], { validate: true });
+    ], options);
   },
 
   async down(queryInterface, Sequelize) {
     options.tableName = 'Users';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
-      username: { [Op.in]: ['DemoEmp1','DemoEmp2','DemoEmp3', 'DemoClient1', 'DemoClient2', 'DemoClient3'] }
+      username: {
+        [Op.in]: ["DemoEmp1", "DemoEmp2", "DemoEmp3", "DemoEmp4", "DemoEmp5", "DemoEmp6"]
+      }
     }, {});
   }
 };
