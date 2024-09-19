@@ -1,5 +1,5 @@
 let options = {};
-options.tableName = 'Spots';
+options.tableName = 'Tickets';
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // define your schema in options object
 }
@@ -26,11 +26,11 @@ module.exports = {
         },
         onDelete: "CASCADE"
       },
-      takenBy: {
+      clientId: {
         type: Sequelize.INTEGER,
         allowNull: true,
         references: {
-          model: 'Users',
+          model: 'Clients',
           key: 'id'
         },
         onDelete: "CASCADE"
@@ -40,11 +40,11 @@ module.exports = {
       },
       checkIn: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: true
       },
       checkOut: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: true
       },
       statusId: {
         type: Sequelize.INTEGER,

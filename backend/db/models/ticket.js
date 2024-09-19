@@ -9,15 +9,19 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'createdBy',
         onDelete: 'CASCADE'
       }),
-      Ticket.belongsTo(models.User, {
-        foreignKey: 'takenBy',
-        onDelete: 'CASCADE'
-      }),
       Ticket.belongsTo(models.Status, {
         foreignKey: 'statusId',
         onDelete: 'CASCADE'
-      }),
+      })
+      Ticket.belongsTo(models.Client, {
+        foreignKey: 'clientId',
+        onDelete: 'CASCADE'
+      })
       Ticket.hasMany(models.Note, {
+        foreignKey: 'ticketId',
+        onDelete: 'CASCADE'
+      })
+      Ticket.hasMany(models.Part, {
         foreignKey: 'ticketId',
         onDelete: 'CASCADE'
       })
@@ -37,11 +41,11 @@ module.exports = (sequelize, DataTypes) => {
       },
       onDelete: "CASCADE"
     },
-    takenBy: {
+    clientId: {
       type: DataTypes.INTEGER,
       allowNull: true,
       references: {
-        model: 'Users',
+        model: 'Clients',
         key: 'id',
       },
       onDelete: "CASCADE"
@@ -51,11 +55,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     checkIn: {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
     },
     checkOut: {
       type: DataTypes.DATE,
-      allowNull: false
+      allowNull: true
     },
     statusId: {
       type: DataTypes.INTEGER,

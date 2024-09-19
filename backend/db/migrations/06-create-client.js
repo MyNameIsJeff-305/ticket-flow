@@ -1,28 +1,39 @@
 let options = {};
-options.tableName = 'Statuses';
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // define your schema in options object
 }
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Statuses', {
+    await queryInterface.createTable('Clients', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
+      firstName: {
         type: Sequelize.STRING(50),
         allowNull: false,
+        defaultValue: ''
       },
-      color: {
-        type: Sequelize.STRING(10),
-        allowNull: false
+      lastName: {
+        type: Sequelize.STRING(50),
+        allowNull: false,
+        defaultValue: ''
       },
-      description: {
-        type: Sequelize.STRING(255),
+      companyName: {
+        type: Sequelize.STRING(50),
+        allowNull: false,
+        defaultValue: ''
+      },
+      email: {
+        type: Sequelize.STRING(256),
+        unique: true
+      },
+      phoneNumber: {
+        type: Sequelize.INTEGER,
+        unique: true
       },
       createdAt: {
         allowNull: false,
@@ -37,7 +48,7 @@ module.exports = {
     }, options);
   },
   async down(queryInterface, Sequelize) {
-    options.tableName = "Statuses";
+    options.tableName = 'Clients';
     if (process.env.NODE_ENV === 'production') {
       options.schema = process.env.SCHEMA;
     }

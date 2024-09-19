@@ -9,10 +9,6 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'createdBy',
         onDelete: 'CASCADE'
       }),
-      User.hasMany(models.Ticket, {
-        foreignKey: 'takenBy',
-        onDelete: 'CASCADE'
-      }),
       User.hasMany(models.Note, {
         foreignKey: 'userId',
         onDelete: 'CASCADE'
@@ -39,11 +35,6 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: ' '
     },
     lastName: {
-      type: DataTypes.STRING(50),
-      allowNull: false,
-      defaultValue: ' '
-    },
-    companyName: {
       type: DataTypes.STRING(50),
       allowNull: false,
       defaultValue: ' '

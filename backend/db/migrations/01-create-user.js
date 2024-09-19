@@ -27,11 +27,6 @@ module.exports = {
         allowNull: false,
         defaultValue: ' '
       },
-      companyName: {
-        type: Sequelize.STRING(50),
-        allowNull: false,
-        defaultValue: ' '
-      },
       email: {
         type: Sequelize.STRING(256),
         allowNull: false,

@@ -4,18 +4,25 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Status extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      // define association here
+      Status.hasMany(models.Ticket, {
+        foreignKey: 'statusId',
+        onDelete: 'CASCADE'
+      })
     }
   }
   Status.init({
-    name: DataTypes.STRING,
-    color: DataTypes.STRING
+    name: {
+      type: DataTypes.STRING(50),
+      allowNull: false
+    },
+    color: {
+      type: DataTypes.STRING(10),
+      allowNull: false
+    },
+    description: {
+      type: DataTypes.STRING(255)
+    }
   }, {
     sequelize,
     modelName: 'Status',

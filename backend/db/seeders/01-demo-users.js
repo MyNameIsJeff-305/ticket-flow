@@ -65,7 +65,7 @@ module.exports = {
         hashedPassword: bcrypt.hashSync("password"),
         role: "client",
       },
-    ], { validate: true });
+    ], options);
   },
 
   async down(queryInterface, Sequelize) {
