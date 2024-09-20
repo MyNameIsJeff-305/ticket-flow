@@ -55,10 +55,6 @@ module.exports = (sequelize, DataTypes) => {
         len: [60, 60],
       },
     },
-    role: {
-      type: DataTypes.STRING(50),
-      allowNull: false,
-    },
     profilePicUrl: {
       type: DataTypes.STRING(256),
       allowNull: false,
