@@ -1,27 +1,37 @@
-import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { Outlet, createBrowserRouter, RouterProvider } from 'react-router-dom';
-import LoginFormPage from './components/LoginFormPage';
-import SignupFormPage from './components/SignupFormPage';
-import Navigation from './components/Navigation';
-import * as sessionActions from './store/session';
+import { useDispatch, useSelector } from "react-redux";
+import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
+import * as sessionActions from "./store/session";
+
+import './index.css'
+
+import { useEffect, useState } from "react";
+
+import LoginSignup from "./components/LoginSignup/LoginSignup";
+import Navigation from "./components/Navigation/Navigation";
 
 function Layout() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
 
+  const sessionUser = useSelector(state => state.session.user);
+
   useEffect(() => {
-    dispatch(sessionActions.restoreUser()).then(() => {
-      setIsLoaded(true)
-    });
+    dispatch(sessionActions.restoreUser())
+      .then(() => setIsLoaded(true));
   }, [dispatch]);
 
   return (
-    <>
-      <Navigation isLoaded={isLoaded} />
-      {isLoaded && <Outlet />}
-    </>
-  );
+    <div className="app-div-container">
+      <header className="header">
+        {sessionUser && <Navigation />}
+      </header>
+      <main className='main-zone'>
+        {isLoaded && <Outlet />}
+      </main>
+      <footer className="footer">
+      </footer>
+    </div>
+  )
 }
 
 const router = createBrowserRouter([
@@ -30,22 +40,32 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <h1>Welcome!</h1>
-      },
-      {
-        path: "login",
-        element: <LoginFormPage />
-      },
-      {
-        path: "signup",
-        element: <SignupFormPage />
+        element: <LoginSignup />
       }
     ]
   }
-]);
+])
 
 function App() {
-  return <RouterProvider router={router} />;
+  const [theme, setTheme] = useState('light');
+
+  //Check Local Storage for saved Theme on initial render
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      setTheme(savedTheme);
+      document.body.className = savedTheme === 'dark' ? 'dark-mode' : 'light-mode';
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    document.body.className = newTheme === 'dark' ? 'dark-mode' : 'light-mode';
+    localStorage.setItem('theme', newTheme);
+  }
+
+  return <RouterProvider router={router} />
 }
 
 export default App;
