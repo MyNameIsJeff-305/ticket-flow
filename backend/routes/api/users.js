@@ -19,7 +19,6 @@ const validateSignup = [
         .withMessage("Username is required"),
     check('firstName').exists({ checkFalsy: true }).withMessage("First Name is required"),
     check('lastName').exists({ checkFalsy: true }).withMessage("Last Name is required"),
-    check('companyName').exists({ checkFalsy: true }).withMessage("Company Name is required"),
     check('password')
         .exists({ checkFalsy: true })
         .isLength({ min: 6 })
@@ -32,9 +31,9 @@ router.post(
     '/',
     validateSignup,
     async (req, res) => {
-        const { email, password, username, firstName, lastName, companyName, role } = req.body;
+        const { email, password, username, firstName, lastName } = req.body;
         const hashedPassword = bcrypt.hashSync(password);
-        const user = await User.create({ email, username, hashedPassword, firstName, lastName, companyName, role });
+        const user = await User.create({ email, username, hashedPassword, firstName, lastName });
 
         const safeUser = {
             id: user.id,
@@ -42,8 +41,6 @@ router.post(
             username: user.username,
             firstName: user.firstName,
             lastName: user.lastName,
-            companyName: user.companyName,
-            role: user.role
         };
 
         await setTokenCookie(res, safeUser);

@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { login } from "../../store/session";
+import { login, signup } from "../../store/session";
 
 import { FaArrowRightToBracket } from "react-icons/fa6";
 import { FaUserPlus } from "react-icons/fa6";
-
 
 import "./LoginSignup.css";
 
@@ -18,6 +17,8 @@ export default function LoginSignup() {
 
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const [createPassword, setCreatePassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -46,10 +47,48 @@ export default function LoginSignup() {
         setIsButtonDisabled(credential.length < 4 || password.length < 6);
     }, [credential, password]);
 
+    useEffect(() => {
+        const newErrors = {};
+        if (firstName.length > 0 && firstName.length < 2) {
+            newErrors.firstName = 'First Name must be 2 characters or longer';
+        }
+        if (lastName.length > 0 && lastName.length < 2) {
+            newErrors.lastName = 'Last Name must be 2 characters or longer';
+        }
+        if (username.length > 0 && username.length < 4) {
+            newErrors.username = 'Username must be 4 characters or longer';
+        }
+        if (email.length > 0 && email.length < 4) {
+            newErrors.email = 'Email must be 4 characters or longer';
+        }
+        if (createPassword.length > 0 && createPassword.length < 6) {
+            newErrors.createPassword = 'Password must be 6 characters or longer';
+        }
+        if (confirmPassword.length > 0 && confirmPassword !== createPassword) {
+            newErrors.confirmPassword = 'Passwords do not match';
+        }
+        setErrors(newErrors);
+        setIsButtonDisabled(firstName.length < 2 || lastName.length < 2 || email.length < 4 || createPassword.length < 6 || confirmPassword !== createPassword);
+    }, [firstName, lastName, username, email, createPassword, confirmPassword]);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         dispatch(login({ credential, password }))
+            .then(() => navigate("/dashboard"))
+            .catch(async (res) => {
+                const data = await res.json();
+                if (data && data.message) {
+                    setIsButtonDisabled(true);
+                    setErrors(data);
+                }
+            })
+    }
+
+    const handleSignup = async (e) => {
+        e.preventDefault();
+
+        dispatch(signup({ firstName, lastName, username, email, password: confirmPassword }))
             .then(() => navigate("/dashboard"))
             .catch(async (res) => {
                 const data = await res.json();
@@ -108,21 +147,59 @@ export default function LoginSignup() {
                                     <label>
                                         First Name
                                         <input type="text" name="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+                                        {
+                                            errors.firstName && (
+                                                <p className='error-message'>{errors.firstName}</p>
+                                            )
+                                        }
                                     </label>
                                     <label>
                                         Last Name
                                         <input type="text" name="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+                                        {
+                                            errors.lastName && (
+                                                <p className='error-message'>{errors.lastName}</p>
+                                            )
+                                        }
                                     </label>
                                 </div>
+                                <label>
+                                    Username
+                                    <input type="text" name="createPassword" value={username} onChange={(e) => setUsername(e.target.value)} />
+                                </label>
+                                {
+                                    errors.email && (
+                                        <p className='error-message'>{errors.username}</p>
+                                    )
+                                }
+                                <label>
+                                    Email
+                                    <input type="text" name="createPassword" value={email} onChange={(e) => setEmail(e.target.value)} />
+                                </label>
+                                {
+                                    errors.email && (
+                                        <p className='error-message'>{errors.email}</p>
+                                    )
+                                }
                                 <label>
                                     Create Password
                                     <input type="password" name="createPassword" value={createPassword} onChange={(e) => setCreatePassword(e.target.value)} />
                                 </label>
+                                {
+                                    errors.createPassword && (
+                                        <p className='error-message'>{errors.createPassword}</p>
+                                    )
+                                }
                                 <label>
                                     Confirm Password
                                     <input type="password" name="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
                                 </label>
-                                <button type="submit" disabled={isButtonDisabled} onClick={(e) => handleSubmit(e)}>Signup</button>
+                                {
+                                    errors.confirmPassword && (
+                                        <p className='error-message'>{errors.confirmPassword}</p>
+                                    )
+                                }
+                                <button type="submit" disabled={isButtonDisabled} onClick={(e) => handleSignup(e)}>Signup</button>
                                 {
                                     errors.message && (
                                         <p className='error-message'>{errors.message}</p>

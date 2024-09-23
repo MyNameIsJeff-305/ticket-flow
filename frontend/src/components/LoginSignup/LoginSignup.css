@@ -163,7 +163,8 @@ body {
 
 .login-signup-toggle button:hover {
     color: var(--white);
-    background-color: var(--teal);
+    background-color: var(--semitransparent-teal);
+    box-shadow: var(--box-shadow);
     transform: scale(1.1);
 }
 
