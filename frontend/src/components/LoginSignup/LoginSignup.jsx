@@ -19,6 +19,7 @@ export default function LoginSignup() {
     const [lastName, setLastName] = useState("");
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
+    const [image, setImage] = useState(null);
     const [createPassword, setCreatePassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -88,7 +89,7 @@ export default function LoginSignup() {
     const handleSignup = async (e) => {
         e.preventDefault();
 
-        dispatch(signup({ firstName, lastName, username, email, password: confirmPassword }))
+        dispatch(signup({ firstName, lastName, username, email, password: confirmPassword, image }))
             .then(() => navigate("/dashboard"))
             .catch(async (res) => {
                 const data = await res.json();
@@ -98,6 +99,11 @@ export default function LoginSignup() {
                 }
             })
     }
+
+    const updateFile = e => {
+        const file = e.target.files[0];
+        if (file) setImage(file);
+    };
 
     return (
         <main className='login-main'>
@@ -181,6 +187,15 @@ export default function LoginSignup() {
                                         <p className='error-message'>{errors.email}</p>
                                     )
                                 }
+                                <label htmlFor='file-upload'> Select From Computer
+                                    <input
+                                        type='file'
+                                        id='file-upload'
+                                        name="img_url"
+                                        onChange={updateFile}
+                                        accept='.jpg, .jpeg, .png, .gif'
+                                    />
+                                </label>
                                 <label>
                                     Create Password
                                     <input type="password" name="createPassword" value={createPassword} onChange={(e) => setCreatePassword(e.target.value)} />
