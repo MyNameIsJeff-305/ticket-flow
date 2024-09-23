@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 
 import LoginSignup from "./components/LoginSignup/LoginSignup";
 import Navigation from "./components/Navigation/Navigation";
+import Dashboard from "./components/Dashboard/Dashboard";
 
 function Layout() {
   const dispatch = useDispatch();
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <LoginSignup />
+      },
+      {
+        path: '/dashboard',
+        element: <Dashboard />
       }
     ]
   }
