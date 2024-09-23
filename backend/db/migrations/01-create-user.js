@@ -36,9 +36,10 @@ module.exports = {
         type: Sequelize.STRING.BINARY,
         allowNull: false
       },
-      role: {
-        type: Sequelize.STRING(50),
+      profilePicUrl: {
+        type: Sequelize.STRING(256),
         allowNull: false,
+        defaultValue: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png',
       },
       createdAt: {
         allowNull: false,

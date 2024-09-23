@@ -1,0 +1,182 @@
+/* LoginSignup.css */
+
+:root {
+    --teal: #67c6b8;
+    --purple: #5e53a3;
+    --yellow: #fdca18;
+    --pink: #ed1876;
+    --white: #ffffff;
+    --light-gray: #f7f7f7;
+    --dark-gray: #333333;
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --semitransparent-teal: #27b39e;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--dark-gray);
+    background-color: var(--semitransparent-teal);
+    margin: 0;
+    padding: 0;
+}
+
+.login-main {
+    display: flex;
+    height: 100vh;
+}
+
+.left-section,
+.right-section {
+    flex: 1;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.left-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* background-color: #868686; */
+    color: var(--white);
+}
+
+.right-section {
+    background-color: var(--teal);
+    /* Updated background color */
+    backdrop-filter: blur(5px);
+    /* Optional: adds a blur effect to the background */
+}
+
+.logo img,
+.right-section-logo {
+    max-width: 150px;
+    margin-bottom: 2rem;
+}
+
+.left-text aside {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--yellow);
+}
+
+.left-text-description {
+    font-size: 0.8rem;
+    line-height: 1.6;
+    color: var(--white);
+    max-width: 100%;
+}
+
+.form-container {
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto;
+    background-color: var(--semitransparent-gray);
+    /* Add a white background to the form container */
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: var(--box-shadow);
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.login-form label {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.9rem;
+    color: var(--white);
+    font-weight: 600;
+}
+
+.login-form input {
+    margin-top: 0.5rem;
+    margin-right: 0.5rem;
+    padding: 0.8rem;
+    border: 2px solid var(--light-gray);
+    border-radius: 4px;
+    background-color: var(--white);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-form input:focus {
+    outline: none;
+    border-color: var(--teal);
+    box-shadow: 0 0 0 3px rgba(103, 198, 184, 0.2);
+}
+
+.login-form button {
+    padding: 0.8rem;
+    background-color: var(--purple);
+    color: var(--white);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.login-form button:hover:not(:disabled) {
+    background-color: var(--pink);
+    transform: translateY(-2px);
+}
+
+.login-form button:disabled {
+    background-color: var(--purple);
+    color: var(--white);
+    cursor: not-allowed;
+}
+
+.error-message {
+    color: var(--pink);
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+}
+
+.login-signup-toggle {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.login-signup-toggle button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border: none;
+    color: var(--white);
+    padding: 10px 10px;
+    background-color: var(--pink);
+    border-radius: 50px;
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.1s ease;
+}
+
+.login-signup-toggle button:hover {
+    color: var(--white);
+    background-color: var(--teal);
+    transform: scale(1.1);
+}
+
+.name-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.name-container input {
+    margin-top: 0.5rem;
+    padding: 0.8rem;
+    border: 2px solid var(--light-gray);
+    border-radius: 4px;
+    background-color: var(--white);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
