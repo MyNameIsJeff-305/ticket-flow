@@ -34,7 +34,7 @@ export default function LoginSignup() {
         setCredential("");
         setPassword("");
         setErrors({});
-    }, []);
+    }, [navigate, sessionUser]);
 
     useEffect(() => {
         const newErrors = {};

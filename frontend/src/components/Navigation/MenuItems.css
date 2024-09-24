@@ -40,15 +40,15 @@
 }
 
 .menu-item:hover {
-    color: #5e53a3;
+    color: #ed1876;
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 5px;
 }
 
 .menu-item.active {
-    color: #5e53a3;
+    color: #ed1876;
     font-weight: 700;
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 5px;
-    border-bottom: 2px solid #5e53a3;
+    border-bottom: 2px solid #ed1876;
 }

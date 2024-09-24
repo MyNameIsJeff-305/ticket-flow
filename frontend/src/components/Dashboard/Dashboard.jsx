@@ -1,7 +1,12 @@
+import MyWork from "../MyWork";
+
 export default function Dashboard() {
     return (
-        <div>
-            <h1>Dashboard</h1>
-        </div>
+        <main className="dashboard">
+            <MyWork />
+            <section className="right-section">
+
+            </section>
+        </main>
     )
 }
