@@ -32,7 +32,7 @@
 
 .new-tickets-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-between;
     align-items: start;
     background-color: #f9f9f9;
@@ -60,7 +60,7 @@
 
 .in-progress-tickets-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-between;
     align-items: start;
     background-color: #f9f9f9;
@@ -88,7 +88,7 @@
 
 .done-tickets-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-between;
     align-items: start;
     background-color: #f9f9f9;
