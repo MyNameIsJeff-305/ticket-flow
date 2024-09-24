@@ -37,7 +37,8 @@ router.get('/', async (req, res, next) => {
                 firstName: currentUser.firstName,
                 lastName: currentUser.lastName,
                 email: currentUser.email,
-                userName: currentUser.userName
+                userName: currentUser.userName,
+                profilePicUrl: currentUser.profilePicUrl
             }
         } || { user: null });
     } catch (error) {
