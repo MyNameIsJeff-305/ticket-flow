@@ -1,6 +1,9 @@
 import {useNavigate} from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 
 import './TicketCard.css'
+import { useEffect } from 'react';
+import { getAllStatusThunk } from '../../store/status';
 
 function formatDate(dateString) {
     const date = new Date(dateString);
@@ -19,6 +22,14 @@ function formatDate(dateString) {
 }
 
 export default function TicketCard({ ticket }) {
+    const dispatch = useDispatch();
+
+    const status = useSelector(state => state.status);
+
+    useEffect(() => {
+        dispatch(getAllStatusThunk(ticket.statusId));
+    }, [dispatch]);
+
     const ticketStatus = ticket.statusId;
 
     const navigate = useNavigate();
@@ -27,8 +38,10 @@ export default function TicketCard({ ticket }) {
         return navigate(`/tickets/${ticket.id}`)
     }
 
+    const thisStatus = status.allStatus?.find(status => status.id === ticket.statusId);
+
     return (
-        <div className={`ticket-card-${ticketStatus}`} onClick={() => handleClick()} style={{cursor: 'pointer'}}>
+        <div className={`ticket-card-${ticketStatus}`} style={thisStatus ? {borderLeft: `6px solid ${thisStatus.color}`, cursor: 'pointer'} : {borderLeft: `6px solid gray`, cursor: 'pointer'}} onClick={() => handleClick()}>
             <div className="ticket-card-left">
                 <h3>{ticket.title}</h3>
                 <p>{ticket.description}</p>

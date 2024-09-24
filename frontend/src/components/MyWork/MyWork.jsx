@@ -4,6 +4,8 @@ import { getMyTicketsThunk } from "../../store/tickets";
 
 import TicketCard from "./TicketCard";
 
+import './MyWork.css';
+
 
 export default function MyWork() {
 
@@ -22,7 +24,7 @@ export default function MyWork() {
     )
 
     return (
-        <section>
+        <section className="my-work-tab">
             <h1>My Work</h1>
             {
                 myTickets.map(ticket => (

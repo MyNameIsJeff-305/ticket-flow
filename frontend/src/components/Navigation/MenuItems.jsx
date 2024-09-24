@@ -10,19 +10,19 @@ import './MenuItems.css';
 export default function MenuItems() {
     return (
         <menu className="menu">
-            <NavLink to="/dashboard" className="menu-item" activeClassName="active">
+            <NavLink to="/dashboard" className="menu-item">
                 <FaHome />
                 Dashboard
             </NavLink>
-            <NavLink to="/tickets" className="menu-item" activeClassName="active">
+            <NavLink to="/tickets" className="menu-item">
                 <FaTicketAlt />
                 Tickets
             </NavLink>
-            <NavLink to="/parts" className="menu-item" activeClassName="active">
+            <NavLink to="/parts" className="menu-item">
                 <FaTools />
                 Parts
             </NavLink>
-            <NavLink to="/clients" className="menu-item" activeClassName="active">
+            <NavLink to="/clients" className="menu-item">
                 <FaUsers />
                 Clients
             </NavLink>

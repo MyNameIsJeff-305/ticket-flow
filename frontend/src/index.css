@@ -14,3 +14,19 @@ body.dark-mode {
     background-color: var(--background-color-dark);
     color: var(--text-color-dark);
 }
+
+.app-div-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 100vh;
+    gap: 0;
+}
+
+.main-zone {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}

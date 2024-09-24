@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import LoginSignup from "./components/LoginSignup/LoginSignup";
 import Navigation from "./components/Navigation/Navigation";
 import Dashboard from "./components/Dashboard/Dashboard";
+import Footer from "./components/Footer/Footer";
 
 function Layout() {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ function Layout() {
         {isLoaded && <Outlet />}
       </main>
       <footer className="footer">
+        <Footer />
       </footer>
     </div>
   )

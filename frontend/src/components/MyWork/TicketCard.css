@@ -48,7 +48,8 @@
 
 /* Status-based styles */
 .ticket-card-1 {
-    border-left: 6px solid #4CAF50;
+    /* border-left: 6px solid #ed1876; */
+    width: 100%;
     /* New ticket */
     display: flex;
     justify-content: space-between;
@@ -67,7 +68,8 @@
 }
 
 .ticket-card-2 {
-    border-left: 6px solid #FFC107;
+    /* border-left: 6px solid #FFC107; */
+    width: 100%;
     /* Pending ticket */
     display: flex;
     justify-content: space-between;
@@ -86,7 +88,8 @@
 }
 
 .ticket-card-3 {
-    border-left: 6px solid #F44336;
+    /* border-left: 6px solid #F44336; */
+    width: 100%;
     /* Closed ticket */
     display: flex;
     justify-content: space-between;

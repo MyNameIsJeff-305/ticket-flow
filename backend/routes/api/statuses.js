@@ -17,6 +17,22 @@ router.get('/', requireAuth, async (req, res, next) => {
     }
 });
 
+//Get a Status by Status ID
+router.get('/:id', requireAuth, async (req, res, next) => {
+    try {
+        const status = await Status.findByPk(req.params.id);
+
+        if (!status) {
+            return res.status(404).json({ message: 'Status not found' });
+        }
+
+        return res.json(status);
+
+    } catch (error) {
+        next(error);
+    }
+});
+
 //Add a new Status
 router.post('/', requireAuth, async (req, res, next) => {
     try {
