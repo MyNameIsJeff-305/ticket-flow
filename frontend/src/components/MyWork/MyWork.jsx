@@ -19,7 +19,7 @@ export default function MyWork({myTickets, status}) {
     return (
         <section className="my-work-tab">
             <h1>My Work</h1>
-            <div style={{ width: "100%" }}>
+            <div style={{ width: "90%" }}>
                 <h3>New Tickets</h3>
                 {
                     newTickets.length > 0 ? (
@@ -31,7 +31,7 @@ export default function MyWork({myTickets, status}) {
                     )
                 }
             </div>
-            <div style={{ width: "100%" }}>
+            <div style={{ width: "90%" }}>
                 <h3>In Progress Tickets</h3>
                 {
                     inProgress.length > 0 ? (
@@ -43,7 +43,7 @@ export default function MyWork({myTickets, status}) {
                     )
                 }
             </div>
-            <div style={{ width: "100%" }}>
+            <div style={{ width: "90%" }}>
                 <h3>Completed</h3>
                 {
                     completed.length > 0 ? (

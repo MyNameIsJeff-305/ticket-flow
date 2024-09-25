@@ -1,4 +1,4 @@
-import MyWork from "../MyWork";
+// import MyWork from "../MyWork";
 import Statistics from "../Statistics/Statistics";
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
@@ -24,12 +24,11 @@ export default function Dashboard() {
     return (
         <main className="dashboard">
             <div className="left-section-d">
-                <MyWork myTickets={myTickets} status={status} />
-            </div>
-            <section className="right-section-d">
                 <Statistics myTickets={myTickets} status={status} />
+            </div>
+            <div className="right-section-d">
                 <MyAccount user={user} />
-            </section>
+            </div>
         </main>
     )
 }

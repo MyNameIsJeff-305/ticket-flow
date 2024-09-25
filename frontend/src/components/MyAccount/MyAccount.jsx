@@ -1,42 +1,43 @@
-import { useDispatch } from 'react-redux';
-import { useEffect, useState } from 'react';
+// import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 
-import { updateUserThunk } from '../../store/session';
+// import { updateUserThunk } from '../../store/session';
 
 import { FaPen } from "react-icons/fa6";
-import { FaSave } from "react-icons/fa";
+// import { FaSave } from "react-icons/fa";
 
 import './MyAccount.css'
 
 export default function MyAccount({ user }) {
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
-    const [profilePicUrl, setProfilePicUrl] = useState(user.profilePicUrl);
+    // const [profilePicUrl, setProfilePicUrl] = useState(user.profilePicUrl);
 
-    const [isEditing, setIsEditing] = useState(false);
+    // const [isEditing, setIsEditing] = useState(false);
 
 
 
     useEffect(() => {
-        if (isEditing) {
-            dispatch(updateUserThunk(user.id, { image_url: profilePicUrl }));
-        }
+        // if (isEditing) {
+        //     dispatch(updateUserThunk(user.id, { image_url: profilePicUrl }));
+        // }
     })
 
-    const updateFile = e => {
-        const file = e.target.files[0];
-        if (file) setProfilePicUrl(file);
-    };
+    // const updateFile = e => {
+    //     // const file = e.target.files[0];
+    //     // if (file) setProfilePicUrl(file);
+    // };
 
     return (
         <section className="my-account-tab">
             <div className='my-account-header'>
                 <h1>My Account</h1>
                 <button className='edit-cancel-button' onClick={() => window.alert("Feature Coming Soon...")}>
-                    {
+                    {/* {
                         isEditing ? <FaSave /> : <FaPen />
-                    }
+                    } */}
+                    <FaPen />
                 </button>
             </div>
             <div className="account-details-container-main">
@@ -45,9 +46,9 @@ export default function MyAccount({ user }) {
                     <input
                         type="file"
                         name='img_url'
-                        onChange={updateFile}
+                        // onChange={updateFile}
                         accept='.jpg, .jpeg, .png'
-                        disabled={!isEditing}
+                        // disabled={!isEditing}
                     />
                 </div>
                 <div className="account-details-container">

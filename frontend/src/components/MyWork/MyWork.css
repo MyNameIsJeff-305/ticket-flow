@@ -1,15 +1,18 @@
 .my-work-tab {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     align-items: start;
     width: 80%;
     /* padding: 10px; */
     /* margin: 10px 0; */
+    /* margin-top: 35px; */
+    /* margin-bottom: 40px; */
     border-radius: 10px;
-    padding-left: 10px;
-    /* padding: 1rem 2rem; */
+    /* padding-left: 10px; */
+    padding: 1rem 2rem;
     /* margin: 10px; */
     background-color: #3bbca7;
     color: white;
+    height: 100%;
 }
