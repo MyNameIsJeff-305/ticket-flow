@@ -1,0 +1,85 @@
+.my-account-tab {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+    width: 95%;
+    /* padding: 10px; */
+    /* margin: 10px 0; */
+    border-radius: 10px;
+    padding-left: 10px;
+    /* padding: 1rem 2rem; */
+    margin: 20px;
+    background-color: #3bbca7;
+    color: white;
+}
+
+.my-account-tab h1 {
+    font-size: 1.5rem;
+    /* margin-bottom: 20px; */
+    text-align: center;
+    /* color: #333; */
+}
+
+.account-details-container {
+    display: flex;
+    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.my-account-header {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    align-content: space-between;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.account-picture-container img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #ccc;
+}
+
+.details-1,
+.details-2 {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+    margin-bottom: 10px;
+}
+
+.details-1 span,
+.details-2 span {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+input[type="text"] {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: #3bbca7;
+}
+
+@media (min-width: 768px) {
+    .account-details-container {
+        flex-direction: row;
+    }
+}

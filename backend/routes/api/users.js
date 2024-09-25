@@ -16,7 +16,7 @@ const validateSignup = [
         .exists({ checkFalsy: true })
         .isEmail()
         .withMessage('Invalid email'),
-    check('username')
+    check('userName')
         .exists({ checkFalsy: true })
         .withMessage("Username is required"),
     check('firstName').exists({ checkFalsy: true }).withMessage("First Name is required"),
@@ -34,17 +34,17 @@ router.post(
     singleMulterUpload('image'),
     validateSignup,
     async (req, res) => {
-        const { email, password, username, firstName, lastName } = req.body;
+        const { email, password, userName, firstName, lastName } = req.body;
         const profileImageUrl = req.file ?
             await singleFileUpload({ file: req.file, public: true }) :
             null;
         const hashedPassword = bcrypt.hashSync(password);
-        const user = await User.create({ email, username, hashedPassword, firstName, lastName, profileImageUrl });
+        const user = await User.create({ email, userName, hashedPassword, firstName, lastName, profileImageUrl });
 
         const safeUser = {
             id: user.id,
             email: user.email,
-            username: user.username,
+            userName: user.userName,
             firstName: user.firstName,
             lastName: user.lastName,
             profilePicUrl: user.profilePicUrl
@@ -66,17 +66,17 @@ router.put(
     async (req, res) => {
         const { id } = req.params;
         const user = await User.findByPk(id);
-        const { email, password, username, firstName, lastName } = req.body;
+        const { email, password, userName, firstName, lastName } = req.body;
         const profileImageUrl = req.file ?
             await singleFileUpload({ file: req.file, public: true }) :
             null;
         const hashedPassword = bcrypt.hashSync(password);
-        await user.update({ email, username, hashedPassword, firstName, lastName, profileImageUrl });
+        await user.update({ email, userName, hashedPassword, firstName, lastName, profileImageUrl });
 
         const safeUser = {
             id: user.id,
             email: user.email,
-            username: user.username,
+            userNme: user.userName,
             firstName: user.firstName,
             lastName: user.lastName,
             profilePicUrl: user.profilePicUrl

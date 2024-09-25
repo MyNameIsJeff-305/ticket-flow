@@ -6,6 +6,7 @@ import { getMyTicketsThunk } from '../../store/tickets';
 import { getAllStatusThunk } from '../../store/status';
 
 import './Dashboard.css';
+import MyAccount from "../MyAccount";
 
 export default function Dashboard() {
 
@@ -13,6 +14,7 @@ export default function Dashboard() {
 
     const myTickets = useSelector(state => state.tickets.myTickets);
     const status = useSelector(state => state.status.allStatus);
+    const user = useSelector(state => state.session.user);
 
     useEffect(() => {
         dispatch(getMyTicketsThunk());
@@ -26,6 +28,7 @@ export default function Dashboard() {
             </div>
             <section className="right-section-d">
                 <Statistics myTickets={myTickets} status={status} />
+                <MyAccount user={user} />
             </section>
         </main>
     )
