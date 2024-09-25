@@ -82,6 +82,8 @@ export const updateUserThunk = (userId, form) => async (dispatch) => {
     const { img_url } = form
     try {
 
+        console.log(img_url, "THIS IS IMG_URL");
+
         const formData = new FormData();
 
         formData.append('userId', userId)
@@ -93,7 +95,8 @@ export const updateUserThunk = (userId, form) => async (dispatch) => {
             body: formData
         }
 
-        const response = await csrfFetch(`/api/users/${userId}/update`, option);
+        const response = await csrfFetch(`/api/users/${userId}`, option);
+
         if (response.ok) {
             const user = await response.json();
             dispatch(editUser(user));
