@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
+import { FaCirclePlus } from "react-icons/fa6";
 
 import './Tickets.css';
 import { getAllTicketsThunk, getMyTicketsThunk, getTotalTicketsAmountThunk } from '../../store/tickets';
@@ -37,7 +38,7 @@ export default function Tickets() {
             <div style={{width: "100%"}}>
                 <div className='tickets-header'>
                     <h1>Tickets</h1>
-                    <button className='add-ticket-btn'>Add Ticket</button>
+                    <button className='add-ticket-btn'><div><FaCirclePlus /></div><span>Add Ticket</span></button>
                 </div>
                 <div className='tickets-container'>
                     {

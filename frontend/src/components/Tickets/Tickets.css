@@ -45,24 +45,69 @@
     margin-top: 20px;
 }
 
-.prev-btn, .next-btn {
-    background-color: #fff; /* Button background color */
-    color: #3bbca7; /* Text color to match the theme */
-    border: 2px solid #3bbca7; /* Border to match the theme */
-    padding: 0.5rem 0.5rem; /* Add padding to make the buttons bigger */
-    border-radius: 10px; /* Slightly round the corners */
-    font-size: 1rem; /* Increase font size for better readability */
+.prev-btn,
+.next-btn {
+    background-color: #fff;
+    /* Button background color */
+    color: #3bbca7;
+    /* Text color to match the theme */
+    border: 2px solid #3bbca7;
+    /* Border to match the theme */
+    padding: 0.5rem 0.5rem;
+    /* Add padding to make the buttons bigger */
+    border-radius: 10px;
+    /* Slightly round the corners */
+    font-size: 1rem;
+    /* Increase font size for better readability */
     cursor: pointer;
-    transition: background-color 0.3s, color 0.3s; /* Smooth transition on hover */
+    transition: background-color 0.3s, color 0.3s;
+    /* Smooth transition on hover */
 }
 
-.prev-btn:disabled, .next-btn:disabled {
-    background-color: #ddd; /* Gray out the buttons when disabled */
-    color: #999; /* Lighter color for the text */
-    cursor: not-allowed; /* Change cursor to indicate it's not clickable */
+.add-ticket-btn {
+    background-color: #fff;
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    /* Button background color */
+    color: #3bbca7;
+    /* Text color to match the theme */
+    border: 2px solid #3bbca7;
+    /* Border to match the theme */
+    padding: 0.6rem 0.5rem;
+    /* Add padding to make the buttons bigger */
+    border-radius: 10px;
+    /* Slightly round the corners */
+    font-size: 1rem;
+    /* Increase font size for better readability */
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    /* Smooth transition on hover */
 }
 
-.prev-btn:hover:not(:disabled), .next-btn:hover:not(:disabled) {
-    background-color: #ed1876; /* Change background color on hover */
-    color: white; /* Change text color on hover */
+.add-ticket-btn:hover {
+    background-color: #ed1876;
+    /* Change background color on hover */
+    color: white;
+    /* Change text color on hover */
+}
+
+.prev-btn:disabled,
+.next-btn:disabled {
+    background-color: #ddd;
+    /* Gray out the buttons when disabled */
+    color: #999;
+    /* Lighter color for the text */
+    cursor: not-allowed;
+    /* Change cursor to indicate it's not clickable */
+}
+
+.prev-btn:hover:not(:disabled),
+.next-btn:hover:not(:disabled) {
+    background-color: #ed1876;
+    /* Change background color on hover */
+    color: white;
+    /* Change text color on hover */
 }
