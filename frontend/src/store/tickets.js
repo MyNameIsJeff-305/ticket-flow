@@ -2,6 +2,7 @@ import { csrfFetch } from "./csrf";
 
 //CONSTANTS
 const GETALLTICKETS = 'tickets/getAllTickets';
+const GETTOTALTICKETSACOUMT = 'tickets/getTotalTicketsAmount';
 const GETMYTICKETS = 'tickets/getMyTickets';
 const GETTICKET = 'tickets/getTicket';
 const ADDTICKET = 'tickets/addTicket';
@@ -12,6 +13,11 @@ const DELETETICKET = 'tickets/deleteTicket';
 const getAllTickets = (tickets) => ({
     type: GETALLTICKETS,
     payload: tickets
+});
+
+const getTotalTicketsAmount = (amount) => ({
+    type: GETTOTALTICKETSACOUMT,
+    payload: amount
 });
 
 const getMyTickets = (tickets) => ({
@@ -40,11 +46,19 @@ const deleteTicket = (ticket) => ({
 });
 
 //THUNKS
-export const getAllTicketsThunk = () => async (dispatch) => {
-    const res = await csrfFetch('/api/tickets');
+export const getAllTicketsThunk = (page, size) => async (dispatch) => {
+    // console.log(page, size, "page and size");
+    const res = await csrfFetch(`/api/tickets?page=${page}&size=${size}`);
     const tickets = await res.json();
     dispatch(getAllTickets(tickets));
 };
+
+export const getTotalTicketsAmountThunk = () => async (dispatch) => {
+    const res = await csrfFetch(`/api/tickets/`);
+    const amount = await res.json();
+    // console.log(amount, "amount");
+    dispatch(getTotalTicketsAmount(amount.length));
+}
 
 export const getMyTicketsThunk = () => async (dispatch) => {
     const res = await csrfFetch(`/api/tickets/current`);
@@ -85,12 +99,20 @@ export const deleteTicketThunk = (id) => async (dispatch) => {
 }
 
 //REDUCER
-const initialState = {};
+const initialState = {
+    allTickets: [],
+    myTickets: [],
+    ticket: {},
+    totalTicketsAmount: 0
+};
 
 const ticketsReducer = (state = initialState, action) => {
     switch (action.type) {
         case GETALLTICKETS: {
             return { ...state, allTickets: action.payload };
+        }
+        case GETTOTALTICKETSACOUMT: {
+            return { ...state, totalTicketsAmount: action.payload };
         }
         case GETMYTICKETS: {
             return { ...state, myTickets: action.payload };
