@@ -1,5 +1,7 @@
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+
+import { FaBuilding, FaUser } from "react-icons/fa";
 
 import './TicketCard.css'
 import { useEffect } from 'react';
@@ -41,9 +43,27 @@ export default function TicketCard({ ticket }) {
     const thisStatus = status.allStatus?.find(status => status.id === ticket.statusId);
 
     return (
-        <div className={`ticket-card-${ticketStatus}`} style={thisStatus ? {borderLeft: `6px solid ${thisStatus.color}`, cursor: 'pointer'} : {borderLeft: `6px solid gray`, cursor: 'pointer'}} onClick={() => handleClick()}>
+        <div className={`ticket-card-${ticketStatus}`} style={thisStatus ? { borderLeft: `6px solid ${thisStatus.color}`, cursor: 'pointer' } : { borderLeft: `6px solid gray`, cursor: 'pointer' }} onClick={() => handleClick()}>
             <div className="ticket-card-left">
-                <h3>{ticket.title}</h3>
+                <h3>
+                    {ticket.title}
+                    {
+                        ticket.clientId.companyName !== '' ? (
+                            <div className='client-container-company'>
+                                <FaBuilding />
+                                <span>{ticket.clientId.companyName}</span>
+                            </div>
+                        ) : (
+                            <div className='client-container-personal'>
+                                <FaUser />
+                                <span>{ticket.clientId.firstName} {ticket.clientId.lastName}</span>
+                            </div>
+                        )
+                    }
+                </h3>
+                {
+                    typeof (ticket.createdBy) !== "number" && <span>Created by: {ticket.createdBy.firstName}</span>
+                }
                 <p>{ticket.description}</p>
             </div>
             <div className='ticket-card-right'>

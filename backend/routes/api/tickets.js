@@ -44,16 +44,16 @@ router.get('/', requireAuth, async (req, res, next) => {
         let Tickets = [];
 
         for (const ticket of tickets) {
-            ticket.status = await Status.findByPk(where.status);
-            ticket.client = await Client.findByPk(where.client);
-            ticket.createdBy = await User.findByPk(where.createdBy);
+            ticket["status"] = await Status.findByPk(where.status);
+            ticket.clientId = await Client.findByPk(where.client || ticket.clientId);
+            ticket.createdBy = await User.findByPk(where.createdBy || ticket.createdBy);
             const values = ticket.toJSON();
             Tickets.push(values);
         }
 
         return res.json(Tickets);
 
-        return res.json(tickets);
+        // return res.json(tickets);
 
     } catch (error) {
         next(error);
@@ -69,7 +69,15 @@ router.get('/current', requireAuth, async (req, res, next) => {
             }
         });
 
-        return res.json(tickets);
+        let Tickets = [];
+
+        for (const ticket of tickets) {
+            ticket.client = await Client.findByPk(ticket.clientId);
+            const values = ticket.toJSON();
+            Tickets.push(values);
+        }
+
+        return res.json(Tickets);
 
     } catch (error) {
         next(error);

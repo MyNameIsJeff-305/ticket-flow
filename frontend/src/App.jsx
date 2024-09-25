@@ -32,9 +32,13 @@ function Layout() {
         {sessionUser && <Navigation />}
       </header>
       <main className='main-zone'>
-        <div className="left-section-mm">
-          <MyWork myTickets={myTickets} status={status} />
-        </div>
+        {
+          sessionUser && (
+            <div className="left-section-mm">
+              <MyWork myTickets={myTickets} status={status} />
+            </div>
+          )
+        }
         <div className="right-section-mm">
           {isLoaded && <Outlet />}
         </div>

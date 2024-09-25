@@ -18,10 +18,14 @@
 
 /* Styling for left side (title and description) */
 .ticket-card-left {
-    max-width: 70%;
+    max-width: 100%;
 }
 
 .ticket-card-left h3 {
+    display: flex;
+    flex-direction: row;
+    
+    gap: 15px;
     font-size: 1.2rem;
     margin: 0;
     color: #333;
@@ -57,6 +61,7 @@
     background-color: #f9f9f9;
     border-radius: 8px;
     padding: 16px;
+    gap: 15px;
     margin: 12px 0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -77,6 +82,7 @@
     background-color: #f9f9f9;
     border-radius: 8px;
     padding: 16px;
+    gap: 15px;
     margin: 12px 0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -97,6 +103,7 @@
     background-color: #f9f9f9;
     border-radius: 8px;
     padding: 16px;
+    gap: 15px;
     margin: 12px 0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -106,3 +113,36 @@
     transform: translateY(-2px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
+
+span {
+    font-size: 0.85rem;
+    color: #888;
+}
+
+.client-container-company {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border-radius: 50px;
+    padding: 5px 10px;
+    background-color: #fdca18;
+    font-size: small;
+    color: #f9f9f9;
+}
+
+.client-container-company span, .client-container-personal span {
+    font-size: 0.85rem;
+    color: #f9f9f9;
+}
+
+.client-container-personal {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border-radius: 50px;
+    padding: 5px 10px;
+    background-color: #5e53a3;
+    font-size: small;
+    color: #f9f9f9;
+}
+
