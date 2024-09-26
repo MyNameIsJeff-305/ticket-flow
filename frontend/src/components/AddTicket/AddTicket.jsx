@@ -95,6 +95,7 @@ export default function AddTicket({ setTicketsChecker }) {
                         value={clientId}
                         onChange={(e) => setClientId(e.target.value)}
                     >
+                        <option value=''>Select a client</option>
                         {
                             clients.map(client => (
                                 <option key={client.id} value={client.id}>

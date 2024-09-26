@@ -43,25 +43,22 @@ export default function Tickets() {
         setTicketsChecker(true); // Trigger re-fetch when modal is closed after adding a new ticket
     }
 
-    console.log(totalTickets, "TotalTickets");
-
-    console.log(lastPage, "lastPage");
-
     return (
         <section className='tickets-tab'>
             <div style={{ width: "100%" }}>
                 <div className={`tickets-header`}>
                     <h1>Tickets</h1>
-                    <button className='add-ticket-btn' >
-                        <div>
-                            <FaCirclePlus />
-                            <OpenModalMenuItem
-                                itemText={"Add Ticket"}
-                                modalComponent={<AddTicket setTicketsChecker={setTicketsChecker} />}
-                                onModalClose={onModalClose} // Call onModalClose after modal closes
-                            />
-                        </div>
-                    </button>
+
+                    <div className='add-ticket-btn' style={{ listStyle: "none", display: "flex", flexDirection: "row", gap: "5px" }}>
+                        <FaCirclePlus />
+                        <OpenModalMenuItem
+                            itemText={"Add Ticket"}
+                            modalComponent={<AddTicket setTicketsChecker={setTicketsChecker} />}
+                            onModalClose={onModalClose} // Call onModalClose after modal closes
+                        >
+                        </OpenModalMenuItem>
+                    </div>
+
                 </div>
                 <div className='tickets-container'>
                     {
