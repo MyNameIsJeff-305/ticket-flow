@@ -47,7 +47,7 @@ button {
     /* Button background color */
     color: #3bbca7;
     /* Text color to match the theme */
-    border: 2px solid #3bbca7;
+    border: 2px solid #fff;
     /* Border to match the theme */
     padding: 0.6rem 0.6rem;
     /* Add padding to make the buttons bigger */
@@ -61,6 +61,7 @@ button {
 
 button:hover {
     background-color: #ed1876;
+    border: 2px solid #ed1876;
     /* Change background color on hover */
     color: white;
     /* Change text color on hover */
@@ -119,6 +120,7 @@ button:hover {
     justify-content: center;
     background-color: #f9f9f9;
     color: #333;
+    gap: 1rem;
     border-radius: 10px;
     padding: 15px 15px;
     width: 50%;

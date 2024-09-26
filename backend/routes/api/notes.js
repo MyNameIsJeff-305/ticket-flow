@@ -6,6 +6,17 @@ const { properNoteValidation } = require('../../utils/validation');
 
 const router = express.Router();
 
+//Get All Notes
+router.get('/', requireAuth, async (req, res, next) => {
+    try {
+        const notes = await Note.findAll();
+
+        return res.json({ Notes: notes });
+    } catch (error) {
+        next(error);
+    }
+});
+
 //Get all notes of the Current User
 router.get('/current', requireAuth, async (req, res, next) => {
     try {

@@ -91,4 +91,26 @@ router.put(
     }
 );
 
+//Get a User by ID
+router.get(
+    '/:id',
+    requireAuth,
+    async (req, res) => {
+        const { id } = req.params;
+        const user = await User.findByPk(id);
+        return res.json(user);
+    }
+);
+
+//Get all Users
+router.get(
+    '/',
+    requireAuth,
+    async (_req, res) => {
+        const users = await User.findAll();
+        // console.log(users, "USERS");
+        return res.json(users);
+    }
+);
+
 module.exports = router;

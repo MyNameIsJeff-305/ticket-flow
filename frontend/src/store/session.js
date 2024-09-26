@@ -3,6 +3,7 @@ import { csrfFetch } from './csrf';
 
 //CONSTANTS
 const SET_USER = "session/setUser";
+const GET_ALL_USERS = "session/getAllUsers";
 const REMOVE_USER = "session/removeUser";
 const EDIT_USER = "session/editUser";
 
@@ -24,6 +25,13 @@ const editUser = (user) => {
     return {
         type: SET_USER,
         payload: user
+    }
+}
+
+const getAllUsers = (users) => {
+    return {
+        type: GET_ALL_USERS,
+        payload: users
     }
 }
 
@@ -115,8 +123,16 @@ export const updateUserThunk = (userId, form) => async (dispatch) => {
     }
 }
 
+export const getAllUsersThunk = () => async (dispatch) => {
+    const response = await csrfFetch('/api/users');
+    const data = await response.json();
+    // console.log(data, "THIS IS DATA");
+    dispatch(getAllUsers(data));
+    // return response;
+}
+
 //REDUCER
-const initialState = { user: null };
+const initialState = { user: null, allUsers: [] };
 
 const sessionReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -126,6 +142,10 @@ const sessionReducer = (state = initialState, action) => {
             return { ...state, user: action.payload };
         case REMOVE_USER:
             return { ...state, user: null };
+        case GET_ALL_USERS: {
+            // console.log(action, "THIS IS ACTION PAYLOAD");
+            return { ...state, allUsers: action.payload }
+        }
         default:
             return state;
     }

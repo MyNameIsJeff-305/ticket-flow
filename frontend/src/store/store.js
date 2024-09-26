@@ -4,12 +4,14 @@ import sessionReducer from './session';
 import ticketsReducer from './tickets';
 import statusReducer from './status';
 import clientsReducer from './clients';
+import notesReducer from './notes';
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   tickets: ticketsReducer,
   status: statusReducer,
-  clients: clientsReducer
+  clients: clientsReducer,
+  notes: notesReducer
 });
 
 let enhancer;

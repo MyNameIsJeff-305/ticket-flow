@@ -9,6 +9,8 @@ const ADDTICKET = 'tickets/addTicket';
 const UPDATETICKET = 'tickets/updateTicket';
 const DELETETICKET = 'tickets/deleteTicket';
 
+const ADD_NOTE_TO_TICKET = 'tickets/addNoteToTicket';
+
 //ACTION CREATORS
 const getAllTickets = (tickets) => ({
     type: GETALLTICKETS,
@@ -43,6 +45,11 @@ const updateTicket = (ticket) => ({
 const deleteTicket = (ticket) => ({
     type: DELETETICKET,
     payload: ticket
+});
+
+const addNoteToTicket = (note) => ({
+    type: ADD_NOTE_TO_TICKET,
+    payload: note
 });
 
 //THUNKS
@@ -98,6 +105,16 @@ export const deleteTicketThunk = (id) => async (dispatch) => {
     dispatch(deleteTicket(deletedTicket));
 }
 
+export const addNoteToTicketThunk = (note, ticketId) => async (dispatch) => {
+    const res = await csrfFetch(`/api/tickets/${ticketId}/notes`, {
+        method: 'POST',
+        body: JSON.stringify(note)
+    });
+    const newNote = await res.json();
+    dispatch(addNoteToTicket(newNote));
+}
+
+
 //REDUCER
 const initialState = {
     allTickets: [],
@@ -122,6 +139,9 @@ const ticketsReducer = (state = initialState, action) => {
         }
         case ADDTICKET: {
             return { ...state, myTickets: [...state.myTickets, action.payload] };
+        }
+        case ADD_NOTE_TO_TICKET: {
+            return { ...state, ticket: { ...state.ticket, notes: [...state.ticket.notes, action.payload] } };
         }
         case UPDATETICKET: {
             return { ...state, myTickets: state.myTickets.map(ticket => ticket.id === action.payload.id ? action.payload : ticket) };
