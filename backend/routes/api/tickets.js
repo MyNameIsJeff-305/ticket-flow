@@ -13,8 +13,8 @@ router.get('/', requireAuth, async (req, res, next) => {
 
         const { status, client, createdBy } = req.query;
 
-        const page = parseInt(req.query.page) || 1;
-        const size = parseInt(req.query.size) || 10;
+        const page = parseInt(req.query.page) || null;
+        const size = parseInt(req.query.size) || null;
 
         //Declare where
         const where = {};
@@ -72,7 +72,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
         let Tickets = [];
 
         for (const ticket of tickets) {
-            ticket.client = await Client.findByPk(ticket.clientId);
+            ticket.clientId = await Client.findByPk(ticket.clientId);
             const values = ticket.toJSON();
             Tickets.push(values);
         }

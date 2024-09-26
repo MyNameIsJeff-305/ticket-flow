@@ -30,7 +30,7 @@ export default function TicketCard({ ticket }) {
 
     useEffect(() => {
         dispatch(getAllStatusThunk(ticket.statusId));
-    }, [dispatch]);
+    }, [dispatch, ticket.statusId]);
 
     const ticketStatus = ticket.statusId;
 
@@ -45,7 +45,7 @@ export default function TicketCard({ ticket }) {
     return (
         <div className={`ticket-card-${ticketStatus}`} style={thisStatus ? { borderLeft: `6px solid ${thisStatus.color}`, cursor: 'pointer' } : { borderLeft: `6px solid gray`, cursor: 'pointer' }} onClick={() => handleClick()}>
             <div className="ticket-card-left">
-                <h3>
+                <h3 style={{ textOverflow: "ellipsis" }}>
                     {ticket.title}
                     {
                         ticket.clientId.companyName !== '' ? (
@@ -56,7 +56,7 @@ export default function TicketCard({ ticket }) {
                         ) : (
                             <div className='client-container-personal'>
                                 <FaUser />
-                                <span>{ticket.clientId.firstName} {ticket.clientId.lastName}</span>
+                                <span style={{ textOverflow: "ellipsis" }}>{ticket.clientId.firstName} {ticket.clientId.lastName}</span>
                             </div>
                         )
                     }
@@ -64,11 +64,11 @@ export default function TicketCard({ ticket }) {
                 {
                     typeof (ticket.createdBy) !== "number" && <span>Created by: {ticket.createdBy.firstName}</span>
                 }
-                <p>{ticket.description}</p>
-            </div>
+                {typeof (ticket.createdBy) === "number" && <p>{ticket.description}</p>}
+            </div >
             <div className='ticket-card-right'>
                 <p>{formatDate(ticket.createdAt)}</p>
             </div>
-        </div>
+        </div >
     )
 }

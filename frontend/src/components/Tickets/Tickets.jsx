@@ -4,9 +4,12 @@ import { useEffect, useState } from 'react';
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import { FaCirclePlus } from "react-icons/fa6";
 
+import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
+
 import './Tickets.css';
 import { getAllTicketsThunk, getMyTicketsThunk, getTotalTicketsAmountThunk } from '../../store/tickets';
 import TicketCard from '../MyWork/TicketCard';
+import AddTicket from '../AddTicket/AddTicket';
 
 export default function Tickets() {
 
@@ -16,14 +19,17 @@ export default function Tickets() {
     const totalTickets = useSelector(state => state.tickets.totalTicketsAmount);
 
     const [page, setPage] = useState(1);
-    const TICKETS_PER_PAGE = 5;
+    const [ticketsChecker, setTicketsChecker] = useState(false);
+
+    const TICKETS_PER_PAGE = 8;
 
     useEffect(() => {
-        // Fetch tickets when the page changes
-        dispatch(getAllTicketsThunk(page, TICKETS_PER_PAGE));
+        // Fetch tickets when the page changes or when a new ticket is added
         dispatch(getTotalTicketsAmountThunk());
+        dispatch(getAllTicketsThunk(page, TICKETS_PER_PAGE));
         dispatch(getMyTicketsThunk());
-    }, [dispatch, page]);
+        setTicketsChecker(false); // Reset after re-fetching the tickets
+    }, [dispatch, page, ticketsChecker]);
 
     const lastPage = Math.ceil(totalTickets / TICKETS_PER_PAGE);
 
@@ -33,12 +39,29 @@ export default function Tickets() {
         </section>
     )
 
+    const onModalClose = () => {
+        setTicketsChecker(true); // Trigger re-fetch when modal is closed after adding a new ticket
+    }
+
+    console.log(totalTickets, "TotalTickets");
+
+    console.log(lastPage, "lastPage");
+
     return (
         <section className='tickets-tab'>
-            <div style={{width: "100%"}}>
-                <div className='tickets-header'>
+            <div style={{ width: "100%" }}>
+                <div className={`tickets-header`}>
                     <h1>Tickets</h1>
-                    <button className='add-ticket-btn'><div><FaCirclePlus /></div><span>Add Ticket</span></button>
+                    <button className='add-ticket-btn' >
+                        <div>
+                            <FaCirclePlus />
+                            <OpenModalMenuItem
+                                itemText={"Add Ticket"}
+                                modalComponent={<AddTicket setTicketsChecker={setTicketsChecker} />}
+                                onModalClose={onModalClose} // Call onModalClose after modal closes
+                            />
+                        </div>
+                    </button>
                 </div>
                 <div className='tickets-container'>
                     {
@@ -51,7 +74,7 @@ export default function Tickets() {
             <div className='tickets-footer'>
                 <button className='prev-btn' disabled={page <= 1} onClick={() => setPage(page - 1)}><FaAngleLeft /></button>
                 <div>
-                    <span>
+                    <span style={{ color: "white" }}>
                         {page} of {lastPage}
                     </span>
                 </div>
