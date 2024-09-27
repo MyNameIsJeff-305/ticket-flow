@@ -6,6 +6,17 @@ const { properNoteValidation } = require('../../utils/validation');
 
 const router = express.Router();
 
+//Get All Notes
+router.get('/', requireAuth, async (req, res, next) => {
+    try {
+        const notes = await Note.findAll();
+
+        return res.json(notes);
+    } catch (error) {
+        next(error);
+    }
+});
+
 //Get all notes of the Current User
 router.get('/current', requireAuth, async (req, res, next) => {
     try {
@@ -16,6 +27,26 @@ router.get('/current', requireAuth, async (req, res, next) => {
         });
 
         return res.json({ Notes: notes });
+    } catch (error) {
+        next(error);
+    }
+});
+
+//Add a Note
+router.post('/', requireAuth, async (req, res, next) => {
+    try {
+        const { note, ticketId, userId } = req.body;
+
+        console.log(req.user.id, "THIS IS USER ID");
+
+        const newNote = await Note.create({
+            note: note,
+            ticketId: parseInt(ticketId),
+            userId: parseInt(userId)
+        });
+
+        return res.json(newNote);
+
     } catch (error) {
         next(error);
     }

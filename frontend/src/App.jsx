@@ -9,12 +9,18 @@ import { useEffect, useState } from "react";
 import LoginSignup from "./components/LoginSignup/LoginSignup";
 import Navigation from "./components/Navigation/Navigation";
 import Dashboard from "./components/Dashboard/Dashboard";
+import Footer from "./components/Footer/Footer";
+import Tickets from "./components/Tickets";
+import MyWork from "./components/MyWork";
+import TicketDetails from "./components/TicketDetails";
 
 function Layout() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
 
   const sessionUser = useSelector(state => state.session.user);
+  const myTickets = useSelector(state => state.tickets.myTickets);
+  const status = useSelector(state => state.status.allStatus);
 
   useEffect(() => {
     dispatch(sessionActions.restoreUser())
@@ -27,9 +33,19 @@ function Layout() {
         {sessionUser && <Navigation />}
       </header>
       <main className='main-zone'>
-        {isLoaded && <Outlet />}
+        {
+          sessionUser && (
+            <div className="left-section-mm">
+              <MyWork myTickets={myTickets} status={status} />
+            </div>
+          )
+        }
+        <div className="right-section-mm">
+          {isLoaded && <Outlet />}
+        </div>
       </main>
       <footer className="footer">
+        <Footer />
       </footer>
     </div>
   )
@@ -46,29 +62,20 @@ const router = createBrowserRouter([
       {
         path: '/dashboard',
         element: <Dashboard />
+      },
+      {
+        path: '/tickets',
+        element: <Tickets />
+      },
+      {
+        path: '/tickets/:ticketId',
+        element: <TicketDetails />
       }
     ]
   }
 ])
 
 function App() {
-  const [theme, setTheme] = useState('light');
-
-  //Check Local Storage for saved Theme on initial render
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      setTheme(savedTheme);
-      document.body.className = savedTheme === 'dark' ? 'dark-mode' : 'light-mode';
-    }
-  }, []);
-
-  const toggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
-    setTheme(newTheme);
-    document.body.className = newTheme === 'dark' ? 'dark-mode' : 'light-mode';
-    localStorage.setItem('theme', newTheme);
-  }
 
   return <RouterProvider router={router} />
 }

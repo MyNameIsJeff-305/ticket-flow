@@ -1,3 +1,5 @@
+const { singleFileUpload, singleMulterUpload } = require("../../awsS3");
+
 const express = require('express');
 const bcrypt = require('bcryptjs');
 
@@ -14,12 +16,11 @@ const validateSignup = [
         .exists({ checkFalsy: true })
         .isEmail()
         .withMessage('Invalid email'),
-    check('username')
+    check('userName')
         .exists({ checkFalsy: true })
         .withMessage("Username is required"),
     check('firstName').exists({ checkFalsy: true }).withMessage("First Name is required"),
     check('lastName').exists({ checkFalsy: true }).withMessage("Last Name is required"),
-    check('companyName').exists({ checkFalsy: true }).withMessage("Company Name is required"),
     check('password')
         .exists({ checkFalsy: true })
         .isLength({ min: 6 })
@@ -30,20 +31,24 @@ const validateSignup = [
 // Sign up
 router.post(
     '/',
+    singleMulterUpload('image'),
     validateSignup,
     async (req, res) => {
-        const { email, password, username, firstName, lastName, companyName, role } = req.body;
+        const { email, password, userName, firstName, lastName } = req.body;
+        // console.log(req.body, "REQ BODY");
+        const profileImageUrl = req.file ?
+            await singleFileUpload({ file: req.file, public: true }) :
+            null;
         const hashedPassword = bcrypt.hashSync(password);
-        const user = await User.create({ email, username, hashedPassword, firstName, lastName, companyName, role });
+        const user = await User.create({ email, userName, hashedPassword, firstName, lastName, profileImageUrl });
 
         const safeUser = {
             id: user.id,
             email: user.email,
-            username: user.username,
+            userName: user.userName,
             firstName: user.firstName,
             lastName: user.lastName,
-            companyName: user.companyName,
-            role: user.role
+            profilePicUrl: user.profilePicUrl
         };
 
         await setTokenCookie(res, safeUser);
@@ -51,6 +56,60 @@ router.post(
         return res.json({
             user: safeUser
         });
+    }
+);
+
+//Edit a User
+router.put(
+    '/:id',
+    requireAuth,
+    singleMulterUpload('image'),
+    async (req, res) => {
+        const { id } = req.params;
+        const user = await User.findByPk(id);
+        const { email, password, userName, firstName, lastName } = req.body;
+        const profileImageUrl = req.file ?
+            await singleFileUpload({ file: req.file, public: true }) :
+            null;
+        const hashedPassword = bcrypt.hashSync(password);
+        await user.update({ email, userName, hashedPassword, firstName, lastName, profileImageUrl });
+
+        const safeUser = {
+            id: user.id,
+            email: user.email,
+            userNme: user.userName,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            profilePicUrl: user.profilePicUrl
+        };
+
+        await setTokenCookie(res, safeUser);
+
+        return res.json({
+            user: safeUser
+        });
+    }
+);
+
+//Get a User by ID
+router.get(
+    '/:id',
+    requireAuth,
+    async (req, res) => {
+        const { id } = req.params;
+        const user = await User.findByPk(id);
+        return res.json(user);
+    }
+);
+
+//Get all Users
+router.get(
+    '/',
+    requireAuth,
+    async (_req, res) => {
+        const users = await User.findAll();
+        // console.log(users, "USERS");
+        return res.json(users);
     }
 );
 

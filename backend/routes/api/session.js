@@ -37,7 +37,8 @@ router.get('/', async (req, res, next) => {
                 firstName: currentUser.firstName,
                 lastName: currentUser.lastName,
                 email: currentUser.email,
-                userName: currentUser.userName
+                userName: currentUser.userName,
+                profilePicUrl: currentUser.profilePicUrl
             }
         } || { user: null });
     } catch (error) {
@@ -52,7 +53,7 @@ router.post(
     async (req, res, next) => {
         const { credential, password } = req.body;
 
-        
+
 
         const user = await User.unscoped().findOne({
             where: {
@@ -75,8 +76,9 @@ router.post(
             id: user.id,
             email: user.email,
             userName: user.userName,
-            fistName: user.firstName,
-            lastName: user.lastName
+            firstName: user.firstName,
+            lastName: user.lastName,
+            profilePicUrl: user.profilePicUrl
         };
 
         await setTokenCookie(res, safeUser);
@@ -107,8 +109,11 @@ router.get(
         if (user) {
             const safeUser = {
                 id: user.id,
+                firstName: user.firstName,
+                lastName: user.lastName,
                 email: user.email,
                 userName: user.userName,
+                profilePicUrl: user.profilePicUrl
             };
             return res.json({
                 user: safeUser

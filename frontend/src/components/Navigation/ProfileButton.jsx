@@ -1,10 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../store/session";
-import OpenModalMenuItem from "./OpenModalMenuItem";
-import LoginFormModal from "../LoginFormModal";
-import SignupFormModal from "../SignupFormModal";
 import { useNavigate } from "react-router-dom";
+
+import "./ProfileButton.css";
 
 function ProfileButton() {
   const dispatch = useDispatch();
@@ -48,37 +47,21 @@ function ProfileButton() {
   };
 
   return (
-    <>
-      <button onClick={toggleMenu}>
-        <i className="fas fa-user-circle" />
-      </button>
-      {showMenu && (
-        <ul className={"profile-dropdown"} ref={ulRef}>
-          {user ? (
-            <>
-              <li>{user.username}</li>
-              <li>{user.email}</li>
-              <li>
-                <button onClick={handleLogout}>Log Out</button>
-              </li>
-            </>
-          ) : (
-            <>
-              <OpenModalMenuItem
-                itemText="Log In"
-                onItemClick={closeMenu}
-                modalComponent={<LoginFormModal />}
-              />
-              <OpenModalMenuItem
-                itemText="Sign Up"
-                onItemClick={closeMenu}
-                modalComponent={<SignupFormModal />}
-              />
-            </>
-          )}
-        </ul>
-      )}
-    </>
+    <div className="profile-container">
+      <div className="container-left">
+        <span className="welcome-message">Welcome, {user.firstName}</span>
+        <span className="log-out" onClick={handleLogout}>Log Out</span>
+      </div>
+      <div className="container-right">
+        {
+          user.profilePicUrl ?
+            <div onClick={toggleMenu}>
+              <img src={user.profilePicUrl} onClick={toggleMenu} alt="Profile Picture" />
+            </div> :
+            <div className="fallback-profile" onClick={toggleMenu}>{`${user.firstName[0]}${user.lastName[0]}`}</div>
+        }
+      </div>
+    </div>
   );
 }
 

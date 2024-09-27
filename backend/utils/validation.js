@@ -89,7 +89,7 @@ const properNoteValidation = async (req, res, next) => {
 
         const ticket = await Ticket.findByPk(note.ticketId);
 
-        if (ticket.createdBy !== id) {
+        if (note.userId !== id) {
             const err = new Error('Unauthorized');
             err.status = 403;
             err.title = 'Forbidden';

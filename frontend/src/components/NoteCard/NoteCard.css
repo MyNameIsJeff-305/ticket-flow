@@ -1,0 +1,78 @@
+.note-card {
+    display: flex;
+    /* width: 100vh; */
+    align-items: center;
+    background-color: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.user-profile-pic {
+    margin-right: 16px;
+    flex-shrink: 0;
+}
+
+.user-profile-pic img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.note-card-content {
+    flex-grow: 1;
+    font-size: 14px;
+    color: #333;
+}
+
+.note-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 16px;
+    gap: 8px;
+}
+
+button {
+    background-color: #fff;
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    /* Button background color */
+    color: #3bbca7;
+    /* Text color to match the theme */
+    border: 2px solid #3bbca7;
+    /* Border to match the theme */
+    padding: 0.6rem 0.6rem;
+    /* Add padding to make the buttons bigger */
+    border-radius: 50px;
+    /* Slightly round the corners */
+    font-size: 1rem;
+    /* Increase font size for better readability */
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+button:hover {
+    background-color: #ed1876;
+    border: 2px solid #ed1876;
+    /* Change background color on hover */
+    color: white;
+    /* Change text color on hover */
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+
+}

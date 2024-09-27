@@ -13,8 +13,8 @@ router.get('/', requireAuth, async (req, res, next) => {
 
         const { status, client, createdBy } = req.query;
 
-        const page = parseInt(req.query.page) || 1;
-        const size = parseInt(req.query.size) || 10;
+        const page = parseInt(req.query.page) || null;
+        const size = parseInt(req.query.size) || null;
 
         //Declare where
         const where = {};
@@ -44,16 +44,27 @@ router.get('/', requireAuth, async (req, res, next) => {
         let Tickets = [];
 
         for (const ticket of tickets) {
-            ticket.status = await Status.findByPk(where.status);
-            ticket.client = await Client.findByPk(where.client);
-            ticket.createdBy = await User.findByPk(where.createdBy);
+            ticket["status"] = await Status.findByPk(where.status);
+            ticket.clientId = await Client.findByPk(where.client || ticket.clientId);
+            ticket.createdBy = await User.findByPk(where.createdBy || ticket.createdBy);
             const values = ticket.toJSON();
+
+            let Notes = await Note.findAll({
+                where: {
+                    ticketId: ticket.id
+                }
+            });
+
+            values.Notes = Notes;
+
             Tickets.push(values);
         }
 
+
+
         return res.json(Tickets);
 
-        return res.json(tickets);
+        // return res.json(tickets);
 
     } catch (error) {
         next(error);
@@ -69,7 +80,24 @@ router.get('/current', requireAuth, async (req, res, next) => {
             }
         });
 
-        return res.json(tickets);
+        let Tickets = [];
+
+        for (const ticket of tickets) {
+            ticket.clientId = await Client.findByPk(ticket.clientId);
+            const values = ticket.toJSON();
+
+            let Notes = await Note.findAll({
+                where: {
+                    ticketId: ticket.id
+                }
+            });
+
+            values.Notes = Notes;
+
+            Tickets.push(values);
+        }
+
+        return res.json(Tickets);
 
     } catch (error) {
         next(error);
@@ -94,6 +122,10 @@ router.get('/:id', requireAuth, async (req, res, next) => {
                 ticketId: ticket.id
             }
         });
+
+        let Notes = await Note.findAll({
+            
+        })
 
         const StatusInfo = await Status.findByPk(ticket.statusId);
 
