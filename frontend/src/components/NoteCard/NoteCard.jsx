@@ -7,13 +7,15 @@ import { FaPen, FaTrash } from "react-icons/fa";
 
 import './NoteCard.css';
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
-import AddNote from "../AddNote/AddNote";
+// import AddNote from "../AddNote/AddNote";
 import EditNote from "../EditNote";
+import ConfirmDeleteNote from "../ConfirmDeleteNote";
 
-export default function NoteCard({ note }) {
+export default function NoteCard({ note, setDeleteNoteChecker }) {
     const dispatch = useDispatch();
 
-    const [noteChecker, setNoteChecker] = useState(false)
+    const [noteChecker, setNoteChecker] = useState(false);
+    // const [deleteNoteChecker, setDeleteNoteChecker] = useState(false);
 
     const users = useSelector(state => state.session.allUsers);
     const currentUser = useSelector(state => state.session.user)
@@ -21,7 +23,8 @@ export default function NoteCard({ note }) {
     useEffect(() => {
         dispatch(getAllUsersThunk());
         setNoteChecker(false)
-    }, [dispatch, noteChecker]);
+        setDeleteNoteChecker(false)
+    }, [dispatch, noteChecker, setNoteChecker, setDeleteNoteChecker]);
 
     if (!users || users.length === 0 || !currentUser) return <div>Loading...</div>;
 
@@ -29,6 +32,7 @@ export default function NoteCard({ note }) {
 
     const onModalClose = () => {
         setNoteChecker(true);
+        setDeleteNoteChecker(true);
     }
 
     return (
@@ -51,7 +55,12 @@ export default function NoteCard({ note }) {
                                 ></OpenModalMenuItem>
 
                             </button>
-                            <button><FaTrash /></button>
+                            <button className="edit-ticket-btn" style={{ listStyle: "none", display: "flex", flexDirection: "row", gap: "5px" }}>
+                                <OpenModalMenuItem
+                                    itemText={<FaTrash />}
+                                    modalComponent={<ConfirmDeleteNote setDeleteNoteChecker={setDeleteNoteChecker} note={note} />}
+                                ></OpenModalMenuItem>
+                            </button>
                         </>
                     ) : <></>
                 }

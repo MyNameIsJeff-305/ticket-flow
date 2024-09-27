@@ -17,6 +17,7 @@ export default function TicketDetails() {
     const dispatch = useDispatch();
 
     const [noteChecker, setNoteChecker] = useState(false);
+    const [deleteNoteChecker, setDeleteNoteChecker] = useState(false);
 
     const { ticketId } = useParams();
 
@@ -32,7 +33,8 @@ export default function TicketDetails() {
         dispatch(getAllStatusThunk());
         dispatch(getAllNotesThunk());
         // setNoteChecker(false);
-    }, [dispatch, ticketId]);
+        setDeleteNoteChecker(false);
+    }, [dispatch, ticketId, noteChecker, deleteNoteChecker]);
 
     useEffect(() => {
         setNoteChecker(false)
@@ -50,6 +52,7 @@ export default function TicketDetails() {
 
     const onModalClose = () => {
         setNoteChecker(true);
+        setDeleteNoteChecker(true);
     }
 
     return (
@@ -123,7 +126,7 @@ export default function TicketDetails() {
                     <div className="notes-container" style={{ display: "flex", flexDirection: "column", overflowX: "hidden", overflowY: "scroll", maxHeight: "300px" }}>
                         {
                             notesForTicket?.map(note => (
-                                <NoteCard key={note.id} note={note} />
+                                <NoteCard key={note.id} note={note} setDeleteNoteChecker={setDeleteNoteChecker}/>
                             ))
                         }
                     </div>
