@@ -10,7 +10,7 @@ export default function MyWork({ myTickets, status }) {
 
     if (!myTickets || !status) return (
         <section>
-            <span>loading...</span>
+            <span className="loader"></span>
         </section>
     )
 

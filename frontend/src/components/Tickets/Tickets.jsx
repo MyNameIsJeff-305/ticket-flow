@@ -35,7 +35,7 @@ export default function Tickets() {
 
     if (!allTickets || !totalTickets) return (
         <section>
-            <span>loading...</span>
+            <span className="loader"></span>
         </section>
     )
 

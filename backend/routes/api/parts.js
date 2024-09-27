@@ -33,6 +33,44 @@ router.get('/', requireAuth, async (req, res, next) => {
     }
 });
 
+//Get a Part
+router.get('/:id', requireAuth, async (req, res, next) => {
+    try {
+        const part = await Part.findByPk(req.params.id);
+
+        const ticket = await Ticket.findByPk(part.ticketId);
+
+        const value = {};
+        value.id = part.id;
+        value.name = part.name;
+        value.description = part.description;
+        value.imageUrl = part.imageUrl;
+        value.Ticket = ticket;
+
+        return res.json(value);
+    } catch (error) {
+        next(error);
+    }
+});
+
+//Create a Part
+router.post('/', requireAuth, properPartValidation, async (req, res, next) => {
+    try {
+        const { name, description, imageUrl, ticketId } = req.body;
+
+        const part = await Part.create({
+            name,
+            description,
+            imageUrl,
+            ticketId
+        });
+
+        return res.json(part);
+    } catch (error) {
+        next(error);
+    }
+});
+
 //Edit a Part
 router.put('/:id', requireAuth, properPartValidation, async (req, res, next) => {
     try {

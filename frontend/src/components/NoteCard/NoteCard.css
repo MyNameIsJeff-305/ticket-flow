@@ -1,5 +1,6 @@
 .note-card {
     display: flex;
+    /* width: 100vh; */
     align-items: center;
     background-color: #f8f9fa;
     border: 1px solid #e0e0e0;
@@ -63,4 +64,15 @@ button:hover {
     /* Change background color on hover */
     color: white;
     /* Change text color on hover */
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+
 }

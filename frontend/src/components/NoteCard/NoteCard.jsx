@@ -6,8 +6,9 @@ import { FaPen, FaTrash } from "react-icons/fa";
 
 
 import './NoteCard.css';
+
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
-// import AddNote from "../AddNote/AddNote";
+
 import EditNote from "../EditNote";
 import ConfirmDeleteNote from "../ConfirmDeleteNote";
 
@@ -26,7 +27,7 @@ export default function NoteCard({ note, setDeleteNoteChecker }) {
         setDeleteNoteChecker(false)
     }, [dispatch, noteChecker, setNoteChecker, setDeleteNoteChecker]);
 
-    if (!users || users.length === 0 || !currentUser) return <div>Loading...</div>;
+    if (!users || users.length === 0 || !currentUser) return null;
 
     const user = users.find(user => user.id === note.userId);
 
