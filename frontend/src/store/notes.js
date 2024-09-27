@@ -3,6 +3,7 @@ import { csrfFetch } from './csrf';
 //Constants
 const GET_ALL_NOTES = 'notes/getAllNotes';
 const GET_NOTE = 'notes/getNote';
+const ADD_NOTE = 'notes/addNote';
 const EDIT_NOTE = 'notes/editNote';
 const DELETE_NOTE = 'notes/deleteNote';
 
@@ -14,6 +15,11 @@ const getAllNotes = (notes) => ({
 
 const getNote = (note) => ({
     type: GET_NOTE,
+    payload: note
+});
+
+const addNote = (note) => ({
+    type: ADD_NOTE,
     payload: note
 });
 
@@ -39,6 +45,19 @@ export const getNoteThunk = (noteId) => async (dispatch) => {
     const note = await res.json();
     dispatch(getNote(note));
 };
+
+export const addNoteThunk = (note) => async (dispatch) => {
+    console.log(note, "THIS IS NOTE");
+    const res = await csrfFetch('/api/notes', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(note)
+    });
+    const newNote = await res.json();
+    dispatch(addNote(newNote));
+}
 
 export const editNoteThunk = (note) => async (dispatch) => {
     const res = await csrfFetch(`/api/notes/${note.id}`, {
@@ -73,6 +92,9 @@ const notesReducer = (state = initialState, action) => {
         }
         case GET_NOTE: {
             return { ...state, note: action.payload };
+        }
+        case ADD_NOTE: {
+            return { ...state, allNotes: [...state.allNotes, action.payload] };
         }
         case EDIT_NOTE: {
             return {

@@ -140,9 +140,6 @@ const ticketsReducer = (state = initialState, action) => {
         case ADDTICKET: {
             return { ...state, myTickets: [...state.myTickets, action.payload] };
         }
-        case ADD_NOTE_TO_TICKET: {
-            return { ...state, ticket: { ...state.ticket, notes: [...state.ticket.notes, action.payload] } };
-        }
         case UPDATETICKET: {
             return { ...state, myTickets: state.myTickets.map(ticket => ticket.id === action.payload.id ? action.payload : ticket) };
         }

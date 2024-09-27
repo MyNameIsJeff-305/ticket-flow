@@ -1,22 +1,20 @@
-import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useModal } from '../../context/Modal';
+import { useDispatch } from "react-redux";
+import { useModal } from "../../context/Modal";
+import { useEffect, useState } from "react";
 
-import './AddNote.css';
-// import { addNoteToTicketThunk } from '../../store/tickets';
-import { addNoteThunk } from '../../store/notes';
+import { editNoteThunk } from "../../store/notes";
 
-export default function AddNote({ userId, ticketId, setNotesChecker }) {
+export default function EditNote({ note, setNoteChecker }) {
     const dispatch = useDispatch();
 
-    const [note, setNote] = useState('');
+    const [updatedNote, setUpdatedNote] = useState(note.note);
     const [errors, setErrors] = useState({});
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
-    const { closeModal } = useModal()
+    const { closeModal } = useModal();
 
     useEffect(() => {
-        setNote('');
+        setUpdatedNote(note.note);
         setErrors({});
         setIsButtonDisabled(true);
     }, []);
@@ -24,33 +22,35 @@ export default function AddNote({ userId, ticketId, setNotesChecker }) {
     useEffect(() => {
         let newErrors = {};
 
-        if (!note || note === "") {
-            newErrors.title = "Please enter a note"
+        if (!updatedNote || updatedNote === "") {
+            newErrors.title = "Please enter a Note"
+        }
+
+        if(updatedNote === note.note) {
+            newErrors.title = "Please enter a new Note"
         }
         setErrors(newErrors);
         setIsButtonDisabled(Object.keys(newErrors).length > 0);
-    }, [note])
-
-    // console.log(note, "THIS IS NOTE");
+    }, [note.note, updatedNote])
 
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrors({});
 
-        const newNote = {
-            note: note,
-            ticketId: ticketId,
-            userId: userId
+        const newUpdatedNote = {
+            id: note.id,
+            note: updatedNote,
+            ticketId: note.ticketId,
+            userId: note.userId
         }
 
-        return dispatch(addNoteThunk(newNote))
+        return dispatch(editNoteThunk(newUpdatedNote))
             .then(() => {
-                setNotesChecker(true);
+                setNoteChecker(true);
                 closeModal();
             })
             .catch(async (res) => {
                 const data = await res.json();
-                console.log(data, "THIS IS DATA");
                 if (data && data.message) {
                     setErrors(data.message);
                 }
@@ -59,13 +59,13 @@ export default function AddNote({ userId, ticketId, setNotesChecker }) {
 
     return (
         <form className='add-note-form' onSubmit={handleSubmit}>
-            <h3>Add a Note</h3>
+            <h3>Edit Note</h3>
             <label htmlFor='note'>Note</label>
             <input
                 id='note'
                 type='text'
-                value={note}
-                onChange={(e) => setNote(e.target.value)}
+                value={updatedNote}
+                onChange={(e) => setUpdatedNote(e.target.value)}
             />
             {errors.title && <div className='add-note-form-error'>{errors.title}</div>}
             <button type='submit' disabled={isButtonDisabled}>Save</button>

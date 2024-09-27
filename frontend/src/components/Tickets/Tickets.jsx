@@ -55,8 +55,7 @@ export default function Tickets() {
                             itemText={"Add Ticket"}
                             modalComponent={<AddTicket setTicketsChecker={setTicketsChecker} />}
                             onModalClose={onModalClose} // Call onModalClose after modal closes
-                        >
-                        </OpenModalMenuItem>
+                        ></OpenModalMenuItem>
                     </div>
 
                 </div>

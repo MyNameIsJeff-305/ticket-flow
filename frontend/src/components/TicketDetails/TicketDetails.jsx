@@ -1,6 +1,9 @@
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
+import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
+import AddNote from "../AddNote/AddNote";
+
 import { FaBuilding, FaUser, FaPen, FaTrash, FaPlusCircle } from "react-icons/fa";
 
 import './TicketDetails.css';
@@ -13,8 +16,11 @@ import NoteCard from "../NoteCard";
 export default function TicketDetails() {
     const dispatch = useDispatch();
 
+    const [noteChecker, setNoteChecker] = useState(false);
+
     const { ticketId } = useParams();
 
+    const user = useSelector(state => state.session.user);
     const status = useSelector(state => state.status.allStatus);
     const notes = useSelector(state => state.notes.allNotes);
     const ticket = useSelector(state => state.tickets.ticket);
@@ -25,19 +31,26 @@ export default function TicketDetails() {
         dispatch(getTicketThunk(parseInt(ticketId)));
         dispatch(getAllStatusThunk());
         dispatch(getAllNotesThunk());
+        // setNoteChecker(false);
     }, [dispatch, ticketId]);
 
-    if (!ticket || !status || !notes) return <div>Loading...</div>;
+    useEffect(() => {
+        setNoteChecker(false)
+    }, [noteChecker])
+
+    if (!ticket || !status || !notes || !user) return <div>Loading...</div>;
 
     const newStatus = status.filter(status => status.id !== ticket.StatusInfo?.id);
-    const notesForTicket = notes.Notes?.filter(note => note.ticketId === ticket.id);
+    const notesForTicket = notes.filter(note => note.ticketId === ticket.id);
 
     const handleStatusChange = (e) => {
         dispatch(updateTicketThunk({ ...ticket, statusId: e.target.value, StatusInfo: status.find(status => status.id === parseInt(e.target.value)) }));
         setTicketStatus(e.target.value)
     }
 
-    console.log(notesForTicket, "THIS IS NOTES FOR TICKET")
+    const onModalClose = () => {
+        setNoteChecker(true);
+    }
 
     return (
         <section className="ticket-details-tab">
@@ -99,9 +112,15 @@ export default function TicketDetails() {
                 <div className="tickets-details-notes">
                     <div style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "space-between", maxHeight: "40px", alignItems: "center" }}>
                         <h3>Notes</h3>
-                        <button className="edit-ticket-btn"><FaPlusCircle /></button>
+                        <button className="edit-ticket-btn" style={{display:"flex", listStyle: "none", padding:"8px 10px", alignItems:"center" }}>
+                            <OpenModalMenuItem
+                                itemText={<FaPlusCircle />}
+                                modalComponent={<AddNote userId={user.id} ticketId={ticket.id} setNotesChecker={setNoteChecker} />}
+                                onModalClose={onModalClose}
+                            ></OpenModalMenuItem>
+                        </button>
                     </div>
-                    <div className="notes-container">
+                    <div className="notes-container" style={{ display: "flex", flexDirection: "column", overflowX: "hidden", overflowY: "scroll", maxHeight: "300px" }}>
                         {
                             notesForTicket?.map(note => (
                                 <NoteCard key={note.id} note={note} />
