@@ -1,13 +1,13 @@
 import { FaPen, FaTrash } from "react-icons/fa";
 
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import { useState } from "react";
 
 export default function PartCard({ part, setDeletePartChecker }) {
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
     const [partChecker, setPartChecker] = useState(false);
 

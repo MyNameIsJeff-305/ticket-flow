@@ -1,15 +1,20 @@
-.footer-d {
+/* Footer Styles */
+.footer {
     display: flex;
-    /* justify-content: space-between; */
-    align-items: center;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 10px;
-    border-radius: 10px;
-    padding: 10px;
-    gap: 5px;
-    margin: 10px;
-    background-color: #3bbca7;
-    color: white;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: var(--footer-bg-color);
+    text-align: center;
+    color: var(--text-color);
+}
+
+.footer-links a {
+    color: var(--text-color);
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
 }

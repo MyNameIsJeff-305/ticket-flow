@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { FaBuilding, FaUser } from "react-icons/fa";
 
-import './TicketCard.css'
+import './MyWorkTicketCards.css'
 import { useEffect } from 'react';
 import { getAllStatusThunk } from '../../store/status';
 
@@ -45,16 +45,8 @@ export default function TicketCard({ ticket }) {
     return (
         <div className={`ticket-card-${ticketStatus}`} style={thisStatus ? { borderLeft: `6px solid ${thisStatus.color}`, cursor: 'pointer' } : { borderLeft: `6px solid gray`, cursor: 'pointer' }} onClick={() => handleClick()}>
             <div className="ticket-card-left">
-                <div>
-                    <h3 style={{ textOverflow: "ellipsis" }}>
-                        {ticket.title}
-                    </h3>
-                    {
-                        typeof (ticket.createdBy) !== "number" && <span>Created by: {ticket.createdBy.firstName}</span>
-                    }
-                    {typeof (ticket.createdBy) === "number" && <p>{ticket.description}</p>}
-                </div>
-                <div>
+                <h3 style={{ textOverflow: "ellipsis" }}>
+                    {ticket.title}
                     {
                         ticket.clientId.companyName !== '' ? (
                             <div className='client-container-company'>
@@ -68,7 +60,11 @@ export default function TicketCard({ ticket }) {
                             </div>
                         )
                     }
-                </div>
+                </h3>
+                {
+                    typeof (ticket.createdBy) !== "number" && <span>Created by: {ticket.createdBy.firstName}</span>
+                }
+                {typeof (ticket.createdBy) === "number" && <p>{ticket.description}</p>}
             </div >
             <div className='ticket-card-right'>
                 <p>{formatDate(ticket.createdAt)}</p>

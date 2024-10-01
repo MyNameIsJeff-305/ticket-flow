@@ -1,47 +1,29 @@
-.logo-main {
-    width: 180px;
-    height: auto;
-    margin: 0 auto;
-    display: block;
-    padding: 10px;
-    transition: all 0.3s;
+/* NavLogo Styles */
+
+/* Container for the logo */
+.nav-logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    transition: all ease 0.3s;
+    padding: 10px;
+    gap: 10px;
+    background-color: var(--header-bg-color); /* Use theme-based header background color */
+    transition: background-color 0.3s ease;
+    border-radius: 8px;  /* Optionally round the edges */
 }
 
-.logo-main:hover {
-    transform: scale(1.05);
+/* Logo image */
+.logo-main {
+    max-width: 150px;
+    height: auto;
+    transition: transform 0.3s ease;  /* Add a subtle transition effect */
 }
 
-.logo-mobile {
-    display: none;
+.nav-logo-container img {
+    width: 50px;
 }
 
-.logo-mobile:hover {
-    transform: scale(1.05);
-}
-
-@media (max-width: 1012px) {
-    .logo-main {
-        display: none;
-    }
-
-    .logo-mobile {
-        display: block;
-        width: 50px;
-        height: auto;
-        margin: 0 auto;
-        padding: 10px;
-        transition: all 0.3s;
-        cursor: pointer;
-        transition: all ease 0.3s;
-    }
-
-}
-
-@media (min-width: 1013px) and (max-width: 1307px) {
-    .logo-main {
-        width: 150px;
-        transition: all ease 0.3s;
-    }
+.nav-logo-container:hover .logo-main {
+    transform: scale(1.1);  /* Slightly enlarge the logo on hover */
 }

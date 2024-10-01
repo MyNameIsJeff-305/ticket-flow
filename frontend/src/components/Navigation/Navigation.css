@@ -1,24 +1,31 @@
-.profile-dropdown {
-    position: absolute;
-}
-
+/* Container for the entire navigation */
 .navigation {
     display: flex;
-    justify-content: space-between;
+    width: 100%;
+    justify-content: space-between;  /* Spread out the logo, menu items, and profile button */
     align-items: center;
-    padding: 10px;
-    margin: 10px 0;
+    padding: 15px 10px;
     border-radius: 10px;
-    border-radius: 10px;
-    padding: 0rem 2rem;
-    margin: 10px;
-    background-color: #3bbca7;
-    color: white;
-    shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background-color: var(--header-bg-color);  /* Apply the theme-based header background */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);  /* Optional shadow for better visual separation */
+    transition: background-color 0.3s ease;  /* Smooth transition for theme changes */
 }
 
-.navigation section {
+/* Left section: Logo */
+.navigation > div:first-child {
     display: flex;
     align-items: center;
-    padding: 10px;
+}
+
+/* Middle section: Menu items */
+.navigation > div:nth-child(2) {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+/* Right section: Profile button */
+.navigation > div:last-child {
+    display: flex;
+    align-items: center;
 }

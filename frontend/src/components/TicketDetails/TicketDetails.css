@@ -1,21 +1,19 @@
 .ticket-details-tab {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: start;
-    width: 90%;
-    /* padding: 10px; */
-    /* margin: 10px 0; */
-    /* margin-top: 35px; */
-    /* margin-bottom: 40px; */
-    border-radius: 10px;
-    /* padding-left: 10px; */
-    padding: 1rem 2rem;
-    /* margin: 10px; */
-    background-color: #3bbca7;
-    color: white;
-    height: 100%;
-    gap: 2rem;
+    align-content: space-between;
+    justify-content: space-between;
+    width: 61%;
+    /* max-width: 1200px; */
+    /* margin: 20px auto; */
+    padding: 20px 30px;
+    background-color: var(--background-color);
+    /* Adapt based on theme */
+    color: var(--text-color);
+    /* Adapt text color based on theme */
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .ticket-details-header {
@@ -38,17 +36,14 @@
 }
 
 button {
-    background-color: #fff;
+    background-color: var(--button-bg-color);
     display: flex;
     flex-direction: row;
     gap: 0.5rem;
     align-items: center;
     justify-content: center;
-    /* Button background color */
-    color: #3bbca7;
-    /* Text color to match the theme */
-    border: 2px solid #fff;
-    /* Border to match the theme */
+    border: none;
+    color: var(--button-text-color);
     padding: 0.6rem 0.6rem;
     /* Add padding to make the buttons bigger */
     border-radius: 50px;
@@ -59,12 +54,8 @@ button {
     transition: background-color 0.3s, color 0.3s;
 }
 
-button:hover {
-    background-color: #ed1876;
-    border: 2px solid #ed1876;
-    /* Change background color on hover */
-    color: white;
-    /* Change text color on hover */
+.notes-container button {
+    border: none;
 }
 
 .ticket-description-body {
@@ -78,13 +69,13 @@ button:hover {
 .ticket-description-body h3 {
     font-size: 1.2rem;
     font-weight: 700;
-    color: #fff;
+    color: var(--text-color);
 }
 
 .ticket-description-body span {
     font-size: 1rem;
     font-weight: 500;
-    color: #fff;
+    color: var(--text-color);
 }
 
 #body-row {
@@ -107,7 +98,7 @@ button:hover {
 .ticket-details-status select {
     padding: 0.5rem;
     border-radius: 5px;
-    border: 1px solid #3bbca7;
+    border: 1px solid var(--semitransparent-bg);
     font-size: 1rem;
     width: 50%;
 }
@@ -117,13 +108,15 @@ button:hover {
     display: flex;
     flex-direction: column;
     align-items: start;
-    justify-content: center;
-    background-color: #f9f9f9;
-    color: #333;
+    align-content: start;
+    /* justify-content: center; */
+    background-color: var(--login-bg);
+    color: var(--text-color);
     gap: 1rem;
     border-radius: 10px;
     padding: 15px 15px;
     width: 50%;
+    height: 400px;
 }
 
 #notes-parts {
@@ -138,10 +131,14 @@ button:hover {
 .loader {
     width: 48px;
     height: 48px;
-    border: 5px solid #FFF;
+    border: 5px solid var(--semitransparent-bg);
     border-bottom-color: #5e53a3;
     border-radius: 50%;
     display: inline-block;
     box-sizing: border-box;
     animation: rotation 1s linear infinite;
+}
+
+.parts-container {
+    width: 100%;
 }

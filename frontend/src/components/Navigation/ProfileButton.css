@@ -18,19 +18,19 @@
 .welcome-message {
     font-size: 14px;
     font-weight: 500;
-    color: #fff;
+    color: var(--text-color);
     margin-bottom: 4px;
 }
 
 .log-out {
     font-size: 12px;
-    color: #5e53a3;
+    color: var(--razzmatazz);
     cursor: pointer;
     transition: color 0.2s ease-in-out;
 }
 
 .log-out:hover {
-    color: #333;
+    color: var(--jonquil);
 }
 
 .container-right {

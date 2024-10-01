@@ -4,7 +4,7 @@
     justify-content: center;
     align-items: center;
     height: 100%;
-    width: 100%;
+    /* width: 100%; */
 }
 
 .nav-links {
@@ -31,7 +31,7 @@
     align-items: center;
     gap: 10px;
     margin: 0 10px;
-    color: #f0f0f0;
+    color: var(--text-color);
     text-decoration: none;
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
@@ -46,7 +46,7 @@
 }
 
 .menu-item.active {
-    color: #ffffff;
+    color: var(--text-color);
     font-weight: 700;
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 5px;
