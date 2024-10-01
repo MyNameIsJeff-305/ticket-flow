@@ -7,13 +7,13 @@
     "sequelize": "sequelize",
     "sequelize-cli": "sequelize-cli",
     "start": "per-env",
-    "migrate": "npx dotenv sequelize db:migrate",
-    "seed": "npx dotenv sequelize db:seed:all",
+    "migrate": "npx sequelize db:migrate",
+    "seed": "npx sequelize db:seed:all",
     "michael": "npm run migrate && npm run seed && dotenv npm start --production",
     "magic": "npm run migrate && npm run seed",
     "start:development": "nodemon ./bin/www",
     "start:production": "dotenv node ./bin/www",
-    "build": "dotenv node psql-setup-script.js"
+    "build": "node psql-setup-script.js"
   },
   "keywords": [],
   "author": "",
