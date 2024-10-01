@@ -1,0 +1,335 @@
+/* Default Light Theme Variables */
+:root {
+    --background-gradient: linear-gradient(90deg, var(--razzmatazz), var(--jonquil), var(--tiffany-blue));
+    --background-color: #f9f9f9;
+    --text-color: #1d1a05;
+    --button-bg-color: var(--ultra-violet);
+    --button-text-color: #f9f9f9;
+    --header-bg-color: #f8f9fa;
+    --footer-bg-color: #f1f1f1;
+    --ultra-violet: #5e53a4;
+    --tiffany-blue: #66c6b8;
+    --razzmatazz: #ed1476;
+    --jonquil: #fecb19;
+    --smoky-black: #1d1a05;
+    --box-bg: #f1f1f1;
+    --ticket-card-bg: #ececec;
+    --seasalt: #f9f9f9;
+    --login-bg: #d0d0d0;
+    --semitransparent-bg: #ffffff6d;
+}
+
+/* Dark Theme Variables */
+body.dark-mode {
+    --background-gradient: linear-gradient(90deg, var(--ultra-violet), var(--razzmatazz), var(--tiffany-blue));
+    --background-color: #333;
+    --text-color: #f9f9f9;
+    --button-bg-color: #ed1476;
+    --ticket-card-bg: #666;
+    --button-text-color: #f9f9f9;
+    --box-bg: #555;
+    --header-bg-color: #333;
+    --footer-bg-color: #333;
+    --login-bg: #4a4a4a;
+    --semitransparent-bg: #3333336d;
+}
+
+/* Global Styles */
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+button {
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+/* Header Styles */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: var(--header-bg-color);
+}
+
+.logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo img {
+    max-width: 50px;
+    height: auto;
+}
+
+.logo h1 {
+    color: var(--text-color);
+}
+
+.navbar ul {
+    list-style-type: none;
+    display: flex;
+    gap: 15px;
+}
+
+.nav-links a {
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.cta {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Hero Section Styles */
+.hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px 40px;
+    background: var(--background-gradient);
+    color: var(--text-color);
+    background: var(--background-gradient);
+    background-size: 400% 400%;
+
+    -webkit-animation: AnimationName 30s ease infinite;
+    -moz-animation: AnimationName 30s ease infinite;
+    animation: AnimationName 30s ease infinite;
+}
+
+.hero-content h1 {
+    font-size: 2.5rem;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+}
+
+.cta-button {
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
+    padding: 10px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.cta-button:hover {
+    opacity: 0.9;
+    background-color: #66C6B8;
+    border: none;
+}
+
+.hero-image img {
+    max-width: 100%;
+    height: auto;
+    animation: float 4s ease-in-out infinite;
+    /* Add the float animation */
+}
+
+/* Floating Animation */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+        /* Start at original position */
+    }
+
+    50% {
+        transform: translateY(-10px);
+        /* Move up 10px at the halfway point */
+    }
+}
+
+/* Benefits Section Styles */
+.benefits {
+    padding: 50px 20px;
+    background-color: var(--background-bg-color);
+    color: var(--text-color);
+    text-align: center;
+}
+
+.benefits-list {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px
+}
+
+.benefit-item {
+    text-align: center;
+    width: 300px;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: var(--box-bg);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.icon {
+    font-size: 3rem;
+}
+
+/* Features Section Styles */
+.features {
+    display: flex;
+    flex-direction: column;
+    padding: 50px 20px;
+    background-color: var(--background-color);
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color);
+}
+
+.feature-items {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.feature-item {
+    background-color: var(--box-bg);
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.feature-item h3 {
+    font-size: 1.5rem;
+}
+
+.feature-item p {
+    font-size: 1rem;
+}
+
+/* Testimonials Section Styles */
+.testimonials {
+    padding: 50px 20px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.testimonials-list {
+    display: flex;
+    justify-content: space-around;
+}
+
+.testimonial-item {
+    max-width: 300px;
+    text-align: center;
+}
+
+/* CTA Section Styles */
+.ctass {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px 20px;
+    background: var(--background-gradient);
+    color: var(--text-color);
+    text-align: center;
+    background-size: 400% 400%;
+
+    -webkit-animation: AnimationName 30s ease infinite;
+    -moz-animation: AnimationName 30s ease infinite;
+    animation: AnimationName 30s ease infinite;
+}
+
+.ctass button {
+    width: 40%;
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.cta-button:hover {
+    opacity: 0.9;
+}
+
+/* Footer Styles */
+.footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: var(--footer-bg-color);
+    /* text-align: center; */
+    color: var(--text-color);
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+}
+
+.footer-links a {
+    color: var(--text-color);
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+@-webkit-keyframes AnimationName {
+    0% {
+        background-position: 0% 50%
+    }
+
+    50% {
+        background-position: 100% 50%
+    }
+
+    100% {
+        background-position: 0% 50%
+    }
+}
+
+@-moz-keyframes AnimationName {
+    0% {
+        background-position: 0% 50%
+    }
+
+    50% {
+        background-position: 100% 50%
+    }
+
+    100% {
+        background-position: 0% 50%
+    }
+}
+
+@keyframes AnimationName {
+    0% {
+        background-position: 0% 50%
+    }
+
+    50% {
+        background-position: 100% 50%
+    }
+
+    100% {
+        background-position: 0% 50%
+    }
+}

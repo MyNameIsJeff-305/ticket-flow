@@ -1,17 +1,18 @@
 .my-account-tab {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: start;
     align-items: start;
-    width: 95%;
-    /* padding: 10px; */
-    /* margin: 10px 0; */
+    width: 92vh;
+    height: 62.8vh;
     border-radius: 10px;
-    /* padding: 10px; */
-    padding: 1rem 1.2rem;
-    margin-top: 20px;
-    background-color: #3bbca7;
-    color: white;
+    padding: 20px;
+    /* margin-top: 20px; */
+    background-color: var(--background-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow */
+    transition: background-color 0.3s ease, color 0.3s ease;
+    color: var(--text-color);
 }
 
 .my-account-tab h1 {
@@ -47,6 +48,13 @@
     gap: 10px;
 }
 
+.my-account-header button {
+    width: fit-content;
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
+    border: none;
+}
+
 .account-picture-container {
     display: flex;
     flex-direction: column;
@@ -77,24 +85,20 @@
 .details-2 span {
     font-weight: bold;
     margin-bottom: 5px;
-    color: #555;
+    color: var(--text-color);
 }
 
 input[type="text"] {
     padding: 10px;
     font-size: 1rem;
-    border: 1px solid #ccc;
+    border: 1px solid var(--text-color);
     border-radius: 5px;
     width: 100%;
 }
 
 input[type="text"]:focus {
     outline: none;
-    border-color: #3bbca7;
-}
-
-@media (min-width: 768px) {
-    .account-details-container {
-        flex-direction: row;
-    }
+    border-color: var(--text-color);
+    border: 1px solid #ccc;
+    background-color: var(--semitransparent-bg);
 }

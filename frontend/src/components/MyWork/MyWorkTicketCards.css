@@ -18,7 +18,7 @@
 
 /* Styling for left side (title and description) */
 .ticket-card-left {
-    max-inline-size: 100%;
+    /* max-width: 100%; */
     width: 100%;
 }
 
@@ -26,7 +26,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    /* justify-content: start; */
+    justify-content: space-between;
     /* justify-content: center; */
     gap: 15px;
     font-size: 1.2rem;
@@ -55,7 +55,9 @@
 
 /* Status-based styles */
 .ticket-card-1 {
-    max-width: 96%;
+    /* border-left: 6px solid #ed1876; */
+    width: 100%;
+    /* New ticket */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -76,7 +78,7 @@
 
 .ticket-card-2 {
     /* border-left: 6px solid #FFC107; */
-    max-width: 96%;
+    width: 100%;
     /* Pending ticket */
     display: flex;
     justify-content: space-between;
@@ -97,7 +99,7 @@
 
 .ticket-card-3 {
     /* border-left: 6px solid #F44336; */
-    max-width: 96%;
+    width: 100%;
     /* Closed ticket */
     display: flex;
     justify-content: space-between;
@@ -123,8 +125,11 @@ span {
 
 .client-container-company {
     display: flex;
-    width: max-content;
+    flex-direction: row;
     align-items: center;
+    justify-content: center;
+    justify-items: center;
+    width: max-content;
     gap: 5px;
     border-radius: 50px;
     padding: 10px 10px;
@@ -141,9 +146,13 @@ span {
 
 .client-container-personal {
     display: flex;
+    flex-direction: row;
     align-items: center;
-    width: max-content;
+    align-content: center;
+    justify-content: center;
+    justify-items: center;
     gap: 5px;
+    width: max-content;
     border-radius: 50px;
     padding: 10px 10px;
     background-color: var(--ultra-violet);

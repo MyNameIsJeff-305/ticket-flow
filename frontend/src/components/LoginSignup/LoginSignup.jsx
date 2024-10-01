@@ -109,10 +109,14 @@ export default function LoginSignup() {
         <main className='login-main'>
             <section className='left-section'>
                 <div className="logo">
-                    <img src="../../../dist/assets/logo.png" alt="logo" />
+                    <img style={{ cursor: "pointer" }} src="../../../dist/assets/logo.png" alt="logo" onClick={() => navigate('/')} />
+                </div>
+                <div className="hero-image">
+                    {/* Add a relevant image or animation here */}
+                    <img src='/public/assets/computer.webp' alt="ticketFlow Interface" />
                 </div>
                 <aside className="left-text">
-                    <p className='left-text-description'>
+                    <p className='left-text-description' style={{ fontSize: "12px", textAlign: "left" }}>
                         Ticket Flow is a streamlined IT ticketing system designed to simplify support and project management. With Ticket Flow, IT teams can easily track, manage, and resolve tickets, ensuring efficient workflow, faster response times, and enhanced customer satisfaction. Perfect for IT companies looking to optimize their service management and improve operational productivity.
                     </p>
                 </aside>
@@ -225,8 +229,8 @@ export default function LoginSignup() {
                     }
                 </div>
                 <div className='login-signup-toggle'>
-                    <button onClick={() => setIsLoginSelected(true)}><FaArrowRightToBracket /></button>
-                    <button onClick={() => setIsLoginSelected(false)}><FaUserPlus /></button>
+                    <button onClick={() => setIsLoginSelected(true)}><FaArrowRightToBracket /> Login</button>
+                    <button onClick={() => setIsLoginSelected(false)}><FaUserPlus /> Signup</button>
                 </div>
             </section>
         </main>

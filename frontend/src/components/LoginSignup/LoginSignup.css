@@ -1,183 +1,229 @@
-:root {
-    --teal: #67c6b8;
-    --purple: #5e53a3;
-    --yellow: #fdca18;
-    --pink: #ed1876;
-    --white: #ffffff;
-    --light-gray: #f7f7f7;
-    --dark-gray: #333333;
-    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    --semitransparent-teal: #27b39e;
-}
-
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    color: var(--dark-gray);
-    background-color: var(--semitransparent-teal);
-    margin: 0;
-    padding: 0;
-}
-
+/* Main Container */
 .login-main {
     display: flex;
-    width: 100%;
     height: 100vh;
+    /* background: var(--login-bg); */
+    color: var(--text-color);
+    background: var(--background-gradient);
+    background-size: 400% 400%;
+
+    -webkit-animation: AnimationName 30s ease infinite;
+    -moz-animation: AnimationName 30s ease infinite;
+    animation: AnimationName 30s ease infinite;
 }
 
-.left-section,
-.right-section {
-    flex: 1;
-    width: 50%;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
+/* Left Section */
 .left-section {
+    flex: 1;
+    padding: 40px;
+    /* background-color: var(--header-bg-color); */
+    /* Apply theme background */
     display: flex;
     flex-direction: column;
+    align-items: start;
     justify-content: space-between;
-    /* background-color: #868686; */
-    color: var(--white);
+    text-align: center;
 }
 
-.right-section {
-    background-color: var(--teal);
-    /* Updated background color */
-    backdrop-filter: blur(5px);
-    /* Optional: adds a blur effect to the background */
-}
-
-.logo img,
-.right-section-logo {
+.left-section .logo img {
     max-width: 150px;
-    margin-bottom: 2rem;
-}
-
-.left-text aside {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: var(--yellow);
+    margin-bottom: 20px;
 }
 
 .left-text-description {
-    font-size: 0.8rem;
+    font-size: 1.2rem;
     line-height: 1.6;
-    color: var(--white);
-    max-width: 100%;
+    color: var(--text-color);
+}
+
+/* Right Section */
+.right-section {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--semitransparent-bg);
+    /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
 }
 
 .form-container {
     width: 100%;
-    max-width: 350px;
-    margin: 0 auto;
-    background-color: var(--semitransparent-gray);
-    /* Add a white background to the form container */
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: var(--box-shadow);
-}
-
-.login-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+    max-width: 400px;
+    /* background-color: var(--background-color); */
+    /* Match theme */
+    padding: 30px;
+    border-radius: 10px;
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
 }
 
 .login-form label {
-    display: flex;
-    flex-direction: column;
-    font-size: 0.9rem;
-    color: var(--white);
-    font-weight: 600;
+    display: block;
+    margin-bottom: 15px;
+    font-size: 1rem;
+    color: var(--text-color);
 }
 
 .login-form input {
-    margin-top: 0.5rem;
-    margin-right: 0.5rem;
-    padding: 0.8rem;
-    border: 2px solid var(--light-gray);
-    border-radius: 4px;
-    background-color: var(--white);
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: var(--semitransparent-bg);
+    /* Input background */
+    color: var(--text-color);
+    /* Input text color */
 }
 
 .login-form input:focus {
     outline: none;
-    border-color: var(--teal);
-    box-shadow: 0 0 0 3px rgba(103, 198, 184, 0.2);
+    border-color: var(--button-bg-color);
+    /* Focus color */
 }
 
-.login-form button {
-    padding: 0.8rem;
-    background-color: var(--purple);
-    color: var(--white);
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.1s ease;
+button {
+    width: 100%;
+    padding: 10px;
     font-size: 1rem;
-    font-weight: 600;
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s;
 }
 
-.login-form button:hover:not(:disabled) {
-    background-color: var(--pink);
-    transform: translateY(-2px);
-}
-
-.login-form button:disabled {
-    background-color: var(--purple);
-    color: var(--white);
+button:disabled {
+    background-color: #ccc;
     cursor: not-allowed;
 }
 
-.error-message {
-    color: var(--pink);
-    font-size: 0.8rem;
-    margin-top: 0.25rem;
+button:hover:not(:disabled) {
+    opacity: 0.9;
 }
 
-.login-signup-toggle {
+/* Error Message Styling */
+.error-message {
+    color: var(--razzmatazz);
+    /* Highlight errors in a noticeable color */
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+/* Name Container Styling for Signup Form */
+.name-container {
     display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 2rem;
+    gap: 10px;
+}
+
+.name-container label {
+    flex: 1;
+}
+
+/* File Upload Styling */
+#file-upload {
+    margin-top: 10px;
+    display: block;
+    color: var(--text-color);
+}
+
+/* Login/Signup Toggle */
+.login-signup-toggle {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
 }
 
 .login-signup-toggle button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: transparent;
+    flex: 1;
+    padding: 10px;
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
     border: none;
-    color: var(--white);
-    padding: 10px 10px;
-    background-color: var(--pink);
-    border-radius: 50px;
-    font-size: 1.4rem;
+    border-radius: 5px;
     cursor: pointer;
-    transition: color 0.3s ease, transform 0.1s ease;
 }
 
 .login-signup-toggle button:hover {
-    color: var(--white);
-    background-color: var(--semitransparent-teal);
-    box-shadow: var(--box-shadow);
+    background-color: var(--ultra-violet);
+    /* Change color on hover */
+}
+
+.logo {
+    /* border-radius: 50%; */
+    overflow: hidden;
+    transition: transform 0.3s;
+}
+
+.logo:hover {
     transform: scale(1.1);
 }
 
-.name-container {
-    display: flex;
-    flex-direction: row;
+
+@-webkit-keyframes AnimationName {
+    0% {
+        background-position: 0% 50%
+    }
+
+    50% {
+        background-position: 100% 50%
+    }
+
+    100% {
+        background-position: 0% 50%
+    }
 }
 
-.name-container input {
-    margin-top: 0.5rem;
-    padding: 0.8rem;
-    border: 2px solid var(--light-gray);
-    border-radius: 4px;
-    background-color: var(--white);
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+@-moz-keyframes AnimationName {
+    0% {
+        background-position: 0% 50%
+    }
+
+    50% {
+        background-position: 100% 50%
+    }
+
+    100% {
+        background-position: 0% 50%
+    }
+}
+
+@keyframes AnimationName {
+    0% {
+        background-position: 0% 50%
+    }
+
+    50% {
+        background-position: 100% 50%
+    }
+
+    100% {
+        background-position: 0% 50%
+    }
+}
+
+.hero-image img {
+    max-width: 90%;
+    height: auto;
+    animation: float 4s ease-in-out infinite;
+    /* Add the float animation */
+}
+
+/* Floating Animation */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+        /* Start at original position */
+    }
+
+    50% {
+        transform: translateY(-10px);
+        /* Move up 10px at the halfway point */
+    }
 }

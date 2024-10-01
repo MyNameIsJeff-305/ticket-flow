@@ -1,124 +1,133 @@
+/* Tickets Tab Container */
 .tickets-tab {
     display: flex;
     flex-direction: column;
+    align-content: space-between;
     justify-content: space-between;
-    align-items: start;
-    width: 93%;
-    /* padding: 10px; */
-    /* margin: 10px 0; */
-    /* margin-top: 35px; */
-    /* margin-bottom: 40px; */
-    border-radius: 10px;
-    /* padding-left: 10px; */
-    padding: 1rem 2rem;
-    /* margin: 10px; */
-    background-color: #3bbca7;
-    color: white;
-    height: 100%;
+    width: 61%;
+    /* max-width: 1200px; */
+    /* margin: 20px auto; */
+    padding: 20px 30px;
+    background-color: var(--background-color);
+    /* Adapt based on theme */
+    color: var(--text-color);
+    /* Adapt text color based on theme */
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.tickets-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    margin-top: 20px;
-    padding: 0 0.1rem;
-}
-
+/* Tickets Header */
 .tickets-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
-    /* margin-bottom: 20px; */
+    margin-bottom: 20px;
 }
 
-.tickets-footer {
-    display: flex;
-    flex-direction: row;
-
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    width: 100%;
-    margin-top: 20px;
+.tickets-header h1 {
+    font-size: 2rem;
+    color: var(--text-color);
+    /* Adapt text color based on theme */
 }
 
-.prev-btn,
-.next-btn {
-    background-color: #fff;
-    /* Button background color */
-    color: #3bbca7;
-    /* Text color to match the theme */
-    border: 2px solid #3bbca7;
-    /* Border to match the theme */
-    padding: 0.5rem 0.5rem;
-    /* Add padding to make the buttons bigger */
-    border-radius: 10px;
-    /* Slightly round the corners */
-    font-size: 1rem;
-    /* Increase font size for better readability */
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-    /* Smooth transition on hover */
-}
-
+/* Add Ticket Button */
 .add-ticket-btn {
-    background-color: #fff;
     display: flex;
-    flex-direction: row;
-    gap: 0.5rem;
     align-items: center;
-    justify-content: center;
-    /* Button background color */
-    color: #3bbca7;
-    /* Text color to match the theme */
-    border: 2px solid #3bbca7;
-    /* Border to match the theme */
-    padding: 0.6rem 0.5rem;
-    /* Add padding to make the buttons bigger */
-    border-radius: 10px;
-    /* Slightly round the corners */
+    gap: 5px;
     font-size: 1rem;
-    /* Increase font size for better readability */
+    background-color: var(--button-bg-color);
+    /* Button background */
+    color: var(--button-text-color);
+    /* Button text color */
+    padding: 10px 15px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-    /* Smooth transition on hover */
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .add-ticket-btn:hover {
-    background-color: #ed1876;
-    /* Change background color on hover */
-    color: white;
-    /* Change text color on hover */
+    background-color: var(--ultra-violet);
+    /* Darker hover effect */
+    color: var(--seasalt);
+    /* Light hover text */
+}
+
+/* Tickets Container */
+.tickets-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    /* margin-bottom: 10px; */
+    /* overflow-y: auto; */
+    overflow-x: hidden;
+    max-height: 850px;
+    /* Allow scrolling within the container */
+}
+
+/* Tickets Footer */
+.tickets-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+/* Pagination Buttons */
+.prev-btn,
+.next-btn {
+    background-color: var(--button-bg-color);
+    /* Button background */
+    color: var(--button-text-color);
+    /* Button text */
+    /* border: none; */
+    width: fit-content;
+    padding: 10px 15px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .prev-btn:disabled,
 .next-btn:disabled {
-    background-color: #ddd;
-    /* Gray out the buttons when disabled */
-    color: #999;
-    /* Lighter color for the text */
+    background-color: var(--login-bg);
+    /* Disabled button background */
+    color: var(--text-color);
+    /* Disabled text color */
     cursor: not-allowed;
-    /* Change cursor to indicate it's not clickable */
 }
 
 .prev-btn:hover:not(:disabled),
 .next-btn:hover:not(:disabled) {
-    background-color: #ed1876;
-    /* Change background color on hover */
-    color: white;
-    /* Change text color on hover */
+    background-color: var(--ultra-violet);
+    /* Darker background on hover */
 }
 
+/* Loader (for loading state) */
 .loader {
     width: 48px;
     height: 48px;
-    border: 5px solid #FFF;
-    border-bottom-color: #5e53a3;
+    border: 5px solid var(--seasalt);
+    /* Outer part adapts to theme */
+    border-top: 5px solid var(--button-bg-color);
+    /* Themed rotating part */
     border-radius: 50%;
-    display: inline-block;
-    box-sizing: border-box;
-    animation: rotation 1s linear infinite;
+    animation: spin 1s linear infinite;
+    margin: auto;
+}
+
+/* Spin Animation for Loader */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }

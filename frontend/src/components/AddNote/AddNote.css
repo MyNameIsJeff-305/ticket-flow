@@ -1,0 +1,90 @@
+/* Form Container */
+.add-note-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    /* max-width: 500px; */
+    /* margin: auto; */
+    padding: 20px;
+    background-color: var(--box-bg);
+    /* Adapt based on theme */
+    color: var(--text-color);
+    /* Adapt text color based on theme */
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Form Heading */
+.add-note-form h3 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: var(--text-color);
+    /* Adapt text color based on theme */
+}
+
+/* Label for the Note Input */
+.add-note-form label {
+    font-size: 1rem;
+    color: var(--text-color);
+    /* Adapt label color based on theme */
+}
+
+/* Input Field */
+.add-note-form input {
+    padding: 10px;
+    font-size: 1rem;
+    width: 95%;
+    color: var(--text-color);
+    /* Input text color based on theme */
+    background-color: var(--semitransparent-bg);
+    /* Light input background */
+    border: 1px solid var(--ultra-violet);
+    /* Border color based on theme */
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+}
+
+.add-note-form input:focus {
+    outline: none;
+    border-color: var(--button-bg-color);
+    /* Focus border color */
+}
+
+/* Error Message Styling */
+.add-note-form-error {
+    font-size: 0.9rem;
+    color: var(--razzmatazz);
+    /* Error text color based on theme */
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+
+/* Save Button */
+.add-note-form button {
+    padding: 10px 15px;
+    background-color: var(--button-bg-color);
+    /* Button background */
+    color: var(--button-text-color);
+    /* Button text color */
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.add-note-form button:disabled {
+    background-color: var(--seasalt);
+    /* Disabled button background */
+    color: var(--smoky-black);
+    /* Disabled text color */
+    cursor: not-allowed;
+}
+
+.add-note-form button:hover:not(:disabled) {
+    background-color: var(--ultra-violet);
+    /* Darker hover effect */
+    color: var(--button-text-color);
+}

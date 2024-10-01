@@ -21,9 +21,9 @@ export default function ConfirmDeleteNote({ note, setDeleteNoteChecker }) {
     }
 
     return (
-        <div style={{ display: "flex", flexDirection: "column" }}>
+        <div className="confirm-delete-container">
             <h3>Are you sure you want to delete this note?</h3>
-            <div style={{ display: "flex", flexDirection: "row" }}>
+            <div className="confirm-delete-buttons">
                 <button onClick={(e) => handleDelete(e)}>Yes</button>
                 <button onClick={closeModal}>No</button>
             </div>

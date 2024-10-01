@@ -1,10 +1,16 @@
+import { FaGithub } from "react-icons/fa";
+
 import './Footer.css'
 
-export default function Footer() {
+const Footer = () => {
     return (
-        <footer className="footer-d">
-            <span>© 2024</span>
-            <span>Created by <a href="https://github.com/mynameisjeff-305/">Michel Garcia</a></span>
+        <footer className="footer">
+            <div className="footer-links">
+                <a href="https://github.com/MyNameIsJeff-305"><FaGithub /> Contact Us</a>
+            </div>
+            <p style={{fontSize: "10px", width:"70%"}}></p>
         </footer>
-    )
-}
+    );
+};
+
+export default Footer;

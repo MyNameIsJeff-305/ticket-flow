@@ -142,7 +142,7 @@ export default function TicketDetails() {
                 <div className="tickets-details-notes">
                     <div style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "space-between", maxHeight: "40px", alignItems: "center" }}>
                         <h3>Notes</h3>
-                        <button className="edit-ticket-btn" style={{ display: "flex", listStyle: "none", padding: "8px 10px", alignItems: "center" }}>
+                        <button className="edit-ticket-btn" style={{ display: "flex", listStyle: "none", padding: "8px", alignItems: "center", width: "fit-content", border: "none" }}>
                             <OpenModalMenuItem
                                 itemText={<FaPlusCircle />}
                                 modalComponent={<AddNote userId={user.id} ticketId={ticket.id} setNotesChecker={setNoteChecker} />}
@@ -150,7 +150,7 @@ export default function TicketDetails() {
                             ></OpenModalMenuItem>
                         </button>
                     </div>
-                    <div className="notes-container" style={{ display: "flex", flexDirection: "column", overflowX: "hidden", overflowY: "scroll", maxHeight: "300px", width: "100%" }}>
+                    <div className="notes-container" style={{ display: "flex", flexDirection: "column", overflowX: "hidden", overflowY: "scroll", maxHeight: "350px", width: "100%", }}>
                         {
                             notesForTicket.length > 0 ? (
                                 notesForTicket?.map(note => (
@@ -165,7 +165,7 @@ export default function TicketDetails() {
                 <div className="tickets-details-parts">
                     <div style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "space-between", maxHeight: "40px", alignItems: "center" }}>
                         <h3>Parts</h3>
-                        <button className="edit-ticket-btn"><FaPlusCircle /></button>
+                        <button className="edit-ticket-btn" style={{ display: "flex", listStyle: "none", padding: "8px", alignItems: "center", width: "fit-content", border: "none" }}><FaPlusCircle /></button>
                     </div>
                     <div className="parts-container">
                         {

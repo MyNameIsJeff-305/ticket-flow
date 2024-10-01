@@ -7,6 +7,7 @@ import './index.css'
 import { useEffect, useState } from "react";
 
 import LoginSignup from "./components/LoginSignup/LoginSignup";
+import Splash from "./components/Splash/Splash";
 import Navigation from "./components/Navigation/Navigation";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Footer from "./components/Footer/Footer";
@@ -29,24 +30,28 @@ function Layout() {
 
   return (
     <div className="app-div-container">
-      <header className="header">
-        {sessionUser && <Navigation />}
-      </header>
+      {
+        sessionUser &&
+        <header className="header">
+          <Navigation />
+        </header>
+      }
       <main className='main-zone'>
         {
           sessionUser && (
-            <div className="left-section-mm">
+            // <div className="left-section-mm">
               <MyWork myTickets={myTickets} status={status} />
-            </div>
+            // </div>
           )
         }
-        <div className="right-section-mm">
-          {isLoaded && <Outlet />}
-        </div>
+        {/* <div className="right-section-mm"> */}
+          <Outlet />
+        {/* </div> */}
       </main>
-      <footer className="footer">
+      {
+        sessionUser &&
         <Footer />
-      </footer>
+      }
     </div>
   )
 }
@@ -57,6 +62,10 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
+        element: <Splash />
+      },
+      {
+        path: '/login',
         element: <LoginSignup />
       },
       {

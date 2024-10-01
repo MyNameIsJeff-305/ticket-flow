@@ -45,10 +45,9 @@ export default function Tickets() {
 
     return (
         <section className='tickets-tab'>
-            <div style={{ width: "100%" }}>
+            <div>
                 <div className={`tickets-header`}>
                     <h1>Tickets</h1>
-
                     <div className='add-ticket-btn' style={{ listStyle: "none", display: "flex", flexDirection: "row", gap: "5px" }}>
                         <FaCirclePlus />
                         <OpenModalMenuItem
@@ -57,24 +56,25 @@ export default function Tickets() {
                             onModalClose={onModalClose} // Call onModalClose after modal closes
                         ></OpenModalMenuItem>
                     </div>
-
                 </div>
                 <div className='tickets-container'>
                     {
-                        allTickets.map(ticket => (
-                            <TicketCard key={ticket.id} ticket={ticket} />
-                        ))
+                        <div>
+                            {allTickets.map(ticket => (
+                                <TicketCard key={ticket.id} ticket={ticket} />
+                            ))}
+                        </div>
                     }
                 </div>
             </div>
             <div className='tickets-footer'>
-                <button className='prev-btn' disabled={page <= 1} onClick={() => setPage(page - 1)}><FaAngleLeft /></button>
+                <button className='prev-btn' style={{ border: "none" }} disabled={page <= 1} onClick={() => setPage(page - 1)}><FaAngleLeft /></button>
                 <div>
-                    <span style={{ color: "white" }}>
+                    <span >
                         {page} of {lastPage}
                     </span>
                 </div>
-                <button className='next-btn' disabled={page >= lastPage} onClick={() => setPage(page + 1)}><FaAngleRight /></button>
+                <button className='next-btn' style={{ border: "none" }} disabled={page >= lastPage} onClick={() => setPage(page + 1)}><FaAngleRight /></button>
             </div>
         </section>
     )

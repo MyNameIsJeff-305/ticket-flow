@@ -2,12 +2,13 @@
     display: flex;
     /* width: 100vh; */
     align-items: center;
-    background-color: #f8f9fa;
-    border: 1px solid #e0e0e0;
+    background-color: var(--ticket-card-bg);
+    /* border: 1px solid #e0e0e0; */
     border-radius: 8px;
     padding: 16px;
     margin-bottom: 16px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .user-profile-pic {
@@ -25,7 +26,7 @@
 .note-card-content {
     flex-grow: 1;
     font-size: 14px;
-    color: #333;
+    color: var(--text-color);
 }
 
 .note-buttons {
@@ -37,16 +38,16 @@
 }
 
 button {
-    background-color: #fff;
+    background-color: var(--button-bg-color);
     display: flex;
     flex-direction: row;
     gap: 0.5rem;
     align-items: center;
     justify-content: center;
     /* Button background color */
-    color: #3bbca7;
+    /* color: #3bbca7; */
     /* Text color to match the theme */
-    border: 2px solid #3bbca7;
+    /* border: 2px solid #3bbca7; */
     /* Border to match the theme */
     padding: 0.6rem 0.6rem;
     /* Add padding to make the buttons bigger */
@@ -56,14 +57,6 @@ button {
     /* Increase font size for better readability */
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
-}
-
-button:hover {
-    background-color: #ed1876;
-    border: 2px solid #ed1876;
-    /* Change background color on hover */
-    color: white;
-    /* Change text color on hover */
 }
 
 @keyframes rotation {
