@@ -31,26 +31,22 @@ function Layout() {
   return (
     <div className="app-div-container">
       {
-        sessionUser &&
-        <header className="header">
-          <Navigation />
-        </header>
-      }
-      <main className='main-zone'>
-        {
-          sessionUser && (
-            // <div className="left-section-mm">
+        sessionUser ? (
+          <>
+            <header className="header">
+              <Navigation />
+            </header>
+            <main className='main-zone'>
               <MyWork myTickets={myTickets} status={status} />
-            // </div>
-          )
-        }
-        {/* <div className="right-section-mm"> */}
-          <Outlet />
-        {/* </div> */}
-      </main>
-      {
-        sessionUser &&
-        <Footer />
+              <Outlet />
+            </main>
+            <Footer />
+          </>
+        ) : (
+          <main className='main-zone'>
+            <Outlet />
+          </main>
+        )
       }
     </div>
   )

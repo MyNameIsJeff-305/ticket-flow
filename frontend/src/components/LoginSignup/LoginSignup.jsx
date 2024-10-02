@@ -86,6 +86,20 @@ export default function LoginSignup() {
             })
     }
 
+    const handleDemoSubmit = async (e) => {
+        e.preventDefault();
+
+        dispatch(login({ credential: 'DemoEmp5', password: 'password' }))
+            .then(() => navigate("/dashboard"))
+            .catch(async (res) => {
+                const data = await res.json();
+                if (data && data.message) {
+                    setIsButtonDisabled(true);
+                    setErrors(data);
+                }
+            })
+    }
+
     const handleSignup = async (e) => {
         e.preventDefault();
 
@@ -128,7 +142,7 @@ export default function LoginSignup() {
                             <form className="login-form">
                                 <label>
                                     Username or Email
-                                    <input type="text" name="credential" value={credential} onChange={(e) => setCredential(e.target.value)} />
+                                    <input style={{ width: "95%" }} type="text" name="credential" value={credential} onChange={(e) => setCredential(e.target.value)} />
                                 </label>
                                 {
                                     errors.credential && (
@@ -153,7 +167,7 @@ export default function LoginSignup() {
                             </form>
                         ) : (
                             <form className="login-form">
-                                <div className="name-container">
+                                <div className="name-container" style={{gap: "30px", width: "95%"}}>
                                     <label>
                                         First Name
                                         <input type="text" name="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
@@ -175,7 +189,7 @@ export default function LoginSignup() {
                                 </div>
                                 <label>
                                     Username
-                                    <input type="text" name="createPassword" value={username} onChange={(e) => setUsername(e.target.value)} />
+                                    <input type="text" style={{ width: "95%" }} name="createPassword" value={username} onChange={(e) => setUsername(e.target.value)} />
                                 </label>
                                 {
                                     errors.email && (
@@ -184,7 +198,7 @@ export default function LoginSignup() {
                                 }
                                 <label>
                                     Email
-                                    <input type="text" name="createPassword" value={email} onChange={(e) => setEmail(e.target.value)} />
+                                    <input type="text" style={{ width: "95%" }} name="createPassword" value={email} onChange={(e) => setEmail(e.target.value)} />
                                 </label>
                                 {
                                     errors.email && (
@@ -227,6 +241,7 @@ export default function LoginSignup() {
                             </form>
                         )
                     }
+                    <button className='demo-button' onClick={(e) => handleDemoSubmit(e)}>Demo User</button>
                 </div>
                 <div className='login-signup-toggle'>
                     <button onClick={() => setIsLoginSelected(true)}><FaArrowRightToBracket /> Login</button>

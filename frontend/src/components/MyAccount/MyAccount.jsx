@@ -42,7 +42,7 @@ export default function MyAccount({ user }) {
             </div>
             <div className="account-details-container-main">
                 <div className="account-picture-container">
-                    <img src={user.profilePicUrl} alt="user-avatar" />
+                    <img src={user?.profilePicUrl} alt="user-avatar" />
                     <input
                         type="file"
                         name='img_url'
