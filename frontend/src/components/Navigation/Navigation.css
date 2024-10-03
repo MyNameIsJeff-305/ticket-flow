@@ -6,7 +6,7 @@
     align-items: center;
     padding: 15px 10px;
     border-radius: 10px;
-    background-color: var(--header-bg-color);  /* Apply the theme-based header background */
+    /* background-color: var(--header-bg-color);  Apply the theme-based header background */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);  /* Optional shadow for better visual separation */
     transition: background-color 0.3s ease;  /* Smooth transition for theme changes */
 }

@@ -8,7 +8,7 @@
     cursor: pointer;
     padding: 10px;
     gap: 10px;
-    background-color: var(--header-bg-color); /* Use theme-based header background color */
+    /* background-color: var(--header-bg-color); Use theme-based header background color */
     transition: background-color 0.3s ease;
     border-radius: 8px;  /* Optionally round the edges */
 }
