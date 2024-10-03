@@ -1,20 +1,11 @@
 /* Tickets Tab Container */
 .tickets-tab {
     display: flex;
+    width: 100%;
     flex-direction: column;
     align-content: space-between;
     justify-content: space-between;
-    width: 61%;
-    /* max-width: 1200px; */
-    /* margin: 20px auto; */
-    padding: 20px 30px;
-    background-color: var(--background-color);
-    /* Adapt based on theme */
-    color: var(--text-color);
-    /* Adapt text color based on theme */
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease, color 0.3s ease;
+    flex: 1;
 }
 
 /* Tickets Header */
@@ -23,6 +14,8 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .tickets-header h1 {
@@ -59,7 +52,9 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 96%;
     /* margin-bottom: 10px; */
     /* overflow-y: auto; */
     overflow-x: hidden;

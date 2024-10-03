@@ -54,11 +54,11 @@ export default function MyAccount({ user }) {
                 <div className="account-details-container">
                     <div className="details-1">
                         <span>First Name:</span>
-                        <input type="text" value={user.firstName} disabled="true"></input>
+                        <input type="text" value={user?.firstName} disabled="true"></input>
                     </div>
                     <div className="details-2">
                         <span>Last Name:</span>
-                        <input type="text" value={user.lastName} disabled="true"></input>
+                        <input type="text" value={user?.lastName} disabled="true"></input>
                     </div>
                 </div>
             </div>

@@ -37,8 +37,12 @@ function Layout() {
               <Navigation />
             </header>
             <main className='main-zone'>
-              <MyWork myTickets={myTickets} status={status} />
-              <Outlet />
+              <div className="left-section-mm">
+                <MyWork myTickets={myTickets} status={status} />
+              </div>
+              <div className="right-section-mm">
+                <Outlet />
+              </div>
             </main>
             <Footer />
           </>

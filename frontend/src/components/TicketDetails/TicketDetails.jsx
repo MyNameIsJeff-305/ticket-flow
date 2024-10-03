@@ -5,6 +5,7 @@ import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import AddNote from "../AddNote/AddNote";
 
 import { FaBuilding, FaUser, FaPen, FaTrash, FaPlusCircle } from "react-icons/fa";
+import { FaTicketAlt } from "react-icons/fa";
 
 import './TicketDetails.css';
 import { useEffect, useState } from "react";
@@ -77,45 +78,40 @@ export default function TicketDetails() {
     return (
         <section className="ticket-details-tab">
             <div className="ticket-details-header">
-                <div className="ticket-details-header-left">
-                    <h1>{ticket.title}</h1>
-                    <span>
-                        {
-                            ticket?.CreatedBy?.companyName === '' ? (
-                                ticket.CreatedBy.firstName + ' ' + ticket.CreatedBy.lastName
-                            ) : (
-                                ticket.CreatedBy?.companyName
-                            )
-                        }
-                    </span>
-                    <div className="ticket-description-body" id="body-row">
-                        <span style={{ color: "#f9f9f9" }}>
-                            {
-                                ticket.ClientInfo?.companyName !== "" ? (
-                                    <div className='client-container-company' style={{ color: "#f9f9f9" }}>
-                                        <FaBuilding />
-                                        <span style={{ color: "#f9f9f9" }}>{ticket.ClientInfo?.companyName}</span>
-                                    </div>
-                                ) : (
-                                    <div className='client-container-personal' style={{ color: "#f9f9f9" }}>
-                                        <FaUser />
-                                        <span style={{ textOverflow: "ellipsis", color: "f9f9f9" }}>{ticket.ClientInfo?.firstName} {ticket.ClientInfo?.lastName}</span>
-                                    </div>
-                                )
-                            }
-                        </span>
+                <div style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "space-between", alignContent: "center" }}>
+                    <div className="ticket-details-header-left">
+                        <h1>{ticket.title}</h1>
+                        <div style={{ display: "flex", flexDirection: "row", gap: "10px" }}>
+                            <span style={{ gap: "5px", display: "flex", flexDirection: "row" }}><FaTicketAlt /> {ticket.CreatedBy?.firstName} {ticket.CreatedBy?.lastName}</span>
+                            <div style={{ gap: "5px", display: "flex", flexDirection: "row" }}> | </div>
+                            <span style={{ color: "#f9f9f9" }}>
+                                {
+                                    ticket.ClientInfo?.companyName !== "" ? (
+                                        <div style={{ gap: "5px", display: "flex", flexDirection: "row" }}>
+                                            <FaBuilding />
+                                            <span style={{ color: "#f9f9f9" }}>{ticket.ClientInfo?.companyName}</span>
+                                        </div>
+                                    ) : (
+                                        <div style={{ gap: "5px", display: "flex", flexDirection: "row" }}>
+                                            <FaUser />
+                                            <span style={{ textOverflow: "ellipsis", color: "f9f9f9" }}>{ticket.ClientInfo?.firstName} {ticket.ClientInfo?.lastName}</span>
+                                        </div>
+                                    )
+                                }
+                            </span>
+                        </div>
+                    </div>
+                    <div className="ticket-details-header-right" style={{ height: "fit-content", paddingTop:"20px", paddingRight:"20px" }}>
+                        <button className="edit-ticket-btn"><FaPen /></button>
+                        <button className="delete-ticket-btn"><FaTrash /></button>
                     </div>
                 </div>
-                <div className="ticket-details-header-right">
-                    <button className="edit-ticket-btn"><FaPen /></button>
-                    <button className="delete-ticket-btn"><FaTrash /></button>
+                <div className="ticket-description-body" style={{paddingLeft:"40px"}}>
+                    <h3>Description</h3>
+                    <span>
+                        {ticket.description}
+                    </span>
                 </div>
-            </div>
-            <div className="ticket-description-body">
-                <h3>Description</h3>
-                <span>
-                    {ticket.description}
-                </span>
             </div>
             <div className="ticket-details-status">
 

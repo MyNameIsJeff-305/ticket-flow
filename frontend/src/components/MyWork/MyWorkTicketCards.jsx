@@ -44,19 +44,17 @@ export default function TicketCard({ ticket }) {
 
     return (
         <div className={`ticket-card-${ticketStatus}`} style={thisStatus ? { borderLeft: `6px solid ${thisStatus.color}`, cursor: 'pointer' } : { borderLeft: `6px solid gray`, cursor: 'pointer' }} onClick={() => handleClick()}>
-            <div className="ticket-card-left">
-                <h3 style={{ textOverflow: "ellipsis" }}>
+            <div className="ticket-card-left-m">
+                <h3 style={{ textOverflow: "ellipsis", fontSize: "16px" }}>
                     {ticket.title}
                     {
                         ticket.clientId.companyName !== '' ? (
-                            <div className='client-container-company'>
-                                <FaBuilding />
-                                <span>{ticket.clientId.companyName}</span>
+                            <div>
+                                <span style={{ alignItems: "center", fontSize: "12px" }}><FaBuilding /> {ticket.clientId.companyName}</span>
                             </div>
                         ) : (
-                            <div className='client-container-personal'>
-                                <FaUser />
-                                <span style={{ textOverflow: "ellipsis" }}>{ticket.clientId.firstName} {ticket.clientId.lastName}</span>
+                            <div>
+                                <span style={{ alignItems: "center", fontSize: "12px" }}><FaUser /> {ticket.clientId.firstName} {ticket.clientId.lastName}</span>
                             </div>
                         )
                     }
@@ -64,7 +62,7 @@ export default function TicketCard({ ticket }) {
                 {
                     typeof (ticket.createdBy) !== "number" && <span>Created by: {ticket.createdBy.firstName}</span>
                 }
-                {typeof (ticket.createdBy) === "number" && <p>{ticket.description}</p>}
+                {typeof (ticket.createdBy) === "number" && <p style={{fontSize: "14px"}}>{ticket.description}</p>}
             </div >
             <div className='ticket-card-right'>
                 <p>{formatDate(ticket.createdAt)}</p>
