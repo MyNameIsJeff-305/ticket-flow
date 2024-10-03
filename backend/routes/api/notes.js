@@ -37,7 +37,7 @@ router.post('/', requireAuth, async (req, res, next) => {
     try {
         const { note, ticketId, userId } = req.body;
 
-        console.log(req.user.id, "THIS IS USER ID");
+        // console.log(req.user.id, "THIS IS USER ID");
 
         const newNote = await Note.create({
             note: note,

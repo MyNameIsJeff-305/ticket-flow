@@ -54,18 +54,33 @@ router.get('/:id', requireAuth, async (req, res, next) => {
 });
 
 //Create a Part
-router.post('/', requireAuth, properPartValidation, async (req, res, next) => {
+router.post('/', requireAuth, async (req, res, next) => {
     try {
         const { name, description, imageUrl, ticketId } = req.body;
 
-        const part = await Part.create({
-            name,
-            description,
-            imageUrl,
-            ticketId
-        });
+        // console.log(name, description, imageUrl, ticketId, "THIS IS THE BODY");
 
-        return res.json(part);
+        let part = {};
+
+        if (!imageUrl || !imageUrl.startsWith('https')) {
+            part = {
+                name,
+                description,
+                ticketId,
+                imageUrl: 'https://archive.org/download/placeholder-image/placeholder-image.jpg'
+            }
+        } else {
+            part = {
+                name,
+                description,
+                ticketId,
+                imageUrl
+            }
+        }
+
+        const newPart = await Part.create(part);
+
+        return res.json(newPart);
     } catch (error) {
         next(error);
     }

@@ -15,12 +15,16 @@ import { getAllNotesThunk } from "../../store/notes";
 import NoteCard from "../NoteCard";
 import { getAllPartsThunk } from "../../store/parts";
 import PartCard from "../PartCard/PartCard";
+import AddPart from "../AddPart";
 
 export default function TicketDetails() {
     const dispatch = useDispatch();
 
     const [noteChecker, setNoteChecker] = useState(false);
     const [myWorkTickets, setMyWorkTickets] = useState(false);
+
+    const [partsChecker, setPartsChecker] = useState(false);
+
     const [deleteNoteChecker, setDeleteNoteChecker] = useState(false);
     const [deletePartChecker, setDeletePartChecker] = useState(false);
 
@@ -42,12 +46,17 @@ export default function TicketDetails() {
         dispatch(getAllPartsThunk());
         // setNoteChecker(false);
         setDeleteNoteChecker(false);
+        setPartsChecker(false);
         setDeletePartChecker(false);
-    }, [dispatch, ticketId, noteChecker, deleteNoteChecker, myWorkTickets, deletePartChecker]);
+    }, [dispatch, ticketId, noteChecker, deleteNoteChecker, myWorkTickets, deletePartChecker, partsChecker]);
 
     useEffect(() => {
         setNoteChecker(false)
     }, [noteChecker])
+
+    useEffect(() => {
+        setPartsChecker(false);
+    }, [partsChecker])
 
     useEffect(() => {
         setMyWorkTickets(false);
@@ -70,6 +79,10 @@ export default function TicketDetails() {
     const onModalClose = () => {
         setNoteChecker(true);
         setDeleteNoteChecker(true);
+    }
+
+    const onModalCloseParts = () => {
+        setPartsChecker(true);
         setDeletePartChecker(true);
     }
 
@@ -101,12 +114,12 @@ export default function TicketDetails() {
                             </span>
                         </div>
                     </div>
-                    <div className="ticket-details-header-right" style={{ height: "fit-content", paddingTop:"20px", paddingRight:"20px" }}>
+                    <div className="ticket-details-header-right" style={{ height: "fit-content", paddingTop: "20px", paddingRight: "20px" }}>
                         <button className="edit-ticket-btn"><FaPen /></button>
                         <button className="delete-ticket-btn"><FaTrash /></button>
                     </div>
                 </div>
-                <div className="ticket-description-body" style={{paddingLeft:"40px"}}>
+                <div className="ticket-description-body" style={{ paddingLeft: "40px" }}>
                     <h3>Description</h3>
                     <span>
                         {ticket.description}
@@ -138,7 +151,10 @@ export default function TicketDetails() {
                 <div className="tickets-details-notes">
                     <div style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "space-between", maxHeight: "40px", alignItems: "center" }}>
                         <h3>Notes</h3>
-                        <button className="edit-ticket-btn" style={{ display: "flex", listStyle: "none", padding: "8px", alignItems: "center", width: "fit-content", border: "none" }}>
+                        <button
+                            className="edit-ticket-btn"
+                            style={{ display: "flex", listStyle: "none", padding: "8px", alignItems: "center", width: "fit-content", border: "none", height: "fit-content" }}
+                        >
                             <OpenModalMenuItem
                                 itemText={<FaPlusCircle />}
                                 modalComponent={<AddNote userId={user.id} ticketId={ticket.id} setNotesChecker={setNoteChecker} />}
@@ -161,9 +177,22 @@ export default function TicketDetails() {
                 <div className="tickets-details-parts">
                     <div style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "space-between", maxHeight: "40px", alignItems: "center" }}>
                         <h3>Parts</h3>
-                        <button className="edit-ticket-btn" style={{ display: "flex", listStyle: "none", padding: "8px", alignItems: "center", width: "fit-content", border: "none" }}><FaPlusCircle /></button>
+                        {
+                            user.id !== ticket.CreatedBy?.id ? (
+                                <button
+                                    className="edit-ticket-btn"
+                                    style={{ display: "flex", listStyle: "none", padding: "8px", alignItems: "center", width: "fit-content", border: "none" }}
+                                >
+                                    <OpenModalMenuItem
+                                        itemText={<FaPlusCircle />}
+                                        modalComponent={<AddPart ticketId={ticket.id} setPartsChecker={setPartsChecker} />}
+                                        onModalClose={onModalCloseParts}
+                                    ></OpenModalMenuItem>
+                                </button>
+                            ) : (<></>)
+                        }
                     </div>
-                    <div className="parts-container">
+                    <div className="parts-container" style={{ display: "flex", flexDirection: "column", overflowX: "hidden", overflowY: "scroll", maxHeight: "350px", width: "100%", }}>
                         {
                             partsForTicket.length > 0 ? (
                                 partsForTicket?.map(part => (

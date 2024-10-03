@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
 
 import './AddNote.css';
-// import { addNoteToTicketThunk } from '../../store/tickets';
+
 import { addNoteThunk } from '../../store/notes';
 
 export default function AddNote({ userId, ticketId, setNotesChecker }) {
