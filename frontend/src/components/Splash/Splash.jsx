@@ -1,3 +1,6 @@
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
 import HeroSection from "./Herosection";
 import BenefitsSection from "./BenefitsSection";
 import FeaturesSection from "./FeaturesSection";
@@ -9,13 +12,22 @@ import './Splash.css';
 import Header from "./Header";
 
 const Splash = () => {
+  const navigate = useNavigate();
+
+  const user = useSelector((state) => state.session.user);
+
+  if (!user) {
+    navigate('/');
+  } else {
+    navigate('/dashboard');
+  }
+
   return (
     <div className="app">
       <Header />
       <HeroSection />
       <BenefitsSection />
       <FeaturesSection />
-      {/* <TestimonialsSection /> */}
       <CTASection />
       <Footer />
     </div>
