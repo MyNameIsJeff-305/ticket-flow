@@ -151,7 +151,7 @@ export default function TicketDetails() {
                 <div className="tickets-details-notes">
                     <div style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "space-between", maxHeight: "40px", alignItems: "center" }}>
                         <h3>Notes</h3>
-                        <button
+                        <div
                             className="edit-ticket-btn"
                             style={{ display: "flex", listStyle: "none", padding: "8px", alignItems: "center", width: "fit-content", border: "none", height: "fit-content" }}
                         >
@@ -160,7 +160,7 @@ export default function TicketDetails() {
                                 modalComponent={<AddNote userId={user.id} ticketId={ticket.id} setNotesChecker={setNoteChecker} />}
                                 onModalClose={onModalClose}
                             ></OpenModalMenuItem>
-                        </button>
+                        </div>
                     </div>
                     <div className="notes-container" style={{ display: "flex", flexDirection: "column", overflowX: "hidden", overflowY: "scroll", maxHeight: "350px", width: "100%", }}>
                         {
@@ -179,17 +179,19 @@ export default function TicketDetails() {
                         <h3>Parts</h3>
                         {
                             user.id !== ticket.CreatedBy?.id ? (
-                                <button
+                                <div
                                     className="edit-ticket-btn"
-                                    style={{ display: "flex", listStyle: "none", padding: "8px", alignItems: "center", width: "fit-content", border: "none" }}
+                                    // style={{ display: "flex", flexDirection:"row", listStyle: "none", padding: "8px", alignItems: "center", width: "fit-content", border: "none" }}
                                 >
                                     <OpenModalMenuItem
                                         itemText={<FaPlusCircle />}
                                         modalComponent={<AddPart ticketId={ticket.id} setPartsChecker={setPartsChecker} />}
                                         onModalClose={onModalCloseParts}
                                     ></OpenModalMenuItem>
-                                </button>
-                            ) : (<></>)
+                                </div>
+                            ) : (
+                                <span>No parts for this ticket</span>
+                            )
                         }
                     </div>
                     <div className="parts-container" style={{ display: "flex", flexDirection: "column", overflowX: "hidden", overflowY: "scroll", maxHeight: "350px", width: "100%", }}>

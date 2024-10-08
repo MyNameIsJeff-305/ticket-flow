@@ -67,6 +67,30 @@ button {
     transition: background-color 0.3s, color 0.3s;
 }
 
+.edit-ticket-btn {
+    /* background-color: var(--button-bg-color); */
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    color: var(--button-text-color);
+    padding: 0.6rem 0.6rem;
+    /* Add padding to make the buttons bigger */
+    border-radius: 50px;
+    /* Slightly round the corners */
+    font-size: 1rem;
+    /* Increase font size for better readability */
+    cursor: pointer;
+    list-style: none;
+    transition: ease-in 0.2s, color 0.2s;
+}
+
+.edit-ticket-btn:hover {
+    transform: scale(1.1);
+}
+
 .notes-container button {
     border: none;
 }
