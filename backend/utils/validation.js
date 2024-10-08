@@ -61,7 +61,7 @@ const properPartValidation = async (req, res, next) => {
 
         const ticket = await Ticket.findByPk(part.ticketId);
 
-        if (ticket.createdBy !== id) {
+        if (ticket.createdBy !== parseInt(id)) {
             const err = new Error('Unauthorized');
             err.status = 403;
             err.title = 'Forbidden';
