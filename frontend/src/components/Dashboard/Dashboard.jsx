@@ -16,10 +16,18 @@ export default function Dashboard() {
     const status = useSelector(state => state.status.allStatus);
     const user = useSelector(state => state.session.user);
 
+    // console.log(user, "THIS IS USER");
+
     useEffect(() => {
         dispatch(getMyTicketsThunk());
         dispatch(getAllStatusThunk());
     }, [dispatch]);
+
+    if (!user) return (
+        <section className="dashboard">
+            <span className="loader"></span>
+        </section>
+    )
 
     return (
         <main className="dashboard">

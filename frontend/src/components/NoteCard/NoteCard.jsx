@@ -48,20 +48,20 @@ export default function NoteCard({ note, setDeleteNoteChecker }) {
                 {
                     currentUser.id === note.userId ? (
                         <>
-                            <button className="edit-ticket-btn" style={{ listStyle: "none", display: "flex", flexDirection: "row", gap: "5px" }}>
+                            <div className="edit-ticket-btn" style={{ listStyle: "none", display: "flex", flexDirection: "row", gap: "5px" }}>
                                 <OpenModalMenuItem
                                     itemText={<FaPen />}
                                     modalComponent={<EditNote setNoteChecker={setNoteChecker} note={note} />}
                                     onModalClose={onModalClose}
                                 ></OpenModalMenuItem>
 
-                            </button>
-                            <button className="edit-ticket-btn" style={{ listStyle: "none", display: "flex", flexDirection: "row", gap: "5px" }}>
+                            </div>
+                            <div className="edit-ticket-btn" style={{ listStyle: "none", display: "flex", flexDirection: "row", gap: "5px" }}>
                                 <OpenModalMenuItem
                                     itemText={<FaTrash />}
                                     modalComponent={<ConfirmDeleteNote setDeleteNoteChecker={setDeleteNoteChecker} note={note} />}
                                 ></OpenModalMenuItem>
-                            </button>
+                            </div>
                         </>
                     ) : <></>
                 }

@@ -34,7 +34,7 @@ export default function Tickets() {
     const lastPage = Math.ceil(totalTickets / TICKETS_PER_PAGE);
 
     if (!allTickets || !totalTickets) return (
-        <section>
+        <section className='tickets-tab'>
             <span className="loader"></span>
         </section>
     )

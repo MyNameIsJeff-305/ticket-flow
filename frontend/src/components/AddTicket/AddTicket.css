@@ -1,7 +1,7 @@
 .add-ticket-form {
     display: flex;
     flex-direction: column;
-    /* background-color: #fff; */
+    background-color: var(--seasalt);
     border-radius: 10px;
     padding: 2rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -10,7 +10,7 @@
 }
 
 .add-ticket-form h1 {
-    color: #f9f9f9;
+    color: var(--text-color);
     margin-bottom: 1rem;
     text-align: center;
     font-size: 1.5rem;
@@ -31,7 +31,7 @@
 
 .add-ticket-form-input label {
     font-weight: bold;
-    color: #f9f9f9;
+    color: var(--text-color);
 }
 
 .add-ticket-form-input input,
@@ -39,7 +39,7 @@
 .add-ticket-form-input select {
     padding: 0.75rem;
     font-family: Arial, Helvetica, sans-serif;
-    border: 1px solid #ddd;
+    border: 1px solid var(--box-bg-border);
     border-radius: 5px;
     font-size: 1rem;
     width: 100%;
@@ -50,7 +50,7 @@
 .add-ticket-form-input input:focus,
 .add-ticket-form-input textarea:focus,
 .add-ticket-form-input select:focus {
-    border-color: #5e53a3;
+    border-color: var(--ultra-violet);
     outline: none;
 }
 
@@ -60,19 +60,19 @@
 }
 
 .add-ticket-form-input select {
-    background-color: #f9f9f9;
+    background-color: var(--seasalt);
 }
 
 .add-ticket-form-error {
-    color: red;
+    color: var(--razzmatazz);
     font-size: 0.9rem;
 }
 
 button[type='submit'] {
     padding: 0.75rem 2rem;
     font-size: 1.2rem;
-    background-color: #5e53a3;
-    color: white;
+    background-color: var(--ultra-violet);
+    color: var(--button-text-color);
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -82,10 +82,10 @@ button[type='submit'] {
 }
 
 button[type='submit']:hover {
-    background-color: #ed1876;
+    background-color: var(--razzmatazz);
 }
 
 button[type='submit']:disabled {
-    background-color: #ccc;
+    background-color: var(--login-bg);
     cursor: not-allowed;
 }

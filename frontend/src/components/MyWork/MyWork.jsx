@@ -9,7 +9,7 @@ export default function MyWork({ myTickets, status }) {
     const completed = myTickets?.filter(ticket => ticket.statusId === status?.filter(status => status.name === 'Closed')[0]?.id);
 
     if (!myTickets || !status) return (
-        <section>
+        <section className='my-work-tab'>
             <span className="loader"></span>
         </section>
     )

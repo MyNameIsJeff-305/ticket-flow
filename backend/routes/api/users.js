@@ -71,8 +71,11 @@ router.put(
         const profileImageUrl = req.file ?
             await singleFileUpload({ file: req.file, public: true }) :
             null;
+
+        console.log(email, password, userName, firstName, lastName, profileImageUrl, "HEYYYYYYYYYY");
+
         const hashedPassword = bcrypt.hashSync(password);
-        await user.update({ email, userName, hashedPassword, firstName, lastName, profileImageUrl });
+        await user.update({ email: email || user.email, userName: userName || user.userName, hashedPassword: hashedPassword || user.hashedPassword, firstName: firstName || user.firstName, lastName: lastName || user.lastName, profilePicUrl: profileImageUrl || user.profilePicUrl });
 
         const safeUser = {
             id: user.id,
@@ -85,9 +88,7 @@ router.put(
 
         await setTokenCookie(res, safeUser);
 
-        return res.json({
-            user: safeUser
-        });
+        return res.json(safeUser);
     }
 );
 

@@ -1,41 +1,20 @@
+/* Main Container */
 .my-account-tab {
     display: flex;
     flex-direction: column;
     justify-content: start;
     align-items: start;
     width: 100%;
-    /* height: 62.8vh; */
     border-radius: 10px;
     padding: 0 20px;
-    /* margin-top: 20px; */
-    /* background-color: var(--background-color); */
-    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
-    /* Subtle shadow */
     transition: background-color 0.3s ease, color 0.3s ease;
     color: var(--text-color);
 }
 
+/* Header Styling */
 .my-account-tab h1 {
     font-size: 1.5rem;
-    /* margin-bottom: 20px; */
     text-align: center;
-    /* color: #333; */
-}
-
-.account-details-container {
-    display: flex;
-    flex-direction: column;
-    flex-direction: row;
-    flex-wrap: wrap;
-    /* gap: 20px; */
-    justify-content: center;
-    align-items: flex-start;
-}
-
-.account-details-container-main {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
 }
 
 .my-account-header {
@@ -43,7 +22,6 @@
     width: 100%;
     flex-direction: row;
     align-items: center;
-    align-content: space-between;
     justify-content: space-between;
     gap: 10px;
 }
@@ -53,13 +31,39 @@
     background-color: var(--button-bg-color);
     color: var(--button-text-color);
     border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+.my-account-header button:hover {
+    background-color: var(--button-hover-bg-color);
+    color: var(--button-hover-text-color);
+}
+
+/* Account Details Container */
+.account-details-container-main {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.account-details-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+    width: 100%;
+}
+
+/* Account Picture */
 .account-picture-container {
     display: flex;
     flex-direction: column;
-    justify-content: start;
-    align-items: start;
     align-items: center;
     width: 100%;
 }
@@ -72,15 +76,16 @@
     border: 3px solid #ccc;
 }
 
+/* Details Sections */
 .details-1,
 .details-2 {
     display: flex;
     flex-direction: column;
     width: 100%;
     max-width: 300px;
-    /* margin-bottom: 10px; */
 }
 
+/* Label Styling */
 .details-1 span,
 .details-2 span {
     font-weight: bold;
@@ -88,17 +93,53 @@
     color: var(--text-color);
 }
 
-input[type="text"] {
+/* Input Styling for Text and Password */
+input[type="text"],
+input[type="password"] {
     padding: 10px;
     font-size: 1rem;
     border: 1px solid var(--text-color);
     border-radius: 5px;
     width: 100%;
+    background-color: var(--background-color);
+    transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 
-input[type="text"]:focus {
+input[type="text"]:focus,
+input[type="password"]:focus {
     outline: none;
-    border-color: var(--text-color);
-    border: 1px solid #ccc;
-    background-color: var(--semitransparent-bg);
+    border-color: #ccc;
+    background-color: #fff;
+}
+
+/* Error Message Styling */
+.error {
+    font-size: 0.9rem;
+    color: var(--error-color);
+    margin-top: 5px;
+}
+
+/* File Input Styling */
+input[type="file"] {
+    margin-top: 10px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .my-account-tab {
+        padding: 10px;
+    }
+
+    .account-details-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .details-1,
+    .details-2 {
+        width: 100%;
+        max-width: none;
+    }
 }

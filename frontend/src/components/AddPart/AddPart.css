@@ -1,0 +1,77 @@
+/* Form Container */
+.add-part-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    padding: 20px;
+    background-color: var(--box-bg);
+    color: var(--text-color);
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Form Heading */
+.add-part-form h3 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: var(--text-color);
+}
+
+/* Label for Inputs */
+.add-part-form label {
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+/* Input Fields */
+.add-part-form input,
+.add-part-form textarea {
+    padding: 10px;
+    font-size: 1rem;
+    width: 95%;
+    color: var(--text-color);
+    background-color: var(--semitransparent-bg);
+    border: 1px solid var(--ultra-violet);
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+    resize: vertical;
+}
+
+.add-part-form input:focus,
+.add-part-form textarea:focus {
+    outline: none;
+    border-color: var(--button-bg-color);
+}
+
+/* Error Message Styling */
+.add-part-form-error {
+    font-size: 0.9rem;
+    color: var(--razzmatazz);
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+
+/* Save and Cancel Buttons */
+.add-part-form button {
+    padding: 10px 15px;
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.add-part-form button:disabled {
+    background-color: var(--seasalt);
+    color: var(--smoky-black);
+    cursor: not-allowed;
+}
+
+.add-part-form button:hover:not(:disabled) {
+    background-color: var(--ultra-violet);
+    color: var(--button-text-color);
+}

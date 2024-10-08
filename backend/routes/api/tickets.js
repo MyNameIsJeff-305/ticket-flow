@@ -179,13 +179,14 @@ router.put('/:id', requireAuth, properUserValidation, async (req, res, next) => 
             return res.status(404).json({ message: 'Ticket not found' });
         }
 
-        const { title, description, checkIn, checkOut, statusId } = req.body;
+        const { title, description, checkIn, checkOut, statusId, clientId } = req.body;
 
         ticket.title = title || ticket.title;
         ticket.description = description || ticket.description;
         ticket.checkIn = checkIn || ticket.checkIn;
         ticket.checkOut = checkOut || ticket.checkOut;
         ticket.statusId = statusId || ticket.statusId;
+        ticket.clientId = clientId || ticket.clientId;
 
         await ticket.save();
 

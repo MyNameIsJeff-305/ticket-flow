@@ -80,6 +80,7 @@
 .login-form input:focus {
     outline: none;
     border-color: var(--button-bg-color);
+    color: var(--background-color);
     /* Focus color */
 }
 

@@ -151,7 +151,7 @@ export default function LoginSignup() {
                                 }
                                 <label>
                                     Password
-                                    <input type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                                    <input style={{width:"95%"}} type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                                 </label>
                                 {
                                     errors.password && (
@@ -216,7 +216,7 @@ export default function LoginSignup() {
                                 </label>
                                 <label>
                                     Create Password
-                                    <input type="password" name="createPassword" value={createPassword} onChange={(e) => setCreatePassword(e.target.value)} />
+                                    <input type="password" name="createPassword" style={{width:"95%"}} value={createPassword} onChange={(e) => setCreatePassword(e.target.value)} />
                                 </label>
                                 {
                                     errors.createPassword && (
@@ -225,7 +225,7 @@ export default function LoginSignup() {
                                 }
                                 <label>
                                     Confirm Password
-                                    <input type="password" name="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+                                    <input type="password" name="confirmPassword" style={{width:"95%"}} value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
                                 </label>
                                 {
                                     errors.confirmPassword && (

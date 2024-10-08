@@ -87,41 +87,39 @@ export const signup = (user) => async (dispatch) => {
 };
 
 export const updateUserThunk = (userId, form) => async (dispatch) => {
-    const { img_url } = form
+    const { img_url, firstName, lastName, password } = form;
     try {
-
-        console.log(img_url, "THIS IS IMG_URL");
-
         const formData = new FormData();
-
-        formData.append('userId', userId)
+        formData.append('userId', userId);
         formData.append("image", img_url);
+        formData.append("firstName", firstName);
+        formData.append("lastName", lastName);
+        formData.append("password", password);
 
-        const option = {
+        const options = {
             method: "PUT",
-            headers: { 'Content-Type': 'multipart/form-data' },
             body: formData
-        }
+        };
 
-        const response = await csrfFetch(`/api/users/${userId}`, option);
+        const response = await csrfFetch(`/api/users/${parseInt(userId)}`, options);
 
         if (response.ok) {
             const user = await response.json();
             dispatch(editUser(user));
-
         } else if (response.status < 500) {
             const data = await response.json();
             if (data.errors) {
-                return data
+                return data;
             } else {
-                throw new Error('An error occured. Please try again.')
+                throw new Error('An error occurred. Please try again.');
             }
         }
-        return response;
+        return response.user;
     } catch (e) {
-        return e
+        console.error("Error in updateUserThunk:", e);
+        return e;
     }
-}
+};
 
 export const getAllUsersThunk = () => async (dispatch) => {
     const response = await csrfFetch('/api/users');
