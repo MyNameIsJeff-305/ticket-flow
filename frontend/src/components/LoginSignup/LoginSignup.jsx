@@ -127,7 +127,7 @@ export default function LoginSignup() {
                 </div>
                 <div className="hero-image">
                     {/* Add a relevant image or animation here */}
-                    <img src='/public/assets/computer.webp' alt="ticketFlow Interface" />
+                    <img src='assets/computer.webp' alt="ticketFlow Interface" />
                 </div>
                 <aside className="left-text">
                     <p className='left-text-description' style={{ fontSize: "12px", textAlign: "left" }}>
