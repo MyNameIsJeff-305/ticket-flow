@@ -1,21 +1,23 @@
-#!/usr/bin/env mode
-//backend/bin/www
+#!/usr/bin/env node
+import dotenv from 'dotenv';
+dotenv.config();
 
-//Import Environment Variables
-require('dotenv').config();
+import config from '../config'
 
-const { port } = require('../config');
+const { port } = config;
 
-const app = require('../app');
-const db = require('../db/models');
+import app from '../app'
 
-//Check the Database connection before starting the app
+
+import db from '../db/models';
+
+// // Check the database connection before starting the app
 db.sequelize
     .authenticate()
     .then(() => {
         console.log('Database connection success! Sequelize is ready to use...');
 
-        //Start Listening for Connections
+        //     // Start listening for connections
         app.listen(port, () => console.log(`Listening on port ${port}...`));
     })
     .catch((err) => {
