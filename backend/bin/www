@@ -1,15 +1,12 @@
 #!/usr/bin/env node
-import dotenv from 'dotenv';
+const dotenv = require('dotenv');
 dotenv.config();
 
-import config from '../config'
-
+const config = require('../config');
 const { port } = config;
 
-import app from '../app'
-
-
-import db from '../db/models';
+const app = require('../app');
+const db = require('../db/models');
 
 // // Check the database connection before starting the app
 db.sequelize
