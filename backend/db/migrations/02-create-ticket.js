@@ -30,10 +30,13 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'Clients',
+          model: {
+            tableName: 'Clients',
+            schema: options.schema
+          },
           key: 'id'
         },
-        onDelete: "CASCADE"
+        onDelete: 'CASCADE'
       },
       description: {
         type: Sequelize.STRING(256),
