@@ -1,0 +1,53 @@
+/* Confirm Delete Note Container */
+.confirm-delete-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: var(--box-bg);
+    /* Adapt based on theme */
+    color: var(--text-color);
+    /* Adapt text color based on theme */
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow */
+    max-width: 400px;
+    margin: auto;
+    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Heading */
+.confirm-delete-container h3 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: var(--text-color);
+    /* Adapt text color based on theme */
+}
+
+/* Buttons Container */
+.confirm-delete-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Delete and Cancel Buttons */
+.confirm-delete-buttons button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: var(--button-bg-color);
+    /* Button background color */
+    color: var(--button-text-color);
+    /* Button text color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.confirm-delete-buttons button:hover {
+    background-color: var(--ultra-violet);
+    /* Hover effect for buttons */
+}

@@ -19,6 +19,7 @@ export default function Tickets() {
     const totalTickets = useSelector(state => state.tickets.totalTicketsAmount);
 
     const [page, setPage] = useState(1);
+    const [deleteTicketChecker, setDeleteTicketChecker] = useState(false);
     const [ticketsChecker, setTicketsChecker] = useState(false);
 
     const TICKETS_PER_PAGE = 8;
@@ -28,8 +29,10 @@ export default function Tickets() {
         dispatch(getTotalTicketsAmountThunk());
         dispatch(getAllTicketsThunk(page, TICKETS_PER_PAGE));
         dispatch(getMyTicketsThunk());
+        setDeleteTicketChecker(false); // Reset after re-fetching the tickets
         setTicketsChecker(false); // Reset after re-fetching the tickets
-    }, [dispatch, page, ticketsChecker]);
+
+    }, [dispatch, page, ticketsChecker, deleteTicketChecker]);
 
     const lastPage = Math.ceil(totalTickets / TICKETS_PER_PAGE);
 
@@ -40,6 +43,7 @@ export default function Tickets() {
     )
 
     const onModalClose = () => {
+        setDeleteTicketChecker(true); // Trigger re-fetch when modal is closed after deleting a ticket
         setTicketsChecker(true); // Trigger re-fetch when modal is closed after adding a new ticket
     }
 
@@ -61,7 +65,7 @@ export default function Tickets() {
                     {
                         <div>
                             {allTickets.map(ticket => (
-                                <TicketCard key={ticket.id} ticket={ticket} />
+                                <TicketCard key={ticket.id} ticket={ticket} setDeleteTicketChecker={setDeleteTicketChecker} />
                             ))}
                         </div>
                     }

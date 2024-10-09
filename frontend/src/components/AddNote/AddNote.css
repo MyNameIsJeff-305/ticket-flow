@@ -9,7 +9,7 @@
     padding: 20px;
     background-color: var(--box-bg);
     /* Adapt based on theme */
-    color: var(--text-color);
+    color: var(--box-bg-border);
     /* Adapt text color based on theme */
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -36,9 +36,9 @@
     padding: 10px;
     font-size: 1rem;
     width: 95%;
-    color: var(--text-color);
+    color: var(--smoky-black);
     /* Input text color based on theme */
-    background-color: var(--semitransparent-bg);
+    background-color: var(--seasalt);
     /* Light input background */
     border: 1px solid var(--ultra-violet);
     /* Border color based on theme */

@@ -75,7 +75,7 @@ button {
     align-items: center;
     justify-content: center;
     border: none;
-    color: var(--button-text-color);
+    color: var(--box-bg-border);
     padding: 0.6rem 0.6rem;
     /* Add padding to make the buttons bigger */
     border-radius: 50px;

@@ -54,6 +54,8 @@ export default function MyAccount({ user }) {
             .then(() => {
                 setIsEditing(false);
             })
+        } else {
+            setIsEditing(false);
         }
     };
 

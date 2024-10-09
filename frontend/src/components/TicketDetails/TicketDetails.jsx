@@ -4,10 +4,9 @@ import { useSelector, useDispatch } from "react-redux";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import AddNote from "../AddNote/AddNote";
 
-import { FaBuilding, FaUser, FaPen, FaTrash, FaPlusCircle } from "react-icons/fa";
+import { FaBuilding, FaUser, FaPen, FaPlusCircle } from "react-icons/fa";
 import { FaTicketAlt } from "react-icons/fa";
 
-import './TicketDetails.css';
 import { useEffect, useState } from "react";
 import { getTicketThunk, updateTicketThunk, getMyTicketsThunk } from "../../store/tickets";
 import { getAllStatusThunk } from "../../store/status";
@@ -17,6 +16,8 @@ import { getAllPartsThunk } from "../../store/parts";
 import PartCard from "../PartCard/PartCard";
 import AddPart from "../AddPart";
 import EditTicket from "../EditTicket/EditTicket";
+
+import './TicketDetails.css';
 
 export default function TicketDetails() {
     const dispatch = useDispatch();
@@ -128,14 +129,6 @@ export default function TicketDetails() {
                                     <div className="edit-ticket-btn">
                                         <OpenModalMenuItem
                                             itemText={<FaPen />}
-                                            modalComponent={<EditTicket setTicketChecker={setTicketChecker} />}
-                                            onModalClose={onModalCloseTickets}
-                                        >
-                                        </OpenModalMenuItem>
-                                    </div>
-                                    <div className="edit-ticket-btn">
-                                        <OpenModalMenuItem
-                                            itemText={<FaTrash />}
                                             modalComponent={<EditTicket setTicketChecker={setTicketChecker} />}
                                             onModalClose={onModalCloseTickets}
                                         >

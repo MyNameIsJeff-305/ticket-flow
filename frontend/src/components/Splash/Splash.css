@@ -19,10 +19,12 @@
     --seasalt: #f9f9f9;
     --login-bg: #d0d0d0;
     --semitransparent-bg: #ffffff6d;
+    --special-btn: var(--tiffany-blue);
 }
 
 /* Dark Theme Variables */
 body.dark-mode {
+    --special-btn: var(--razzmatazz);
     --special-button-color: var(--ultra-violet);
     --background-gradient: linear-gradient(90deg, var(--ultra-violet), var(--razzmatazz), var(--tiffany-blue));
     --background-color: #333;
