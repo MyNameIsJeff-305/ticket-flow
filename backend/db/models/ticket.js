@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
         Ticket.belongsTo(models.Client, {
           foreignKey: 'clientId',
           onDelete: 'CASCADE'
-        }, onDelete = 'CASCADE')
+        })
       Ticket.belongsTo(models.Status, {
         foreignKey: 'statusId',
         onDelete: 'CASCADE'

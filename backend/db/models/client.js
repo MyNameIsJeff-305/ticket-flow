@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
       Client.hasMany(models.Ticket, {
         foreignKey: 'clientId',
         onDelete: 'CASCADE'
-      }, onDelete = 'CASCADE')
+      })
     }
   }
   Client.init({
