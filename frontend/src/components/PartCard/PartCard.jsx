@@ -3,18 +3,18 @@ import { FaPen, FaTrash } from "react-icons/fa";
 import { useSelector } from "react-redux"
 
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
-import { useState } from "react";
+// import { useState } from "react";
 
 export default function PartCard({ part, setDeletePartChecker, ticketAuthor }) {
 
     // const dispatch = useDispatch();
 
-    const [partChecker, setPartChecker] = useState(false);
+    // const [partChecker, setPartChecker] = useState(false);
 
     const currentUser = useSelector(state => state.session.user);
 
     const onModalClose = () => {
-        setPartChecker(true);
+        // setPartChecker(true);
         setDeletePartChecker(true);
     }
 

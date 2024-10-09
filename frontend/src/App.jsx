@@ -4,7 +4,7 @@ import * as sessionActions from "./store/session";
 
 import './index.css'
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import LoginSignup from "./components/LoginSignup/LoginSignup";
 import Splash from "./components/Splash/Splash";
@@ -17,7 +17,7 @@ import TicketDetails from "./components/TicketDetails";
 
 function Layout() {
   const dispatch = useDispatch();
-  const [isLoaded, setIsLoaded] = useState(false);
+  // const [isLoaded, setIsLoaded] = useState(false);
 
   const sessionUser = useSelector(state => state.session.user);
   const myTickets = useSelector(state => state.tickets.myTickets);
@@ -25,7 +25,7 @@ function Layout() {
 
   useEffect(() => {
     dispatch(sessionActions.restoreUser())
-      .then(() => setIsLoaded(true));
+      // .then(() => setIsLoaded(true));
   }, [dispatch]);
 
   return (

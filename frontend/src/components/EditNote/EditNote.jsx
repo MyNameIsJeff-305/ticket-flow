@@ -17,7 +17,7 @@ export default function EditNote({ note, setNoteChecker }) {
         setUpdatedNote(note.note);
         setErrors({});
         setIsButtonDisabled(true);
-    }, []);
+    }, [note.note]);
 
     useEffect(() => {
         let newErrors = {};
