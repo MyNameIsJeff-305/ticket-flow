@@ -1,35 +1,46 @@
+/* Styles for the main dashboard container */
 .dashboard {
     display: flex;
-    flex-direction: column;
-    align-content: space-between;
-    justify-content: space-between;
-    width: 64.3%;
-    /* max-width: 1200px; */
-    /* margin: 20px auto; */
-    /* padding: 20px 30px; */
-    background-color: var(--background-color);
-    color: var(--text-color);
-    border-radius: 12px;
-    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
-    transition: background-color 0.3s ease, color 0.3s ease;
+    flex-direction: row;
 }
 
-.left-section-d {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    justify-content: start;
-    /* width: 100vh; */
-    /* height: 100%; */
-    /* background-color: var(--background-color); */
-}
-
+/* Left and right sections - Equal width and height */
+.left-section-d, 
 .right-section-d {
+    flex: 1; /* Ensures both sections take up equal width */
     display: flex;
-    flex-direction: column;
-    align-items: start;
-    justify-content: start;
-    /* width: 100vh; */
-    /* height: 100vh; */
-    /* background-color: #f5f5f5; */
+    flex-direction: column; /* Stack content vertically */
+    align-items: stretch; /* Ensure child elements stretch to fill the container */
+    justify-content: flex-start; /* Align content to the top */
+    background-color: var(--section-background-color); /* Adjust this to fit your theme */
+    border-radius: 10px;
+    padding: 20px;
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+}
+
+/* Ensure both sections have the same height as their parent */
+.dashboard > .left-section-d, 
+.dashboard > .right-section-d {
+    height: 100%; /* Takes up full height of the parent container */
+}
+
+/* Responsive Styles */
+
+/* For tablets */
+@media (min-width: 768px) {
+    .dashboard {
+        flex-direction: row;
+    }
+}
+
+/* For mobile */
+@media (max-width: 767px) {
+    .dashboard {
+        flex-direction: column;
+        gap: 10px; /* Reduce gap for smaller screens */
+    }
+    .left-section-d, 
+    .right-section-d {
+        width: 100%;
+    }
 }

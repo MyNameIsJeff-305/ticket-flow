@@ -3,6 +3,7 @@
     --background-gradient: linear-gradient(90deg, var(--razzmatazz), var(--jonquil), var(--tiffany-blue));
     --background-color: #f9f9f9;
     --text-color: #1d1a05;
+    --special-button-color: none;
     --button-bg-color: var(--ultra-violet);
     --button-text-color: #f9f9f9;
     --header-bg-color: #f8f9fa;
@@ -13,14 +14,18 @@
     --jonquil: #fecb19;
     --smoky-black: #1d1a05;
     --box-bg: #f1f1f1;
+    --box-bg-border: #555;
     --ticket-card-bg: #ececec;
     --seasalt: #f9f9f9;
     --login-bg: #d0d0d0;
     --semitransparent-bg: #ffffff6d;
+    --special-btn: var(--tiffany-blue);
 }
 
 /* Dark Theme Variables */
 body.dark-mode {
+    --special-btn: var(--razzmatazz);
+    --special-button-color: var(--ultra-violet);
     --background-gradient: linear-gradient(90deg, var(--ultra-violet), var(--razzmatazz), var(--tiffany-blue));
     --background-color: #333;
     --text-color: #f9f9f9;
@@ -28,6 +33,7 @@ body.dark-mode {
     --ticket-card-bg: #666;
     --button-text-color: #f9f9f9;
     --box-bg: #555;
+    --box-bg-border: #f1f1f1;
     --header-bg-color: #333;
     --footer-bg-color: #333;
     --login-bg: #4a4a4a;
@@ -132,7 +138,7 @@ button:hover {
 
 .cta-button:hover {
     opacity: 0.9;
-    background-color: #66C6B8;
+    background-color: var(--header-bg-color);
     border: none;
 }
 

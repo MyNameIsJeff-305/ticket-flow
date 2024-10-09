@@ -1,0 +1,18 @@
+.open-modal-menu-item {
+    cursor: pointer;
+    padding: 10px 10px;
+    color: var(--text-color);
+    /* background-color: var(--button-bg-color); */
+    border-radius: 100%;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    list-style-type: none;
+}
+
+.open-modal-menu-item:hover {
+    /* background-color: var(--ultra-violet); */
+    /* color: var(--button-text-color); */
+}
+
+.open-modal-menu-item:active {
+    /* background-color: var(--razzmatazz); */
+}

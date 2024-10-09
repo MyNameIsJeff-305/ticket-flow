@@ -3,32 +3,33 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 30%;
-    /* max-width: 1200px; */
-    /* margin: 20px auto; */
-    padding: 20px 30px;
-    background-color: var(--background-color);  /* Adapt based on theme */
-    color: var(--text-color);  /* Adapt text color based on theme */
+    width: 100%;
+    padding-left: 20px;
+    /* background-color: var(--background-color); */
+    color: var(--text-color);
     border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Subtle shadow */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s ease, color 0.3s ease;
-    overflow-y: scroll;
+    overflow-y: auto;
     max-height: 1024px;
 }
 
 /* Section Titles */
 .my-work-tab h3 {
     font-size: 1.5rem;
-    color: var(--text-color);  /* Adapt text color based on theme */
+    color: var(--text-color);
+    /* Adapt text color based on theme */
     margin-bottom: 15px;
-    border-bottom: 2px solid var(--semitransparent-bg);  /* Themed underlining */
+    border-bottom: 2px solid var(--semitransparent-bg);
+    /* Themed underlining */
     padding-bottom: 8px;
-    /* width: 100%; */
 }
 
+/* Main Title */
 .my-work-tab h1 {
     font-size: 2rem;
-    color: var(--text-color);  /* Adapt text color based on theme */
+    color: var(--text-color);
+    /* Adapt text color based on theme */
     margin-bottom: 15px;
 }
 
@@ -38,11 +39,14 @@
     flex-direction: column;
     gap: 15px;
     overflow-y: auto;
-    max-height: 400px;  /* Limit the height for scrollable container */
+    max-height: 400px;
+    /* Limit the height for scrollable container */
     width: 100%;
+    /* Ensure the container takes full width */
     padding-right: 10px;
     scrollbar-width: thin;
-    scrollbar-color: var(--button-bg-color) var(--box-bg); /* Themed scrollbar */
+    scrollbar-color: var(--button-bg-color) var(--box-bg);
+    /* Themed scrollbar */
 }
 
 /* Scrollbar for webkit-based browsers */
@@ -51,30 +55,40 @@
 }
 
 .ticket-list::-webkit-scrollbar-thumb {
-    background-color: var(--button-bg-color); /* Adapt based on theme */
+    background-color: var(--button-bg-color);
+    /* Adapt based on theme */
     border-radius: 10px;
 }
 
 /* Ticket Card Container */
 .ticket-card-container {
     padding: 15px;
-    background-color: var(--seasalt);  /* Light background for ticket cards */
+    background-color: var(--seasalt);
+    /* Light background for ticket cards */
     border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);  /* Light shadow */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    /* Light shadow */
     transition: background-color 0.3s ease;
+    width: 100%;
+    /* Make the ticket card take full width of its parent */
 }
 
+/* Hover state for ticket cards */
 .ticket-card-container:hover {
-    background-color: var(--button-bg-color);  /* Slightly darker background on hover */
-    color: var(--button-text-color);  /* Switch to button text color on hover */
+    background-color: var(--button-bg-color);
+    /* Slightly darker background on hover */
+    color: var(--button-text-color);
+    /* Switch to button text color on hover */
 }
 
 /* Loader Styling */
 .loader {
     width: 50px;
     height: 50px;
-    border: 5px solid var(--seasalt);  /* Outer part adapts to theme */
-    border-top: 5px solid var(--button-bg-color);  /* Themed rotating part */
+    border: 5px solid var(--seasalt);
+    /* Outer part adapts to theme */
+    border-top: 5px solid var(--button-bg-color);
+    /* Themed rotating part */
     border-radius: 50%;
     animation: spin 1s linear infinite;
     margin: auto;
@@ -85,6 +99,7 @@
     0% {
         transform: rotate(0deg);
     }
+
     100% {
         transform: rotate(360deg);
     }
@@ -93,7 +108,8 @@
 /* No Tickets Message */
 .no-tickets {
     font-style: italic;
-    color: var(--text-color);  /* Adapt text color based on theme */
+    color: var(--text-color);
+    /* Adapt text color based on theme */
     margin-left: 10px;
     font-size: 1rem;
     text-align: center;

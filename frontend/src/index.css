@@ -1,28 +1,104 @@
+/* General layout styles */
 .app-div-container {
-    width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    min-height: 100vh;
+    background-color: var(--background-color);
+    color: var(--text-color);
 }
 
+/* Header styles */
+.header {
+    background-color: var(--header-bg-color);
+    color: var(--header-text-color);
+    padding: 20px 20px 0 20px;
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+    z-index: 100;
+}
+
+/* Main content area */
 .main-zone {
     display: flex;
     flex-direction: row;
-    width: 100%;
-    justify-content: center;
-    gap: 10px;
-    /* gap: 70px; */
-    /* padding: 0 20px; */
-    /* padding-right: 5px; */
+    flex-grow: 1;
+    padding: 0 20px 20px 20px;
+    background-color: var(--main-bg-color);
 }
 
+/* Left section for MyWork */
 .left-section-mm {
+    width: 30%;
+    /* Set the left section to take up 25% of the parent width */
+    background-color: var(--section-bg-color);
+    /* padding: 20px; */
+    border-radius: 12px;
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
-    width: 100%;
+    box-sizing: border-box;
 }
 
+/* Right section for Outlet */
 .right-section-mm {
+    width: 70%;
+    /* Set the right section to take up 75% of the parent width */
+    /* padding: 20px; */
+    border-radius: 12px;
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+/* Ensure child components of the sections take full width */
+.left-section-mm>*,
+.right-section-mm>* {
     width: 100%;
+    /* Force all child components to take the full width of their parent */
+}
+
+/* Footer styles */
+footer {
+    background-color: var(--footer-bg-color);
+    color: var(--footer-text-color);
+    padding: 20px;
+    text-align: center;
+    /* box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1); */
+}
+
+/* Media queries for responsiveness */
+
+/* For tablets */
+@media (min-width: 768px) {
+    .main-zone {
+        gap: 30px;
+    }
+
+    .left-section-mm {
+        width: 25%;
+        /* Keep the left section at 25% on tablets */
+    }
+
+    .right-section-mm {
+        width: 75%;
+        /* Keep the right section at 75% on tablets */
+    }
+}
+
+/* For smaller screens (mobile) */
+@media (max-width: 767px) {
+    .main-zone {
+        flex-direction: column;
+        /* Stack sections vertically on mobile */
+        padding: 10px;
+        gap: 10px;
+    }
+
+    .left-section-mm,
+    .right-section-mm {
+        width: 100%;
+        /* Ensure both sections take full width on mobile */
+        padding: 10px;
+        border-radius: 8px;
+    }
 }

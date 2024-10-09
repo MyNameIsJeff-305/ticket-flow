@@ -4,9 +4,9 @@ import { useSelector, useDispatch } from "react-redux";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import AddNote from "../AddNote/AddNote";
 
-import { FaBuilding, FaUser, FaPen, FaTrash, FaPlusCircle } from "react-icons/fa";
+import { FaBuilding, FaUser, FaPen, FaPlusCircle } from "react-icons/fa";
+import { FaTicketAlt } from "react-icons/fa";
 
-import './TicketDetails.css';
 import { useEffect, useState } from "react";
 import { getTicketThunk, updateTicketThunk, getMyTicketsThunk } from "../../store/tickets";
 import { getAllStatusThunk } from "../../store/status";
@@ -14,12 +14,20 @@ import { getAllNotesThunk } from "../../store/notes";
 import NoteCard from "../NoteCard";
 import { getAllPartsThunk } from "../../store/parts";
 import PartCard from "../PartCard/PartCard";
+import AddPart from "../AddPart";
+import EditTicket from "../EditTicket/EditTicket";
+
+import './TicketDetails.css';
 
 export default function TicketDetails() {
     const dispatch = useDispatch();
 
     const [noteChecker, setNoteChecker] = useState(false);
     const [myWorkTickets, setMyWorkTickets] = useState(false);
+
+    const [partsChecker, setPartsChecker] = useState(false);
+    const [ticketChecker, setTicketChecker] = useState(false);
+
     const [deleteNoteChecker, setDeleteNoteChecker] = useState(false);
     const [deletePartChecker, setDeletePartChecker] = useState(false);
 
@@ -39,20 +47,26 @@ export default function TicketDetails() {
         dispatch(getAllNotesThunk());
         dispatch(getMyTicketsThunk());
         dispatch(getAllPartsThunk());
+        setTicketChecker(false);
         // setNoteChecker(false);
         setDeleteNoteChecker(false);
+        setPartsChecker(false);
         setDeletePartChecker(false);
-    }, [dispatch, ticketId, noteChecker, deleteNoteChecker, myWorkTickets, deletePartChecker]);
+    }, [dispatch, ticketId, noteChecker, deleteNoteChecker, myWorkTickets, deletePartChecker, partsChecker, ticketChecker]);
 
     useEffect(() => {
         setNoteChecker(false)
     }, [noteChecker])
 
     useEffect(() => {
+        setPartsChecker(false);
+    }, [partsChecker])
+
+    useEffect(() => {
         setMyWorkTickets(false);
     }, [myWorkTickets])
 
-    if (!ticket || !status || !user || !notes || !parts) return <span className="loader"></span>;
+    if (!ticket || !status || !user || !notes || !parts) return <div className="ticket-details-tab"><span className="loader"></span></div>;
 
     // if(!notes) return <span className="loader"></span>;
 
@@ -69,53 +83,68 @@ export default function TicketDetails() {
     const onModalClose = () => {
         setNoteChecker(true);
         setDeleteNoteChecker(true);
+    }
+
+    const onModalCloseTickets = () => {
+        setTicketChecker(true);
+    }
+
+    const onModalCloseParts = () => {
+        setPartsChecker(true);
         setDeletePartChecker(true);
     }
 
-    console.log(partsForTicket, "PARTS FOR TICKET");
+    // console.log(partsForTicket, "PARTS FOR TICKET");
 
     return (
         <section className="ticket-details-tab">
             <div className="ticket-details-header">
-                <div className="ticket-details-header-left">
-                    <h1>{ticket.title}</h1>
-                    <span>
+                <div style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "space-between", alignContent: "center" }}>
+                    <div className="ticket-details-header-left">
+                        <h1>{ticket.title}</h1>
+                        <div style={{ display: "flex", flexDirection: "row", gap: "10px" }}>
+                            <span style={{ gap: "5px", display: "flex", flexDirection: "row" }}><FaTicketAlt /> {ticket.CreatedBy?.firstName} {ticket.CreatedBy?.lastName}</span>
+                            <div style={{ gap: "5px", display: "flex", flexDirection: "row" }}> | </div>
+                            <span>
+                                {
+                                    ticket.ClientInfo?.companyName !== "" ? (
+                                        <div style={{ gap: "5px", display: "flex", flexDirection: "row" }}>
+                                            <FaBuilding />
+                                            <span>{ticket.ClientInfo?.companyName}</span>
+                                        </div>
+                                    ) : (
+                                        <div style={{ gap: "5px", display: "flex", flexDirection: "row" }}>
+                                            <FaUser />
+                                            <span style={{ textOverflow: "ellipsis" }}>{ticket.ClientInfo?.firstName} {ticket.ClientInfo?.lastName}</span>
+                                        </div>
+                                    )
+                                }
+                            </span>
+                        </div>
+                    </div>
+                    <div className="ticket-details-header-right" style={{ height: "fit-content", paddingTop: "20px", paddingRight: "20px" }}>
                         {
-                            ticket?.CreatedBy?.companyName === '' ? (
-                                ticket.CreatedBy.firstName + ' ' + ticket.CreatedBy.lastName
-                            ) : (
-                                ticket.CreatedBy?.companyName
+                            user.id === ticket.CreatedBy?.id && (
+                                <>
+                                    <div className="edit-ticket-btn">
+                                        <OpenModalMenuItem
+                                            itemText={<FaPen />}
+                                            modalComponent={<EditTicket setTicketChecker={setTicketChecker} />}
+                                            onModalClose={onModalCloseTickets}
+                                        >
+                                        </OpenModalMenuItem>
+                                    </div>
+                                </>
                             )
                         }
-                    </span>
-                    <div className="ticket-description-body" id="body-row">
-                        <span style={{ color: "#f9f9f9" }}>
-                            {
-                                ticket.ClientInfo?.companyName !== "" ? (
-                                    <div className='client-container-company' style={{ color: "#f9f9f9" }}>
-                                        <FaBuilding />
-                                        <span style={{ color: "#f9f9f9" }}>{ticket.ClientInfo?.companyName}</span>
-                                    </div>
-                                ) : (
-                                    <div className='client-container-personal' style={{ color: "#f9f9f9" }}>
-                                        <FaUser />
-                                        <span style={{ textOverflow: "ellipsis", color: "f9f9f9" }}>{ticket.ClientInfo?.firstName} {ticket.ClientInfo?.lastName}</span>
-                                    </div>
-                                )
-                            }
-                        </span>
                     </div>
                 </div>
-                <div className="ticket-details-header-right">
-                    <button className="edit-ticket-btn"><FaPen /></button>
-                    <button className="delete-ticket-btn"><FaTrash /></button>
+                <div className="ticket-description-body" style={{ paddingLeft: "40px" }}>
+                    <h3>Description</h3>
+                    <span>
+                        {ticket.description}
+                    </span>
                 </div>
-            </div>
-            <div className="ticket-description-body">
-                <h3>Description</h3>
-                <span>
-                    {ticket.description}
-                </span>
             </div>
             <div className="ticket-details-status">
 
@@ -142,13 +171,16 @@ export default function TicketDetails() {
                 <div className="tickets-details-notes">
                     <div style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "space-between", maxHeight: "40px", alignItems: "center" }}>
                         <h3>Notes</h3>
-                        <button className="edit-ticket-btn" style={{ display: "flex", listStyle: "none", padding: "8px", alignItems: "center", width: "fit-content", border: "none" }}>
+                        <div
+                            className="edit-ticket-btn"
+                            style={{ display: "flex", listStyle: "none", padding: "8px", alignItems: "center", width: "fit-content", border: "none", height: "fit-content" }}
+                        >
                             <OpenModalMenuItem
                                 itemText={<FaPlusCircle />}
                                 modalComponent={<AddNote userId={user.id} ticketId={ticket.id} setNotesChecker={setNoteChecker} />}
                                 onModalClose={onModalClose}
                             ></OpenModalMenuItem>
-                        </button>
+                        </div>
                     </div>
                     <div className="notes-container" style={{ display: "flex", flexDirection: "column", overflowX: "hidden", overflowY: "scroll", maxHeight: "350px", width: "100%", }}>
                         {
@@ -165,13 +197,28 @@ export default function TicketDetails() {
                 <div className="tickets-details-parts">
                     <div style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "space-between", maxHeight: "40px", alignItems: "center" }}>
                         <h3>Parts</h3>
-                        <button className="edit-ticket-btn" style={{ display: "flex", listStyle: "none", padding: "8px", alignItems: "center", width: "fit-content", border: "none" }}><FaPlusCircle /></button>
+                        {
+                            user.id === ticket.CreatedBy?.id ? (
+                                <div
+                                    className="edit-ticket-btn"
+                                // style={{ display: "flex", flexDirection:"row", listStyle: "none", padding: "8px", alignItems: "center", width: "fit-content", border: "none" }}
+                                >
+                                    <OpenModalMenuItem
+                                        itemText={<FaPlusCircle />}
+                                        modalComponent={<AddPart ticketId={ticket.id} setPartsChecker={setPartsChecker} />}
+                                        onModalClose={onModalCloseParts}
+                                    ></OpenModalMenuItem>
+                                </div>
+                            ) : (
+                                <></>
+                            )
+                        }
                     </div>
-                    <div className="parts-container">
+                    <div className="parts-container" style={{ display: "flex", flexDirection: "column", overflowX: "hidden", overflowY: "scroll", maxHeight: "350px", width: "100%", }}>
                         {
                             partsForTicket.length > 0 ? (
                                 partsForTicket?.map(part => (
-                                    <PartCard key={part.id} part={part} setDeletePartChecker={setDeletePartChecker} />
+                                    <PartCard key={part.id} part={part} setDeletePartChecker={setDeletePartChecker} ticketAuthor={ticket.CreatedBy?.id} />
                                 ))
                             ) : (
                                 <span>No parts for this ticket</span>

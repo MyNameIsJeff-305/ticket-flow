@@ -37,6 +37,9 @@ export const getAllStatusThunk = () => async (dispatch) => {
 
     const data = await res.json();
     // console.log(data, "THIS IS DATA");
+    if(data.message){
+        return dispatch(getAllStatus([]));
+    }
     dispatch(getAllStatus(data));
 }
 
@@ -79,7 +82,10 @@ export const deleteStatusThunk = (id) => async (dispatch) => {
 }
 
 //REDUCER
-const initialState = {};
+const initialState = {
+    allStatus: [],
+    thisStatus: {}
+};
 
 const statusReducer = (state = initialState, action) => {
     switch (action.type) {

@@ -54,11 +54,11 @@ function ProfileButton() {
       </div>
       <div className="container-right">
         {
-          user.profilePicUrl ?
+          user.profilePicUrl || user.user.profilePicUrl ?
             <div onClick={toggleMenu}>
               <img src={user.profilePicUrl} onClick={toggleMenu} alt="Profile Picture" />
             </div> :
-            <div className="fallback-profile" onClick={toggleMenu}>{`${user.firstName[0]}${user.lastName[0]}`}</div>
+            <div className="fallback-profile" onClick={toggleMenu}>{`${user.firstName[0] || user.user.firstName[0]}${user.lastName[0] || user.user.lastName[0]}`}</div>
         }
       </div>
     </div>

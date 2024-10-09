@@ -1,103 +1,62 @@
+/* Main statistics container */
 .statistics-tab {
     display: flex;
+    flex: 1;
     flex-direction: column;
-    align-items: start;
-    width: 92vh;
+    align-items: flex-start;
+    width: 100%;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
     transition: background-color 0.3s ease, color 0.3s ease;
     color: var(--text-color);
 }
 
+/* Heading for statistics */
 .statistics-tab h1 {
     font-size: 1.5rem;
     margin: 0;
     padding: 0;
 }
 
+/* Container for all tickets insights */
 .tickets-insights-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: 100%;
     margin-top: 20px;
     gap: 10px;
     justify-content: space-between;
-    align-items: start;
+    align-items: flex-start;
 }
 
-.new-tickets-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: start;
-    background-color: var(--box-bg);
-    border-radius: 8px;
-    padding: 16px;
-    margin: 12px 0;
-    width: 100%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    color: var(--text-color);
-    gap: 21px;
-}
-
-.new-tickets-container h2 {
-    font-size: 1rem;
-    font-weight: bold;
-    margin: 0;
-    padding: 0;
-}
-
-.new-tickets-container span {
-    font-size: 2rem;
-    font-weight: bold;
-}
-
-.in-progress-tickets-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: start;
-    background-color: var(--box-bg);
-    border-radius: 8px;
-    padding: 16px;
-    margin: 12px 0;
-    width: 100%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    color: var(--text-color);
-    gap: 21px;
-}
-
-.in-progress-tickets-container h2 {
-    font-size: 1rem;
-    font-weight: bold;
-    margin: 0;
-    padding: 0;
-}
-
-.in-progress-tickets-container span {
-    font-size: 2rem;
-    font-weight: bold;
-}
-
+/* Common styling for each ticket status container (New, In Progress, Done) */
+.new-tickets-container,
+.in-progress-tickets-container,
 .done-tickets-container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: start;
+    align-items: flex-start;
     background-color: var(--box-bg);
     border-radius: 8px;
     padding: 16px;
     margin: 12px 0;
     width: 100%;
+    /* Full width of the parent */
+    max-width: 100%;
+    /* Prevents container from exceeding parent's width */
+    box-sizing: border-box;
+    /* Ensures padding is included in width */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     color: var(--text-color);
     gap: 21px;
 }
 
+/* Heading inside each ticket container */
+.new-tickets-container h2,
+.in-progress-tickets-container h2,
 .done-tickets-container h2 {
     font-size: 1rem;
     font-weight: bold;
@@ -105,6 +64,9 @@
     padding: 0;
 }
 
+/* Ticket count inside each ticket container */
+.new-tickets-container span,
+.in-progress-tickets-container span,
 .done-tickets-container span {
     font-size: 2rem;
     font-weight: bold;

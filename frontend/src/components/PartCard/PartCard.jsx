@@ -5,7 +5,7 @@ import { useSelector } from "react-redux"
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import { useState } from "react";
 
-export default function PartCard({ part, setDeletePartChecker }) {
+export default function PartCard({ part, setDeletePartChecker, ticketAuthor }) {
 
     // const dispatch = useDispatch();
 
@@ -29,22 +29,22 @@ export default function PartCard({ part, setDeletePartChecker }) {
             </div>
             <div className="note-buttons">
                 {
-                    currentUser.id === part.Ticket?.createdBy ? (
+                    currentUser.id === ticketAuthor ? (
                         <>
-                            <button className="edit-ticket-btn" style={{ listStyle: "none", display: "flex", flexDirection: "row", gap: "5px" }}>
+                            <div className="edit-ticket-btn" style={{ listStyle: "none", display: "flex", flexDirection: "row"}}>
                                 <OpenModalMenuItem
                                     itemText={<FaPen />}
                                     modalComponent={<></>}
                                     onModalClose={onModalClose}
                                 ></OpenModalMenuItem>
 
-                            </button>
-                            <button className="edit-ticket-btn" style={{ listStyle: "none", display: "flex", flexDirection: "row", gap: "5px" }}>
+                            </div>
+                            <div className="edit-ticket-btn" style={{ listStyle: "none", display: "flex", flexDirection: "row"}}>
                                 <OpenModalMenuItem
                                     itemText={<FaTrash />}
                                     modalComponent={<></>}
                                 ></OpenModalMenuItem>
-                            </button>
+                            </div>
                         </>
                     ) : <></>
                 }
