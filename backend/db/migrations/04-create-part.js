@@ -1,5 +1,5 @@
 let options = {};
-options.tableName = 'Parts';
+// options.tableName = 'Parts';
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // define your schema in options object
 }
@@ -46,9 +46,6 @@ module.exports = {
   },
   async down(queryInterface, Sequelize) {
     options.tableName = 'Parts';
-    if (process.env.NODE_ENV === 'production') {
-      options.schema = process.env.SCHEMA;
-    }
     return queryInterface.dropTable(options);
   }
 };

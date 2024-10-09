@@ -54,9 +54,6 @@ module.exports = {
   },
   async down(queryInterface, Sequelize) {
     options.tableName = 'Clients';
-    if (process.env.NODE_ENV === 'production') {
-      options.schema = process.env.SCHEMA;
-    }
     return queryInterface.dropTable(options);
   }
 };
