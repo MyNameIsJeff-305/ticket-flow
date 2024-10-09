@@ -123,11 +123,11 @@ export default function LoginSignup() {
         <main className='login-main'>
             <section className='left-section'>
                 <div className="logo">
-                    <img style={{ cursor: "pointer" }} src="../../../dist/assets/logo.png" alt="logo" onClick={() => navigate('/')} />
+                    <img style={{ cursor: "pointer" }} src="/assets/logo.png" alt="logo" onClick={() => navigate('/')} />
                 </div>
                 <div className="hero-image">
                     {/* Add a relevant image or animation here */}
-                    <img src='assets/computer.webp' alt="ticketFlow Interface" />
+                    <img src='/assets/computer.webp' alt="ticketFlow Interface" />
                 </div>
                 <aside className="left-text">
                     <p className='left-text-description' style={{ fontSize: "12px", textAlign: "left" }}>
