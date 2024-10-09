@@ -12,7 +12,7 @@ const HeroSection = () => {
             </div>
             <div className="hero-image">
                 {/* Add a relevant image or animation here */}
-                <img src='/public/assets/computer.webp' alt="ticketFlow Interface" />
+                <img src='/assets/computer.webp' alt="ticketFlow Interface" />
             </div>
         </section>
     );
