@@ -1,0 +1,9 @@
+.icon-theme-switch {
+    display: flex;
+    align-items: center;
+    transition: transform 0.2s ease;
+}
+
+.icon-theme-switch:hover {
+    transform: scale(1.1);
+}

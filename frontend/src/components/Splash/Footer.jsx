@@ -3,11 +3,12 @@ import ThemeSwitch from "../ThemeSwitch/ThemeSwitch";
 
 const Footer = () => {
     return (
-        <footer className="footer">
-            <div className="footer-links" style={{width:"100%"}}>
-                <a href="https://github.com/MyNameIsJeff-305"><FaGithub /> Contact Me</a>
+        <footer className="footer" style={{ display: "flex", flexDirection: "column", justifyItems: "start" }}>
+            <span>Contact Me</span>
+            <div className="footer-links" style={{ width: "100%", display: "flex", flexDirection: "row" }}>
+                <a href="https://github.com/MyNameIsJeff-305"><FaGithub /></a>
             </div>
-            <ThemeSwitch />
+            {/* <ThemeSwitch /> */}
         </footer>
     );
 };

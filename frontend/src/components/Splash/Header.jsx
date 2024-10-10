@@ -1,6 +1,7 @@
 import {useNavigate} from 'react-router-dom';
 
-import ThemeSwitch from '../ThemeSwitch/ThemeSwitch';
+// import ThemeSwitch from '../ThemeSwitch/ThemeSwitch';
+import IconThemeSwitch from '../IconThemeSwitch';
 
 const Header = () => {
 
@@ -14,7 +15,7 @@ const Header = () => {
             </div>
             
             <div className="cta">
-                <ThemeSwitch />
+                <IconThemeSwitch />
             </div>
         </header>
     );

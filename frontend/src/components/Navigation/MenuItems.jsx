@@ -18,10 +18,6 @@ export default function MenuItems() {
                 <FaTicketAlt />
                 Tickets
             </NavLink>
-            <NavLink to="/parts" className="menu-item">
-                <FaTools />
-                Parts
-            </NavLink>
             <NavLink to="/clients" className="menu-item">
                 <FaUsers />
                 Clients

@@ -138,7 +138,7 @@ button:hover {
 
 .cta-button:hover {
     opacity: 0.9;
-    background-color: var(--header-bg-color);
+    background-color: var(--button-bg-color);
     border: none;
 }
 
@@ -278,6 +278,7 @@ button:hover {
     justify-content: space-between;
     padding: 20px;
     background-color: var(--footer-bg-color);
+    gap: 10px;
     /* text-align: center; */
     color: var(--text-color);
 }
@@ -285,17 +286,20 @@ button:hover {
 .footer-links {
     display: flex;
     flex-direction: row;
-    justify-content: start;
+    justify-content: center;
+    gap: 5px;
 }
 
 .footer-links a {
     color: var(--text-color);
     margin: 0 10px;
     text-decoration: none;
+    transition: transform 0.2s ease;
 }
 
 .footer-links a:hover {
     text-decoration: underline;
+    transform: scale(1.1);
 }
 
 @-webkit-keyframes AnimationName {

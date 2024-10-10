@@ -146,7 +146,7 @@ export default function TicketDetails() {
                     </span>
                 </div>
             </div>
-            <div className="ticket-details-status">
+            <div className="ticket-details-status" style={{paddingLeft: "20px"}}>
 
                 {
                     user.id === ticket.CreatedBy?.id ? (
