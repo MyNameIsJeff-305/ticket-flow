@@ -2,19 +2,37 @@ const express = require('express');
 const { requireAuth } = require('../../utils/auth');
 
 const { Client, Ticket } = require('../../db/models');
+const { singleFileUpload, singleMulterUpload } = require('../../awsS3');
 
 const router = express.Router();
 
 //Get All CLients
 router.get('/', requireAuth, async (req, res, next) => {
     try {
-        const clients = await Client.findAll();
+        const page = parseInt(req.query.page) || null;
+        const size = parseInt(req.query.size) || null;
+
+        const where = {};
+
+        const clients = await Client.findAll({
+            where,
+            limit: size,
+            offset: (page - 1) * size
+        });
 
         return res.json(clients);
-    }
-    catch (error) {
+
+    } catch (error) {
         next(error);
     }
+    // try {
+    //     const clients = await Client.findAll();
+
+    //     return res.json(clients);
+    // }
+    // catch (error) {
+    //     next(error);
+    // }
 });
 
 //Get a Client by clientId
@@ -30,43 +48,53 @@ router.get('/:id', requireAuth, async (req, res, next) => {
 });
 
 //Add a Client
-router.post('/', requireAuth, async (req, res, next) => {
+router.post('/', requireAuth, singleMulterUpload('image'), async (req, res, next) => {
     try {
-        const { firstName, lastName, companyName, email, phone } = req.body;
+        const { firstName, lastName, companyName, email, phoneNumber } = req.body;
+
+        // Check if a file was uploaded, otherwise use null
+        const profilePicUrl = req.file
+            ? await singleFileUpload({ file: req.file, public: true })
+            : null;
 
         const client = await Client.create({
             firstName,
             lastName,
             companyName,
             email,
-            phone
+            phoneNumber, // ensure you use the same name as in the form data
+            profilePicUrl
         });
 
         return res.json(client);
-    }
-    catch (error) {
+    } catch (error) {
         next(error);
     }
-})
+});
 
 //Edit a Client
-router.put('/:id', requireAuth, async (req, res, next) => {
+router.put('/:id', requireAuth, singleMulterUpload('image'), async (req, res, next) => {
     try {
         const client = await Client.findByPk(req.params.id);
 
         const { firstName, lastName, companyName, email, phone } = req.body;
+
+        // Check if a file was uploaded, otherwise use the current profilePicUrl
+        const profilePicUrl = req.file
+            ? await singleFileUpload({ file: req.file, public: true })
+            : client.profilePicUrl; // Use current image if no new file uploaded
 
         client.firstName = firstName || client.firstName;
         client.lastName = lastName || client.lastName;
         client.companyName = companyName || client.companyName;
         client.email = email || client.email;
         client.phone = phone || client.phone;
+        client.profilePicUrl = profilePicUrl;
 
         await client.save();
 
         return res.json(client);
-    }
-    catch (error) {
+    } catch (error) {
         next(error);
     }
 });
