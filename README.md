@@ -2,6 +2,8 @@
 
 ticketFlow is an intuitive and powerful ticket management system designed specifically for IT businesses. With streamlined workflows, real-time tracking, and comprehensive reporting features, ticketFlow ensures that IT support teams can efficiently manage tasks, resolve issues faster, and provide exceptional service. From ticket creation to resolution, ticketFlow keeps your IT operations organized, helping you stay on top of all support requests and improve customer satisfaction.
 
+<a href="https://ticket-flow-rrfx.onrender.com/">Live Demo</a>
+
 ## Database Schema Design
 
 ![db-diagram]
