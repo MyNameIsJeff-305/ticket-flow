@@ -14,6 +14,7 @@ import Footer from "./components/Footer/Footer";
 import Tickets from "./components/Tickets";
 import MyWork from "./components/MyWork";
 import TicketDetails from "./components/TicketDetails";
+import Clients from "./components/Clients/Clients";
 
 function Layout() {
   const dispatch = useDispatch();
@@ -79,6 +80,10 @@ const router = createBrowserRouter([
       {
         path: '/tickets/:ticketId',
         element: <TicketDetails />
+      },
+      {
+        path: '/clients',
+        element: <Clients />
       }
     ]
   }

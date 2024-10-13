@@ -2,6 +2,7 @@ import { csrfFetch } from './csrf';
 
 //Constants
 const GET_ALL_CLIENTS = 'clients/getAllClients';
+const GET_TOTAL_CLIENTS_AMOUNT = 'clients/getTotalClientsAmount';
 const GET_ONE_CLIENT = 'clients/getOneClient';
 const ADD_CLIENT = 'clients/addClient';
 const EDIT_CLIENT = 'clients/editClient';
@@ -11,6 +12,11 @@ const DELETE_CLIENT = 'clients/deleteClient';
 const getAllClients = (clients) => ({
     type: GET_ALL_CLIENTS,
     payload: clients
+});
+
+const getTotalClientsAmount = (amount) => ({
+    type: GET_TOTAL_CLIENTS_AMOUNT,
+    payload: amount
 });
 
 const getOneClient = (client) => ({
@@ -34,10 +40,16 @@ const deleteClient = (client) => ({
 });
 
 //Thunks
-export const getAllClientsThunk = () => async (dispatch) => {
-    const res = await csrfFetch('/api/clients');
+export const getAllClientsThunk = (page, size) => async (dispatch) => {
+    const res = await csrfFetch(`/api/clients?page=${page}&size=${size}`);
     const clients = await res.json();
     dispatch(getAllClients(clients));
+};
+
+export const getTotalClientsAmountThunk = () => async (dispatch) => {
+    const res = await csrfFetch('/api/clients/');
+    const amount = await res.json();
+    dispatch(getTotalClientsAmount(amount.length));
 };
 
 export const getOneClientThunk = (clientId) => async (dispatch) => {
@@ -47,25 +59,40 @@ export const getOneClientThunk = (clientId) => async (dispatch) => {
 };
 
 export const addClientThunk = (client) => async (dispatch) => {
+    const formData = new FormData();
+
+    console.log(client, "THIS IS CLIENT");
+
+    // Append the client information to the form data
+    if (client.firstName) formData.append('firstName', client.firstName); else formData.append('firstName', '');
+    if (client.lastName) formData.append('lastName', client.lastName); else formData.append('lastName', '');
+    if (client.companyName) formData.append('companyName', client.companyName); else formData.append('companyName', '');
+    if (client.email) formData.append('email', client.email);
+    if (client.phoneNumber) formData.append('phoneNumber', client.phoneNumber);
+
+    // Append the profile picture (file) if it exists
+    if (client.profilePicUrl) {
+        formData.append('image', client.profilePicUrl); // 'image' is the field name used in multer
+    }
+
     const res = await csrfFetch('/api/clients', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            // No need to set 'Content-Type' to 'multipart/form-data', it will be automatically handled
         },
-        body: JSON.stringify(client)
+        body: formData
     });
+
     const newClient = await res.json();
     dispatch(addClient(newClient));
 };
 
-export const editClientThunk = (client) => async (dispatch) => {
-    const res = await csrfFetch(`/api/clients/${client.id}`, {
+export const editClientThunk = (clientId, formData) => async (dispatch) => {
+    const res = await csrfFetch(`/api/clients/${clientId}`, {
         method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(client)
+        body: formData, // FormData automatically sets the correct headers
     });
+
     const updatedClient = await res.json();
     dispatch(editClient(updatedClient));
 };
@@ -81,13 +108,17 @@ export const deleteClientThunk = (clientId) => async (dispatch) => {
 //Reducer
 const initialState = {
     allClients: [],
-    client: {}
+    client: {},
+    totalClientsAmount: 0
 };
 
 const clientsReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_ALL_CLIENTS: {
             return { ...state, allClients: action.payload };
+        }
+        case GET_TOTAL_CLIENTS_AMOUNT: {
+            return { ...state, totalClientsAmount: action.payload };
         }
         case GET_ONE_CLIENT: {
             return { ...state, client: action.payload };

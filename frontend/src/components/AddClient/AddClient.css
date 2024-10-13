@@ -1,0 +1,91 @@
+.add-client-container {
+    background-color: var(--box-bg);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 0 auto;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--text-color);
+}
+
+.add-part-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--text-color);
+    text-align: center;
+}
+
+.add-client-input-container label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 5px;
+    color: var(--text-color);
+}
+
+.add-client-input-container input[type="text"],
+.add-client-input-container input[type="file"] {
+    width: 94%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid var(--box-bg-border);
+    border-radius: 4px;
+    font-size: 14px;
+    outline: none;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: border-color 0.3s ease;
+}
+
+.add-client-input-container input[type="text"]:focus,
+.add-client-input-container input[type="file"]:focus {
+    border-color: var(--tiffany-blue);
+    /* Using a prominent color for focus */
+}
+
+.client-type-radio {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.client-type-radio label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.client-type-radio input {
+    margin-right: 5px;
+}
+
+.add-client-container button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-client-container button[type="submit"]:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.add-client-container button[type="submit"]:hover:enabled {
+    opacity: 0.9;
+    background-color: var(--button-bg-color);
+}
+
+.add-client-container span {
+    font-size: 12px;
+    color: var(--razzmatazz);
+    /* Error messages using a highlighted color */
+}
