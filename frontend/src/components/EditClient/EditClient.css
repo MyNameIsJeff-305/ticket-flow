@@ -1,0 +1,101 @@
+.edit-client-container {
+    background-color: var(--box-bg);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 0 auto;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--text-color);
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--text-color);
+    text-align: center;
+}
+
+.edit-client-form label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 5px;
+    color: var(--text-color);
+}
+
+.edit-client-input {
+    margin-bottom: 15px;
+}
+
+.edit-client-form input[type="text"],
+.edit-client-form input[type="file"] {
+    width: 94%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid var(--box-bg-border);
+    border-radius: 4px;
+    font-size: 14px;
+    outline: none;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: border-color 0.3s ease;
+}
+
+.edit-client-form input[type="text"]:focus,
+.edit-client-form input[type="file"]:focus {
+    border-color: var(--tiffany-blue); /* Using a prominent color for focus */
+}
+
+.edit-client-errors {
+    color: var(--razzmatazz); /* Error messages using a highlighted color */
+    font-size: 12px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+
+.edit-client-buttons {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+button[type="submit"]:hover:enabled {
+    opacity: 0.9;
+    background-color: var(--button-bg-color);
+}
+
+button {
+    width: 48%;
+    padding: 10px;
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    opacity: 0.9;
+}

@@ -144,8 +144,7 @@ export default function EditClient({ client, setEditClientChecker }) {
                     </div>
                 </div>
                 <div className="edit-client-buttons">
-                    <button type="submit" disabled={isButtonDisabled}>Save</button>
-                    <button onClick={closeModal}>Cancel</button>
+                    <button type="submit" disabled={isButtonDisabled} style={{width:"100%", padding: "10px"}}>Save</button>
                 </div>
             </form>
         </div>
