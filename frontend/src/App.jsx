@@ -10,7 +10,7 @@ import LoginSignup from "./components/LoginSignup/LoginSignup";
 import Splash from "./components/Splash/Splash";
 import Navigation from "./components/Navigation/Navigation";
 import Dashboard from "./components/Dashboard/Dashboard";
-import Footer from "./components/Footer/Footer";
+import Footer from "./components/Splash/Footer";
 import Tickets from "./components/Tickets";
 import MyWork from "./components/MyWork";
 import TicketDetails from "./components/TicketDetails";

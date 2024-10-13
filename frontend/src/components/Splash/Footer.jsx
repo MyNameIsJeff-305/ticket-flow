@@ -1,14 +1,23 @@
-import { FaGithub } from "react-icons/fa";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 import ThemeSwitch from "../ThemeSwitch/ThemeSwitch";
+import IconThemeSwitch from "../IconThemeSwitch";
+
+import "./Footer.css";
 
 const Footer = () => {
     return (
-        <footer className="footer" style={{ display: "flex", flexDirection: "column", justifyItems: "start" }}>
-            <span>Contact Me</span>
-            <div className="footer-links" style={{ width: "100%", display: "flex", flexDirection: "row" }}>
-                <a href="https://github.com/MyNameIsJeff-305"><FaGithub /></a>
+        <footer className="footer">
+            <div className="contact">
+                <span>Contact Me</span>
+                <div className="footer-links" style={{ width: "100%", display: "flex", flexDirection: "row" }}>
+                    <a href="https://github.com/MyNameIsJeff-305"><FaGithub /></a>
+                    <a href="https://linkedin.com/in/mm4ever"><FaLinkedin /></a>
+                </div>
             </div>
-            {/* <ThemeSwitch /> */}
+            <div className="theme">
+                <IconThemeSwitch />
+            </div>
+
         </footer>
     );
 };
