@@ -12,7 +12,7 @@ export default function EditClient({ client, setEditClientChecker }) {
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [profilePicUrl, setProfilePicUrl] = useState("");
-    const [loading, setLoading] = useState(true);
+    // const [loading, setLoading] = useState(true);
     const [errors, setErrors] = useState({});
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
     const [selectedFile, setSelectedFile] = useState(null);
@@ -26,7 +26,7 @@ export default function EditClient({ client, setEditClientChecker }) {
             try {
                 await dispatch(getAllClientsThunk());
             } finally {
-                setLoading(false);
+                // setLoading(false);
                 setCompanyName(client.companyName || "");
                 setFirstName(client.firstName || "");
                 setLastName(client.lastName || "");
@@ -43,7 +43,7 @@ export default function EditClient({ client, setEditClientChecker }) {
             setLastName(client.lastName || "");
             setEmail(client.email || "");
             setProfilePicUrl(client.profilePicUrl || "");
-            setLoading(false);
+            // setLoading(false);
         }
     }, [clientId, client, dispatch]);
 
@@ -77,6 +77,8 @@ export default function EditClient({ client, setEditClientChecker }) {
         // If a file is selected, append it to the FormData
         if (selectedFile) {
             formData.append("image", selectedFile); // 'image' is the key in multer
+        } else {
+            formData.append("profilePicUrl", profilePicUrl);
         }
 
         return dispatch(editClientThunk(client.id, formData))
@@ -99,7 +101,9 @@ export default function EditClient({ client, setEditClientChecker }) {
                                 value={companyName}
                                 onChange={(e) => setCompanyName(e.target.value)}
                             />
+                            {errors.name && <div className="edit-client-errors">{errors.name}</div>}
                         </div>
+                        
                     ) : (
                         <>
                             <div className="edit-client-input">
@@ -118,6 +122,7 @@ export default function EditClient({ client, setEditClientChecker }) {
                                     onChange={(e) => setLastName(e.target.value)}
                                 />
                             </div>
+                            {errors.name && <div className="edit-client-errors">{errors.name}</div>}
                         </>
                     )}
                     <div className="edit-client-input">
