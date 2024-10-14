@@ -1,4 +1,5 @@
 # Ticket Flow
+
 <a href="https://ticket-flow-rrfx.onrender.com/">Live Demo</a>
 
 ![splash-1]
@@ -109,9 +110,6 @@ Use the TicketDetails component to view detailed ticket information, including e
 
 ## Client Login for Ticket Status Tracking:
 Implement a second authentication for Clients in order for them to track the status of the tickets.
-
-## Roles and Permissions:
-Implement Roles and Permission Levels for handling feature access.
 
 ### AI-powered Suggestions: 
 Implement AI to suggest solutions or best practices for handling tickets.
