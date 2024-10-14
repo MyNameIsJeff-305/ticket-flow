@@ -42,6 +42,7 @@ export default function NoteCard({ note, setDeleteNoteChecker }) {
                 <img src={user.profilePicUrl} alt="profile-pic" />
             </div>
             <div className="note-card-content">
+                <h4>{user.firstName} {user.lastName}</h4>
                 <span style={{ textOverflow: "ellipsis" }}>{note.note}</span>
             </div>
             <div className="note-buttons">
