@@ -31,8 +31,6 @@ export default function AddNote({ userId, ticketId, setNotesChecker }) {
         setIsButtonDisabled(Object.keys(newErrors).length > 0);
     }, [note])
 
-    // console.log(note, "THIS IS NOTE");
-
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrors({});

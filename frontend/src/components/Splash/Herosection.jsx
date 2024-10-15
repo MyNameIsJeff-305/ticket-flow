@@ -11,7 +11,6 @@ const HeroSection = () => {
                 <button className="cta-button" onClick={() => navigate('/login')}>Get Started for Free</button>
             </div>
             <div className="hero-image">
-                {/* Add a relevant image or animation here */}
                 <img src='/assets/computer.webp' alt="ticketFlow Interface" />
             </div>
         </section>

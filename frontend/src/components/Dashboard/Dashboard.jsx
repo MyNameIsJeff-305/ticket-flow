@@ -16,8 +16,6 @@ export default function Dashboard() {
     const status = useSelector(state => state.status.allStatus);
     const user = useSelector(state => state.session.user);
 
-    // console.log(user, "THIS IS USER");
-
     useEffect(() => {
         dispatch(getMyTicketsThunk());
         dispatch(getAllStatusThunk());

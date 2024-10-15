@@ -21,7 +21,6 @@ export default function AddTicket({ setTicketsChecker }) {
 
     const clients = useSelector(state => state.clients.allClients);
 
-    //Reset Status when reopening the modal
     useEffect(() => {
         setTitle('');
         setDescription('');
@@ -55,8 +54,8 @@ export default function AddTicket({ setTicketsChecker }) {
 
         return dispatch(addTicketThunk({ title, description, clientId }))
             .then(() => {
-                setTicketsChecker(true); // Inform parent component to re-fetch tickets
-                closeModal(); // Close the modal after successful submission
+                setTicketsChecker(true);
+                closeModal();
             })
             .catch(async (res) => {
                 const data = await res.json();

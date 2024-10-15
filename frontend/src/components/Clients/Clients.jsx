@@ -29,14 +29,13 @@ export default function Clients() {
     const CLIENTS_PER_PAGE = 8;
 
     useEffect(() => {
-        // Fetch clients when the page changes or when a new client is added
         dispatch(getTotalClientsAmountThunk());
         dispatch(getAllClientsThunk(page, CLIENTS_PER_PAGE));
         dispatch(getMyTicketsThunk());
         dispatch(getAllStatusThunk());
-        setDeleteClientChecker(false); // Reset after re-fetching the clients
-        setClientsAddChecker(false); // Reset after re-fetching the clients
-        setEditClientChecker(false); // Reset after re-fetching the clients
+        setDeleteClientChecker(false);
+        setClientsAddChecker(false);
+        setEditClientChecker(false);
     }, [dispatch, page, clientsAddChecker, deleteClientChecker, editClientChecker]);
 
     console.log(totalClients, "totalClients");
@@ -51,9 +50,9 @@ export default function Clients() {
         );
 
     const onModalClose = () => {
-        setDeleteClientChecker(true); // Trigger re-fetch when modal is closed after deleting a client
-        setClientsAddChecker(true); // Trigger re-fetch when modal is closed after adding a new client
-        setEditClientChecker(true); // Trigger re-fetch when modal is closed after editing a client
+        setDeleteClientChecker(true);
+        setClientsAddChecker(true);
+        setEditClientChecker(true);
     }
 
     return (
@@ -66,7 +65,7 @@ export default function Clients() {
                         <OpenModalMenuItem
                             itemText={"Add Client"}
                             modalComponent={<AddClient setClientsChecker={setClientsAddChecker} />}
-                            onModalClose={onModalClose} // Call onModalClose after modal closes
+                            onModalClose={onModalClose}
                         />
                     </div>
                 </div>

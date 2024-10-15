@@ -4,8 +4,6 @@ import './MyWork.css';
 
 export default function MyWork({ myTickets, status }) {
 
-    // console.log(myTickets, "myTickets");
-
     const newTickets = myTickets?.filter(ticket => ticket.statusId === status?.filter(status => status.name === 'Open')[0]?.id);
     const inProgress = myTickets?.filter(ticket => ticket.statusId === status?.filter(status => status.name === 'In Progress')[0]?.id);
     const completed = myTickets?.filter(ticket => ticket.statusId === status?.filter(status => status.name === 'Closed')[0]?.id);

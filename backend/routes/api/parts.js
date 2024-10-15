@@ -58,8 +58,6 @@ router.post('/', requireAuth, async (req, res, next) => {
     try {
         const { name, description, imageUrl, ticketId } = req.body;
 
-        // console.log(name, description, imageUrl, ticketId, "THIS IS THE BODY");
-
         let part = {};
 
         if (!imageUrl || !imageUrl.startsWith('https')) {

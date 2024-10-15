@@ -75,7 +75,6 @@ module.exports = (sequelize, DataTypes) => {
         model: 'Statuses',
         key: 'id',
       },
-      // onDelete: "CASCADE"
     }
   }, {
     sequelize,

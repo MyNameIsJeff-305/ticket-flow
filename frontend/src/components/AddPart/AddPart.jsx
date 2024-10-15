@@ -47,8 +47,6 @@ export default function AddPart({ ticketId, setPartsChecker}) {
             ticketId: ticketId
         }
 
-        // console.log(newPart, "THIS IS NEW PART");
-
         return dispatch(addPartThunk(newPart))
             .then(() => {
                 setPartsChecker(true);

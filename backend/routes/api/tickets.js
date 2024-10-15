@@ -16,25 +16,20 @@ router.get('/', requireAuth, async (req, res, next) => {
         const page = parseInt(req.query.page) || null;
         const size = parseInt(req.query.size) || null;
 
-        //Declare where
         const where = {};
 
-        //Status Filter
         if (status) {
             where.status = parseInt(status);
         }
 
-        //Client Filter
         if (client) {
             where.client = parseInt(client);
         }
 
-        //CreatedBy Filter
         if (createdBy) {
             where.createdBy = parseInt(createdBy);
         }
 
-        //Get Tickets
         const tickets = await Ticket.findAll({
             where,
             limit: size,
@@ -63,8 +58,6 @@ router.get('/', requireAuth, async (req, res, next) => {
 
 
         return res.json(Tickets);
-
-        // return res.json(tickets);
 
     } catch (error) {
         next(error);

@@ -4,7 +4,6 @@ import { getAllUsersThunk } from "../../store/session";
 
 import { FaPen, FaTrash } from "react-icons/fa";
 
-
 import './NoteCard.css';
 
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
@@ -16,7 +15,6 @@ export default function NoteCard({ note, setDeleteNoteChecker }) {
     const dispatch = useDispatch();
 
     const [noteChecker, setNoteChecker] = useState(false);
-    // const [deleteNoteChecker, setDeleteNoteChecker] = useState(false);
 
     const users = useSelector(state => state.session.allUsers);
     const currentUser = useSelector(state => state.session.user)

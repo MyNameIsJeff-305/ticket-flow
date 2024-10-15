@@ -13,7 +13,6 @@ function LoginFormModal() {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const { closeModal } = useModal();
 
-  // Reset state when the modal is opened
   useEffect(() => {
     setCredential("");
     setPassword("");
@@ -52,7 +51,6 @@ function LoginFormModal() {
     return dispatch(login({ credential: 'demo@aa.io', password: 'password' }))
       .then(closeModal);
   }
-
 
   return (
     <div className='login-container'>

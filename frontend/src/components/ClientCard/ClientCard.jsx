@@ -17,7 +17,6 @@ export default function ClientCard({ client, setEditClientChecker, setDeleteClie
     const clientType = client.companyName ? "company" : "individual";
 
     const handleDeleteClick = (e) => {
-        // Prevent the event from propagating to the parent card div
         e.stopPropagation();
     };
 

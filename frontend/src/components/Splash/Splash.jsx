@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import HeroSection from "./Herosection";
 import BenefitsSection from "./BenefitsSection";
 import FeaturesSection from "./FeaturesSection";
-// import TestimonialsSection from "./TestimonialsSection";
 import CTASection from "./CtaSection";
 import Footer from "./Footer";
 

@@ -25,14 +25,6 @@ router.get('/', requireAuth, async (req, res, next) => {
     } catch (error) {
         next(error);
     }
-    // try {
-    //     const clients = await Client.findAll();
-
-    //     return res.json(clients);
-    // }
-    // catch (error) {
-    //     next(error);
-    // }
 });
 
 //Get a Client by clientId
@@ -52,7 +44,6 @@ router.post('/', requireAuth, singleMulterUpload('image'), async (req, res, next
     try {
         const { firstName, lastName, companyName, email, phoneNumber } = req.body;
 
-        // Check if a file was uploaded, otherwise use null
         const profilePicUrl = req.file
             ? await singleFileUpload({ file: req.file, public: true })
             : null;
@@ -62,7 +53,7 @@ router.post('/', requireAuth, singleMulterUpload('image'), async (req, res, next
             lastName,
             companyName,
             email,
-            phoneNumber, // ensure you use the same name as in the form data
+            phoneNumber,
             profilePicUrl
         });
 
@@ -79,10 +70,9 @@ router.put('/:id', requireAuth, singleMulterUpload('image'), async (req, res, ne
 
         const { firstName, lastName, companyName, email, phone } = req.body;
 
-        // Check if a file was uploaded, otherwise use the current profilePicUrl
         const profilePicUrl = req.file
             ? await singleFileUpload({ file: req.file, public: true })
-            : client.profilePicUrl; // Use current image if no new file uploaded
+            : client.profilePicUrl;
 
         client.firstName = firstName || client.firstName;
         client.lastName = lastName || client.lastName;

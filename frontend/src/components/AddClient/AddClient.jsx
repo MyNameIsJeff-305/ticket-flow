@@ -21,7 +21,6 @@ export default function AddClient({ setClientsChecker }) {
     const { closeModal } = useModal();
 
     useEffect(() => {
-        // Clear fields and errors on mount
         setCompanyName('');
         setFirstName('');
         setLastName('');
@@ -34,7 +33,6 @@ export default function AddClient({ setClientsChecker }) {
     }, []);
 
     useEffect(() => {
-        // Validate form fields based on client type
         let newErrors = {};
 
         if (clientType === 'company' && (!companyName || companyName.trim() === '')) {
@@ -61,7 +59,7 @@ export default function AddClient({ setClientsChecker }) {
         const file = e.target.files[0];
         if (file) {
             setSelectedFile(file);
-            setProfilePicUrl(file); // Keep the actual file for FormData
+            setProfilePicUrl(file);
         }
     };
 
@@ -90,7 +88,6 @@ export default function AddClient({ setClientsChecker }) {
             <form onSubmit={handleSubmit}>
                 <div className="add-part-title">Add a Client</div>
                 <div className="add-client-input-container">
-                    {/* Client Type Selection */}
                     <div className="client-type-radio">
                         <label>
                             <input
@@ -112,7 +109,6 @@ export default function AddClient({ setClientsChecker }) {
                         </label>
                     </div>
 
-                    {/* Conditionally Render Input Fields Based on Client Type */}
                     {clientType === 'company' ? (
                         <div>
                             <label>Company Name</label>

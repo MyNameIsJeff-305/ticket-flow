@@ -35,7 +35,6 @@ router.post(
     validateSignup,
     async (req, res) => {
         const { email, password, username, firstName, lastName } = req.body;
-        // console.log(req.body, "REQ BODY");
         const profilePicUrl = req.file ?
             await singleFileUpload({ file: req.file, public: true }) :
             null;
@@ -109,7 +108,6 @@ router.get(
     requireAuth,
     async (_req, res) => {
         const users = await User.findAll();
-        // console.log(users, "USERS");
         return res.json(users);
     }
 );

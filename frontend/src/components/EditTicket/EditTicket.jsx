@@ -26,7 +26,6 @@ export default function EditTicket({ setTicketChecker }) {
         const fetchTicketAndClients = async () => {
             try {
                 await dispatch(getAllClientsThunk());
-                // await dispatch(getTicketThunk(parseInt(ticketId)));
             } finally {
                 setLoading(false);
                 setTitle(ticket.title || '');
@@ -46,7 +45,6 @@ export default function EditTicket({ setTicketChecker }) {
     }, [ticketId, ticket, dispatch]);
 
     useEffect(() => {
-        // Validate form inputs
         let newErrors = {};
         if (!title) newErrors.title = 'Please enter a title';
         if (!clientId) newErrors.clientId = 'Please select a client';
@@ -60,7 +58,7 @@ export default function EditTicket({ setTicketChecker }) {
         setErrors({});
 
         const updatedTicket = {
-            id: parseInt(ticket.id), // Include ticket ID for the update
+            id: parseInt(ticket.id),
             title: title || ticket.title,
             description: description || ticket.description,
             clientId: clientId
@@ -77,7 +75,7 @@ export default function EditTicket({ setTicketChecker }) {
 
         return dispatch(updateTicketThunk(updatedTicket))
             .then(() => {
-                setTicketChecker(true); // Inform parent component to re-fetch tickets
+                setTicketChecker(true);
                 closeModal();
             })
             .catch(async res => {

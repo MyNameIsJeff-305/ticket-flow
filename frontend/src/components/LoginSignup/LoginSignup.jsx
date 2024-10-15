@@ -28,7 +28,6 @@ export default function LoginSignup() {
     const sessionUser = useSelector((state) => state.session.user);
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
-    //Reset the state when the component is rendered
     useEffect(() => {
         sessionUser && navigate("/dashboard");
         setCredential("");
@@ -71,9 +70,6 @@ export default function LoginSignup() {
         setErrors(newErrors);
         setIsButtonDisabled(firstName.length < 2 || lastName.length < 2 || email.length < 4 || createPassword.length < 6 || confirmPassword !== createPassword);
     }, [firstName, lastName, username, email, createPassword, confirmPassword]);
-
-
-    // console.log(username, "THIS IS USERNAME");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -129,7 +125,6 @@ export default function LoginSignup() {
                     <img style={{ cursor: "pointer" }} src="/assets/logo.png" alt="logo" onClick={() => navigate('/')} />
                 </div>
                 <div className="hero-image">
-                    {/* Add a relevant image or animation here */}
                     <img src='/assets/computer.webp' alt="ticketFlow Interface" />
                 </div>
                 <aside className="left-text">
@@ -208,7 +203,7 @@ export default function LoginSignup() {
                                         <p className='error-message'>{errors.email}</p>
                                     )
                                 }
-                                <label htmlFor='file-upload'> User's Profile Picture
+                                <label htmlFor='file-upload'> User Profile Picture
                                     <input
                                         type='file'
                                         id='file-upload'

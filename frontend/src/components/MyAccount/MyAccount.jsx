@@ -5,7 +5,6 @@ import { FaPen } from "react-icons/fa6";
 import { FaSave } from "react-icons/fa";
 
 import './MyAccount.css';
-// import { retrievePrivateFile } from '../../../../backend/awsS3';
 
 export default function MyAccount({ user }) {
     const dispatch = useDispatch();
@@ -49,7 +48,6 @@ export default function MyAccount({ user }) {
 
     const handleSave = async () => {
         if (selectedFile) {
-            // Dispatch the updateUserThunk with the selected file
             await dispatch(updateUserThunk(user.id, { password: password, confirmPassword: confirmPassword, firstName: firstName, lastName: lastName, img_url: selectedFile || profilePicUrl },))
             .then(() => {
                 setIsEditing(false);

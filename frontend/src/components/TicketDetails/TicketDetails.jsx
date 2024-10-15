@@ -48,7 +48,6 @@ export default function TicketDetails() {
         dispatch(getMyTicketsThunk());
         dispatch(getAllPartsThunk());
         setTicketChecker(false);
-        // setNoteChecker(false);
         setDeleteNoteChecker(false);
         setPartsChecker(false);
         setDeletePartChecker(false);
@@ -67,8 +66,6 @@ export default function TicketDetails() {
     }, [myWorkTickets])
 
     if (!ticket || !status || !user || !notes || !parts) return <div className="ticket-details-tab"><span className="loader"></span></div>;
-
-    // if(!notes) return <span className="loader"></span>;
 
     const newStatus = status.filter(status => status.id !== ticket.StatusInfo?.id);
     const notesForTicket = notes.filter(note => note.ticketId === ticket.id);
@@ -93,8 +90,6 @@ export default function TicketDetails() {
         setPartsChecker(true);
         setDeletePartChecker(true);
     }
-
-    // console.log(partsForTicket, "PARTS FOR TICKET");
 
     return (
         <section className="ticket-details-tab">
@@ -201,7 +196,6 @@ export default function TicketDetails() {
                             user.id === ticket.CreatedBy?.id ? (
                                 <div
                                     className="edit-ticket-btn"
-                                // style={{ display: "flex", flexDirection:"row", listStyle: "none", padding: "8px", alignItems: "center", width: "fit-content", border: "none" }}
                                 >
                                     <OpenModalMenuItem
                                         itemText={<FaPlusCircle />}

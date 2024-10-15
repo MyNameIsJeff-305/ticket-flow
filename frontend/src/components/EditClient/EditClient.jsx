@@ -12,7 +12,6 @@ export default function EditClient({ client, setEditClientChecker }) {
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [profilePicUrl, setProfilePicUrl] = useState("");
-    // const [loading, setLoading] = useState(true);
     const [errors, setErrors] = useState({});
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
     const [selectedFile, setSelectedFile] = useState(null);
@@ -26,7 +25,6 @@ export default function EditClient({ client, setEditClientChecker }) {
             try {
                 await dispatch(getAllClientsThunk());
             } finally {
-                // setLoading(false);
                 setCompanyName(client.companyName || "");
                 setFirstName(client.firstName || "");
                 setLastName(client.lastName || "");
@@ -43,12 +41,10 @@ export default function EditClient({ client, setEditClientChecker }) {
             setLastName(client.lastName || "");
             setEmail(client.email || "");
             setProfilePicUrl(client.profilePicUrl || "");
-            // setLoading(false);
         }
     }, [clientId, client, dispatch]);
 
     useEffect(() => {
-        // Validate form inputs
         let newErrors = {};
         if (!companyName && !firstName && !lastName) newErrors.name = "Please enter a name";
         if (!email) newErrors.email = "Please enter an email";
@@ -74,9 +70,8 @@ export default function EditClient({ client, setEditClientChecker }) {
         formData.append("lastName", lastName);
         formData.append("email", email);
 
-        // If a file is selected, append it to the FormData
         if (selectedFile) {
-            formData.append("image", selectedFile); // 'image' is the key in multer
+            formData.append("image", selectedFile);
         } else {
             formData.append("profilePicUrl", profilePicUrl);
         }

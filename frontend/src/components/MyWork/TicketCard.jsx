@@ -10,14 +10,12 @@ import './TicketCard.css';
 function formatDate(dateString) {
     const date = new Date(dateString);
     const now = new Date();
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+    const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');
 
     if (now.getFullYear() === date.getFullYear()) {
-        // Return "MM/DD" if it's within the same year
         return `${month}/${day}`;
     } else {
-        // Return "MM/DD/YYYY" if it's from a different year
         return `${month}/${day}/${date.getFullYear()}`;
     }
 }
@@ -41,7 +39,6 @@ export default function TicketCard({ ticket, setDeleteTicketChecker }) {
     const thisStatus = status.allStatus?.find(status => status.id === ticket.statusId);
 
     const handleDeleteClick = (e) => {
-        // Prevent the event from propagating to the parent card div
         e.stopPropagation();
     };
 

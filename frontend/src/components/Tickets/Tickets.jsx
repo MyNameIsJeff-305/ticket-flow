@@ -25,12 +25,11 @@ export default function Tickets() {
     const TICKETS_PER_PAGE = 8;
 
     useEffect(() => {
-        // Fetch tickets when the page changes or when a new ticket is added
         dispatch(getTotalTicketsAmountThunk());
         dispatch(getAllTicketsThunk(page, TICKETS_PER_PAGE));
         dispatch(getMyTicketsThunk());
-        setDeleteTicketChecker(false); // Reset after re-fetching the tickets
-        setTicketsChecker(false); // Reset after re-fetching the tickets
+        setDeleteTicketChecker(false);
+        setTicketsChecker(false);
 
     }, [dispatch, page, ticketsChecker, deleteTicketChecker]);
 
@@ -43,8 +42,8 @@ export default function Tickets() {
     )
 
     const onModalClose = () => {
-        setDeleteTicketChecker(true); // Trigger re-fetch when modal is closed after deleting a ticket
-        setTicketsChecker(true); // Trigger re-fetch when modal is closed after adding a new ticket
+        setDeleteTicketChecker(true);
+        setTicketsChecker(true);
     }
 
     return (
@@ -57,7 +56,7 @@ export default function Tickets() {
                         <OpenModalMenuItem
                             itemText={"Add Ticket"}
                             modalComponent={<AddTicket setTicketsChecker={setTicketsChecker} />}
-                            onModalClose={onModalClose} // Call onModalClose after modal closes
+                            onModalClose={onModalClose}
                         ></OpenModalMenuItem>
                     </div>
                 </div>

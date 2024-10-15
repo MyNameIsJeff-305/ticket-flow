@@ -1,5 +1,4 @@
 import { useDispatch } from "react-redux";
-// import { useNavigate } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import { deleteTicketThunk } from "../../store/tickets";
 
@@ -7,7 +6,6 @@ import "./ConfirmDeleteTicket.css";
 
 export default function ConfirmDeleteTicket({ ticket, setDeleteTicketChecker }) {
     const dispatch = useDispatch();
-    // const navigate = useNavigate();
     const { closeModal } = useModal();
 
     const handleDelete = (e) => {
@@ -16,7 +14,6 @@ export default function ConfirmDeleteTicket({ ticket, setDeleteTicketChecker }) 
 
         return dispatch(deleteTicketThunk(ticket.id))
             .then(() => {
-                // navigate("/tickets"); // Navigate to /tickets after successful deletion
                 setDeleteTicketChecker(true);
                 closeModal();
             })

@@ -1,5 +1,4 @@
 import { FaGithub, FaLinkedin } from "react-icons/fa";
-// import ThemeSwitch from "../ThemeSwitch/ThemeSwitch";
 import IconThemeSwitch from "../IconThemeSwitch";
 
 import "./Footer.css";

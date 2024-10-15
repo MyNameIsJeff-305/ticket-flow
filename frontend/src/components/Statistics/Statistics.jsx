@@ -8,8 +8,6 @@ export default function Statistics({ myTickets, status }) {
     const inProgress = myTickets?.filter(ticket => ticket.statusId === status?.filter(status => status.name === 'In Progress')[0]?.id).length;
     const completed = myTickets?.filter(ticket => ticket.statusId === status?.filter(status => status.name === 'Closed')[0]?.id).length;
 
-    // console.log(status[0].color);
-
     if (!myTickets || !status) return (
         <section>
             <span>loading...</span>
