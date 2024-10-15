@@ -14,7 +14,7 @@ const validateLogin = [
     check('credential')
         .exists({ checkFalsy: true })
         .notEmpty()
-        .withMessage('Please provide a valid email or userName.'),
+        .withMessage('Please provide a valid email or username.'),
     check('password')
         .exists({ checkFalsy: true })
         .withMessage('Please provide a password.'),
@@ -37,7 +37,7 @@ router.get('/', async (req, res, next) => {
                 firstName: currentUser.firstName,
                 lastName: currentUser.lastName,
                 email: currentUser.email,
-                userName: currentUser.userName,
+                username: currentUser.username,
                 profilePicUrl: currentUser.profilePicUrl
             }
         } || { user: null });
@@ -58,7 +58,7 @@ router.post(
         const user = await User.unscoped().findOne({
             where: {
                 [Op.or]: {
-                    userName: credential,
+                    username: credential,
                     email: credential
                 }
             }
@@ -75,7 +75,7 @@ router.post(
         const safeUser = {
             id: user.id,
             email: user.email,
-            userName: user.userName,
+            username: user.username,
             firstName: user.firstName,
             lastName: user.lastName,
             profilePicUrl: user.profilePicUrl
@@ -112,7 +112,7 @@ router.get(
                 firstName: user.firstName,
                 lastName: user.lastName,
                 email: user.email,
-                userName: user.userName,
+                username: user.username,
                 profilePicUrl: user.profilePicUrl
             };
             return res.json({

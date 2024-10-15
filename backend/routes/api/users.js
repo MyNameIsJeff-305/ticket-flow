@@ -16,7 +16,7 @@ const validateSignup = [
         .exists({ checkFalsy: true })
         .isEmail()
         .withMessage('Invalid email'),
-    check('userName')
+    check('username')
         .exists({ checkFalsy: true })
         .withMessage("Username is required"),
     check('firstName').exists({ checkFalsy: true }).withMessage("First Name is required"),
@@ -34,18 +34,18 @@ router.post(
     singleMulterUpload('image'),
     validateSignup,
     async (req, res) => {
-        const { email, password, userName, firstName, lastName } = req.body;
+        const { email, password, username, firstName, lastName } = req.body;
         // console.log(req.body, "REQ BODY");
         const profileImageUrl = req.file ?
             await singleFileUpload({ file: req.file, public: true }) :
             null;
         const hashedPassword = bcrypt.hashSync(password);
-        const user = await User.create({ email, userName, hashedPassword, firstName, lastName, profileImageUrl });
+        const user = await User.create({ email, username, hashedPassword, firstName, lastName, profileImageUrl });
 
         const safeUser = {
             id: user.id,
             email: user.email,
-            userName: user.userName,
+            username: user.username,
             firstName: user.firstName,
             lastName: user.lastName,
             profilePicUrl: user.profilePicUrl
@@ -67,20 +67,20 @@ router.put(
     async (req, res) => {
         const { id } = req.params;
         const user = await User.findByPk(id);
-        const { email, password, userName, firstName, lastName } = req.body;
+        const { email, password, username, firstName, lastName } = req.body;
         const profileImageUrl = req.file ?
             await singleFileUpload({ file: req.file, public: true }) :
             null;
 
-        console.log(email, password, userName, firstName, lastName, profileImageUrl, "HEYYYYYYYYYY");
+        console.log(email, password, username, firstName, lastName, profileImageUrl, "HEYYYYYYYYYY");
 
         const hashedPassword = bcrypt.hashSync(password);
-        await user.update({ email: email || user.email, userName: userName || user.userName, hashedPassword: hashedPassword || user.hashedPassword, firstName: firstName || user.firstName, lastName: lastName || user.lastName, profilePicUrl: profileImageUrl || user.profilePicUrl });
+        await user.update({ email: email || user.email, username: username || user.username, hashedPassword: hashedPassword || user.hashedPassword, firstName: firstName || user.firstName, lastName: lastName || user.lastName, profilePicUrl: profileImageUrl || user.profilePicUrl });
 
         const safeUser = {
             id: user.id,
             email: user.email,
-            userNme: user.userName,
+            username: user.username,
             firstName: user.firstName,
             lastName: user.lastName,
             profilePicUrl: user.profilePicUrl

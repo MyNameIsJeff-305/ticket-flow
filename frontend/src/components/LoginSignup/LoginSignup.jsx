@@ -72,6 +72,9 @@ export default function LoginSignup() {
         setIsButtonDisabled(firstName.length < 2 || lastName.length < 2 || email.length < 4 || createPassword.length < 6 || confirmPassword !== createPassword);
     }, [firstName, lastName, username, email, createPassword, confirmPassword]);
 
+
+    // console.log(username, "THIS IS USERNAME");
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -189,7 +192,7 @@ export default function LoginSignup() {
                                 </div>
                                 <label>
                                     Username
-                                    <input type="text" style={{ width: "95%" }} name="createPassword" value={username} onChange={(e) => setUsername(e.target.value)} />
+                                    <input type="text" style={{ width: "95%" }} name="username" value={username} onChange={(e) => setUsername(e.target.value)} />
                                 </label>
                                 {
                                     errors.email && (
@@ -205,7 +208,7 @@ export default function LoginSignup() {
                                         <p className='error-message'>{errors.email}</p>
                                     )
                                 }
-                                <label htmlFor='file-upload'> Select From Computer
+                                <label htmlFor='file-upload'> User's Profile Picture
                                     <input
                                         type='file'
                                         id='file-upload'
