@@ -10,7 +10,7 @@ export default function MyWork({ myTickets, status }) {
     const inProgress = myTickets?.filter(ticket => ticket.statusId === status?.filter(status => status.name === 'In Progress')[0]?.id);
     const completed = myTickets?.filter(ticket => ticket.statusId === status?.filter(status => status.name === 'Closed')[0]?.id);
 
-    if (!myTickets || !status || myTickets.length === 0) return (
+    if (!myTickets || !status) return (
         <section className='my-work-tab'>
             <span className="loader"></span>
         </section>
@@ -19,8 +19,8 @@ export default function MyWork({ myTickets, status }) {
     return (
         <section className="my-work-tab">
             <h1>My Work</h1>
-            <div style={{ width: "100%" }}>
-                <h3>New Tickets</h3>
+            <div>
+                <h3>New</h3>
                 <div style={{ display: "flex", flexDirection: "column", overflowX: "hidden", overflowY: "scroll", maxHeight: "400px" }}>
                     {
                         newTickets.length > 0 ? (
@@ -35,8 +35,8 @@ export default function MyWork({ myTickets, status }) {
                     }
                 </div>
             </div>
-            <div style={{ width: "100%" }}>
-                <h3>In Progress Tickets</h3>
+            <div>
+                <h3>In Progress</h3>
                 <div style={{ display: "flex", flexDirection: "column", overflowX: "hidden", overflowY: "scroll", maxHeight: "400px" }}>
                     {
                         inProgress.length > 0 ? (
@@ -51,7 +51,7 @@ export default function MyWork({ myTickets, status }) {
                     }
                 </div>
             </div>
-            <div style={{ width: "100%" }}>
+            <div>
                 <h3>Completed</h3>
                 <div style={{ display: "flex", flexDirection: "column", overflowX: "hidden", overflowY: "scroll", maxHeight: "400px" }}>
                     {

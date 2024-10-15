@@ -36,11 +36,11 @@ router.post(
     async (req, res) => {
         const { email, password, username, firstName, lastName } = req.body;
         // console.log(req.body, "REQ BODY");
-        const profileImageUrl = req.file ?
+        const profilePicUrl = req.file ?
             await singleFileUpload({ file: req.file, public: true }) :
             null;
         const hashedPassword = bcrypt.hashSync(password);
-        const user = await User.create({ email, username, hashedPassword, firstName, lastName, profileImageUrl });
+        const user = await User.create({ email, username, hashedPassword, firstName, lastName, profilePicUrl });
 
         const safeUser = {
             id: user.id,
