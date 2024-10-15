@@ -17,6 +17,15 @@ module.exports = {
         allowNull: false,
         unique: true
       },
+      role: {
+        type: Sequelize.ENUM('user', 'client'),
+        allowNull: false
+      },
+      companyName:{
+        type: Sequelize.STRING(50),
+        allowNull: false,
+        defaultValue: ' '
+      },
       firstName: {
         type: Sequelize.STRING(50),
         allowNull: false,

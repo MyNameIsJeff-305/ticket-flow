@@ -9,10 +9,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'createdBy',
         onDelete: 'CASCADE'
       }),
-      User.hasMany(models.Note, {
-        foreignKey: 'userId',
-        onDelete: 'CASCADE'
-      })
+        User.hasMany(models.Note, {
+          foreignKey: 'userId',
+          onDelete: 'CASCADE'
+        })
     }
   }
   User.init({
@@ -28,6 +28,15 @@ module.exports = (sequelize, DataTypes) => {
           }
         },
       },
+    },
+    role: {
+      type: DataTypes.ENUM('admin', 'user'),
+      allowNull: false,
+    },
+    companyName: {
+      type: DataTypes.STRING(50),
+      allowNull: false,
+      defaultValue: 'individual'
     },
     firstName: {
       type: DataTypes.STRING(50),
