@@ -27,7 +27,7 @@ Ticket Flow is an IT Ticketing System designed to streamline the management of I
 - **Theme Support**: Light and dark themes for a customizable user experience.
 ![Theme]
 
-[Theme]: ./images/Theme.jpg
+[Theme]: ./images/Theme.png
 
 - **Performance**: Efficient data fetching with Redux for dynamic updates and smooth user interactions.
 
@@ -108,7 +108,7 @@ Use the TicketDetails component to view detailed ticket information, including e
 
 ## Future Improvements
 
-## Client Login for Ticket Status Tracking:
+### Client Login for Ticket Status Tracking:
 Implement a second authentication for Clients in order for them to track the status of the tickets.
 
 ### AI-powered Suggestions: 
