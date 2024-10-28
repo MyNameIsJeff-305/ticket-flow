@@ -108,11 +108,12 @@ button:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 50px 40px;
+    padding: 50px 20px;
     background: var(--background-gradient);
     color: var(--text-color);
     background: var(--background-gradient);
     background-size: 400% 400%;
+    width: 100%;
 
     -webkit-animation: AnimationName 30s ease infinite;
     -moz-animation: AnimationName 30s ease infinite;
@@ -120,6 +121,7 @@ button:hover {
 }
 
 .hero-content h1 {
+    text-align: left;
     font-size: 2.5rem;
 }
 
@@ -166,8 +168,9 @@ button:hover {
 
 /* Benefits Section Styles */
 .benefits {
+    width: 100%;
     padding: 50px 20px;
-    background-color: var(--background-bg-color);
+    background-color: var(--footer-bg-color);
     color: var(--text-color);
     text-align: center;
 }
@@ -251,7 +254,7 @@ button:hover {
     color: var(--text-color);
     text-align: center;
     background-size: 400% 400%;
-
+    width: 100%;
     -webkit-animation: AnimationName 30s ease infinite;
     -moz-animation: AnimationName 30s ease infinite;
     animation: AnimationName 30s ease infinite;
@@ -349,5 +352,119 @@ button:hover {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    /* height: 100vh; */
+}
+
+/* Responsive Layouts */
+
+/* Small screens (mobiles, 600px and below) */
+@media (max-width: 600px) {
+
+    .header,
+    .cta,
+    .benefits-list,
+    .feature-items,
+    .testimonials-list,
+    .footer {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .navbar ul,
+    .footer-links {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .hero {
+        padding: 20px;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .cta-button,
+    .ctass button {
+        width: 100%;
+    }
+
+    .benefit-item,
+    .feature-item,
+    .testimonial-item {
+        width: 90%;
+        margin-bottom: 20px;
+    }
+}
+
+/* Medium screens (tablets, 768px and below) */
+@media (max-width: 768px) {
+
+    .header,
+    .hero,
+    .cta,
+    .footer {
+        padding: 20px;
+    }
+
+    .navbar ul,
+    .footer-links {
+        gap: 15px;
+    }
+
+    .hero {
+        padding: 30px;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    
+
+    .hero-image img {
+        max-width: 80%;
+        margin: 20px 0;
+    }
+
+    .benefits-list,
+    .feature-items,
+    .testimonials-list {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .benefit-item,
+    .feature-item {
+        width: 100%;
+    }
+}
+
+/* Large screens (desktops, 992px and above) */
+@media (min-width: 992px) {
+    .navbar ul {
+        gap: 20px;
+    }
+
+    .hero-content h1 {
+        font-size: 3rem;
+    }
+
+    .cta,
+    .footer {
+        padding: 40px 20px;
+    }
+
+    .benefits-list,
+    .feature-items,
+    .testimonials-list {
+        gap: 30px;
+    }
+
+    .benefit-item,
+    .feature-item,
+    .testimonial-item {
+        width: 300px;
+    }
 }
