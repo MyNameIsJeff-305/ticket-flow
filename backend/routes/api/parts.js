@@ -3,6 +3,7 @@ const express = require('express');
 const { Part, Ticket } = require('../../db/models');
 const { requireAuth } = require('../../utils/auth');
 const { properPartValidation } = require('../../utils/validation');
+const { singleMulterUpload, singleFileUpload } = require('../../awsS3');
 
 
 const router = express.Router();
@@ -54,9 +55,15 @@ router.get('/:id', requireAuth, async (req, res, next) => {
 });
 
 //Create a Part
-router.post('/', requireAuth, async (req, res, next) => {
+router.post('/', requireAuth, singleMulterUpload('image'), async (req, res, next) => {
     try {
-        const { name, description, imageUrl, ticketId } = req.body;
+        const { name, description, ticketId } = req.body;
+
+        // console.log(req.file, "THIS IS THE REQ.FILE");
+
+        const imageUrl = req.file 
+        ? await singleFileUpload({ file: req.file, public: true }) : 
+        null;
 
         let part = {};
 
@@ -85,15 +92,23 @@ router.post('/', requireAuth, async (req, res, next) => {
 });
 
 //Edit a Part
-router.put('/:id', requireAuth, properPartValidation, async (req, res, next) => {
+router.put(
+    '/:id', 
+    requireAuth, 
+    properPartValidation, 
+    singleMulterUpload('image'), 
+    async (req, res, next) => {
     try {
         const part = await Part.findByPk(req.params.id);
 
-        const { name, description, imageUrl } = req.body;
+        const { name, description } = req.body;
+        const partImageUrl = req.file ?
+        await singleFileUpload({ file: req.file, public: true }) :
+        null;
 
         part.name = name || part.name;
         part.description = description || part.description;
-        part.imageUrl = imageUrl || part.imageUrl;
+        part.imageUrl = partImageUrl || part.imageUrl;
 
         await part.save();
 

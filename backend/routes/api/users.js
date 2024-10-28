@@ -71,8 +71,8 @@ router.put(
             await singleFileUpload({ file: req.file, public: true }) :
             null;
 
-        console.log(email, password, username, firstName, lastName, profileImageUrl, "HEYYYYYYYYYY");
-
+        
+        
         const hashedPassword = bcrypt.hashSync(password);
         await user.update({ email: email || user.email, username: username || user.username, hashedPassword: hashedPassword || user.hashedPassword, firstName: firstName || user.firstName, lastName: lastName || user.lastName, profilePicUrl: profileImageUrl || user.profilePicUrl });
 
