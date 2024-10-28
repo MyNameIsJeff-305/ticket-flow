@@ -141,7 +141,7 @@ export default function TicketDetails() {
                     </span>
                 </div>
             </div>
-            <div className="ticket-details-status" style={{paddingLeft: "20px"}}>
+            <div className="ticket-details-status" style={{ paddingLeft: "20px" }}>
 
                 {
                     user.id === ticket.CreatedBy?.id ? (
@@ -212,7 +212,7 @@ export default function TicketDetails() {
                         {
                             partsForTicket.length > 0 ? (
                                 partsForTicket?.map(part => (
-                                    <PartCard key={part.id} part={part} setDeletePartChecker={setDeletePartChecker} ticketAuthor={ticket.CreatedBy?.id} />
+                                    <PartCard key={part.id} part={part} setDeletePartChecker={setDeletePartChecker} ticketAuthor={ticket.CreatedBy?.id} setPartsChecker={setPartsChecker} />
                                 ))
                             ) : (
                                 <span>No parts for this ticket</span>

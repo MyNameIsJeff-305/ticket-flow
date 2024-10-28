@@ -6,13 +6,17 @@ import './AddPart.css';
 
 import { addPartThunk } from "../../store/parts";
 
-export default function AddPart({ ticketId, setPartsChecker}) {
+export default function AddPart({ ticketId, setPartsChecker }) {
     const dispatch = useDispatch();
 
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
-    const [imageUrl, setImageUrl] = useState('');
+    // const [imageUrl, setImageUrl] = useState('');
     const [errors, setErrors] = useState({});
+
+    const [partImageURL, setPartImageURL] = useState('/assets/placeholder-image.jpg');
+
+    const [selectedFile, setSelectedFile] = useState(null);
 
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
@@ -21,20 +25,32 @@ export default function AddPart({ ticketId, setPartsChecker}) {
     useEffect(() => {
         setName('');
         setDescription('');
-        setImageUrl('');
+        // setImageUrl('');
         setErrors({});
+        setPartImageURL('/assets/placeholder-image.jpg');
+        setSelectedFile(null);
         setIsButtonDisabled(true);
     }, []);
 
     useEffect(() => {
         let newErrors = {};
 
-        if (!name || name ==='') {
+        if (!name || name === '') {
             newErrors.name = "Please enter a valid part name";
         }
         setErrors(newErrors);
         setIsButtonDisabled(Object.keys(newErrors).length > 0);
     }, [name]);
+
+    const updateFile = e => {
+        const file = e.target.files[0];
+        if (file) {
+            setSelectedFile(file);
+            const fileURL = URL.createObjectURL(file);
+            setPartImageURL(fileURL);
+            console.log(fileURL, "THIS IS THE FILE URL");
+        }
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -43,9 +59,11 @@ export default function AddPart({ ticketId, setPartsChecker}) {
         const newPart = {
             name: name,
             description: description,
-            imageUrl: imageUrl,
+            imageUrl: selectedFile || partImageURL,
             ticketId: ticketId
         }
+
+        console.log(newPart, "THIS IS THE NEW PART");
 
         return dispatch(addPartThunk(newPart))
             .then(() => {
@@ -64,9 +82,6 @@ export default function AddPart({ ticketId, setPartsChecker}) {
         <div className="add-part-container">
             <form onSubmit={handleSubmit} className="add-part-form">
                 <div className="add-part-title">Add a Part</div>
-                <div className="add-part-errors">
-                    {errors.name && <div>{errors.name}</div>}
-                </div>
                 <div className="add-part-input">
                     <label>Part Name</label>
                     <input
@@ -75,6 +90,7 @@ export default function AddPart({ ticketId, setPartsChecker}) {
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                     />
+                    {errors.name && <div>{errors.name}</div>}
                 </div>
                 <div className="add-part-input">
                     <label>Description</label>
@@ -85,12 +101,12 @@ export default function AddPart({ ticketId, setPartsChecker}) {
                     />
                 </div>
                 <div className="add-part-input">
-                    <label>Image URL</label>
+                    <img src={partImageURL} alt="user-avatar" className="part-image" />
                     <input
-                        type="text"
-                        name="imageUrl"
-                        value={imageUrl}
-                        onChange={(e) => setImageUrl(e.target.value)}
+                        type="file"
+                        name='img_url'
+                        onChange={updateFile}
+                        accept='.jpg, .jpeg, .png'
                     />
                 </div>
                 <div className="add-part-buttons">

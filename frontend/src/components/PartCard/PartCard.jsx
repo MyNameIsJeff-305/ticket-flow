@@ -2,13 +2,25 @@ import { FaPen, FaTrash } from "react-icons/fa";
 
 import { useSelector } from "react-redux"
 
-import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
+// import { useState, useEffect } from "react";
 
-export default function PartCard({ part, setDeletePartChecker, ticketAuthor }) {
+import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
+import EditPart from "../EditPart/EditPart";
+
+export default function PartCard({ part, setDeletePartChecker, ticketAuthor, setPartsChecker }) {
 
     const currentUser = useSelector(state => state.session.user);
 
+    // const [partsChecker, setPartsChecker] = useState(false);
+
+    // useEffect(() => { 
+    //     if (partsChecker) {
+    //         setPartsChecker(false);
+    //     }
+    // }, [partsChecker])
+
     const onModalClose = () => {
+        setPartsChecker(true);
         setDeletePartChecker(true);
     }
 
@@ -28,7 +40,7 @@ export default function PartCard({ part, setDeletePartChecker, ticketAuthor }) {
                             <div className="edit-ticket-btn" style={{ listStyle: "none", display: "flex", flexDirection: "row"}}>
                                 <OpenModalMenuItem
                                     itemText={<FaPen />}
-                                    modalComponent={<></>}
+                                    modalComponent={<EditPart part={part} setPartChecker={setPartsChecker} />}
                                     onModalClose={onModalClose}
                                 ></OpenModalMenuItem>
 

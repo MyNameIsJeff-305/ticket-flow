@@ -47,27 +47,66 @@ export const getPartThunk = (partId) => async (dispatch) => {
 };
 
 export const addPartThunk = (part) => async (dispatch) => {
-    const res = await csrfFetch('/api/parts', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(part)
-    });
-    const newPart = await res.json();
-    dispatch(addPart(newPart));
+    const { name, description, ticketId, imageUrl } = part;
+
+    try {
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('description', description);
+        formData.append('ticketId', ticketId);
+        formData.append('image', imageUrl);
+
+        const options = {
+            method: "POST",
+            body: formData
+        }
+        const res = await csrfFetch('/api/parts', options);
+
+        if(res.ok) {
+            const newPart = await res.json();
+            dispatch(addPart(newPart));
+        } else if (res.status < 500) {
+            const data = await res.json();
+            if (data.errors) {
+                return data;
+            }
+        }
+    } catch (error) {
+        console.error(error);
+        return error;
+    }
 }
 
 export const editPartThunk = (part) => async (dispatch) => {
-    const res = await csrfFetch(`/api/parts/${part.id}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(part)
-    });
-    const updatedPart = await res.json();
-    dispatch(editPart(updatedPart));
+
+    const { name, description, ticketId, imageUrl } = part;
+
+    try {
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('description', description);
+        formData.append('ticketId', ticketId);
+        formData.append('image', imageUrl);
+
+        const options = {
+            method: "PUT",
+            body: formData
+        }
+        const res = await csrfFetch(`/api/parts/${part.id}`, options);
+
+        if(res.ok) {
+            const updatedPart = await res.json();
+            dispatch(editPart(updatedPart));
+        } else if (res.status < 500) {
+            const data = await res.json();
+            if (data.errors) {
+                return data;
+            }
+        }
+    } catch (error) {
+        console.error(error);
+        return error;
+    }
 }
 
 export const deletePartThunk = (partId) => async (dispatch) => {
