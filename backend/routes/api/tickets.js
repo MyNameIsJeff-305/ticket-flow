@@ -97,6 +97,8 @@ router.get('/track/:hashedId', async (req, res) => {
         description: ticket.description,
         checkIn: ticket.checkIn,
         checkOut: ticket.checkOut,
+        createdAt: ticket.createdAt,
+        updatedAt: ticket.updatedAt,
         CreatedBy,
         ClientInfo,
         Parts,

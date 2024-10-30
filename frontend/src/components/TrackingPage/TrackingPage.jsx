@@ -47,6 +47,8 @@ const TicketTrackingPage = () => {
 
     const { id, StatusInfo, createdAt, updatedAt, description } = ticket;
 
+    console.log(ticket, "THIS IS A TICKET");
+
     return (
         <div className="ticket-tracking">
             <div className="ticket-card">
