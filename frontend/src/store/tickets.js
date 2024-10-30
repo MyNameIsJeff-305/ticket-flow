@@ -8,6 +8,7 @@ const GETTICKET = 'tickets/getTicket';
 const ADDTICKET = 'tickets/addTicket';
 const UPDATETICKET = 'tickets/updateTicket';
 const DELETETICKET = 'tickets/deleteTicket';
+const GETTICKETBYHASH = 'tickets/getTicketByHash';
 
 const ADD_NOTE_TO_TICKET = 'tickets/addNoteToTicket';
 
@@ -20,6 +21,11 @@ const getAllTickets = (tickets) => ({
 const getTotalTicketsAmount = (amount) => ({
     type: GETTOTALTICKETSACOUMT,
     payload: amount
+});
+
+const getTicketByHash = (ticket) => ({
+    type: GETTICKETBYHASH,
+    payload: ticket
 });
 
 const getMyTickets = (tickets) => ({
@@ -59,6 +65,13 @@ export const getAllTicketsThunk = (page, size) => async (dispatch) => {
     const tickets = await res.json();
     dispatch(getAllTickets(tickets));
 };
+
+export const getTicketByHashThunk = (hashedId) => async (dispatch) => {
+    const res = await csrfFetch(`/api/tickets/track/${hashedId}`);
+    console.log(res, "THIS IS RES");
+    const ticket = await res.json();
+    dispatch(getTicketByHash(ticket));
+}
 
 export const getTotalTicketsAmountThunk = () => async (dispatch) => {
     const res = await csrfFetch(`/api/tickets/`);
@@ -120,6 +133,7 @@ const initialState = {
     allTickets: [],
     myTickets: [],
     ticket: {},
+    ticketByHash: {},
     totalTicketsAmount: 0
 };
 
@@ -130,6 +144,9 @@ const ticketsReducer = (state = initialState, action) => {
         }
         case GETTOTALTICKETSACOUMT: {
             return { ...state, totalTicketsAmount: action.payload };
+        }
+        case GETTICKETBYHASH: {
+            return { ...state, ticketByHash: action.payload };
         }
         case GETMYTICKETS: {
             return { ...state, myTickets: action.payload };

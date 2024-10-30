@@ -64,6 +64,49 @@ router.get('/', requireAuth, async (req, res, next) => {
     }
 });
 
+// Track a Ticket by hashed ID
+router.get('/track/:hashedId', async (req, res) => {
+    const { hashedId } = req.params;
+
+    // Retrieve ticket by original ticket ID (stored with the hash)
+    const ticket = await Ticket.findOne({ where: { hashedId } });
+
+    if (!ticket) {
+        return res.status(404).json({ error: 'Ticket not found' });
+    }
+
+    if (!ticket) {
+        return res.status(404).json({ message: 'Ticket not found' });
+    }
+
+    const CreatedBy = await User.findByPk(ticket.createdBy);
+
+    const ClientInfo = await Client.findByPk(ticket.clientId);
+
+    const Parts = await Part.findAll({
+        where: {
+            ticketId: ticket.id
+        }
+    });
+
+    const StatusInfo = await Status.findByPk(ticket.statusId);
+
+    const safeTicket = {
+        id: ticket.id,
+        title: ticket.title,
+        description: ticket.description,
+        checkIn: ticket.checkIn,
+        checkOut: ticket.checkOut,
+        CreatedBy,
+        ClientInfo,
+        Parts,
+        StatusInfo
+    }
+
+    // If valid, send ticket data for tracking
+    res.json(safeTicket);
+});
+
 // Get Tickets created by Current User
 router.get('/current', requireAuth, async (req, res, next) => {
     try {
@@ -117,7 +160,7 @@ router.get('/:id', requireAuth, async (req, res, next) => {
         });
 
         let Notes = await Note.findAll({
-            
+
         })
 
         const StatusInfo = await Status.findByPk(ticket.statusId);

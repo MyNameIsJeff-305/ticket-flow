@@ -87,7 +87,7 @@ const router = createBrowserRouter([
         element: <Clients />
       },
       {
-        path: '/path/:ticketId',
+        path: '/track/:ticketHashedId',
         element: <TrackingPage />
       }
     ]

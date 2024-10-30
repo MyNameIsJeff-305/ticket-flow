@@ -144,7 +144,7 @@ export default function TicketDetails() {
                         </span>
                     </div>
                     <div style={{width: "20%"}}>
-                        <TicketQR ticketId={ticket.id} />
+                        <TicketQR ticketId={ticket.hashedId} />
                     </div>
                 </div>
             </div>

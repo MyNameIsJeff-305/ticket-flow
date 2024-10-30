@@ -3,8 +3,8 @@ import { FaShare } from "react-icons/fa";
 
 import './TicketDetails.css';
 
-export default function TicketQR({ ticketId }) {
-    const trackingUrl = `${window.location.origin}/track/${ticketId}`;
+export default function TicketQR({ ticketHashedId }) {
+    const trackingUrl = `${window.location.origin}/track/${ticketHashedId}`;
 
     const handleShare = async () => {
         if (navigator.share) {
