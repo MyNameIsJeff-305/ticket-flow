@@ -171,6 +171,7 @@ router.get('/:id', requireAuth, async (req, res, next) => {
             description: ticket.description,
             checkIn: ticket.checkIn,
             checkOut: ticket.checkOut,
+            hashedId: ticket.hashedId,
             CreatedBy,
             ClientInfo,
             Parts,

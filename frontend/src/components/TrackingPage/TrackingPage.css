@@ -1,0 +1,87 @@
+.ticket-tracking {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    background-color: var(--background-color);
+    /* Clean background */
+    color: var(--text-color);
+}
+
+.ticket-card {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--ticket-card-bg);
+    border: 1px solid var(--box-bg-border);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+    text-align: left;
+}
+
+.ticket-card h1 {
+    font-size: 2rem;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+}
+
+.ticket-details {
+    font-size: 1.1rem;
+    color: var(--smoky-black);
+}
+
+.ticket-details h2,
+.ticket-details p {
+    margin: 0.5rem 0;
+    color: var(--text-color);
+}
+
+.ticket-details span {
+    font-weight: bold;
+    /* color: var(--razzmatazz); */
+}
+
+.loading,
+.error,
+.not-found {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    text-align: center;
+    color: var(--text-color);
+}
+
+.loading h1,
+.error h1,
+.not-found h1 {
+    color: var(--text-color);
+}
+
+.spinner {
+    border: 4px solid var(--semitransparent-bg);
+    border-top: 4px solid var(--ultra-violet);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin-top: 1rem;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.error p,
+.not-found p {
+    color: var(--razzmatazz);
+}

@@ -92,6 +92,8 @@ export default function TicketDetails() {
         setDeletePartChecker(true);
     }
 
+    // console.log(ticket.hashedId, "TICKET HASHED ID");
+
     return (
         <section className="ticket-details-tab">
             <div className="ticket-details-header">
@@ -144,7 +146,7 @@ export default function TicketDetails() {
                         </span>
                     </div>
                     <div style={{width: "20%"}}>
-                        <TicketQR ticketId={ticket.hashedId} />
+                        <TicketQR ticketHashedId={ticket.hashedId} />
                     </div>
                 </div>
             </div>

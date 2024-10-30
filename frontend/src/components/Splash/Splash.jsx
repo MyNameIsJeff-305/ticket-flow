@@ -9,17 +9,20 @@ import Footer from "./Footer";
 
 import './Splash.css';
 import Header from "./Header";
+import { useEffect } from "react";
 
 const Splash = () => {
   const navigate = useNavigate();
 
   const user = useSelector((state) => state.session.user);
 
-  if (!user) {
-    navigate('/');
-  } else {
-    navigate('/dashboard');
-  }
+  useEffect(() => {
+    if (!user) {
+      navigate('/');
+    } else {
+      navigate('/dashboard');
+    }
+  }, [navigate, user])
 
   return (
     <div className="app">
