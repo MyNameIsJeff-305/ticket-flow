@@ -18,6 +18,7 @@ import AddPart from "../AddPart";
 import EditTicket from "../EditTicket/EditTicket";
 
 import './TicketDetails.css';
+import TicketQR from "./TicketQR";
 
 export default function TicketDetails() {
     const dispatch = useDispatch();
@@ -132,13 +133,19 @@ export default function TicketDetails() {
                                 </>
                             )
                         }
+
                     </div>
                 </div>
                 <div className="ticket-description-body" style={{ paddingLeft: "40px" }}>
-                    <h3>Description</h3>
-                    <span>
-                        {ticket.description}
-                    </span>
+                    <div style={{width: "80%"}}>
+                        <h3>Description</h3>
+                        <span>
+                            {ticket.description}
+                        </span>
+                    </div>
+                    <div style={{width: "20%"}}>
+                        <TicketQR ticketId={ticket.id} />
+                    </div>
                 </div>
             </div>
             <div className="ticket-details-status" style={{ paddingLeft: "20px" }}>
