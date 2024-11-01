@@ -404,8 +404,7 @@ button:hover {
 
     .header,
     .hero,
-    .cta,
-    .footer {
+    .cta {
         padding: 20px;
     }
 
@@ -451,8 +450,7 @@ button:hover {
         font-size: 3rem;
     }
 
-    .cta,
-    .footer {
+    .cta {
         padding: 40px 20px;
     }
 

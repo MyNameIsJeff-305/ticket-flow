@@ -139,18 +139,18 @@ export default function TicketDetails() {
                     </div>
                 </div>
                 <div className="ticket-description-body" style={{ paddingLeft: "40px" }}>
-                    <div style={{width: "80%"}}>
+                    <div style={{width: "100%"}}>
                         <h3>Description</h3>
                         <span>
                             {ticket.description}
                         </span>
                     </div>
-                    <div style={{width: "20%"}}>
+                    <div style={{width: "100%"}}>
                         <TicketQR ticketHashedId={ticket.hashedId} />
                     </div>
                 </div>
             </div>
-            <div className="ticket-details-status" style={{ paddingLeft: "20px" }}>
+            <div className="ticket-details-status" style={{ paddingLeft: "20px", marginBottom: "20px", width: "75%" }}>
 
                 {
                     user.id === ticket.CreatedBy?.id ? (

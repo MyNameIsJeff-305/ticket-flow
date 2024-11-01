@@ -41,7 +41,7 @@ export default function TicketCard({ ticket }) {
     const thisStatus = status.allStatus?.find(status => status.id === ticket.statusId);
 
     return (
-        <div className={`ticket-card-${ticketStatus}`} style={thisStatus ? { borderLeft: `6px solid ${thisStatus.color}`, cursor: 'pointer' } : { borderLeft: `6px solid gray`, cursor: 'pointer' }} onClick={() => handleClick()}>
+        <div className={`ticket-card-${ticketStatus}`} style={thisStatus ? { borderLeft: `6px solid ${thisStatus.color}`, cursor: 'pointer', display: "flex", flex: 1 } : { borderLeft: `6px solid gray`, cursor: 'pointer' }} onClick={() => handleClick()}>
             <div className="ticket-card-left-m">
                 <h3 style={{ textOverflow: "ellipsis", fontSize: "16px" }}>
                     {ticket.title}

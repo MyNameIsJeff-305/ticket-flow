@@ -9,7 +9,9 @@ const Footer = () => {
             <div className="footer-links">
                 <a href="https://github.com/MyNameIsJeff-305"><FaGithub /> Contact Me</a>
             </div>
-            <ThemeSwitch />
+            <div>
+                <ThemeSwitch />
+            </div>
         </footer>
     );
 };

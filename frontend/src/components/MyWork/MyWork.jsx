@@ -23,7 +23,7 @@ export default function MyWork({ myTickets, status }) {
                     {
                         newTickets.length > 0 ? (
                             newTickets.map(ticket => (
-                                <div key={ticket.id} style={{ width: "85%" }}>
+                                <div key={ticket.id} style={{ width: "90%" }}>
                                     <MyWorkTicketCards key={ticket.id} ticket={ticket} />
                                 </div>
                             ))
@@ -39,7 +39,7 @@ export default function MyWork({ myTickets, status }) {
                     {
                         inProgress.length > 0 ? (
                             inProgress.map(ticket => (
-                                <div key={ticket.id} style={{ width: "85%" }}>
+                                <div key={ticket.id} style={{ width: "90%" }}>
                                     <MyWorkTicketCards key={ticket.id} ticket={ticket} />
                                 </div>
                             ))
@@ -55,7 +55,7 @@ export default function MyWork({ myTickets, status }) {
                     {
                         completed.length > 0 ? (
                             completed.map(ticket => (
-                                <div key={ticket.id} style={{ width: "85%" }}>
+                                <div key={ticket.id} style={{ width: "92%" }}>
                                     <MyWorkTicketCards key={ticket.id} ticket={ticket} />
                                 </div>
                             ))

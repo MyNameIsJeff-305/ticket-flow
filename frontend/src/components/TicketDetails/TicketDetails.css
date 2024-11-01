@@ -10,7 +10,7 @@
     border-radius: 12px;
     /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
     transition: background-color 0.3s ease, color 0.3s ease;
-    height: 100%;
+    /* height: 100%; */
 }
 
 .ticket-details-header {
@@ -19,7 +19,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    width: 100%;
+    /* width: 100%; */
     gap: 10px;
 }
 
@@ -101,6 +101,7 @@ button {
     align-items: space-between;
     justify-content: space-between;
     width: 100%;
+    margin-bottom: 10px;
 }
 
 .ticket-description-body h3 {
@@ -130,6 +131,7 @@ button {
     align-items: start;
     justify-content: start;
     width: 100%;
+    margin-bottom: 10px;
 }
 
 .ticket-details-status select {
@@ -146,6 +148,7 @@ button {
     align-items: start;
     justify-content: space-between;
     width: 100%;
+    /* max-height: 200px; */
     gap: 1rem;
 }
 
