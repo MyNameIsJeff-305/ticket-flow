@@ -180,7 +180,7 @@ button:hover:not(:disabled) {
 }
 
 @-moz-keyframes AnimationName {
-    0% {
+    0% {z
         background-position: 0% 50%
     }
 
@@ -208,8 +208,8 @@ button:hover:not(:disabled) {
 }
 
 .hero-image img {
-    max-width: 90%;
-    height: auto;
+    width: 80%;
+    /* height: auto; */
     animation: float 4s ease-in-out infinite;
     /* Add the float animation */
 }
