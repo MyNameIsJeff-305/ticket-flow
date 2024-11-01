@@ -14,6 +14,16 @@ const BenefitsSection = () => {
             icon: '🤝',
             title: 'Seamless Collaboration',
             description: 'Assign team members, leave comments, and attach files.'
+        },
+        {
+            icon: '📊',
+            title: 'QR Code Integration',
+            description: 'Scan QR codes to access ticket information.'
+        },
+        {
+            icon: '📱',
+            title: 'Mobile-Friendly',
+            description: 'Access ticketFlow on the go with our mobile'
         }
     ];
 

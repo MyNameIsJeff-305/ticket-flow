@@ -120,6 +120,10 @@ button:hover {
     animation: AnimationName 30s ease infinite;
 }
 
+.hero-content {
+    margin-left: 20px;
+}
+
 .hero-content h1 {
     text-align: left;
     font-size: 2.5rem;
@@ -132,6 +136,7 @@ button:hover {
 .cta-button {
     background-color: var(--button-bg-color);
     color: var(--button-text-color);
+
     padding: 10px 10px;
     border: none;
     border-radius: 5px;
@@ -177,8 +182,10 @@ button:hover {
 
 .benefits-list {
     display: flex;
-    justify-content: space-around;
-    gap: 20px
+    flex: 1;
+    justify-content: center;
+    gap: 5px;
+    flex-wrap: wrap;
 }
 
 .benefit-item {
@@ -247,8 +254,9 @@ button:hover {
 .ctass {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
+    margin-left: 20px;
     padding: 50px 20px;
     background: var(--background-gradient);
     color: var(--text-color);
