@@ -1,7 +1,7 @@
 .add-ticket-form {
     display: flex;
     flex-direction: column;
-    background-color: var(--seasalt);
+    background-color: var(--background-color);
     border-radius: 10px;
     padding: 2rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
