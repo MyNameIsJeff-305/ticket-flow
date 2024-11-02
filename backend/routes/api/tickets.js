@@ -4,6 +4,7 @@ const { Ticket, Status, Client, User, Part, Note } = require('../../db/models');
 
 const { requireAuth } = require('../../utils/auth');
 const { properUserValidation } = require('../../utils/validation');
+const { generateRandomPassword } = require('js-random-generator');
 
 const router = express.Router();
 
@@ -199,6 +200,7 @@ router.post('/', requireAuth, async (req, res, next) => {
             checkOut: null,
             clientId,
             statusId: 1,
+            hashedId: generateRandomPassword(10),
             createdBy: req.user.id
         });
 
