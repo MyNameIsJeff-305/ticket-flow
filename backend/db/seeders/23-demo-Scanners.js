@@ -8,7 +8,7 @@ if (process.env.NODE_ENV === 'production') {
 const { Scanner } = require('../models');
 
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
     Scanner.bulkCreate([
       {
         assessmentId: 1,
@@ -49,7 +49,7 @@ module.exports = {
     ], options)
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     options.tableName = 'Scanners';
     await queryInterface.bulkDelete(options.tableName, null, {});
   }

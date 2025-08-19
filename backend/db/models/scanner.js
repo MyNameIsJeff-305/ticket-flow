@@ -9,10 +9,14 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'assessmentId',
         onDelete: "CASCADE"
       });
+      Scanner.hasMany(models.ScannerImage, {
+        foreignKey: 'scannerId',
+        onDelete: 'CASCADE'
+      });
     }
   }
   Scanner.init({
-    assessmentId: { 
+    assessmentId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
@@ -21,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       onDelete: 'CASCADE'
     },
-    iPAddress: { 
+    iPAddress: {
       type: DataTypes.STRING,
       allowNull: false
     },
@@ -29,11 +33,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN,
       allowNull: false
     },
-    brand: { 
+    brand: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    model: { 
+    model: {
       type: DataTypes.STRING,
       allowNull: false
     },
@@ -41,7 +45,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    location: { 
+    location: {
       type: DataTypes.STRING,
       allowNull: false
     }
