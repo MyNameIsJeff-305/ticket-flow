@@ -4,20 +4,35 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class AccessPoint extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      // define association here
+      AccessPoint.belongsTo(models.Assessment, {
+        foreignKey: 'assessmentId',
+        onDelete: "CASCADE"
+      });
     }
   }
   AccessPoint.init({
-    assessmentId: DataTypes.INTEGER,
-    brand: DataTypes.STRING,
-    model: DataTypes.STRING,
-    location: DataTypes.STRING
+    assessmentId: { 
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'Assessments',
+        key: 'id'
+      },
+      onDelete: "CASCADE"
+    },
+    brand: { 
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    model: { 
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    location: { 
+      type: DataTypes.STRING,
+      allowNull: false
+    }
   }, {
     sequelize,
     modelName: 'AccessPoint',
