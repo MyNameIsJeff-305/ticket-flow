@@ -9,6 +9,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'assessmentId',
         onDelete: "CASCADE"
       });
+      Firewall.hasMany(models.FirewallImages, {
+        foreignKey: 'firewallId',
+        onDelete: 'CASCADE'
+      });
     }
   }
   Firewall.init({
