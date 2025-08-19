@@ -9,6 +9,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'assessmentId',
         onDelete: "CASCADE"
       });
+      CCTV.hasMany(models.cctvImages, {
+        foreignKey: 'cctvId',
+        onDelete: "CASCADE"
+      });
     }
   }
   CCTV.init({
