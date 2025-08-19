@@ -9,6 +9,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'assessmentId',
         onDelete: "CASCADE"
       });
+      Printer.hasMany(models.PrinterImage, {
+        foreignKey: 'printerId',
+        onDelete: "CASCADE"
+      });
     }
   }
   Printer.init({
