@@ -9,6 +9,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'assessmentId',
         onDelete: 'CASCADE'
       });
+      Server.hasMany(models.ServerImage, {
+        foreignKey: 'serverId',
+        onDelete: 'CASCADE'
+      });
     }
   }
   Server.init({
