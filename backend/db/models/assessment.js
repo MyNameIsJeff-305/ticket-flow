@@ -13,6 +13,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'assessmentId',
         onDelete: "CASCADE"
       });
+      Assessment.hasMany(models.Firewall, {
+        foreignKey: 'assessmentId',
+        onDelete: "CASCADE"
+      });
     }
   }
   Assessment.init({
