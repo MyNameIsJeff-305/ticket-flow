@@ -9,6 +9,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'assessmentId',
         onDelete: "CASCADE"
       });
+      AccessPoint.hasMany(models.AccessPointImage, {
+        foreignKey: 'accessPointId',
+        onDelete: "CASCADE"
+      });
     }
   }
   AccessPoint.init({
