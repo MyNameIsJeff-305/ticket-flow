@@ -38,7 +38,7 @@ module.exports = {
         state: 'CA',
         zipcode: 13579
       }
-    ])
+    ], options)
   },
 
   async down (queryInterface, Sequelize) {
