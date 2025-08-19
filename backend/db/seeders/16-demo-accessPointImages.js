@@ -1,11 +1,11 @@
 'use strict';
 
-const { AccessPointImage } = require('../models');
-
 let options = {};
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;
 }
+
+const { AccessPointImage } = require('../models');
 
 module.exports = {
   async up (queryInterface, Sequelize) {
