@@ -10,7 +10,7 @@ const { Server } = require('../models')
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    Server.bulkCreate([
+    await Server.bulkCreate([
       {
         assessmentId: 1,
         name: "Main Server",

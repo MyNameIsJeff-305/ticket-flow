@@ -9,7 +9,7 @@ const { Switch } = require('../models');
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    Switch.bulkCreate([
+    await Switch.bulkCreate([
       {
         assessmentId: 1,
         name: 'Switch 1',

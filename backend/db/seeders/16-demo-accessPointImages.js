@@ -9,7 +9,7 @@ const { AccessPointImage } = require('../models');
 
 module.exports = {
   async up (queryInterface, Sequelize) {
-    AccessPointImage.bulkCreate([
+    await AccessPointImage.bulkCreate([
       {
         accessPointId: 1,
         imageUrl: 'https://cdn.cs.1worldsync.com/df/33/df338184-a270-4409-8e10-991ca62242d0.jpg',

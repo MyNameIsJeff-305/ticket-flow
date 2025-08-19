@@ -10,7 +10,7 @@ if (process.env.NODE_ENV === 'production') {
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    Firewall.bulkCreate([
+    await Firewall.bulkCreate([
       {
         assessmentId: 1,
         brand: 'Cisco',

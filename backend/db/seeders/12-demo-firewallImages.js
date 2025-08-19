@@ -10,7 +10,7 @@ if (process.env.NODE_ENV === 'production') {
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    FirewallImages.bulkCreate([
+    await FirewallImages.bulkCreate([
       {
         firewallId: 1,
         imageUrl: 'https://www.telquestintl.com/site/images/products/ASA5506-K9-LN.Media-1.jpg',

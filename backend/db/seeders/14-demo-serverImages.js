@@ -9,7 +9,7 @@ const { ServerImage } = require('../models')
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    ServerImage.bulkCreate([
+    await ServerImage.bulkCreate([
       {
         serverId: 1,
         imageUrl: 'https://i.ebayimg.com/images/g/IAIAAOSwiGlfK0jH/s-l1200.jpg',

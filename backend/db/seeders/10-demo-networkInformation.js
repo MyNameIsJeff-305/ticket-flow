@@ -10,7 +10,7 @@ if (process.env.NODE_ENV === 'production') {
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    NetworkInformation.bulkCreate([
+    await NetworkInformation.bulkCreate([
       {
         assessmentId: 1,
         internetServiceProvider: 'AT&T',

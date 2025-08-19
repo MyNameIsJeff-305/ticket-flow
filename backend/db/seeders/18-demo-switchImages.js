@@ -9,7 +9,7 @@ const { SwitchImage } = require('../models')
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    SwitchImage.bulkCreate([
+    await SwitchImage.bulkCreate([
       {
         switchId: 1,
         imageUrl: 'https://www.tritondatacom.com/cdn/shop/files/C9300-48P-E-10-front.png',

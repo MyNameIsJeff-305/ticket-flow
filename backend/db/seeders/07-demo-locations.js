@@ -10,7 +10,7 @@ if (process.env.NODE_ENV === 'production') {
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    Location.bulkCreate([
+    await Location.bulkCreate([
       {
         name: 'Location 1',
         clientId: 1,

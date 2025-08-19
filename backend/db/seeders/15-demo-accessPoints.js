@@ -9,7 +9,7 @@ const { AccessPoint } = require('../models')
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    AccessPoint.bulkCreate([
+    await AccessPoint.bulkCreate([
       {
         assessmentId: 1,
         brand: 'Cisco',
