@@ -7,17 +7,14 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Location.belongsTo(models.Client, {
         foreignKey: 'clientId',
-        as: 'client',
         onDelete: 'CASCADE'
       });
       Location.hasMany(models.LocationPhoneNumber, {
         foreignKey: 'locationId',
-        as: 'phoneNumbers',
         onDelete: 'CASCADE'
       });
       Location.hasMany(models.Assessment, {
         foreignKey: 'locationId',
-        as: 'assessments',
         onDelete: 'CASCADE'
       });
     }

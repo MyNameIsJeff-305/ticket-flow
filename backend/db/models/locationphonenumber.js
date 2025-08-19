@@ -7,7 +7,6 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       LocationPhoneNumber.belongsTo(models.Location, {
         foreignKey: 'locationId',
-        as: 'location',
         onDelete: 'CASCADE'
       });
     }

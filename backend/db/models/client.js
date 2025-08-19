@@ -11,7 +11,6 @@ module.exports = (sequelize, DataTypes) => {
       });
       Client.hasMany(models.Location, {
         foreignKey: 'clientId',
-        as: 'locations',
         onDelete: 'CASCADE'
       });
     }
