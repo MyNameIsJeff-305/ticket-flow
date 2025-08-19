@@ -9,6 +9,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'assessmentId',
         onDelete: "CASCADE"
       });
+      Switch.hasMany(models.SwitchImage, {
+        foreignKey: 'switchId',
+        onDelete: 'CASCADE'
+      });
     }
   }
   Switch.init({
