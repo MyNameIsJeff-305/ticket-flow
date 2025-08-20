@@ -9,6 +9,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'assessmentId',
         onDelete: 'CASCADE'
       });
+      audioAmplifier.hasMany(models.AudioAmplifierImage, {
+        foreignKey: 'audioAmplifierId',
+        onDelete: 'CASCADE'
+      });
     }
   }
   audioAmplifier.init({
