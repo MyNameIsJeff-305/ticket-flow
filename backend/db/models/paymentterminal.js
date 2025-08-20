@@ -4,22 +4,43 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class PaymentTerminal extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      // define association here
+      PaymentTerminal.belongsTo(models.Assessment, {
+        foreignKey: 'assessmentId',
+        onDelete: 'CASCADE'
+      });
     }
   }
   PaymentTerminal.init({
-    assessmentId: DataTypes.INTEGER,
-    brand: DataTypes.STRING,
-    model: DataTypes.STRING,
-    iPAddress: DataTypes.STRING,
-    iPType: DataTypes.STRING,
-    location: DataTypes.STRING
+    assessmentId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'Assessments',
+        key: 'id'
+      },
+      onDelete: 'CASCADE'
+    },
+    brand: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    model: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    iPAddress: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    iPType: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    location: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
   }, {
     sequelize,
     modelName: 'PaymentTerminal',
