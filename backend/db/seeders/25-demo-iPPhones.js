@@ -5,10 +5,10 @@ if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;
 }
 
-const {IPPhone} = require('../models')
+const { IPPhone } = require('../models')
 
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
     await IPPhone.bulkCreate([
       {
         assessmentId: 1,
@@ -32,7 +32,7 @@ module.exports = {
         model: 'VVX 411',
         iPAddress: '192.168.1.12',
         iPType: true,
-        location: 'Office'
+        location: 'Office-2'
       },
       {
         assessmentId: 3,
@@ -40,12 +40,12 @@ module.exports = {
         model: 'CP-8845',
         iPAddress: '192.168.1.13',
         iPType: false,
-        location: 'Main'
+        location: 'OP-1'
       }
     ], options)
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     options.tableName = 'IPPhones';
     await queryInterface.bulkDelete(options.tableName, null, options);
   }

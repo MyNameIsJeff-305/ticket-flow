@@ -9,6 +9,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'assessmentId',
         onDelete: 'CASCADE'
       });
+      IPPhone.hasMany(models.IPPhoneImages, {
+        foreignKey: 'iPPhoneId',
+        onDelete: 'CASCADE'
+      });
     }
   }
   IPPhone.init({
