@@ -7,7 +7,11 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       nasStation.belongsTo(models.Assessment, {
         foreignKey: 'assessmentId',
-        as: 'assessment'
+        onDelete: 'CASCADE'
+      });
+      nasStation.hasMany(models.NasStationImages, {
+        foreignKey: 'nasStationId',
+        onDelete: 'CASCADE'
       });
     }
   }
