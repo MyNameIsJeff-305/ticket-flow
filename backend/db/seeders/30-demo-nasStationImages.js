@@ -25,15 +25,11 @@ module.exports = {
         imageUrl: 'https://www.cnet.com/a/img/resize/d5425b62a302fb757e9d0ee09a91fb62c19979e9/hub/2013/09/27/f4e82c59-6797-11e3-846b-14feb5ca9861/WDMyCloud_(7).jpg?auto=webp&fit=crop&height=1200&width=1200',
         description: 'Image 3 description'
       },
-    ])
+    ], options)
   },
 
   async down (queryInterface, Sequelize) {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
+    options.tableName = 'NasStationImages';
+    await queryInterface.bulkDelete(options.tableName, null, options);
   }
 };
