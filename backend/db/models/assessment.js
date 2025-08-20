@@ -49,6 +49,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'assessmentId',
         onDelete: "CASCADE"
       });
+      Assessment.hasMany(models.nasStation, {
+        foreignKey: 'assessmentId',
+        onDelete: "CASCADE"
+      });
     }
   }
   Assessment.init({
