@@ -14,7 +14,7 @@ module.exports = {
         assessmentId: 3,
         stationName: 'Station 1',
         brand: 'DELL',
-        model: 'G6',
+        model: 'Optiflex 7020',
         formFactor: 'Desktop',
         iPAddress: '192.168.1.10',
         iPType: true,
