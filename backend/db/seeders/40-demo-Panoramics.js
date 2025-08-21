@@ -32,7 +32,7 @@ module.exports = {
         dentalPracticeInformationId: 3,
         brand: 'PLANMECA',
         model: 'PROMAX 3D Plus Panorex',
-        networkDeployed: true
+        networkDeployed: false
       }
     ], options)
   },
