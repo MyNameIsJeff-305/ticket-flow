@@ -21,6 +21,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'dentalPracticeInformationId',
         onDelete: 'CASCADE'
       });
+      DentalPracticeInformation.hasMany(models.Panoramic, {
+        foreignKey: 'dentalPracticeInformationId',
+        onDelete: 'CASCADE'
+      });
     }
   }
   DentalPracticeInformation.init({
