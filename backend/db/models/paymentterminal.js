@@ -9,6 +9,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'assessmentId',
         onDelete: 'CASCADE'
       });
+      PaymentTerminal.hasMany(models.PaymentTerminalImage, {
+        foreignKey: 'paymentTerminalId',
+        onDelete: 'CASCADE'
+      });
     }
   }
   PaymentTerminal.init({
