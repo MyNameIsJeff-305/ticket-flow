@@ -9,6 +9,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'assessmentId',
         onDelete: 'CASCADE'
       });
+      DentalPracticeInformation.hasMany(models.ManagementSoftware, {
+        foreignKey: 'dentalPracticeInformationId',
+        onDelete: 'CASCADE'
+      });
     }
   }
   DentalPracticeInformation.init({
