@@ -9,6 +9,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'panoramicId',
         onDelete: 'CASCADE'
       });
+      AcquisitionStation.hasMany(models.AcquisitionStationImage, {
+        foreignKey: 'acquisitionStationId',
+        onDelete: 'CASCADE'
+      });
     }
   }
   AcquisitionStation.init({
