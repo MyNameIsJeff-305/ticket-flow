@@ -19,7 +19,7 @@ module.exports = {
         storage: '2TB',
         bays: 2,
         iPAddress: '192.168.1.100',
-        iPType: true,
+        iPType: 'Static',
         location: 'Server Room'
       },
       {
@@ -30,7 +30,7 @@ module.exports = {
         storage: '4TB',
         bays: 4,
         iPAddress: '192.168.1.101',
-        iPType: true,
+        iPType: 'DHCP',
         location: 'Server Room'
       },
       {
@@ -41,7 +41,7 @@ module.exports = {
         storage: '8TB',
         bays: 1,
         iPAddress: '192.168.1.102',
-        iPType: true,
+        iPType: 'Static',
         location: 'Server Room'
       }
     ], options)

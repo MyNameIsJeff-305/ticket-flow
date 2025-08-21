@@ -28,7 +28,7 @@ module.exports = {
         allowNull: false
       },
       iPType: { //If true, static IP. If false, DHCP
-        type: Sequelize.BOOLEAN,
+        type: Sequelize.STRING,
         allowNull: false
       },
       brand: {

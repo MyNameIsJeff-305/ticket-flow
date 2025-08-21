@@ -17,7 +17,7 @@ module.exports = {
         model: 'Optiflex 7020',
         formFactor: 'Desktop',
         iPAddress: '192.168.1.10',
-        iPType: true,
+        iPType: "Static",
         location: 'Office'
       },
       {
@@ -27,7 +27,7 @@ module.exports = {
         model: 'Elite',
         formFactor: 'All-In-One',
         iPAddress: '192.168.1.11',
-        iPType: false,
+        iPType: "DHCP",
         location: 'Office'
       },
       {
@@ -37,7 +37,7 @@ module.exports = {
         model: 'Thinkpad',
         formFactor: 'Micro Station',
         iPAddress: '192.168.1.12',
-        iPType: true,
+        iPType: "Static",
         location: 'Office'
       },
       {
@@ -47,7 +47,7 @@ module.exports = {
         model: 'ROG',
         formFactor: 'Mini Station',
         iPAddress: '192.168.1.13',
-        iPType: false,
+        iPType: "DHCP",
         location: 'Office'
       },
       {
@@ -57,7 +57,7 @@ module.exports = {
         model: 'iMac',
         formFactor: 'All-In-One',
         iPAddress: '192.168.1.14',
-        iPType: true,
+        iPType: "Static",
         location: 'Office'
       }
     ], options)

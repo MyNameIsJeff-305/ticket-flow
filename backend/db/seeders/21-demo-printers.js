@@ -13,7 +13,7 @@ module.exports = {
       {
         assessmentId: 1,
         iPAddress: '192.168.1.100',
-        iPType: true,
+        iPType: 'Static',
         brand: 'HP',
         model: 'LaserJet Pro M404dn',
         connection: 'Wired',
@@ -22,7 +22,7 @@ module.exports = {
       {
         assessmentId: 1,
         iPAddress: '192.168.1.101',
-        iPType: false,
+        iPType: 'DHCP',
         brand: 'Canon',
         model: 'imageCLASS MF743Cdw',
         connection: 'Wireless',
@@ -31,7 +31,7 @@ module.exports = {
       {
         assessmentId: 2,
         iPAddress: '192.168.1.102',
-        iPType: true,
+        iPType: 'Static',
         brand: 'Epson',
         model: 'EcoTank ET-4850',
         connection: 'Wired',
@@ -40,7 +40,7 @@ module.exports = {
       {
         assessmentId: 2,
         iPAddress: '192.168.1.103',
-        iPType: false,
+        iPType: 'DHCP',
         brand: 'Brother',
         model: 'HL-L2395DW',
         connection: 'Wireless',
@@ -49,7 +49,7 @@ module.exports = {
       {
         assessmentId: 3,
         iPAddress: '192.168.1.104',
-        iPType: true,
+        iPType: 'Static',
         brand: 'Kyocera',
         model: 'ECOSYS P2040dn',
         connection: 'Wired',
@@ -58,7 +58,7 @@ module.exports = {
       {
         assessmentId: 3,
         iPAddress: '192.168.1.105',
-        iPType: false,
+        iPType: 'DHCP',
         brand: 'Samsung',
         model: 'Xpress M2835DW',
         connection: 'Wireless',
@@ -67,7 +67,7 @@ module.exports = {
       {
         assessmentId: 1,
         iPAddress: '192.168.1.106',
-        iPType: true,
+        iPType: 'Static',
         brand: 'Ricoh',
         model: 'SP C261DNw',
         connection: 'Wired',
@@ -76,7 +76,7 @@ module.exports = {
       {
         assessmentId: 2,
         iPAddress: '192.168.1.107',
-        iPType: false,
+        iPType: 'DHCP',
         brand: 'Lexmark',
         model: 'MC3326adwe',
         connection: 'Wireless',
@@ -85,7 +85,7 @@ module.exports = {
       {
         assessmentId: 3,
         iPAddress: '192.168.1.108',
-        iPType: true,
+        iPType: 'Static',
         brand: 'Dell',
         model: 'B2360dn',
         connection: 'Wired',
@@ -94,7 +94,7 @@ module.exports = {
       {
         assessmentId: 1,
         iPAddress: '192.168.1.109',
-        iPType: false,
+        iPType: 'DHCP',
         brand: 'Xerox',
         model: 'Phaser 6510',
         connection: 'Wireless',

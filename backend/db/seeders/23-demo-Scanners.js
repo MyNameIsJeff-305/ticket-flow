@@ -13,7 +13,7 @@ module.exports = {
       {
         assessmentId: 1,
         iPAddress: '192.168.1.1',
-        iPType: true,
+        iPType: "Static",
         brand: 'HP',
         model: 'LaserJet Pro',
         connection: 'Wired',
@@ -22,7 +22,7 @@ module.exports = {
       {
         assessmentId: 2,
         iPAddress: '192.168.1.2',
-        iPType: false,
+        iPType: "DHCP",
         brand: 'Canon',
         model: 'imageCLASS',
         connection: 'Bluetooth',
@@ -31,7 +31,7 @@ module.exports = {
       {
         assessmentId: 3,
         iPAddress: '192.168.1.3',
-        iPType: true,
+        iPType: "Static",
         brand: 'Epson',
         model: 'EcoTank',
         connection: 'USB',
@@ -40,7 +40,7 @@ module.exports = {
       {
         assessmentId: 1,
         iPAddress: '192.168.1.4',
-        iPType: false,
+        iPType: "DHCP",
         brand: 'Brother',
         model: 'MFC-L3770CDW',
         connection: 'Wireless',

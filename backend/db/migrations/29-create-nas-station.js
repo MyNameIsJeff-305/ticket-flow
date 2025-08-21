@@ -48,7 +48,7 @@ module.exports = {
         allowNull: false
       },
       iPType: { //If true, static. If false, DHCP
-        type: Sequelize.BOOLEAN,
+        type: Sequelize.STRING,
         allowNull: false
       },
       location: {

@@ -15,7 +15,7 @@ module.exports = {
         brand: 'Cisco',
         model: 'CP-8841',
         iPAddress: '192.168.1.10',
-        iPType: true,
+        iPType: "Static",
         location: 'Office'
       },
       {
@@ -23,7 +23,7 @@ module.exports = {
         brand: 'Avaya',
         model: '9608',
         iPAddress: '192.168.1.11',
-        iPType: false,
+        iPType: "DHCP",
         location: 'Main'
       },
       {
@@ -31,7 +31,7 @@ module.exports = {
         brand: 'Polycom',
         model: 'VVX 411',
         iPAddress: '192.168.1.12',
-        iPType: true,
+        iPType: "Static",
         location: 'Office-2'
       },
       {
@@ -39,7 +39,7 @@ module.exports = {
         brand: 'Cisco',
         model: 'CP-8845',
         iPAddress: '192.168.1.13',
-        iPType: false,
+        iPType: "DHCP",
         location: 'OP-1'
       }
     ], options)
