@@ -2,7 +2,7 @@
 
 ![db-diagram]
 
-[db-diagram]: ../images/db-diagram.png
+https://dbdiagram.io/d/6883de4acca18e685cccd6d0
 
 ## API Documentation
 
