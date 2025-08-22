@@ -1390,7 +1390,7 @@ Delete a Client based on Client ID
 
 ## Statuses
 
-### Get all Satuses
+### Get all Statuses
 
 Get a list of all Statuses
 
