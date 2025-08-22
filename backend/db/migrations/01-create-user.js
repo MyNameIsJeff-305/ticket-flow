@@ -12,11 +12,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      username: {
-        type: Sequelize.STRING(30),
-        allowNull: false,
-        unique: true
-      },
       firstName: {
         type: Sequelize.STRING(50),
         allowNull: false,
@@ -27,6 +22,21 @@ module.exports = {
         allowNull: false,
         defaultValue: ' '
       },
+      profilePicUrl: {
+        type: Sequelize.STRING(256),
+        allowNull: false,
+        defaultValue: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png',
+      },
+      title: {
+        type: Sequelize.STRING(100),
+        allowNull: false,
+        defaultValue: ' '
+      },
+      username: {
+        type: Sequelize.STRING(30),
+        allowNull: false,
+        unique: true
+      },
       email: {
         type: Sequelize.STRING(256),
         allowNull: false,
@@ -36,10 +46,9 @@ module.exports = {
         type: Sequelize.STRING.BINARY,
         allowNull: false
       },
-      profilePicUrl: {
-        type: Sequelize.STRING(256),
-        allowNull: false,
-        defaultValue: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png',
+      departmentId: {
+        type: Sequelize.INTEGER,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,

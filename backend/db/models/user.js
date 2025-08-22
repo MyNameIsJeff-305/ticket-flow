@@ -16,6 +16,26 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   User.init({
+    firstName: {
+      type: DataTypes.STRING(50),
+      allowNull: false,
+      defaultValue: ' '
+    },
+    lastName: {
+      type: DataTypes.STRING(50),
+      allowNull: false,
+      defaultValue: ' '
+    },
+    profilePicUrl: {
+      type: DataTypes.STRING(256),
+      allowNull: false,
+      defaultValue: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png',
+    },
+    title: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+      defaultValue: ' '
+    },
     username: {
       type: DataTypes.STRING(30),
       allowNull: false,
@@ -28,16 +48,6 @@ module.exports = (sequelize, DataTypes) => {
           }
         },
       },
-    },
-    firstName: {
-      type: DataTypes.STRING(50),
-      allowNull: false,
-      defaultValue: ' '
-    },
-    lastName: {
-      type: DataTypes.STRING(50),
-      allowNull: false,
-      defaultValue: ' '
     },
     email: {
       type: DataTypes.STRING(256),
@@ -55,10 +65,9 @@ module.exports = (sequelize, DataTypes) => {
         len: [60, 60],
       },
     },
-    profilePicUrl: {
-      type: DataTypes.STRING(256),
+    departmentId: {
+      type: DataTypes.INTEGER,
       allowNull: false,
-      defaultValue: 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png',
     },
   }, {
     sequelize,
