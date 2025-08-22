@@ -9,6 +9,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'roleId',
         onDelete: 'CASCADE'
       });
+      Role.hasMany(models.RolePermission, {
+        foreignKey: 'roleId',
+        onDelete: 'CASCADE'
+      });
     }
   }
   Role.init({
