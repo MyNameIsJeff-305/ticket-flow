@@ -12,7 +12,11 @@ module.exports = (sequelize, DataTypes) => {
       User.hasMany(models.Note, {
         foreignKey: 'userId',
         onDelete: 'CASCADE'
-      })
+      }),
+      User.belongsTo(models.Department, {
+        foreignKey: 'departmentId',
+        onDelete: 'CASCADE'
+      });
     }
   }
   User.init({
@@ -68,6 +72,11 @@ module.exports = (sequelize, DataTypes) => {
     departmentId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      references: {
+        model: 'Departments',
+        key: 'id'
+      },
+      onDelete: 'CASCADE'
     },
   }, {
     sequelize,
