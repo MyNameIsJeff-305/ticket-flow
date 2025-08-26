@@ -4,9 +4,9 @@
 
 https://dbdiagram.io/d/6883de4acca18e685cccd6d0
 
-## API Documentation
+# API Documentation
 
-### User Authentication/Authorization
+## User Authentication/Authorization
 
 ### All endpoints that require authentication
 
@@ -45,16 +45,16 @@ correct role(s) or permission(s).
     }
     ```
 
-### Users
+## Users
 
-#### Get the Current User
+### Get the Current User
 
 Returns the details of the logged in user. If no logged in user, returns null.
 
 - Require Authentication: `false`
 - Request:
 
-  - Method: GET
+  - Method: `GET`
   - URL: `/api/session`
   - Body: none
 
@@ -87,13 +87,13 @@ Returns the details of the logged in user. If no logged in user, returns null.
 }
 ```
 
-#### Log in
+### Log in
 
 Logs in a user with valid credentials and returns the current user's information.
 
 - Require Authentication: `false`
 - Request
-  - Method: POST
+  - Method: `POST`
   - URL: `/api/session`
   - Headers: `Content-Type: application/json`
   - Body:
@@ -149,13 +149,13 @@ Logs in a user with valid credentials and returns the current user's information
 }
 ```
 
-#### Sign Up a User
+### Sign Up a User
 
 Creates a new user, logs them in as the current user, and returns the current user's information.
 
 - Require Authentication: `false`
 - Request
-  - Method: POST
+  - Method: `POST`
   - URL: `/api/users`
   - Headers: `Content-Type: application/json`
   - Body:
@@ -234,15 +234,15 @@ Creates a new user, logs them in as the current user, and returns the current us
 }
 ```
 
-### Tickets
+## Tickets
 
-#### Get All Tickets
+### Get All Tickets
 
 Returns all the Tickets.
 
 - Require Authentication: `true`
 - Request
-  - Method: GET
+  - Method: `GET`
   - URL: `/api/tickets`
   - Body: none
 - Successful Response
@@ -317,13 +317,13 @@ Returns all the Tickets.
 ]
 ```
 
-#### Get All Tickets Assigned to the Current User
+### Get All Tickets Assigned to the Current User
 
 Returns all the Tickets assigned to the Current User
 
 - Require Authentication: `true`
 - Request
-  - Method: GET
+  - Method: `GET`
   - URL: `/api/tickets/current`
   - Body: none
 - Successful Response
@@ -359,13 +359,13 @@ Returns all the Tickets assigned to the Current User
 ]
 ```
 
-#### Get Details of a Ticket from an Id
+### Get Details of a Ticket from an Id
 
 Returns the details of a Ticket specified by its id.
 
 - Require authentication: `true`
 - Request
-  - Method: GET
+  - Method: `GET`
   - URL: `/api/tickets/:ticketId`
   - Body: none
 - Successful Response
@@ -452,12 +452,12 @@ Returns the details of a Ticket specified by its id.
 }
 ```
 
-#### Create a Ticket
+### Create a Ticket
 
 Creates and return a new Ticket
 
 - Require Authentication: `true`
-  - Method: POST
+  - Method: `POST`
   - URL: `/api/tickets`
   - Headers: `Content-Type: application/json`
   - Body:
@@ -503,5 +503,325 @@ Creates and return a new Ticket
     "title": "Title is required",
     "clientId": "Client Id is required"
   }
+}
+```
+
+### Add a Part to a Ticket based on the Ticket's Id
+
+Create and return a new Part for a Ticket specified by id.
+
+- Require Authentication: `true`
+- Require proper Authorization: Ticket must be assigned to the Current User.
+- Request:
+  - Method: `POST`
+  - URL: `/api/tickets/:ticketId/parts`
+  - Headers: `Content-Type: application/json`
+  - Body:
+
+```json
+{
+  "name": "Hard Drive",
+  "description": "A 512Gb SSD Drive",
+  "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1a/2023_Dysk_SSD_Patriot_P210_2TB.jpg"
+}
+```
+
+- Successful Response
+  - Status Code: 200
+  - Headers: `Content-Type: application/json`
+  - Body:
+
+```json
+{
+  "id": 23,
+  "name": "Hard Drive",
+  "description": "A 512Gb SSD Drive",
+  "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1a/2023_Dysk_SSD_Patriot_P210_2TB.jpg",
+  "ticketId": 1,
+  "updatedAt": "2025-08-26T18:16:25.300Z",
+  "createdAt": "2025-08-26T18:16:25.300Z"
+}
+```
+
+- Error Response: Unauthorized
+  - Status Code: 403
+  - Headers: `Content-Type: application/json`
+  - Body:
+
+```json
+{
+  "message": "Unauthorized"
+}
+```
+
+### Edit a Ticket
+
+Updates and return an existing ticket.
+
+- Require Authorization: `true`
+- Require Proper Authorization: Ticket must belong to the current user
+- Request:
+  - Method: `PUT`
+  - URL `/api/tickets/:ticketId`
+  - Headers: `Content-Type: application/json`
+  - Body:
+
+```json
+{
+  "title": "My printer doesn't work",
+  "description": "I am having a problem with my computer, it seems not be recognizing the printer, please I need your help",
+  "status": "Created",
+  "checkIn": "2024-04-01",
+  "checkOut": "2024-05-03",
+  "status": "completed"
+}
+```
+
+- Successful Response
+  - Status Code: 200
+  - Headers: `Content-Type: application/json`
+  - Body:
+
+```json
+{
+  "id": 1,
+  "title": "My printer doesn't work",
+  "createdBy": 1,
+  "clientId": 1,
+  "description": "I am having a problem with my computer, it seems not be recognizing the printer, please I need your help",
+  "checkIn": "2024-04-01T00:00:00.000Z",
+  "checkOut": "2024-05-03T00:00:00.000Z",
+  "statusId": 1,
+  "hashedId": "0XxR/v.CGH",
+  "createdAt": "2025-08-26T14:16:29.146Z",
+  "updatedAt": "2025-08-26T18:22:33.564Z"
+}
+```
+
+- Error Response: Couldn't find a Ticket based on the Specified Id
+  - Status Code: 404
+  - Headers: `Content-Type: application/json`
+  - Body:
+
+```json
+{
+  "message": "Ticket couldn't be found"
+}
+```
+
+### Delete a Ticket
+
+Deletes an existing Ticket.
+
+- Require Authentication: `true`
+- Require Proper Authorization: Ticket must belong to the current user
+- Request:
+  - Method: `DELETE`
+  - URL: `/api/tickets/:ticketId`
+  - Body: none
+- Successful Response:
+  - Status Code: 200
+  - Headers: `Content-Type: application/json`
+  - Body:
+
+```json
+{
+  "message": "Successfully Deleted"
+}
+```
+
+- Error Response: Couldn't find a Ticket with the specified Id
+  - Status Code: 404
+  - Headers: `Content-Type: application/json`
+  - Body:
+
+```json
+{
+  "message": "Ticket couldn't be found"
+}
+```
+
+## Parts
+
+### Get All Parts
+
+Returns all Parts
+
+- Require Authentication: `true`
+- Request:
+  - Method: `GET`
+  - URL: `/api/parts`
+  - Body: none
+- Successful Response:
+  - Status Code: 200
+  - Headers: `Content-Type: application/json`
+  - Body:
+
+```json
+[
+  {
+    "id": 3,
+    "name": "Solid State Drive (SSD)",
+    "description": "500GB SSD for performance improvement",
+    "imageUrl": "https://i5.walmartimages.com/seo/WD-Blue-2-5-Inch-3D-NAND-SATA-SSD-500GB-WDBNCE5000PNC-WRSN_48196402-2f69-45b8-97f0-5f5f486e8801.1a509058826f46b18c7340a2d5902cbc.jpeg",
+    "Ticket": {
+      "id": 2,
+      "title": "Slow Computer Performance",
+      "createdBy": 2,
+      "clientId": 2,
+      "description": "My computer is very slow, it takes a long time to load applications.",
+      "checkIn": null,
+      "checkOut": null,
+      "statusId": 1,
+      "hashedId": "BSU8IfQPUe",
+      "createdAt": "2025-08-26T14:16:29.146Z",
+      "updatedAt": "2025-08-26T14:16:29.146Z"
+    }
+  },
+  {
+    "id": 4,
+    "name": "Memory Upgrade",
+    "description": "16GB DDR4 RAM for desktop",
+    "imageUrl": "https://m.media-amazon.com/images/I/51L+S7mtXdL.jpg",
+    "Ticket": {
+      "id": 2,
+      "title": "Slow Computer Performance",
+      "createdBy": 2,
+      "clientId": 2,
+      "description": "My computer is very slow, it takes a long time to load applications.",
+      "checkIn": null,
+      "checkOut": null,
+      "statusId": 1,
+      "hashedId": "BSU8IfQPUe",
+      "createdAt": "2025-08-26T14:16:29.146Z",
+      "updatedAt": "2025-08-26T14:16:29.146Z"
+    }
+  },
+  {
+    "id": 5,
+    "name": "Outlook Setup Guide",
+    "description": "Guide to set up Outlook for email configuration",
+    "imageUrl": "https://cirasync.com/wp-content/uploads/2022/09/Add-an-email-account-to-outlook.jpg",
+    "Ticket": {
+      "id": 3,
+      "title": "Need Help with Email Setup",
+      "createdBy": 3,
+      "clientId": 3,
+      "description": "I'm having trouble setting up my email on Outlook.",
+      "checkIn": "2021-06-01T14:00:00.000Z",
+      "checkOut": null,
+      "statusId": 2,
+      "hashedId": "OZx63HaF7*",
+      "createdAt": "2025-08-26T14:16:29.146Z",
+      "updatedAt": "2025-08-26T14:16:29.146Z"
+    }
+  }
+]
+```
+
+### Get All Parts by a Ticket's Id
+
+Returns all the Parts that belong to a Ticket specified by Id
+
+- Require Authentication: `false`
+- Request:
+  - Method: `GET`
+  - URL: `/api/tickets/:ticketId/parts`
+  - Body: none
+- Successful Response:
+  - Status Code: 200
+  - Headers: `Content-Type: application/json`
+  - Body:
+
+```json
+{
+  "Parts": [
+    {
+      "id": 3,
+      "name": "Solid State Drive (SSD)",
+      "description": "500GB SSD for performance improvement",
+      "ticketId": 2,
+      "imageUrl": "https://i5.walmartimages.com/seo/WD-Blue-2-5-Inch-3D-NAND-SATA-SSD-500GB-WDBNCE5000PNC-WRSN_48196402-2f69-45b8-97f0-5f5f486e8801.1a509058826f46b18c7340a2d5902cbc.jpeg",
+      "createdAt": "2025-08-26T14:16:29.151Z",
+      "updatedAt": "2025-08-26T14:16:29.151Z"
+    },
+    {
+      "id": 4,
+      "name": "Memory Upgrade",
+      "description": "16GB DDR4 RAM for desktop",
+      "ticketId": 2,
+      "imageUrl": "https://m.media-amazon.com/images/I/51L+S7mtXdL.jpg",
+      "createdAt": "2025-08-26T14:16:29.151Z",
+      "updatedAt": "2025-08-26T14:16:29.151Z"
+    },
+    {
+      "id": 13,
+      "name": "Wireless Mouse",
+      "description": "Logitech wireless mouse for computer use",
+      "ticketId": 2,
+      "imageUrl": "https://resource.logitechg.com/w_692,c_lpad,ar_4:3,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/products/g502x-lightspeed/gallery/g502x-lightspeed-gallery-1-black.png",
+      "createdAt": "2025-08-26T14:16:29.151Z",
+      "updatedAt": "2025-08-26T14:16:29.151Z"
+    }
+  ]
+}
+```
+
+- Error Response: Couldn't find a Ticket based on the specified Id
+  - Status Code: 404
+  - Headers: `Content-Type: application/json`
+  - Body:
+
+```json
+{
+  "message": "Ticket couldn't be found"
+}
+```
+
+### Edit a Part
+
+Update and return an existing part
+
+- Require Authentication: `true`
+- Require Proper Authorization: Ticket where part belongs must belong to the current user.
+- Request:
+  - Method: `PUT`
+  - URL: `/api/parts/:partId`
+  - Headers: `Content-Type: application/json`
+  - Body:
+
+```json
+{
+  "name": "Webcam 2.0",
+  "description": "A Dell HD Webcam",
+  "imageUrl": "https://i5.walmartimages.com/asr/b109f053-d441-4067-8e1f-3900cd130851.83347aafc41e87a584e0bb5147f8dc9b.jpeg?odnHeight=768&odnWidth=768&odnBg=FFFFFF"
+}
+```
+
+- Successful Response:
+  - Status Code: 200
+  - Headers: `Content-Type: application/json`
+  - Body:
+
+```json
+{
+  "id": 24,
+  "name": "Webcam 2.0",
+  "description": "A Dell HD Webcam",
+  "ticketId": 11,
+  "imageUrl": "https://i5.walmartimages.com/asr/b109f053-d441-4067-8e1f-3900cd130851.83347aafc41e87a584e0bb5147f8dc9b.jpeg?odnHeight=768&odnWidth=768&odnBg=FFFFFF",
+  "createdAt": "2025-08-26T18:50:34.814Z",
+  "updatedAt": "2025-08-26T18:51:44.329Z"
+}
+```
+
+- Error Response: Ticket Doesn't belong to the current User
+  - Status Code: 403.
+  - Headers: `Content-Type: application/json`
+  - Body:
+
+```json
+{
+  "message": "Unauthorized"
 }
 ```
