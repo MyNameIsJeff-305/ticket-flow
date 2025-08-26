@@ -45,18 +45,8 @@ router.get('/', requireAuth, async (req, res, next) => {
             ticket.createdBy = await User.findByPk(where.createdBy || ticket.createdBy);
             const values = ticket.toJSON();
 
-            let Notes = await Note.findAll({
-                where: {
-                    ticketId: ticket.id
-                }
-            });
-
-            values.Notes = Notes;
-
             Tickets.push(values);
         }
-
-
 
         return res.json(Tickets);
 
@@ -124,15 +114,6 @@ router.get('/current', requireAuth, async (req, res, next) => {
         for (const ticket of tickets) {
             ticket.clientId = await Client.findByPk(ticket.clientId);
             const values = ticket.toJSON();
-
-            let Notes = await Note.findAll({
-                where: {
-                    ticketId: ticket.id
-                }
-            });
-
-            values.Notes = Notes;
-
             Tickets.push(values);
         }
 

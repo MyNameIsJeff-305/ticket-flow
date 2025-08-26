@@ -153,7 +153,7 @@ Logs in a user with valid credentials and returns the current user's information
 
 Creates a new user, logs them in as the current user, and returns the current user's information.
 
-- Require Authentication: false
+- Require Authentication: `false`
 - Request
   - Method: POST
   - URL: `/api/users`
@@ -240,7 +240,7 @@ Creates a new user, logs them in as the current user, and returns the current us
 
 Returns all the Tickets.
 
-- Require Authentication: true
+- Require Authentication: `true`
 - Request
   - Method: GET
   - URL: `/api/tickets`
@@ -315,4 +315,193 @@ Returns all the Tickets.
     "updatedAt": "2025-08-26T14:16:29.146Z"
   }
 ]
+```
+
+#### Get All Tickets Assigned to the Current User
+
+Returns all the Tickets assigned to the Current User
+
+- Require Authentication: `true`
+- Request
+  - Method: GET
+  - URL: `/api/tickets/current`
+  - Body: none
+- Successful Response
+  - Status Code: 200
+  - Headers: `Content-Type: application/json`
+  - Body:
+
+```json
+[
+  {
+    "id": 1,
+    "title": "Network Connectivity Issues",
+    "createdBy": 1,
+    "clientId": {
+      "id": 1,
+      "firstName": "Jane",
+      "lastName": "Smith",
+      "companyName": "",
+      "email": "janesmith@techsolutions.com",
+      "phoneNumber": null,
+      "profilePicUrl": "https://spor12.dk/wp-content/uploads/2017/05/speaker-1.jpg",
+      "createdAt": "2025-08-26T14:16:29.140Z",
+      "updatedAt": "2025-08-26T14:16:29.140Z"
+    },
+    "description": "The office network is not working, can't connect to the internet.",
+    "checkIn": null,
+    "checkOut": null,
+    "statusId": 1,
+    "hashedId": "0XxR/v.CGH",
+    "createdAt": "2025-08-26T14:16:29.146Z",
+    "updatedAt": "2025-08-26T14:16:29.146Z"
+  }
+]
+```
+
+#### Get Details of a Ticket from an Id
+
+Returns the details of a Ticket specified by its id.
+
+- Require authentication: `true`
+- Request
+  - Method: GET
+  - URL: `/api/tickets/:ticketId`
+  - Body: none
+- Successful Response
+  - Status Code: 200
+  - Headers: `Content-Type: application/json`
+  - Body:
+
+```json
+{
+  "id": 1,
+  "title": "Network Connectivity Issues",
+  "description": "The office network is not working, can't connect to the internet.",
+  "checkIn": null,
+  "checkOut": null,
+  "hashedId": "0XxR/v.CGH",
+  "CreatedBy": {
+    "id": 1,
+    "firstName": "Demo",
+    "lastName": "User",
+    "profilePicUrl": "https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg",
+    "title": "Software Engineer",
+    "username": "DemoEmp1",
+    "departmentId": 1
+  },
+  "ClientInfo": {
+    "id": 1,
+    "firstName": "Jane",
+    "lastName": "Smith",
+    "companyName": "",
+    "email": "janesmith@techsolutions.com",
+    "phoneNumber": null,
+    "profilePicUrl": "https://spor12.dk/wp-content/uploads/2017/05/speaker-1.jpg",
+    "createdAt": "2025-08-26T14:16:29.140Z",
+    "updatedAt": "2025-08-26T14:16:29.140Z"
+  },
+  "Parts": [
+    {
+      "id": 1,
+      "name": "Ethernet Cable",
+      "description": "Cat6 Ethernet cable for network connectivity",
+      "ticketId": 1,
+      "imageUrl": "https://media.startech.com/cms/products/gallery_large/n6patcxmbl.main.jpg",
+      "createdAt": "2025-08-26T14:16:29.151Z",
+      "updatedAt": "2025-08-26T14:16:29.151Z"
+    },
+    {
+      "id": 2,
+      "name": "Network Switch",
+      "description": "5-port Gigabit Network Switch for office network",
+      "ticketId": 1,
+      "imageUrl": "https://intellinetsolutions.com/cdn/shop/products/24-port-gigabit-ethernet-switch-561273-1_11790351-cb3d-41e5-b877-6424af02441c.jpg",
+      "createdAt": "2025-08-26T14:16:29.151Z",
+      "updatedAt": "2025-08-26T14:16:29.151Z"
+    },
+    {
+      "id": 21,
+      "name": "Backup Power Supply",
+      "description": "Uninterruptible Power Supply (UPS) for network devices",
+      "ticketId": 1,
+      "imageUrl": "https://i5.walmartimages.com.mx/mg/gm/3pp/asr/ebf7d5d3-9b04-4885-9eb3-160a4681e5d2.471379173e77c206d2cea3d05e307309.jpeg",
+      "createdAt": "2025-08-26T14:16:29.151Z",
+      "updatedAt": "2025-08-26T14:16:29.151Z"
+    }
+  ],
+  "StatusInfo": {
+    "id": 1,
+    "name": "Open",
+    "color": "#FF6B6B",
+    "description": "The ticket is open and has not been assigned to anyone",
+    "createdAt": "2025-08-26T14:16:29.136Z",
+    "updatedAt": "2025-08-26T14:16:29.136Z"
+  }
+}
+```
+
+- Error Response: No Ticket Found
+  - Status Code: 404
+  - Headers: `Content-Type: application/json`
+  - Body:
+
+```json
+{
+  "message": "Ticket not found"
+}
+```
+
+#### Create a Ticket
+
+Creates and return a new Ticket
+
+- Require Authentication: `true`
+  - Method: POST
+  - URL: `/api/tickets`
+  - Headers: `Content-Type: application/json`
+  - Body:
+
+```json
+{
+  "title": "My printer doesn't work",
+  "description": "I am having a problem with my computer, it seems not be recognizing the printer, please I need your help",
+  "clientId": 1
+}
+```
+
+- Successful Response
+  - Status Code: 201
+  - Headers: `Content-Type: application/json`
+  - Body:
+
+```json
+{
+  "id": 11,
+  "title": "My printer doesn't work",
+  "description": "I am having a problem with my computer, it seems not be recognizing the printer, please I need your help",
+  "checkIn": null,
+  "checkOut": null,
+  "clientId": 1,
+  "statusId": 1,
+  "hashedId": "s_fwq!Xq!D",
+  "createdBy": 1,
+  "updatedAt": "2025-08-26T18:02:20.795Z",
+  "createdAt": "2025-08-26T18:02:20.795Z"
+}
+```
+
+- Error Response
+  - Status Code: 400
+  - Headers: `Content-Type: application/json`
+  - Body:
+
+```json
+{
+  "message": "Bad Request",
+  "errors": {
+    "title": "Title is required",
+    "clientId": "Client Id is required"
+  }
+}
 ```
