@@ -33,28 +33,57 @@ router.post(
     '/',
     singleMulterUpload('image'),
     validateSignup,
-    async (req, res) => {
-        const { email, password, username, firstName, lastName } = req.body;
-        const profilePicUrl = req.file ?
-            await singleFileUpload({ file: req.file, public: true }) :
-            null;
-        const hashedPassword = bcrypt.hashSync(password);
-        const user = await User.create({ email, username, hashedPassword, firstName, lastName, profilePicUrl });
+    async (req, res, next) => {
+        try {
+            const { email, password, username, firstName, lastName, title, departmentId } = req.body;
+            const profilePicUrl = req.file ?
+                await singleFileUpload({ file: req.file, public: true }) :
+                null;
+            const hashedPassword = bcrypt.hashSync(password);
 
-        const safeUser = {
-            id: user.id,
-            email: user.email,
-            username: user.username,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            profilePicUrl: user.profilePicUrl
-        };
+            const noProfilePic = 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png';
 
-        await setTokenCookie(res, safeUser);
+            // Find a user that match the email or the username
+            const checkUserName = await User.findOne({ where: { username: username } });
+            const checkUserEmail = await User.findOne({ where: { email: email } });
+            
+            if (checkUserEmail) {
+                res.status(500);
+                return res.json({
+                    message: "User already exists",
+                    "errors": {
+                        email: "User with this email already exists"
+                    }
+                })
+            }
+            if (checkUserName) {
+                res.status(500);
+                return res.json({
+                    message: "User already exists",
+                    "errors": {
+                        username: "User with this username already exists"
+                    }
+                })
+            }
 
-        return res.json({
-            user: safeUser
-        });
+            const user = await User.create({ email, username, hashedPassword, firstName, lastName, title, departmentId, profilePicUrl: profilePicUrl || noProfilePic });
+
+            const safeUser = {
+                id: user.id,
+                email: user.email,
+                username: user.username,
+                firstName: user.firstName,
+                lastName: user.lastName
+            };
+
+            await setTokenCookie(res, safeUser);
+
+            return res.json({
+                user: safeUser
+            });
+        } catch (error) {
+            next(error);
+        }
     }
 );
 
@@ -71,8 +100,8 @@ router.put(
             await singleFileUpload({ file: req.file, public: true }) :
             null;
 
-        
-        
+
+
         const hashedPassword = bcrypt.hashSync(password);
         await user.update({ email: email || user.email, username: username || user.username, hashedPassword: hashedPassword || user.hashedPassword, firstName: firstName || user.firstName, lastName: lastName || user.lastName, profilePicUrl: profileImageUrl || user.profilePicUrl });
 

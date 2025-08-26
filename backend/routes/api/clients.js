@@ -1,7 +1,7 @@
 const express = require('express');
 const { requireAuth } = require('../../utils/auth');
 
-const { Client, Ticket } = require('../../db/models');
+const { Client, Ticket, Location } = require('../../db/models');
 const { singleFileUpload, singleMulterUpload } = require('../../awsS3');
 
 const router = express.Router();
@@ -39,6 +39,20 @@ router.get('/:id', requireAuth, async (req, res, next) => {
     }
 });
 
+//Get All Locations that belongs to a client
+router.get('/:id/locations', async (req, res, next) => {
+    try {
+        const client = await Client.findByPk(req.params.id, {
+            include: [{ model: Location }]
+        });
+
+        return res.json(client.Locations);
+    }
+    catch (error) {
+        next(error);
+    }
+});
+
 //Add a Client
 router.post('/', requireAuth, singleMulterUpload('image'), async (req, res, next) => {
     try {
@@ -58,6 +72,31 @@ router.post('/', requireAuth, singleMulterUpload('image'), async (req, res, next
         });
 
         return res.json(client);
+    } catch (error) {
+        next(error);
+    }
+});
+
+//Add a Location to a Client
+router.post('/:id/locations', async (req, res, next) => {
+    try {
+        const client = await Client.findByPk(req.params.id);
+        if (!client) {
+            return res.status(404).json({ message: 'Client not found' });
+        }
+
+        const { name, addressLine1, addressLine2, city, state, zipcode } = req.body;
+        const location = await Location.create({
+            name,
+            addressLine1,
+            addressLine2,
+            city,
+            state,
+            zipcode,
+            clientId: client.id
+        });
+
+        return res.status(201).json(location);
     } catch (error) {
         next(error);
     }
