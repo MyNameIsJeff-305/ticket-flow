@@ -99,4 +99,7 @@ router.put('/:id', async (req, res) => {
     }
 });
 
+// Delete a Department
+
+
 module.exports = router;

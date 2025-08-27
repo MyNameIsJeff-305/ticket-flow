@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       }),
       User.belongsTo(models.Department, {
         foreignKey: 'departmentId',
-        onDelete: 'CASCADE'
+        onDelete: 'SET NULL'
       });
       User.hasMany(models.UserRole, {
         foreignKey: 'userId',
@@ -84,12 +84,13 @@ module.exports = (sequelize, DataTypes) => {
     },
     departmentId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
+      defaultValue: null,
       references: {
         model: 'Departments',
         key: 'id'
       },
-      onDelete: 'CASCADE'
+      onDelete: 'SET NULL'
     },
   }, {
     sequelize,
