@@ -62,6 +62,7 @@ module.exports = {
       {
         firstName: "Steve",
         lastName: "Jobs",
+        isActive: false,
         profilePicUrl: "https://cdn.vox-cdn.com/thumbor/yIoKynT0Jl-zE7yWwzmW2fy04xc=/0x0:706x644/1400x1400/filters:focal(353x322:354x323)/cdn.vox-cdn.com/uploads/chorus_asset/file/13874040/stevejobs.1419962539.png",
         title: "CEO",
         username: "DemoEmp6",
