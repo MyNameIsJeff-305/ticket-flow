@@ -22,13 +22,13 @@ router.use('/session', sessionRouter);
 router.use('/departments', departmentsRouter);
 router.use('/roles', rolesRouter);
 router.use('/permissions', permissionsRouter);
+router.use('/clients', clientsRouter);
 router.use('/status', statusesRouter);
 
 //Current Sorting
 router.use('/tickets', ticketsRouter);
 router.use('/parts', partsRouter);
 router.use('/notes', notesRouter);
-router.use('/clients', clientsRouter);
 
 router.get('/require-auth', requireAuth, (req, res) => {
     try {
