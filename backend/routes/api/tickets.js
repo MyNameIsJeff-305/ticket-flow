@@ -3,7 +3,7 @@ const express = require('express');
 const { Ticket, Status, Client, User, Part, Note } = require('../../db/models');
 
 const { requireAuth } = require('../../utils/auth');
-const { properUserValidation } = require('../../utils/validation');
+const { properUserValidation, properNoteValidation } = require('../../utils/validation');
 const { generateRandomPassword } = require('js-random-generator');
 
 const router = express.Router();
@@ -159,6 +159,7 @@ router.get('/:id', requireAuth, async (req, res, next) => {
             CreatedBy,
             ClientInfo,
             Parts,
+            Notes,
             StatusInfo
         }
 
@@ -268,6 +269,29 @@ router.post('/:id/parts', requireAuth, properUserValidation, async (req, res, ne
     }
 });
 
+// Remove a Part from a ticket based on the Ticket's id
+router.delete('/:ticketId/parts/:partId', requireAuth, properUserValidation, async (req, res, next) => {
+    try {
+        const { ticketId, partId } = req.params;
+        
+        const ticket = await Ticket.findByPk(parseInt(ticketId));
+        if (!ticket) {
+            return res.status(404).json({ message: 'Ticket not found' });
+        }
+
+        const part = await Part.findByPk(parseInt(partId));
+        if (!part) {
+            return res.status(404).json({ message: 'Part not found' });
+        }
+
+        await part.destroy();
+
+        return res.json({ message: 'Part removed from ticket' });
+    } catch (error) {
+        next(error);
+    }
+});
+
 //Get All the notes for a Ticket based on Ticket's Id
 router.get('/:id/notes', requireAuth, async (req, res, next) => {
     try {
@@ -311,6 +335,29 @@ router.post('/:id/notes', requireAuth, async (req, res, next) => {
 
         return res.json(createdNote);
 
+    } catch (error) {
+        next(error);
+    }
+});
+
+//Delete a Note of a Ticket based on the ticket Id
+router.delete('/:id/notes/:noteId', requireAuth, properNoteValidation, async (req, res, next) => {
+    try {
+        const { id, noteId } = req.params;
+
+        const ticket = await Ticket.findByPk(id);
+        if (!ticket) {
+            return res.status(404).json({ message: 'Ticket not found' });
+        }
+
+        const note = await Note.findByPk(noteId);
+        if (!note) {
+            return res.status(404).json({ message: 'Note not found' });
+        }
+
+        await note.destroy();
+
+        return res.json({ message: 'Note removed from ticket' });
     } catch (error) {
         next(error);
     }
