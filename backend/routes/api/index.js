@@ -6,13 +6,20 @@ const partsRouter = require('./parts.js');
 const notesRouter = require('./notes.js');
 const statusesRouter = require('./statuses.js');
 const clientsRouter = require('./clients.js');
+const departmentsRouter = require('./departments.js')
+
 const { restoreUser } = require("../../utils/auth.js");
 const { requireAuth } = require("../../utils/auth.js");
 
 router.use(restoreUser);
 
-router.use('/session', sessionRouter);
+//Fixed Sorting of Router
 router.use('/users', usersRouter);
+router.use('/session', sessionRouter);
+router.use('/departments', departmentsRouter);
+
+
+//Current Sorting
 router.use('/tickets', ticketsRouter);
 router.use('/parts', partsRouter);
 router.use('/notes', notesRouter);
