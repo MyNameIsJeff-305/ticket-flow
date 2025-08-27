@@ -100,6 +100,23 @@ router.put('/:id', async (req, res) => {
 });
 
 // Delete a Department
+router.delete('/:id', async (req, res) => {
+    try {
+        const department = await Department.findByPk(req.params.id);
 
+        if (!department) {
+            return res.status(404).json({ message: "Department not found" });
+        }
+
+        await department.destroy();
+        return res.json({ message: "Department deleted successfully" });
+    } catch (error) {
+        return res.status(500).json(
+            {
+                message: "Error Deleting Department",
+                error: error.message
+            });
+    }
+});
 
 module.exports = router;
