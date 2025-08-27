@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { Ticket, Status, Client, User, Part, Note } = require('../../db/models');
+const { Ticket, Status, Client, User, Part, Note, TicketEmployee } = require('../../db/models');
 
 const { requireAuth } = require('../../utils/auth');
 const { properUserValidation, properNoteValidation } = require('../../utils/validation');
@@ -149,6 +149,23 @@ router.get('/:id', requireAuth, async (req, res, next) => {
 
         const StatusInfo = await Status.findByPk(ticket.statusId);
 
+        const AssignedEmployeesData = await TicketEmployee.findAll({
+            where: {
+                ticketId: ticket.id
+            }
+        });
+
+        const AssignedEmployees = [];
+
+        for(const employee of AssignedEmployeesData) {
+            const user = await User.findByPk(employee.userId);
+            AssignedEmployees.push({
+                id: user.id,
+                name: user.username,
+                profilePicURL: user.profilePicUrl
+            });
+        }
+
         const safeTicket = {
             id: ticket.id,
             title: ticket.title,
@@ -156,6 +173,7 @@ router.get('/:id', requireAuth, async (req, res, next) => {
             checkIn: ticket.checkIn,
             checkOut: ticket.checkOut,
             hashedId: ticket.hashedId,
+            AssignedEmployees,
             CreatedBy,
             ClientInfo,
             Parts,
@@ -273,7 +291,7 @@ router.post('/:id/parts', requireAuth, properUserValidation, async (req, res, ne
 router.delete('/:ticketId/parts/:partId', requireAuth, properUserValidation, async (req, res, next) => {
     try {
         const { ticketId, partId } = req.params;
-        
+
         const ticket = await Ticket.findByPk(parseInt(ticketId));
         if (!ticket) {
             return res.status(404).json({ message: 'Ticket not found' });
@@ -393,6 +411,74 @@ router.get('/:id/status', requireAuth, async (req, res, next) => {
         const status = await Status.findByPk(ticket.statusId);
 
         return res.json(status);
+
+    } catch (error) {
+        next(error);
+    }
+});
+
+// Assign an Employee to the Ticket
+router.post('/:ticketId/assign', requireAuth, properUserValidation, async (req, res, next) => {
+    try {
+        const { ticketId } = req.params;
+
+        const ticket = await Ticket.findByPk(parseInt(ticketId));
+
+        if (!ticket) {
+            return res.status(404).json({ message: 'Ticket not found' });
+        }
+
+        const { userId } = req.body;
+
+        const user = await User.findByPk(userId);
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        const assignment = await TicketEmployee.create({
+            ticketId: ticket.id,
+            userId: user.id
+        });
+
+        return res.json(assignment);
+
+    } catch (error) {
+        next(error);
+    }
+});
+
+// Unassign an Employee to the Ticket
+router.delete('/:id/assign/:userId', requireAuth, properUserValidation, async (req, res, next) => {
+    try {
+        const ticket = await Ticket.findByPk(req.params.id);
+
+        if (!ticket) {
+            return res.status(404).json({ message: 'Ticket not found' });
+        }
+
+        const { userId } = req.params;
+
+        const user = await User.findByPk(userId);
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        const assignment = await TicketEmployee.findOne({
+            where: {
+                ticketId: ticket.id,
+                userId: user.id
+            }
+        });
+
+        if (!assignment) {
+            return res.status(404).json({ message: 'Assignment not found' });
+        }
+
+        await assignment.destroy();
+
+        return res.json({ message: 'Employee unassigned from ticket' });
 
     } catch (error) {
         next(error);
