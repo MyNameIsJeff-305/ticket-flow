@@ -30,23 +30,10 @@ router.get('/', requireAuth, async (req, res, next) => {
 //Get a Client by clientId
 router.get('/:id', requireAuth, async (req, res, next) => {
     try {
-        const client = await Client.findByPk(req.params.id);
-
-        return res.json(client);
-    }
-    catch (error) {
-        next(error);
-    }
-});
-
-//Get All Locations that belongs to a client
-router.get('/:id/locations', async (req, res, next) => {
-    try {
         const client = await Client.findByPk(req.params.id, {
             include: [{ model: Location }]
         });
-
-        return res.json(client.Locations);
+        return res.json(client);
     }
     catch (error) {
         next(error);
@@ -97,6 +84,29 @@ router.post('/:id/locations', async (req, res, next) => {
         });
 
         return res.status(201).json(location);
+    } catch (error) {
+        next(error);
+    }
+});
+
+//Remove a Location from a Client
+router.delete('/:clientId/locations/:locationId', async (req, res, next) => {
+    try {
+        const { clientId, locationId } = req.params;
+
+        const client = await Client.findByPk(clientId);
+        if (!client) {
+            return res.status(404).json({ message: 'Client not found' });
+        }
+
+        const location = await Location.findByPk(locationId);
+        if (!location) {
+            return res.status(404).json({ message: 'Location not found' });
+        }
+
+        await location.destroy();
+
+        return res.status(200).json({ message: 'Location removed from client' });
     } catch (error) {
         next(error);
     }
