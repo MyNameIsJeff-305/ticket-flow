@@ -46,7 +46,7 @@ router.post(
             // Find a user that match the email or the username
             const checkUserName = await User.findOne({ where: { username: username } });
             const checkUserEmail = await User.findOne({ where: { email: email } });
-            
+
             if (checkUserEmail) {
                 res.status(500);
                 return res.json({
@@ -95,7 +95,7 @@ router.put(
     async (req, res) => {
         const { id } = req.params;
         const user = await User.findByPk(id);
-        const { email, password, username, firstName, lastName } = req.body;
+        const { email, password, username, firstName, lastName, isActive } = req.body;
         const profileImageUrl = req.file ?
             await singleFileUpload({ file: req.file, public: true }) :
             null;
@@ -103,7 +103,7 @@ router.put(
 
 
         const hashedPassword = bcrypt.hashSync(password);
-        await user.update({ email: email || user.email, username: username || user.username, hashedPassword: hashedPassword || user.hashedPassword, firstName: firstName || user.firstName, lastName: lastName || user.lastName, profilePicUrl: profileImageUrl || user.profilePicUrl });
+        await user.update({ email: email || user.email, username: username || user.username, hashedPassword: hashedPassword || user.hashedPassword, firstName: firstName || user.firstName, lastName: lastName || user.lastName, profilePicUrl: profileImageUrl || user.profilePicUrl, isActive: isActive !== undefined ? isActive : user.isActive });
 
         const safeUser = {
             id: user.id,
@@ -111,7 +111,8 @@ router.put(
             username: user.username,
             firstName: user.firstName,
             lastName: user.lastName,
-            profilePicUrl: user.profilePicUrl
+            profilePicUrl: user.profilePicUrl,
+            isActive: user.isActive
         };
 
         await setTokenCookie(res, safeUser);
