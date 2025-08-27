@@ -1,12 +1,13 @@
 const express = require('express');
 const { requireAuth } = require('../../utils/auth');
 
-const { Client, Ticket, Location } = require('../../db/models');
+const { Client, Ticket, Location, LocationPhoneNumber } = require('../../db/models');
 const { singleFileUpload, singleMulterUpload } = require('../../awsS3');
+const { where } = require('sequelize');
 
 const router = express.Router();
 
-//Get All CLients
+//Get All Clients
 router.get('/', requireAuth, async (req, res, next) => {
     try {
         const page = parseInt(req.query.page) || null;
@@ -30,10 +31,23 @@ router.get('/', requireAuth, async (req, res, next) => {
 //Get a Client by clientId
 router.get('/:id', requireAuth, async (req, res, next) => {
     try {
-        const client = await Client.findByPk(req.params.id, {
-            include: [{ model: Location }]
+        const client = await Client.findByPk(req.params.id);
+        if (!client) {
+            return res.status(404).json({ message: 'Client not found' });
+        }
+
+        const locations = await Location.findAll({
+            where: { clientId: client.id }
         });
-        return res.json(client);
+
+        for (const location of locations) {
+            const phoneNumbers = await LocationPhoneNumber.findAll({
+                where: { locationId: location.id }
+            });
+            location.dataValues.phoneNumbers = phoneNumbers;
+        }
+
+        return res.json({ ...client.toJSON(), locations });
     }
     catch (error) {
         next(error);

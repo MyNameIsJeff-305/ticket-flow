@@ -10,6 +10,7 @@ const clientsRouter = require('./clients.js');
 const departmentsRouter = require('./departments.js');
 const rolesRouter = require('./roles.js');
 const permissionsRouter = require('./permission.js');
+const locationsRouter = require('./locations.js');
 
 const { restoreUser } = require("../../utils/auth.js");
 const { requireAuth } = require("../../utils/auth.js");
@@ -24,6 +25,7 @@ router.use('/roles', rolesRouter);
 router.use('/permissions', permissionsRouter);
 router.use('/clients', clientsRouter);
 router.use('/status', statusesRouter);
+router.use('/locations', locationsRouter);
 
 //Current Sorting
 router.use('/tickets', ticketsRouter);
