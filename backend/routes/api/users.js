@@ -221,7 +221,7 @@ router.get('/:id', requireAuth, async (req, res) => {
             attributes: { exclude: ['createdAt', 'updatedAt'] }
         });
 
-        return res.json({ ...user.dataValues, department: userDepartment, phoneNumbers: userPhoneNumbers });
+        return res.json({ ...user.toJSON(), department: userDepartment, phoneNumbers: userPhoneNumbers });
     } catch (error) {
         return res.status(500).json({ message: "Error fetching user", error: error.message });
     }
