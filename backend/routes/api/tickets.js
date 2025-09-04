@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { Ticket, Status, Client, User, Part, Note, TicketEmployee } = require('../../db/models');
+const { Ticket, Status, Client, User, Part, Note, TicketEmployee, Signature } = require('../../db/models');
 
 const { requireAuth } = require('../../utils/auth');
 const { properUserValidation, properNoteValidation } = require('../../utils/validation');
@@ -479,6 +479,27 @@ router.delete('/:id/assign/:userId', requireAuth, properUserValidation, async (r
         await assignment.destroy();
 
         return res.json({ message: 'Employee unassigned from ticket' });
+
+    } catch (error) {
+        next(error);
+    }
+});
+
+//Add a Signature to a Ticket
+router.post('/:id/signature', requireAuth, properUserValidation, async (req, res, next) => {
+    try {
+        const ticket = await Ticket.findByPk(req.params.id);
+
+        if (!ticket) {
+            return res.status(404).json({ message: 'Ticket not found' });
+        }
+
+        const { signature } = req.body;
+
+        ticket.signature = signature;
+        await ticket.save();
+
+        return res.json(ticket);
 
     } catch (error) {
         next(error);
