@@ -1,4 +1,4 @@
-const { singleFileUpload, singleMulterUpload } = require("../../awsS3");
+const { singleFileUpload, singleMulterUpload } = require("@backend/awsS3");
 
 const express = require('express');
 const bcrypt = require('bcryptjs');
