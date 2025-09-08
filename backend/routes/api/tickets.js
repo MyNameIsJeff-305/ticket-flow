@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { Ticket, Status, Client, User, Part, Note, TicketEmployee, Signature } = require('../../db/models');
+const { Ticket, Status, Client, User, Part, Note, TicketEmployee, Signature } = require('@db/models');
 
 const { requireAuth } = require('../../utils/auth');
 const { properUserValidation, properNoteValidation } = require('../../utils/validation');

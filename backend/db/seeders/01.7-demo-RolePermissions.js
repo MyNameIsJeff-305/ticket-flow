@@ -5,10 +5,10 @@ if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;
 }
 
-const {RolePermission} = require('../models')
+const { RolePermission } = require('@db/models')
 
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
     await RolePermission.bulkCreate([
       { roleId: 1, permissionId: 1 },
       { roleId: 1, permissionId: 2 },
@@ -19,7 +19,7 @@ module.exports = {
     ], options)
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     options.tableName = 'RolePermissions';
     await queryInterface.bulkDelete(options.tableName, null, options);
   }

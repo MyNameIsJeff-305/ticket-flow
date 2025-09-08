@@ -3,7 +3,7 @@ if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;
 }
 
-const { Signature } = require('../models');
+const { Signature } = require('@db/models');
 
 module.exports = {
   async up(queryInterface, Sequelize) {

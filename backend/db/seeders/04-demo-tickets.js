@@ -1,6 +1,6 @@
 const { generateRandomPassword } = require('js-random-generator');
 
-const { Ticket } = require('../models');
+const { Ticket } = require('@db/models');
 
 let options = {};
 if (process.env.NODE_ENV === 'production') {

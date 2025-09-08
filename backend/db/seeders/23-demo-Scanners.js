@@ -5,7 +5,7 @@ if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;
 }
 
-const { Scanner } = require('../models');
+const { Scanner } = require('@db/models');
 
 module.exports = {
   async up(queryInterface, Sequelize) {

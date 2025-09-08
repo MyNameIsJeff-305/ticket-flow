@@ -1,6 +1,6 @@
 const express = require('express');
 
-const {Permission, Role, RolePermission} = require('../../db/models')
+const {Permission, Role, RolePermission} = require('@db/models')
 
 const router = express.Router();
 

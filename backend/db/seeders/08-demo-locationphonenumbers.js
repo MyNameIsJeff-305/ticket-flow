@@ -1,6 +1,6 @@
 'use strict';
 
-const { LocationPhoneNumber } = require('../models');
+const { LocationPhoneNumber } = require('@db/models');
 
 let options = {};
 if (process.env.NODE_ENV === 'production') {

@@ -5,7 +5,7 @@ if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;
 }
 
-const { AudioAmplifierImage } = require('../models')
+const { AudioAmplifierImage } = require('@db/models');
 
 module.exports = {
   async up(queryInterface, Sequelize) {

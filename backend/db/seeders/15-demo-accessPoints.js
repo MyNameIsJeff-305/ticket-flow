@@ -5,7 +5,7 @@ if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;
 }
 
-const { AccessPoint } = require('../models')
+const { AccessPoint } = require('@db/models');
 
 module.exports = {
   async up(queryInterface, Sequelize) {

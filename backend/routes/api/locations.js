@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { Location, LocationPhoneNumber } = require('../../db/models');
+const { Location, LocationPhoneNumber } = require('@db/models');
 
 const router = express.Router();
 

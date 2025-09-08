@@ -5,7 +5,7 @@ if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;
 }
 
-const { Server } = require('../models')
+const { Server } = require('@db/models');
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {

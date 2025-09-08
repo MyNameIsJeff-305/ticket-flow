@@ -4,7 +4,7 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { User, EmployeePhoneNumber, Department } = require('../../db/models');
+const { User, EmployeePhoneNumber, Department } = require('@db/models');
 
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');

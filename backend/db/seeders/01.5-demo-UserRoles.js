@@ -5,10 +5,10 @@ if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;
 }
 
-const {UserRole} = require('../models')
+const { UserRole } = require('@db/models')
 
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
     await UserRole.bulkCreate([
       { userId: 1, roleId: 2 },
       { userId: 2, roleId: 1 },
@@ -19,7 +19,7 @@ module.exports = {
     ], options)
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     options.tableName = 'UserRoles';
     await queryInterface.bulkDelete(options.tableName, null, options);
   }

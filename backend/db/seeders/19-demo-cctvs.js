@@ -5,7 +5,7 @@ if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;
 }
 
-const { CCTV } = require('../models');
+const { CCTV } = require('@db/models');
 
 module.exports = {
   async up (queryInterface, Sequelize) {

@@ -5,10 +5,10 @@ if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;
 }
 
-const {Permission} = require('../models')
+const { Permission } = require('@db/models')
 
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
     await Permission.bulkCreate([
       { name: 'CREATE_TICKET' },
       { name: 'VIEW_TICKET' },
@@ -17,7 +17,7 @@ module.exports = {
     ], options)
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     options.tableName = 'Permissions';
     await queryInterface.bulkDelete(options.tableName, null, options);
   }

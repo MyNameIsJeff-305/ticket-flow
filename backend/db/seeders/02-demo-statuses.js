@@ -1,6 +1,6 @@
 'use strict';
 
-const { Status } = require('../models');
+const { Status } = require('@db/models')
 
 let options = {};
 if (process.env.NODE_ENV === 'production') {

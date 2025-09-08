@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { Role, UserRole, User } = require('../../db/models');
+const { Role, UserRole, User } = require('@db/models');
 
 const router = express.Router();
 

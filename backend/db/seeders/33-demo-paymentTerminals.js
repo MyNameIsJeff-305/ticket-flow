@@ -5,7 +5,7 @@ if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;
 }
 
-const { PaymentTerminal } = require('../models')
+const { PaymentTerminal } = require('@db/models');
 
 module.exports = {
   async up(queryInterface, Sequelize) {

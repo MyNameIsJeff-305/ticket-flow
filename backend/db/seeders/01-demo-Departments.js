@@ -5,10 +5,10 @@ if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;
 }
 
-const {Department} = require('../models')
+const { Department } = require('@db/models')
 
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
     await Department.bulkCreate([
       {
         name: 'HR',
@@ -25,7 +25,7 @@ module.exports = {
     ], options)
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     options.tableName = 'Departments';
     return queryInterface.bulkDelete(options);
   }

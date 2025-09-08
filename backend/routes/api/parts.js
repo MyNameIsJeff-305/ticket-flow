@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { Part, Ticket } = require('../../db/models');
+const { Part, Ticket } = require('@db/models');
 const { requireAuth } = require('../../utils/auth');
 const { properPartValidation } = require('../../utils/validation');
 const { singleMulterUpload, singleFileUpload } = require('../../awsS3');
