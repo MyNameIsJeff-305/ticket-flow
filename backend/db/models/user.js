@@ -25,6 +25,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'userId',
         onDelete: 'CASCADE'
       });
+      User.hasMany(models.StockMovement, {
+        foreignKey: 'userId',
+        onDelete: 'SET NULL'
+      });
     }
   }
   User.init({
