@@ -1,5 +1,5 @@
 const express = require('express');
-const { requireAuth } = require('../../utils/auth');
+const { requireAuth } = require('@utils/auth');
 
 const { Client, Ticket, Location, LocationPhoneNumber } = require('@db/models');
 const { singleFileUpload, singleMulterUpload } = require('../../awsS3');

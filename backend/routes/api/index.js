@@ -13,8 +13,8 @@ const permissionsRouter = require('./permission.js');
 const locationsRouter = require('./locations.js');
 const assessmentsRouter = require('./assessments.js')
 
-const { restoreUser } = require("../../utils/auth.js");
-const { requireAuth } = require("../../utils/auth.js");
+const { restoreUser } = require("@utils/auth.js");
+const { requireAuth } = require("@utils/auth.js");
 
 router.use(restoreUser);
 

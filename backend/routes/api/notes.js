@@ -1,8 +1,8 @@
 const express = require('express');
 
 const { Note } = require('@db/models');
-const { requireAuth } = require('../../utils/auth');
-const { properNoteValidation } = require('../../utils/validation');
+const { requireAuth } = require('@utils/auth');
+const { properNoteValidation } = require('@utils/validation');
 
 const router = express.Router();
 

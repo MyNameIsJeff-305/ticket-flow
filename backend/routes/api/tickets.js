@@ -2,8 +2,8 @@ const express = require('express');
 
 const { Ticket, Status, Client, User, Part, Note, TicketEmployee, Signature } = require('@db/models');
 
-const { requireAuth } = require('../../utils/auth');
-const { properUserValidation, properNoteValidation } = require('../../utils/validation');
+const { requireAuth } = require('@utils/auth');
+const { properUserValidation, properNoteValidation } = require('@utils/validation');
 const { generateRandomPassword } = require('js-random-generator');
 
 const router = express.Router();
