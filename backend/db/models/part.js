@@ -4,7 +4,10 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class Part extends Model {
     static associate(models) {
-      // define association here
+      Part.hasMany(models.PartImage, {
+        foreignKey: 'partId',
+        onDelete: 'CASCADE'
+      });
     }
   }
   Part.init({
