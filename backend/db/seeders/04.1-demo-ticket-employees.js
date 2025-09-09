@@ -3,7 +3,7 @@ if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;
 }
 
-const { TicketEmployee } = require('@db/models');
+const { TicketEmployee } = require('../models');
 
 module.exports = {
   async up(queryInterface, Sequelize) {

@@ -1,6 +1,6 @@
 'use strict';
 
-const { Firewall } = require('@db/models');
+const { Firewall } = require('../models');
 
 let options = {};
 if (process.env.NODE_ENV === 'production') {

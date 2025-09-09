@@ -5,7 +5,7 @@ if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;
 }
 
-const { ReconstructionStationImage } = require('@db/models');
+const { ReconstructionStationImage } = require('../models');
 
 module.exports = {
   async up(queryInterface, Sequelize) {

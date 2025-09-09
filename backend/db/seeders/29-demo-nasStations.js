@@ -5,7 +5,7 @@ if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;
 }
 
-const { nasStation } = require('@db/models');
+const { nasStation } = require('../models');
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {

@@ -5,7 +5,7 @@ if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;
 }
 
-const { SwitchImage } = require('@db/models');
+const { SwitchImage } = require('../models');
 
 module.exports = {
   async up(queryInterface, Sequelize) {

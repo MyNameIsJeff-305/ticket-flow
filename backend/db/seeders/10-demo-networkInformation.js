@@ -1,6 +1,6 @@
 'use strict';
 
-const { NetworkInformation } = require('@db/models');
+const { NetworkInformation } = require('../models');
 
 let options = {};
 if (process.env.NODE_ENV === 'production') {
