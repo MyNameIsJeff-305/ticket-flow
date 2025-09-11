@@ -5,7 +5,7 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class InventoryLocation extends Model {
     static associate(models) {
-      // define association here
+      
     }
   }
   InventoryLocation.init({
