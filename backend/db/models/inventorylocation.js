@@ -5,7 +5,10 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class InventoryLocation extends Model {
     static associate(models) {
-      
+      InventoryLocation.hasMany(models.PartStock, {
+        foreignKey: 'inventoryLocationId',
+        onDelete: 'CASCADE'
+      });
     }
   }
   InventoryLocation.init({
