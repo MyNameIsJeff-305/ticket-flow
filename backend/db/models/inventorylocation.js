@@ -9,6 +9,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'inventoryLocationId',
         onDelete: 'CASCADE'
       });
+      InventoryLocation.hasMany(models.StockMovement, {
+        foreignKey: 'inventoryLocationId',
+        onDelete: 'CASCADE'
+      });
     }
   }
   InventoryLocation.init({
