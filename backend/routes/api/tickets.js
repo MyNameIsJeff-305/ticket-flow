@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { Ticket, Status, Client, User, Part, Note, TicketEmployee, Signature } = require('@db/models');
+const {  StockMovement, Ticket, TicketPart, Status, Client, User, Part, Note, TicketEmployee, Signature } = require('@db/models');
 
 const { requireAuth } = require('@utils/auth');
 const { properUserValidation, properNoteValidation } = require('@utils/validation');
@@ -41,8 +41,9 @@ router.get('/', requireAuth, async (req, res, next) => {
 
         for (const ticket of tickets) {
             ticket["status"] = await Status.findByPk(where.status);
-            ticket.clientId = await Client.findByPk(where.client || ticket.clientId);
-            ticket.createdBy = await User.findByPk(where.createdBy || ticket.createdBy);
+            ticket.clientId = await Client.findByPk(where.client || ticket.clientId, { attributes: { exclude: ['id', 'createdAt', 'updatedAt', 'email', 'phoneNumber', 'address'] } });
+            ticket.createdBy = await User.findByPk(where.createdBy || ticket.createdBy, { attributes: { exclude: ['id', 'username', 'email', 'hashedPassword', 'createdAt', 'updatedAt', 'isActive', 'departmentId'] } });
+
             const values = ticket.toJSON();
 
             Tickets.push(values);
@@ -113,7 +114,10 @@ router.get('/current', requireAuth, async (req, res, next) => {
 
         for (const ticket of tickets) {
             ticket.clientId = await Client.findByPk(ticket.clientId);
+            ticket.createdBy = await User.findByPk(ticket.createdBy, { attributes: { exclude: ['id', 'username', 'email', 'hashedPassword', 'createdAt', 'updatedAt', 'isActive', 'departmentId'] } });
+
             const values = ticket.toJSON();
+
             Tickets.push(values);
         }
 
@@ -133,15 +137,20 @@ router.get('/:id', requireAuth, async (req, res, next) => {
             return res.status(404).json({ message: 'Ticket not found' });
         }
 
-        const CreatedBy = await User.findByPk(ticket.createdBy);
+        const CreatedBy = await User.findByPk(ticket.createdBy, { attributes: { exclude: ['id', 'username', 'email', 'hashedPassword', 'createdAt', 'updatedAt', 'isActive', 'departmentId'] } });
 
-        const ClientInfo = await Client.findByPk(ticket.clientId);
+        const ClientInfo = await Client.findByPk(ticket.clientId, { attributes: { exclude: ['id', 'createdAt', 'updatedAt', 'email', 'phoneNumber', 'address'] } });
 
-        const Parts = await Part.findAll({
-            where: {
-                ticketId: ticket.id
-            }
+        const ticketParts = await TicketPart.findAll({
+            where: { ticketId: ticket.id }
         });
+
+        const Parts = [];
+        
+        for (const part of ticketParts) {
+            const partInfo = await Part.findByPk(part.partId);
+            Parts.push(partInfo);
+        }
 
         let Notes = await Note.findAll({
 
@@ -157,7 +166,7 @@ router.get('/:id', requireAuth, async (req, res, next) => {
 
         const AssignedEmployees = [];
 
-        for(const employee of AssignedEmployeesData) {
+        for (const employee of AssignedEmployeesData) {
             const user = await User.findByPk(employee.userId);
             AssignedEmployees.push({
                 id: user.id,
@@ -263,48 +272,117 @@ router.get('/:id/parts', requireAuth, async (req, res, next) => {
 });
 
 // Add a Part to a Ticket based on the Ticket's Id
-router.post('/:id/parts', requireAuth, properUserValidation, async (req, res, next) => {
+router.post('/:ticketId/parts', requireAuth, properUserValidation, async (req, res, next) => {
+    const { ticketId } = req.params;
+    const { partId, quantity = 1, unitPrice, notes, inventoryLocationId } = req.body;
+
     try {
-        const ticket = await Ticket.findByPk(req.params.id);
-
-        if (!ticket) {
-            return res.status(404).json({ message: 'Ticket not found' });
-        }
-
-        const { name, description, imageUrl } = req.body;
-
-        const part = await Part.create({
-            name,
-            description,
-            imageUrl,
-            ticketId: ticket.id
+        const ticketPart = await TicketPart.create({
+            ticketId,
+            partId,
+            quantity,
+            unitPrice,
+            inventoryLocationId,
+            notes,
+            status: 'REQUESTED'
         });
 
-        return res.json(part);
+        await StockMovement.create({
+            partId,
+            inventoryLocationId,
+            quantity: -quantity,
+            type: 'out',
+            sourceType: 'Ticket Part Request',
+            sourceId: ticketPart.id,
+            employeeId: req.user.id
+        });
 
+        return res.status(201).json(ticketPart);
     } catch (error) {
         next(error);
     }
 });
 
-// Remove a Part from a ticket based on the Ticket's id
-router.delete('/:ticketId/parts/:partId', requireAuth, properUserValidation, async (req, res, next) => {
+// Update a Part as "Picked Up" and substract from stock
+router.put('/:ticketId/parts/:ticketPartId/pickup', requireAuth, properUserValidation, async (req, res, next) => {
+    const { ticketId, ticketPartId } = req.params;
+    
     try {
-        const { ticketId, partId } = req.params;
+        const ticketPart = await TicketPart.findOne({
+            where: {
+                id: ticketPartId,
+                ticketId: ticketId
+            }
+        });
 
-        const ticket = await Ticket.findByPk(parseInt(ticketId));
-        if (!ticket) {
-            return res.status(404).json({ message: 'Ticket not found' });
+        if (!ticketPart) {
+            return res.status(404).json({ message: 'Ticket Part not found' });
         }
 
-        const part = await Part.findByPk(parseInt(partId));
-        if (!part) {
-            return res.status(404).json({ message: 'Part not found' });
+        ticketPart.status = 'PICKED_UP';
+        await ticketPart.save();
+
+        return res.json(ticketPart);
+    } catch (error) {
+        next(error);
+    }
+});
+
+// Update a Part as "Installed"
+router.put('/:ticketId/parts/:ticketPartId/install', requireAuth, properUserValidation, async (req, res, next) => {
+    const { ticketId, ticketPartId } = req.params;
+    
+    try {
+        const ticketPart = await TicketPart.findOne({
+            where: {
+                id: ticketPartId,
+                ticketId: ticketId
+            }
+        });
+
+        if (!ticketPart) {
+            return res.status(404).json({ message: 'Ticket Part not found' });
         }
 
-        await part.destroy();
+        ticketPart.status = 'INSTALLED';
+        await ticketPart.save();
 
-        return res.json({ message: 'Part removed from ticket' });
+        return res.json(ticketPart);
+    } catch (error) {
+        next(error);
+    }
+});
+
+// Update a Part as "Returned" and add back to stock
+router.put('/:ticketId/parts/:ticketPartId/return', requireAuth, properUserValidation, async (req, res, next) => {
+    const { ticketId, ticketPartId } = req.params;
+    
+    try {
+        const ticketPart = await TicketPart.findOne({
+            where: {
+                id: ticketPartId,
+                ticketId: ticketId
+            }
+        });
+
+        if (!ticketPart) {
+            return res.status(404).json({ message: 'Ticket Part not found' });
+        }
+
+        ticketPart.status = 'RETURNED';
+        await ticketPart.save();
+
+        await StockMovement.create({
+            partId: ticketPart.partId,
+            inventoryLocationId: ticketPart.inventoryLocationId,
+            quantity: ticketPart.quantity,
+            type: 'in',
+            sourceType: 'Ticket Part Return',
+            sourceId: ticketPart.id,
+            employeeId: req.user.id
+        });
+
+        return res.json(ticketPart);
     } catch (error) {
         next(error);
     }
