@@ -1,18 +1,22 @@
 const express = require('express');
 
-const { Part, Ticket } = require('@db/models');
+const { Part } = require('@db/models');
 const { requireAuth } = require('@utils/auth');
-const { properPartValidation } = require('@utils/validation');
-const { singleMulterUpload, singleFileUpload } = require('@backend/awsS3');
+const { singleFileUpload } = require('@backend/awsS3');
 
 
 const router = express.Router();
 
 // GET /api/parts
-// Lista todas las partes
+// List all parts
 router.get('/', requireAuth, async (req, res) => {
     try {
         const parts = await Part.findAll();
+
+        if (!parts) {
+            return res.status(404).json({ error: 'No parts found' });
+        }
+
         return res.json(parts);
     }
     catch (error) {
@@ -21,7 +25,7 @@ router.get('/', requireAuth, async (req, res) => {
 });
 
 // GET /api/parts/:id
-// Ver detalle de una parte
+// Get Details of a specific Part
 router.get('/:id', requireAuth, async (req, res) => {
     try {
         const part = await Part.findByPk(req.params.id);
@@ -35,7 +39,7 @@ router.get('/:id', requireAuth, async (req, res) => {
 });
 
 // POST /api/parts
-// Crear nueva parte
+// Create a new Part
 router.post('/', requireAuth, async (req, res, next) => {
     try {
         const { sku, name, description, brand, model, imageUrl, unit, defaultPrice, active } = req.body;
@@ -55,7 +59,7 @@ router.post('/', requireAuth, async (req, res, next) => {
 });
 
 // PUT /api/parts/:id
-// Actualizar parte
+// Update Part
 router.put('/:id', requireAuth, async (req, res, next) => {
     try {
         const { name, description, brand, model, imageUrl, unit, defaultPrice, active } = req.body;
@@ -78,7 +82,7 @@ router.put('/:id', requireAuth, async (req, res, next) => {
 });
 
 // DELETE /api/parts/:id
-// Eliminar/desactivar parte
+// Delete Part
 router.delete('/:id', requireAuth, async (req, res, next) => {
     try {
         const part = await Part.findByPk(req.params.id);
