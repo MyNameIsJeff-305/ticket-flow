@@ -22,6 +22,21 @@ module.exports = {
       description: {
         type: Sequelize.STRING(255)
       },
+      brand: {
+        type: Sequelize.STRING(100),
+        allowNull: false,
+        defaultValue: "Generic"
+      },
+      model: {
+        type: Sequelize.STRING(100),
+        allowNull: false,
+        defaultValue: "Standard"
+      },
+      imageUrl: {
+        type: Sequelize.STRING(255),
+        allowNull: false,
+        defaultValue: 'https://coffective.com/wp-content/uploads/2018/06/default-featured-image.png.jpg'
+      },
       unit: {
         type: Sequelize.STRING(20),
         allowNull: false,

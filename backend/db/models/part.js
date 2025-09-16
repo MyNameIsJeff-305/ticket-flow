@@ -36,6 +36,21 @@ module.exports = (sequelize, DataTypes) => {
     description: {
       type: DataTypes.STRING(255)
     },
+    brand: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+      defaultValue: "Generic"
+    },
+    model: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+      defaultValue: "Standard"
+    },
+    imageUrl: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
+      defaultValue: 'https://coffective.com/wp-content/uploads/2018/06/default-featured-image.png.jpg'
+    },
     unit: {
       type: DataTypes.STRING(20),
       allowNull: false,

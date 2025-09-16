@@ -14,6 +14,9 @@ module.exports = {
         sku: 'CAB-ETH-10FT',
         name: 'Ethernet Cable 10ft',
         description: 'Cat6 UTP',
+        brand: 'NetGear',
+        model: 'NC6-10',
+        imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/6/61/EthernetCableGreen.jpg',
         unit: 'ea',
         defaultPrice: 4.50,
         active: true
@@ -21,6 +24,8 @@ module.exports = {
       {
         sku: 'SW-24POE',
         name: 'PoE Switch 24 Ports',
+        brand: 'Cisco',
+        model: 'SG250-26HP',
         description: 'Gigabit PoE+',
         unit: 'ea',
         defaultPrice: 249.99,

@@ -3,7 +3,6 @@ const router = require('express').Router();
 const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
 const ticketsRouter = require('./tickets.js');
-const partsRouter = require('./parts.js');
 const notesRouter = require('./notes.js');
 const statusesRouter = require('./statuses.js');
 const clientsRouter = require('./clients.js');
@@ -11,7 +10,11 @@ const departmentsRouter = require('./departments.js');
 const rolesRouter = require('./roles.js');
 const permissionsRouter = require('./permission.js');
 const locationsRouter = require('./locations.js');
-const assessmentsRouter = require('./assessments.js')
+const assessmentsRouter = require('./assessments.js');
+const partsRouter = require('./parts.js');
+
+const inventoryRouter = require('./inventory.js');
+// const stockRouter = require('./stock.js'); 
 
 const { restoreUser } = require("@utils/auth.js");
 const { requireAuth } = require("@utils/auth.js");
@@ -28,9 +31,12 @@ router.use('/clients', clientsRouter);
 router.use('/status', statusesRouter);
 router.use('/locations', locationsRouter);
 router.use('/tickets', ticketsRouter);
-router.use('/parts', partsRouter);
 router.use('/notes', notesRouter);
 router.use('/assessments', assessmentsRouter);
+router.use('/parts', partsRouter);
+
+router.use('/inventory', inventoryRouter);
+// router.use('/stock', stockRouter);
 
 router.get('/require-auth', requireAuth, (req, res) => {
     try {
