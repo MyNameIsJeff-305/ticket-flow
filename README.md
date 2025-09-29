@@ -13,7 +13,7 @@ Ticket Flow is an IT Ticketing System designed to streamline the management of I
 - **Ticket Management**: Create, edit, and manage tickets with ease. Tickets are categorized into new, pending, and closed statuses.
 ![Dashboard]
 
-[Dashboard]: ./images/Dashboard.png
+[Dashboard]: ./images/ticketflow.png
 - **Client Management**: Add, edit, and store client information with support for profile image uploads.
 ![ClientTab]
 
