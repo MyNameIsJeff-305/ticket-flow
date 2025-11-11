@@ -13,7 +13,7 @@ import { getAllStatusThunk } from "../../store/status";
 import { getAllNotesThunk } from "../../store/notes";
 import NoteCard from "../NoteCard";
 import { getAllPartsThunk } from "../../store/parts";
-import PartCard from "../PartCard/PartCard";
+import PartCard from "../_PartCard/PartCard";
 import AddPart from "../AddPart";
 import EditTicket from "../EditTicket/EditTicket";
 
@@ -91,8 +91,6 @@ export default function TicketDetails() {
         setPartsChecker(true);
         setDeletePartChecker(true);
     }
-
-    // console.log(ticket.hashedId, "TICKET HASHED ID");
 
     return (
         <section className="ticket-details-tab">

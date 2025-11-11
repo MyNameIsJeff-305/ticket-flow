@@ -6,6 +6,7 @@ const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const { ValidationError } = require('sequelize');
 require('express-async-errors');
+const publicWebhookPaths = require('./routes/api/integrations/twilio').publicWebhookPaths;
 
 const { environment } = require('./config');
 const routes = require('./routes');
@@ -28,15 +29,21 @@ app.use(helmet.crossOriginResourcePolicy({
 })
 );
 
-app.use(
-    csurf({
-        cookie: {
-            secure: isProduction,
-            sameSite: isProduction && "Lax",
-            httpOnly: true
-        }
-    })
-);
+const csrfProtection = csurf({
+    cookie: {
+        secure: isProduction,
+        sameSite: isProduction && "Lax",
+        httpOnly: true
+    }
+});
+
+app.use((req, res, next) => {
+    // Skip CSRF for puiblic webhooks
+    if (publicWebhookPaths.includes(req.path)) {
+        return next();
+    }
+    return csrfProtection(req, res, next);
+});
 
 app.use(routes);
 
@@ -60,7 +67,7 @@ app.use((err, _req, _res, next) => {
     next(err);
 });
 
-app.use((err, _req, res, _next) => { 
+app.use((err, _req, res, _next) => {
     res.status(err.status || 500);
     if (isProduction) {
         delete err.title;

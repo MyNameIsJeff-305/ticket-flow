@@ -1,60 +1,101 @@
-/* Tickets Tab Container */
 .tickets-tab {
     display: flex;
     width: 100%;
-    flex-direction: column;
-    align-content: space-between;
-    justify-content: space-between;
     flex: 1;
+    flex-direction: column;
+    /* align-content: space-between;
+    justify-content: space-between; */
 }
 
 /* Tickets Header */
-.tickets-header {
+.tickets-section-header {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
     padding-left: 20px;
     padding-right: 20px;
 }
 
-.tickets-header h1 {
+.tickets-header-left {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+}
+
+.sorting-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background-color: transparent;
+    border: 1px solid var(--tiffany-blue);
+    color: var(--tiffany-blue);
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 5px;
+    padding: 4px 10px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+
+    &:hover {
+        background-color: rgba(29, 161, 242, 0.1);
+        color: var(--text-color);
+    }
+
+    svg {
+        font-size: 16px;
+    }
+}
+
+.tickets-section-header .spacer {
+    flex: 1 1 auto;
+}
+
+.tickets-section-header .btn-toggle-filters {
+    width: fit-content;
+}
+
+.section-header h1 {
     font-size: 2rem;
     color: var(--text-color);
-    /* Adapt text color based on theme */
 }
 
 /* Add Ticket Button */
 .add-ticket-btn {
     display: flex;
-    justify-content: center;
     align-items: center;
-    /* gap: 5px; */
-    /* font-size: 1rem; */
-    background-color: var(--special-btn);
-    /* border: solid 1px var(--button-bg-color); */
-    border-radius: 10px;
-    /* Button background */
-    color: var(--text-color);
-    /* Button text color */
-    padding: 5px;
+    justify-content: center;
+    gap: 6px;
+    background-color: transparent;
+    border: 1px solid var(--tiffany-blue);
+    color: var(--tiffany-blue);
+    font-size: 14px;
     cursor: pointer;
+    margin: 10px auto;
+    padding: 8px 14px;
+    border-radius: 8px;
     transition: background-color 0.3s ease, color 0.3s ease;
+
+    &:hover {
+        background-color: rgba(29, 161, 242, 0.1);
+        color: var(--text-color);
+    }
+
+    svg {
+        font-size: 16px;
+    }
 }
 
 /* Tickets Container */
 .tickets-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding-left: 20px;
-    padding-right: 20px;
-    width: 96%;
-    /* margin-bottom: 10px; */
-    /* overflow-y: auto; */
-    overflow-x: hidden;
-    max-height: 850px;
-    /* Allow scrolling within the container */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(600px, 1fr));
+    grid-auto-rows: 1fr;
+    gap: 12px;
+    padding: 0 20px 20px 20px;
+    overflow-y: auto;
 }
 
 /* Tickets Footer */
@@ -70,10 +111,7 @@
 .prev-btn,
 .next-btn {
     background-color: var(--button-bg-color);
-    /* Button background */
     color: var(--button-text-color);
-    /* Button text */
-    /* border: none; */
     width: fit-content;
     padding: 10px 15px;
     font-size: 1.2rem;
@@ -86,16 +124,13 @@
 .prev-btn:disabled,
 .next-btn:disabled {
     background-color: var(--login-bg);
-    /* Disabled button background */
     color: var(--text-color);
-    /* Disabled text color */
     cursor: not-allowed;
 }
 
 .prev-btn:hover:not(:disabled),
 .next-btn:hover:not(:disabled) {
     background-color: var(--ultra-violet);
-    /* Darker background on hover */
 }
 
 /* Loader (for loading state) */
@@ -103,12 +138,18 @@
     width: 48px;
     height: 48px;
     border: 5px solid var(--seasalt);
-    /* Outer part adapts to theme */
     border-top: 5px solid var(--button-bg-color);
-    /* Themed rotating part */
     border-radius: 50%;
     animation: spin 1s linear infinite;
     margin: auto;
+}
+
+.btn-toggle-filters .btn-icon {
+    transition: all 0.3s ease;
+}
+
+.btn-toggle-filters.active .btn-icon {
+    transform: rotate(180deg);
 }
 
 /* Spin Animation for Loader */

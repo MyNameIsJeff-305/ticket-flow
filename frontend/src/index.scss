@@ -1,0 +1,60 @@
+/* General layout styles */
+.app-div-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* min-height: 100vh; */
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.main-panel {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    width: 100%;
+    // height: fit-content;
+    padding-left: $sidebarWidth;
+}
+
+/* Header styles */
+header.main-header {
+    width: 100%;
+    padding: 10px 20px;
+}
+
+/* Main content area */
+.main-zone {
+    display: flex;
+    flex-direction: row;
+    // padding: 10px 20px;
+    flex: 1;
+}
+
+.section-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 75%;
+    padding: 20px;
+}
+
+.my-work-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px;
+    width: 25%;
+    flex: 1;
+    background-color: var(--surface-color);
+}
+
+/* Footer styles */
+footer {
+    background-color: var(--footer-bg-color);
+    color: var(--footer-text-color);
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+}

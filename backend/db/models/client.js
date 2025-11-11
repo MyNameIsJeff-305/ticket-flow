@@ -8,7 +8,11 @@ module.exports = (sequelize, DataTypes) => {
       Client.hasMany(models.Ticket, {
         foreignKey: 'clientId',
         onDelete: 'CASCADE'
-      })
+      });
+      Client.hasMany(models.Location, {
+        foreignKey: 'clientId',
+        onDelete: 'CASCADE'
+      });
     }
   }
   Client.init({
@@ -33,8 +37,8 @@ module.exports = (sequelize, DataTypes) => {
         isEmail: true,
       },
     },
-    phoneNumber: {
-      type: DataTypes.INTEGER,
+    phone: {
+      type: DataTypes.STRING(15),
       unique: true
     },
     profilePicUrl: {

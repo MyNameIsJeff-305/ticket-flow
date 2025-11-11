@@ -1,4 +1,5 @@
 let options = {};
+
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;
 }
@@ -7,44 +8,63 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Parts', {
       id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true, autoIncrement: true
+      },
+      sku: {
+        type: Sequelize.STRING(50),
         allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
+        unique: true
       },
       name: {
-        type: Sequelize.STRING(50),
-        allowNull: false
+        type: Sequelize.STRING(100), allowNull: false
       },
       description: {
-        type: Sequelize.STRING(255),
+        type: Sequelize.STRING(255)
       },
-      ticketId: {
-        type: Sequelize.INTEGER,
+      brand: {
+        type: Sequelize.STRING(100),
         allowNull: false,
-        references: {
-          model: 'Tickets',
-          key: 'id'
-        },
-        onDelete: 'CASCADE'
+        defaultValue: "Generic"
+      },
+      model: {
+        type: Sequelize.STRING(100),
+        allowNull: false,
+        defaultValue: "Standard"
       },
       imageUrl: {
         type: Sequelize.STRING(255),
+        allowNull: false,
+        defaultValue: 'https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png'
+      },
+      unit: {
+        type: Sequelize.STRING(20),
+        allowNull: false,
+        defaultValue: 'unit'
+      },
+      defaultPrice: {
+        type: Sequelize.DECIMAL(10, 2)
+      },
+      active: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: true
       },
       createdAt: {
-        allowNull: false,
         type: Sequelize.DATE,
+        allowNull: false,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       },
       updatedAt: {
-        allowNull: false,
         type: Sequelize.DATE,
+        allowNull: false,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       }
     }, options);
   },
-  async down(queryInterface, Sequelize) {
+
+  async down(queryInterface) {
     options.tableName = 'Parts';
-    return queryInterface.dropTable(options);
+    await queryInterface.dropTable(options);
   }
 };

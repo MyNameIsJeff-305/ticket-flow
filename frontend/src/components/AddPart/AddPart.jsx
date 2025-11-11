@@ -2,16 +2,23 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 
-import './AddPart.css';
-
 import { addPartThunk } from "../../store/parts";
 
-export default function AddPart({ ticketId, setPartsChecker }) {
+import './AddPart.scss'
+
+export default function AddPart({ setPartsChecker }) {
     const dispatch = useDispatch();
 
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
+    const [sku, setSku] = useState('');
     // const [imageUrl, setImageUrl] = useState('');
+    const [brand, setBrand] = useState('Generic');
+    const [model, setModel] = useState('Standard');
+    const [unit, setUnit] = useState('unit');
+    const [defaultPrice, setDefaultPrice] = useState(0.00);
+    const [active, setActive] = useState(true);
+
     const [errors, setErrors] = useState({});
 
     const [partImageURL, setPartImageURL] = useState('/assets/placeholder-image.jpg');
@@ -25,6 +32,12 @@ export default function AddPart({ ticketId, setPartsChecker }) {
     useEffect(() => {
         setName('');
         setDescription('');
+        setSku('');
+        setBrand('');
+        setModel('');
+        setUnit('');
+        setDefaultPrice(0.00);
+        setActive(true);
         // setImageUrl('');
         setErrors({});
         setPartImageURL('/assets/placeholder-image.jpg');
@@ -38,9 +51,14 @@ export default function AddPart({ ticketId, setPartsChecker }) {
         if (!name || name === '') {
             newErrors.name = "Please enter a valid part name";
         }
+
+        if (!sku || sku === '') {
+            newErrors.sku = "Please enter a valid SKU";
+        }
+
         setErrors(newErrors);
         setIsButtonDisabled(Object.keys(newErrors).length > 0);
-    }, [name]);
+    }, [name, sku]);
 
     const updateFile = e => {
         const file = e.target.files[0];
@@ -48,7 +66,6 @@ export default function AddPart({ ticketId, setPartsChecker }) {
             setSelectedFile(file);
             const fileURL = URL.createObjectURL(file);
             setPartImageURL(fileURL);
-            console.log(fileURL, "THIS IS THE FILE URL");
         }
     }
 
@@ -59,11 +76,14 @@ export default function AddPart({ ticketId, setPartsChecker }) {
         const newPart = {
             name: name,
             description: description,
-            imageUrl: selectedFile || partImageURL,
-            ticketId: ticketId
+            sku: sku,
+            brand: brand,
+            model: model,
+            unit: unit,
+            defaultPrice: defaultPrice,
+            active: active,
+            imageUrl: selectedFile
         }
-
-        console.log(newPart, "THIS IS THE NEW PART");
 
         return dispatch(addPartThunk(newPart))
             .then(() => {
@@ -80,38 +100,126 @@ export default function AddPart({ ticketId, setPartsChecker }) {
 
     return (
         <div className="add-part-container">
+            <div className="add-part-header">
+                <h1>Add a Part</h1>
+            </div>
             <form onSubmit={handleSubmit} className="add-part-form">
-                <div className="add-part-title">Add a Part</div>
-                <div className="add-part-input">
-                    <label>Part Name</label>
+                <div className="add-part-left">
+                    <div className="image-wrapper" onClick={() => document.getElementById('hiddenAddFileInput').click()}>
+                        <img
+                            src={partImageURL}
+                            alt="client-avatar"
+                            className="client-image"
+                        />
+                        <div className="image-overlay">Click to upload</div>
+                    </div>
                     <input
-                        type="text"
-                        name="name"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                    />
-                    {errors.name && <div>{errors.name}</div>}
-                </div>
-                <div className="add-part-input">
-                    <label>Description</label>
-                    <textarea
-                        name="description"
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                    />
-                </div>
-                <div className="add-part-input">
-                    <img src={partImageURL} alt="user-avatar" className="part-image" />
-                    <input
+                        id="hiddenAddFileInput"
                         type="file"
-                        name='img_url'
+                        name="img_url"
+                        capture="environment"
+                        accept=".jpg, .jpeg, .png"
                         onChange={updateFile}
-                        accept='.jpg, .jpeg, .png'
+                        style={{ display: 'none' }}
                     />
+                    {errors.profilePicUrl && <span className="error">{errors.profilePicUrl}</span>}
+                </div>
+                <div className="add-part-right">
+                    <div className="add-part-name-sku">
+                        <div className="add-part-input">
+                            <label>Part Name</label>
+                            <input
+                                type="text"
+                                name="name"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                            />
+                            {errors.name && <div className="error">{errors.name}</div>}
+                        </div>
+                        <div className="add-part-input">
+                            <label>SKU</label>
+                            <input
+                                type="text"
+                                name="sku"
+                                value={sku}
+                                onChange={(e) => setSku(e.target.value)}
+                            />
+                            {errors.sku && <div className="error">{errors.sku}</div>}
+                        </div>
+                    </div>
+
+                    <div className="add-part-description">
+                        <div className="add-part-input">
+                            <label>Description</label>
+                            <textarea
+                                name="description"
+                                value={description}
+                                onChange={(e) => setDescription(e.target.value)}
+                            />
+                        </div>
+                    </div>
+
+                    <div className="brand-model">
+                        <div className="add-part-input">
+                            <label>Brand</label>
+                            <input
+                                type="text"
+                                name="brand"
+                                placeholder="Generic"
+                                value={brand}
+                                onChange={(e) => setBrand(e.target.value)}
+                            />
+                        </div>
+                        <div className="add-part-input">
+                            <label>Model</label>
+                            <input
+                                type="text"
+                                name="model"
+                                placeholder="Standard"
+                                value={model}
+                                onChange={(e) => setModel(e.target.value)}
+                            />
+                        </div>
+                    </div>
+
+                    <div className="unit-price">
+                        <div className="add-part-input">
+                            <label>Unit</label>
+                            <select
+                                className="select-unit"
+                                type="text"
+                                name="unit"
+                                placeholder="unit"
+                                value={unit}
+                                onChange={(e) => setUnit(e.target.value)}
+                            >
+                                <option value="">Select unit</option>
+                                <option value="lb">lb</option>
+                                <option value="oz">oz</option>
+                                <option value="unit">unit</option>
+                                <option value="box">box</option>
+                                <option value="pack">pack</option>
+                                <option value="set">set</option>
+                                <option value="gallon">gallon</option>
+                                <option value="other">other</option>
+                            </select>
+                        </div>
+                        <div className="add-part-input">
+                            <label>Default Price (USD)</label>
+                            <input
+                                type="number"
+                                name="defaultPrice"
+                                min="0.00"
+                                step="0.01"
+                                value={defaultPrice}
+                                onChange={(e) => setDefaultPrice(e.target.value)}
+                            />
+                        </div>
+                    </div>
                 </div>
                 <div className="add-part-buttons">
-                    <button type="submit" disabled={isButtonDisabled}>Add Part</button>
-                    <button onClick={closeModal}>Cancel</button>
+                    <button className="btn-add-part" type="submit" disabled={isButtonDisabled}>Add Part</button>
+                    <button className="btn-cancel" onClick={closeModal}>Cancel</button>
                 </div>
             </form>
         </div>

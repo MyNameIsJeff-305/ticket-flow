@@ -6,11 +6,13 @@ import statusReducer from './status';
 import clientsReducer from './clients';
 import notesReducer from './notes';
 import partsReducer from './parts';
+import stockLocationsReducer from './stockLocations';
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   tickets: ticketsReducer,
   status: statusReducer,
+  stockLocations: stockLocationsReducer,
   clients: clientsReducer,
   notes: notesReducer,
   parts: partsReducer,

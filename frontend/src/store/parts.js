@@ -2,6 +2,7 @@ import { csrfFetch } from './csrf';
 
 //Constants
 const GET_ALL_PARTS = 'parts/getAllParts';
+const GET_TOTAL_PARTS_AMOUNT = 'parts/getTotalPartsAmount';
 const GET_PART = 'parts/getPart';
 const ADD_PART = 'parts/addPart';
 const EDIT_PART = 'parts/editPart';
@@ -11,6 +12,11 @@ const DELETE_PART = 'parts/deletePart';
 const getAllParts = (parts) => ({
     type: GET_ALL_PARTS,
     payload: parts
+});
+
+const getTotalPartsAmount = (amount) => ({
+    type: GET_TOTAL_PARTS_AMOUNT,
+    payload: amount
 });
 
 const getPart = (part) => ({
@@ -34,10 +40,16 @@ const deletePart = (part) => ({
 });
 
 //Thunks
-export const getAllPartsThunk = () => async (dispatch) => {
-    const res = await csrfFetch('/api/parts');
+export const getAllPartsThunk = (page, size) => async (dispatch) => {
+    const res = await csrfFetch(`/api/parts?page=${page}&size=${size}`);
     const parts = await res.json();
     dispatch(getAllParts(parts));
+};
+
+export const getTotalPartsAmountThunk = () => async (dispatch) => {
+    const res = await csrfFetch('/api/parts');
+    const amount = await res.json();
+    dispatch(getTotalPartsAmount(amount.length));
 };
 
 export const getPartThunk = (partId) => async (dispatch) => {
@@ -46,23 +58,36 @@ export const getPartThunk = (partId) => async (dispatch) => {
     dispatch(getPart(part));
 };
 
+export const getPartTotalStockThunk = async (partId) => {
+    const res = await csrfFetch(`/api/parts/${partId}`);
+    const part = await res.json();
+    return part.totalStock;
+};
+
 export const addPartThunk = (part) => async (dispatch) => {
-    const { name, description, ticketId, imageUrl } = part;
+    const { sku, name, description, brand, model, unit, defaultPrice, active, imageUrl } = part;
 
     try {
         const formData = new FormData();
+        formData.append('sku', sku);
         formData.append('name', name);
         formData.append('description', description);
-        formData.append('ticketId', ticketId);
-        formData.append('image', imageUrl);
-
-        const options = {
-            method: "POST",
-            body: formData
+        formData.append('brand', brand);
+        formData.append('model', model);
+        formData.append('unit', unit);
+        formData.append('defaultPrice', defaultPrice);
+        formData.append('active', active);
+        if (imageUrl) {
+            formData.append('image', imageUrl);
         }
-        const res = await csrfFetch('/api/parts', options);
 
-        if(res.ok) {
+        const res = await csrfFetch('/api/parts', {
+            method: "POST",
+            headers: {},
+            body: formData
+        });
+
+        if (res.ok) {
             const newPart = await res.json();
             dispatch(addPart(newPart));
         } else if (res.status < 500) {
@@ -79,14 +104,15 @@ export const addPartThunk = (part) => async (dispatch) => {
 
 export const editPartThunk = (part) => async (dispatch) => {
 
-    const { name, description, ticketId, imageUrl } = part;
+    const { name, description, unit, defaultPrice, active } = part;
 
     try {
         const formData = new FormData();
         formData.append('name', name);
         formData.append('description', description);
-        formData.append('ticketId', ticketId);
-        formData.append('image', imageUrl);
+        formData.append('unit', unit);
+        formData.append('defaultPrice', defaultPrice);
+        formData.append('active', active);
 
         const options = {
             method: "PUT",
@@ -94,7 +120,7 @@ export const editPartThunk = (part) => async (dispatch) => {
         }
         const res = await csrfFetch(`/api/parts/${part.id}`, options);
 
-        if(res.ok) {
+        if (res.ok) {
             const updatedPart = await res.json();
             dispatch(editPart(updatedPart));
         } else if (res.status < 500) {
@@ -120,13 +146,17 @@ export const deletePartThunk = (partId) => async (dispatch) => {
 //Reducer
 const initialState = {
     allParts: [],
-    part: {}
+    part: {},
+    totalPartsAmount: 0
 };
 
 const partsReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_ALL_PARTS: {
             return { ...state, allParts: action.payload };
+        }
+        case GET_TOTAL_PARTS_AMOUNT: {
+            return { ...state, totalPartsAmount: action.payload };
         }
         case GET_PART: {
             return { ...state, part: action.payload };

@@ -1,0 +1,112 @@
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 10;
+    width: $sidebarWidth;
+    height: 100vh;
+    background-color: var(--surface-color) !important;
+    overflow-y: auto;
+}
+
+:root {
+    --link-color: #7c6b9f;
+    --active-link-color: #6200ee;
+    --active-link-bg: #6300ee0d;
+    --link-hover-bg: #3f28570a;
+}
+
+.dark-mode {
+    --link-color: #727190;
+    --active-link-color: #bb86fc;
+    --active-link-bg: #bb86fc1d;
+    --link-hover-bg: #ffffff0d;
+
+    .sidebar{
+        .brand {
+            img {
+                margin-top: 20px;
+                content: url('/assets/logo-dark.png');
+            }
+        }
+    }
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        width: 100%;
+        padding: 16px 16px 16px 36px;
+        text-decoration: none;
+
+        img {
+            content: url('/assets/logo-light.png');
+            width: 120px;
+            margin-top: 20px;
+        }
+
+        .title {
+            font-size: 20px;
+            font-weight: 600;
+        }
+    }
+
+    ul.nav-list {
+        list-style: none;
+        padding: 0 0 0 24px;
+        margin-top: 24px;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    }
+
+    .nav-item {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 16px;
+        border-radius: 5px 0 0 5px;
+        font-size: 16px;
+        text-decoration: none;
+        color: var(--link-color);
+        transition: all 0.3s ease;
+
+        .nav-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        &:hover {
+            background-color: var(--link-hover-bg);
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 8px;
+            bottom: 8px;
+            display: none;
+            width: 4px;
+            border-radius: 4px 0 0 4px;
+            background-color: var(--active-link-color);
+        }
+
+        &.active {
+            color: var(--active-link-color);
+            background-color: var(--active-link-bg);
+
+            &::after {
+                display: block;
+            }
+        }
+    }
+}

@@ -1,0 +1,90 @@
+.inventory-tab {
+    display: flex;
+    width: 100%;
+    flex: 1;
+    flex-direction: column;
+    // align-content: space-between;
+    // justify-content: space-between;
+
+    .section-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 15px;
+
+        h1 {
+            font-size: 2rem;
+            color: var(--text-color);
+        }
+
+        .btn-add-item {
+            display: flex;
+            align-items: center;
+            width: fit-content;
+            justify-content: end;
+            gap: 6px;
+            background-color: transparent;
+            border: 1px solid var(--tiffany-blue);
+            color: var(--tiffany-blue);
+            font-size: 14px;
+            cursor: pointer;
+            // margin: 10px 10px;
+            padding: 8px 14px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+
+            &:hover {
+                background-color: rgba(29, 161, 242, 0.1);
+                color: var(--text-color);
+            }
+
+            svg {
+                font-size: 16px;
+            }
+        }
+    }
+
+    .inventory-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+        gap: 12px;
+        padding: 0 20px 20px 20px;
+        overflow-y: auto;
+    }
+
+    .inventory-footer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        margin-top: 20px;
+        
+        .prev-btn,
+        .next-btn {
+            background-color: var(--button-bg-color);
+            color: var(--button-text-color);
+            width: fit-content;
+            padding: 10px 15px;
+            font-size: 1.2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+    
+        .prev-btn:disabled,
+        .next-btn:disabled {
+            background-color: var(--login-bg);
+            color: var(--text-color);
+            cursor: not-allowed;
+        }
+    
+        .prev-btn:hover:not(:disabled),
+        .next-btn:hover:not(:disabled) {
+            background-color: var(--ultra-violet);
+        }
+    }
+}

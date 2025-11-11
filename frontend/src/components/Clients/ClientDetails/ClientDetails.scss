@@ -1,0 +1,262 @@
+.client-details {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-right: 20px;
+
+  // --- CLIENT WRAPPER ---
+    .client-wrapper {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        width: 100%;
+
+    // --- HEADER ---
+        .client-details-header {
+            display: flex;
+            flex-direction: column;
+            row-gap: 20px;
+            width: 30%;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            background-color: var(--surface-color);
+            padding: 20px;
+            border-radius: 8px;
+
+      // Title + Edit
+        .client-title-and-edit {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            row-gap: 20px;
+        }
+
+      // --- CLIENT TITLE SECTION ---
+        .client-title {
+            display: flex;
+            flex-direction: column;
+            row-gap: 20px;
+
+            .title-and-company-section {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+
+                .client-image {
+                    img {
+                        width: 120px;
+                        height: 120px;
+                        border-radius: 50%;
+                        object-fit: cover;
+                    }
+
+                    .placeholder-image {
+                        width: 100px;
+                        height: 100px;
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        background-color: var(--button-bg-color);
+                        color: var(--button-text-color);
+                        font-size: 24px;
+                        font-weight: 600;
+                    }
+                }
+
+                .title-and-company {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    row-gap: 4px;
+
+                    h1 {
+                        font-size: 32px;
+                        font-weight: 600;
+                        margin-bottom: 0px;
+                    }
+
+                    .company-tag,
+                    .individual-tag {
+                        font-size: 14px;
+                        padding: 5px 8px;
+                        border-radius: 8px;
+                        width: fit-content;
+                        color: var(--text-color-inverted);
+                    }
+
+                    .company-tag {
+                        background-color: var(--jonquil);
+                    }
+
+                    .individual-tag {
+                        background-color: var(--ultra-violet);
+                        color: var(--light-white);
+                    }
+                }
+            }
+        }
+
+      // --- EDIT BUTTON ---
+        .edit-client-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 100%;
+            height: fit-content;
+            padding: 10px;
+            font-size: 16px;
+            // background-color: var(--button-bg-color);
+            color: var(--button-text-color);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+
+                &:hover {
+                    // background-color: var(--tiffany-blue);
+                    transform: scale(1.1);
+                }
+        }
+
+        .divider {
+            padding-bottom: 10px;
+            border-bottom: 2px dashed var(--text-color);
+            opacity: 0.7;
+            width: 100%;
+        }
+
+      // --- CONTACT INFO ---
+        .client-contact-info-header {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            align-items: flex-start;
+            margin-top: 8px;
+
+                .phone-number,
+                .email-address {
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    font-size: 12px;
+                    padding-right: 10px;
+                    cursor: pointer;
+                    width: fit-content;
+                    z-index: 1;
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    inset: 0;
+                    background-color: var(--text-color);
+                    border-radius: 50px;
+                    opacity: 0.08;
+                    z-index: -1;
+                    transition: opacity 0.3s ease;
+                }
+
+                &:hover::before {
+                    opacity: 0.12;
+                }
+
+                .phone-button,
+                .email-button {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 100%;
+                    padding: 10px;
+                    font-size: 12px;
+                    background-color: var(--button-bg-color);
+                    color: var(--button-text-color);
+                    transition: background-color 0.3s ease;
+
+                    &:hover {
+                        background-color: var(--tiffany-blue);
+                    }
+                }
+            }
+        }
+    }
+
+    // --- BODY ---
+        .client-details-body {
+            display: flex;
+            flex-direction: row;
+            width: 70%;
+            gap: 20px;
+
+        // INFO (opcional)
+            .client-details-info {
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+                margin-bottom: 20px;
+                background-color: var(--surface-color);
+                padding: 20px;
+                border-radius: 8px;
+            }
+
+        // --- LOCATIONS SECTION ---
+            .locations-section {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                background-color: var(--surface-color);
+                border-radius: 8px;
+                gap: 16px;
+                margin-bottom: 20px;
+                padding: 16px 20px 20px;
+
+                .locations-header {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 10px;
+
+                    h2 {
+                        margin: 0;
+                        // font-size: 20px;
+                        // font-weight: 600;
+                    }
+
+                    .add-location-button {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 6px;
+                        background-color: transparent;
+                        border: 1px solid var(--tiffany-blue);
+                        color: var(--tiffany-blue);
+                        font-size: 14px;
+                        cursor: pointer;
+                        // margin: 10px auto;
+                        padding: 8px 14px;
+                        border-radius: 8px;
+                        transition: background-color 0.3s ease, color 0.3s ease;
+
+                        &:hover {
+                            background-color: rgba(29, 161, 242, 0.1);
+                            color: var(--text-color);
+                        }
+                    }
+                }
+
+                .locations-list {
+                    display: grid;
+                    grid-template-columns: repeat(2, minmax(250px, 1fr));
+                    gap: 16px;
+                }
+            }
+        }
+    }
+
+  // --- TICKETS SECTION (outside wrapper) ---
+    .client-tickets-section {
+        width: 100%;
+        margin-top: 20px;
+    }
+}

@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import HeroSection from "./Herosection";
 import BenefitsSection from "./BenefitsSection";
 import FeaturesSection from "./FeaturesSection";
-import CTASection from "./CtaSection";
+import CTASection from "./CTASection";
 import Footer from "./Footer";
 
 import './Splash.css';

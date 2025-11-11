@@ -48,7 +48,6 @@ export default function AddNote({ userId, ticketId, setNotesChecker }) {
             })
             .catch(async (res) => {
                 const data = await res.json();
-                console.log(data, "THIS IS DATA");
                 if (data && data.message) {
                     setErrors(data.message);
                 }

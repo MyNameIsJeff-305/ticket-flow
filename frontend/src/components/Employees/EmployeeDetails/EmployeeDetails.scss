@@ -1,0 +1,79 @@
+.employee-details {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+
+    .employee-header {
+        display: flex;
+            flex-direction: column;
+            row-gap: 20px;
+            width: 100%;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            
+            .employee-basic-info {
+                display: flex;
+                flex-direction: row;
+                width: 100%;
+                background-color: var(--surface-color);
+                gap: 16px;
+                padding: 20px;
+                border-radius: 8px;
+
+                .employee-profile-picture {
+                    img {
+                        width: 250px;
+                        height: 250px;
+                        border-radius: 100%;
+                        object-fit: cover;
+                        border: 1px solid var(--box-bg-border);
+                        background-color: var(--box-bg);
+                    }
+                }
+            }
+            
+            .employee-basic-info-text {
+                display: flex;
+                flex-direction: column;
+
+                .name-status {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    gap: 16px;
+
+                    h2 {
+                        font-size: 24px;
+                        font-weight: 700;
+                        color: var(--text-color);
+                    }
+
+                    .employee-name {
+                        font-size: 28px;
+                        font-weight: 600;
+                        color: var(--text-color);
+                    }
+
+                    .status-badge-active {
+                        font-size: 14px;
+                        font-weight: 500;
+                        padding: 4px 8px;
+                        border-radius: 8px;
+                        color: white;
+                        background-color: #4caf50;
+                    }
+
+                    .status-badge-inactive {
+                        font-size: 14px;
+                        font-weight: 500;
+                        padding: 4px 8px;
+                        border-radius: 8px;
+                        color: white;
+                        background-color: #ff6b6b;
+                    }
+                }
+            }
+    }
+}

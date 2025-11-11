@@ -36,7 +36,6 @@ export const getAllStatusThunk = () => async (dispatch) => {
     const res = await fetch('/api/status');
 
     const data = await res.json();
-    // console.log(data, "THIS IS DATA");
     if(data.message){
         return dispatch(getAllStatus([]));
     }

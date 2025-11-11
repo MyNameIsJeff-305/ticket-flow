@@ -1,0 +1,79 @@
+@forward "buttons";
+@forward "sections";
+@forward "animations";
+
+:root {
+    --background-color: #f5f2f7;
+    --text-color: var(--light-black);
+    --text-color-inverted: #F5F4FB;
+    --text-color-constant: var(--light-black);
+
+    --button-bg-color: #007bff;
+    --button-text-color: var(--light-white);
+
+    --surface-color: #ffffff;
+
+    --light-white: #f9f9f9;
+    --light-black: #51385e;
+
+    --border-color: rgba(0, 0, 0, 0.1);
+
+    --background-gradient: linear-gradient(90deg, var(--razzmatazz), var(--jonquil), var(--tiffany-blue));
+    --special-button-color: none;
+    --header-bg-color: #f8f9fa;
+    --footer-bg-color: #f1f1f1;
+    --ultra-violet: #5e53a4;
+    --tiffany-blue: #66c6b8;
+    --razzmatazz: #ed1476;
+    --jonquil: #fecb19;
+    --smoky-black: #1d1a05;
+    --box-bg: #f1f1f1;
+    --box-bg-border: #555;
+    --ticket-card-bg: #ececec;
+    --seasalt: #f9f9f9;
+    --login-bg: #d0d0d0;
+    --semitransparent-bg: #ffffff6d;
+    --special-btn: var(--tiffany-blue);
+    --location-phone-bg: #e0f7f5;
+}
+
+.dark-mode {
+    --background-color: #0B0A24;
+    --text-color: #F5F4FB;
+    --text-color-inverted: #212121;
+    --text-color-constant: var(--light-black);
+
+    --button-bg-color: #61a1e0;
+    --button-text-color: #f9f9f9;
+
+    --surface-color: #201E43;
+
+    --border-color: rgba(255, 255, 255, 0.1);
+
+    --special-btn: var(--razzmatazz);
+    --special-button-color: var(--ultra-violet);
+    --background-gradient: linear-gradient(90deg, var(--ultra-violet), var(--razzmatazz), var(--tiffany-blue));
+    --ticket-card-bg: #666;
+    --box-bg: #555;
+    --box-bg-border: #f1f1f1;
+    --header-bg-color: #333;
+    --footer-bg-color: #333;
+    --login-bg: #4a4a4a;
+    --semitransparent-bg: #3333336d;
+    --location-phone-bg: #004f4c;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+
+    font-family: "Lato", sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+$sidebarWidth: 245px;

@@ -1,0 +1,309 @@
+.location-contact-info-wrapper {
+    background-color: var(--surface-color);
+    color: var(--text-color);
+    border-radius: 16px;
+    width: 800px;
+    margin: 0 auto;
+    padding: 20px 28px;
+    animation: fadeIn 0.25s ease-in-out;
+
+    .contact-info-header {
+        text-align: center;
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        h1 {
+            font-weight: 600;
+            text-align: center;
+            color: var(--text-color);
+            margin: 10px 0px;
+        }
+
+        p {
+            font-size: 14px;
+            color: var(--text-color);
+            opacity: 0.7;
+            // margin-top: 6px;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+    }
+
+    .contact-info-details {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+
+        // --- Common section style (Phones & Emails)
+        .contact-phone-number-list,
+        .contact-email-list {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 50%;
+            gap: 10px;
+            padding: 20px;
+            border-radius: 16px;
+            background-color: var(--background-color, rgba(0, 0, 0, 0.02));
+
+            h3 {
+                text-align: center;
+                font-size: 18px;
+                font-weight: 600;
+                color: var(--text-color);
+                margin-bottom: 4px;
+            }
+
+            p {
+                text-align: center;
+                font-size: 14px;
+                font-style: italic;
+                color: var(--text-color);
+                opacity: 0.7;
+            }
+
+            .add-button {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 6px;
+                background-color: transparent;
+                border: 1px solid var(--tiffany-blue);
+                color: var(--tiffany-blue);
+                font-size: 14px;
+                cursor: pointer;
+                margin: 10px auto;
+                padding: 8px 14px;
+                border-radius: 8px;
+                transition: background-color 0.3s ease, color 0.3s ease;
+
+                &:hover {
+                    background-color: rgba(29, 161, 242, 0.1);
+                    color: var(--text-color);
+                }
+
+                svg {
+                    font-size: 16px;
+                }
+            }
+        }
+
+        // --- Phone & Email item elements
+        .phone-number-elements,
+        .email-address-elements {
+            display: flex;
+            flex-direction: column;
+            height: 300px;
+            max-height: 300px;
+            overflow-y: scroll;
+            row-gap: 10px;
+
+            .phone-number-element,
+            .email-address-element {
+                position: relative;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                padding: 12px 20px;
+                background-color: var(--surface-color);
+                border-radius: 12px;
+                cursor: pointer;
+                transition: box-shadow 0.2s ease;
+
+                &:hover {
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                }
+
+                .phone-section,
+                .email-section {
+                    display: flex;
+                    align-items: center;
+                    gap: 12px;
+                    flex-grow: 1;
+
+                    .phone-button,
+                    .email-button {
+                        background-color: var(--button-bg-color);
+                        color: var(--light-white);
+                        padding: 10px;
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 14px;
+                        min-width: 36px;
+                        min-height: 36px;
+                        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+                        transition: transform 0.2s ease, background-color 0.2s ease;
+
+                        &:hover {
+                            background-color: var(--tiffany-blue);
+                            transform: scale(1.1);
+                        }
+                    }
+                }
+
+                .phone-number-and-title,
+                .email-address-and-title {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 2px;
+
+                    .phone-type-label,
+                    .email-type-label {
+                        font-size: 11px;
+                        text-transform: uppercase;
+                        color: var(--text-color);
+                        opacity: 0.6;
+                        letter-spacing: 0.5px;
+                    }
+
+                    .phone-number-label,
+                    .email-label {
+                        font-size: 13px;
+                        font-weight: 500;
+                        color: var(--dark-text, var(--text-color));
+                    }
+                }
+
+                .delete-button {
+                    width: 10%;
+                    background: transparent;
+                    border: none;
+                    color: var(--danger-color, #c33);
+                    font-size: 18px;
+                    cursor: pointer;
+                    padding: 4px;
+                    border-radius: 6px;
+                    transition: background-color 0.2s ease;
+
+                    &:hover {
+                        background-color: rgba(255, 0, 0, 0.1);
+                    }
+                }
+            }
+        }
+
+        // --- Add forms (for phone/email)
+        .add-phone-form,
+        .add-email-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 20px;
+            background-color: var(--surface-color);
+            opacity: 0.95;
+            border-radius: 12px;
+            border: 1px solid var(--tiffany-blue);
+
+            .form-header {
+                font-size: 16px;
+                color: var(--text-color);
+                margin-bottom: 10px;
+                text-align: center;
+            }
+
+            .input-group {
+                display: flex;
+                flex-direction: row;
+                gap: 12px;
+
+                .input-field {
+                    // flex: 1;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 4px;
+                    width: 50%;
+
+                    label {
+                        font-size: 10px;
+                        color: var(--text-color);
+                        opacity: 0.8;
+                    }
+                    
+                    input {
+                        width: 100%;
+                        background-color: var(--light-white);
+                        border: 1px solid rgba(0, 0, 0, 0.1);
+                        border-radius: 8px;
+                        padding: 8px 10px;
+                        font-size: 12px;
+                        color: var(--light-black);
+                        outline: none;
+
+                    &:focus {
+                        border-color: var(--tiffany-blue);
+                    }
+                }
+            }
+            }
+
+            .form-actions {
+                display: flex;
+                justify-content: flex-end;
+                gap: 12px;
+
+                button {
+                    width: 50%;
+                    padding: 6px 12px;
+                    border-radius: 8px;
+                    border: none;
+                    cursor: pointer;
+                    font-size: 14px;
+                    // font-weight: 500;
+
+                    &:first-child {
+                        background-color: var(--tiffany-blue);
+                        color: white;
+
+                        &:hover {
+                            opacity: 0.9;
+                        }
+                    }
+
+                    &:last-child {
+                        background-color: transparent;
+                        color: var(--text-color);
+
+                        &:hover {
+                            background-color: #dedede8a;
+
+                        }
+                    }
+                }
+
+                .submit-button-add, .cancel-button-add {
+                    width: 50%;
+                    padding: 6px 12px;
+                    border-radius: 8px;
+                    border: none;
+                    cursor: pointer;
+                    font-size: 14px;
+
+                    &:hover {
+                        opacity: 0.9;
+                    }
+                }
+            }
+        }
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Optional dark mode overrides */
+    .dark-mode & {
+        background-color: var(--surface-dark);
+    }
+}

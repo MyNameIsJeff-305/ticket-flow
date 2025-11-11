@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { deleteClientThunk } from "../../store/clients";
 
-import "./DeleteClient.css";
+import "./DeleteClient.scss";
 
 export default function DeleteClient({ client, setDeleteClientChecker }) {
     const dispatch = useDispatch();
@@ -21,8 +21,8 @@ export default function DeleteClient({ client, setDeleteClientChecker }) {
 
     return (
         <div className="confirm-delete-container">
-            <h3>Are you sure you want to delete this client? </h3>
-            <span>(All Tickets related to this client will be deleted as well)</span>
+            <h1>Are you sure you want to delete this client? </h1>
+            <p>(All Tickets related to this client will be deleted as well)</p>
             <div className="confirm-delete-buttons">
                 <button onClick={(e) => handleDelete(e)}>Yes</button>
                 <button onClick={closeModal}>No</button>

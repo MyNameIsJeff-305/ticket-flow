@@ -1,0 +1,219 @@
+.part-details {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+
+    .part-title {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 20px;
+
+        h1 {
+            text-align: left;
+            margin-bottom: 4px;
+        }
+
+        .title-and-status {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 16px;
+
+            .part-status-chip-active {
+                padding: 4px 8px;
+                border-radius: 8px;
+
+                background-color: rgb(76,175,80);
+                color: var(--text-color-inverted);
+                font-size: 18px;
+            }
+
+            .part-status-chip-inactive {
+                padding: 4px 8px;
+                border-radius: 8px;
+
+                background-color: rgb(244,67,54);
+                color: var(--text-color);
+                font-size: 18px;
+            }
+        }
+        
+        .sku-chip {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 5px 8px;
+
+            p {
+                font-size: 14px;
+                opacity: 0.7;;
+            }
+
+            &::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: var(--text-color);
+            border-radius: 50px;
+            opacity: 0.08;
+            z-index: -1;
+    }
+        }
+    }
+
+    .part-header {
+        display: flex;
+        flex-direction: row;
+        align-items: start;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: 20px;
+
+        .part-info-left {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        width: 40%;
+
+        margin-bottom: 16px;
+
+            .part-img-slider {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                width: 100%;
+                margin-bottom: 8px;
+                border-radius: 8px;
+
+                .left-arrow, .right-arrow {
+                    display: flex;
+                    align-items: center;
+                    align-content: center;
+                    justify-content: center;
+                    position: relative;
+                    z-index: 1;
+                    width: 32px;
+                    height: 32px;
+                    background-color: var(--button-bg-color);
+                    border-radius: 50%;
+                    cursor: pointer;
+                    user-select: none;
+                    transition: background-color 0.3s ease;
+
+                    &:hover {
+                        background-color: var(--button-bg-color);
+                    }
+
+                    &:disabled {
+                        background-color: var(--box-bg);
+                        cursor: not-allowed;
+                        opacity: 0.5;
+                    }
+                }
+
+                .left-arrow {
+                    left: 35px
+                }
+
+                .right-arrow {
+                    right: 35px;
+                }
+
+                img {
+                    width: 300px;
+                    height: 300px;
+                    object-fit: cover;
+                    border-radius: 8px;
+                }
+            }
+        }
+
+        .part-info-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 70%;
+
+            h2 {
+                margin-bottom: 10px;
+            }
+
+            p {
+                margin: 4px 0;
+            }
+
+            .part-description {
+                margin-top: 16px;
+                margin-bottom: 16px;
+
+                .description-title {
+                    font-size: 12px;
+                    opacity: 0.7;
+                    margin-bottom: 4px;
+                }
+            }
+
+            .brand-model-container {
+                display: flex;
+                flex-direction: row;
+                gap: 16px;
+                margin-bottom: 8px;
+
+                .description-title {
+                    font-size: 12px;
+                    opacity: 0.7;
+                    margin-bottom: 4px;
+                }
+            }
+
+            .price-container {
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 8px;
+
+                .description-title {
+                    font-size: 12px;
+                    opacity: 0.7;
+                    margin-bottom: 4px;
+                }
+            }
+        }
+    }
+    .part-stock-details {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+
+        .stock-details-header {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: start;
+            width: 100%;
+            margin-bottom: 10px;
+            gap: 16px;
+
+            .stock-total {
+                font-size: 14px;
+                background-color: var(--light-black);
+                color: var(--light-white);
+                padding: 4px 8px;
+                border-radius: 8px;
+            }
+        }
+
+        .no-stock-locations {
+            font-size: 14px;
+            opacity: 0.7;
+            background-color: var(--ultra-violet);
+        }
+    }
+}

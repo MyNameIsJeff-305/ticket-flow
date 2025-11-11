@@ -22,7 +22,7 @@ const handleValidationErrors = (req, _res, next) => {
 const properUserValidation = async (req, res, next) => {
     const { id } = req.user;
 
-    const ticketId = req.params.id;
+    const { ticketId } = req.params;
 
     try {
         const ticket = await Ticket.findByPk(parseInt(ticketId));

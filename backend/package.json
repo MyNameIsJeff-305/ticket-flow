@@ -4,15 +4,17 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint .",
     "sequelize": "sequelize",
     "sequelize-cli": "sequelize-cli",
-    "start": "per-env",
+    "start": "npm run dev",
     "migrate": "npx dotenv sequelize db:migrate",
     "seed": "npx dotenv sequelize db:seed:all",
     "michael": "npm run migrate && npm run seed && dotenv npm start --production",
     "magic": "npm run migrate && npm run seed",
-    "start:development": "nodemon ./bin/www",
-    "start:production": "dotenv node ./bin/www",
+    "dev": "nodemon -r module-alias/register ./bin/www",
+    "start:development": "nodemon -r module-alias/register ./bin/www",
+    "start:production": "dotenv node -r module-alias/register ./bin/www",
     "build": "dotenv node psql-setup-script.js"
   },
   "keywords": [],
@@ -21,6 +23,7 @@
   "description": "",
   "dependencies": {
     "aws-sdk": "^2.1691.0",
+    "axios": "^1.12.2",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
@@ -33,15 +36,27 @@
     "helmet": "^7.1.0",
     "js-random-generator": "^1.0.3",
     "jsonwebtoken": "^9.0.2",
+    "module-alias": "^2.2.3",
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
+    "openai": "^6.3.0",
     "per-env": "^1.0.2",
     "pg": "^8.11.5",
     "sequelize": "^6.37.3",
-    "sequelize-cli": "^6.6.2"
+    "sequelize-cli": "^6.6.2",
+    "twilio": "^5.10.2"
+  },
+  "_moduleAliases": {
+    "@db": "db",
+    "@utils": "utils",
+    "@backend": ".",
+    "@config": "config"
   },
   "devDependencies": {
-    "nodemon": "^3.1.4",
+    "@eslint/js": "^9.38.0",
+    "eslint": "^9.38.0",
+    "globals": "^16.4.0",
+    "nodemon": "^3.1.10",
     "sqlite3": "^5.1.7"
   }
 }

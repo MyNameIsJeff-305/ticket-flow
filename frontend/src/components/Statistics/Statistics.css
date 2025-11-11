@@ -32,12 +32,13 @@
 /* Common styling for each ticket status container (New, In Progress, Done) */
 .new-tickets-container,
 .in-progress-tickets-container,
+.pending-tickets-container,
 .done-tickets-container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
-    background-color: var(--box-bg);
+    background-color: var(--surface-color);
     border-radius: 8px;
     padding: 16px;
     margin: 12px 0;
@@ -47,7 +48,7 @@
     /* Prevents container from exceeding parent's width */
     box-sizing: border-box;
     /* Ensures padding is included in width */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     color: var(--text-color);
     gap: 21px;
@@ -56,6 +57,7 @@
 /* Heading inside each ticket container */
 .new-tickets-container h2,
 .in-progress-tickets-container h2,
+.pending-tickets-container h2,
 .done-tickets-container h2 {
     font-size: 1rem;
     font-weight: bold;
@@ -66,7 +68,38 @@
 /* Ticket count inside each ticket container */
 .new-tickets-container span,
 .in-progress-tickets-container span,
+.pending-tickets-container span,
 .done-tickets-container span {
     font-size: 2rem;
     font-weight: bold;
+}
+
+.statistics-tab .tabs-container {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+
+    margin-top: 16px;
+
+    border-bottom: 2px solid var(--ticket-card-bg);
+}
+
+.statistics-tab .tabs-container .tab-item {
+    padding: 8px 16px;
+    color: var(--text-color);
+
+    margin-bottom: -2px;
+
+    border-bottom: 2px solid transparent;
+
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    user-select: none;
+}
+
+.statistics-tab .tabs-container .tab-item.active {
+    border-bottom: 2px solid var(--button-bg-color);
+    color: var(--button-bg-color);
 }

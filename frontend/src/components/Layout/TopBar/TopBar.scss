@@ -1,0 +1,16 @@
+.top-bar {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+
+    width: 100%;
+
+    .spacer {
+        flex-grow: 1;
+    }
+
+    .search-bar-wrapper {
+        width: 100%;
+        max-width: 450px;
+    }
+}

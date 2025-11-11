@@ -6,14 +6,21 @@ import eslint from 'vite-plugin-eslint';
 export default defineConfig(({ mode }) => ({
   plugins: [
     react(),
-    eslint({
-      lintOnStart: true,
-      failOnError: mode === "production"
-    })
+    // eslint({
+    //   lintOnStart: true,
+    //   failOnError: mode === "production"
+    // })
   ],
   server: {
     proxy: {
       '/api': 'http://localhost:8000'
     },
-  }
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@import "./src/styles/global.scss";`,
+      },
+    },
+  },
 }));

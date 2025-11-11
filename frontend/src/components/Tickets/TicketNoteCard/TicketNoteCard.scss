@@ -1,0 +1,107 @@
+.ticket-note-wrapper {
+    display: flex;
+    gap: 16px;
+}
+
+.ticket-note-wrapper {
+    .user-image {
+        flex-shrink: 0;
+
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        overflow: hidden;
+
+        cursor: pointer;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+}
+
+.ticket-note-card {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    padding: 16px 16px;
+
+    background-color: var(--surface-color);
+    border-radius: 0 8px 8px 8px;
+
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+
+    &::before {
+        $pic-size: 10px;
+
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -$pic-size;
+
+        width: $pic-size;
+        height: $pic-size;
+
+        background: linear-gradient(45deg, transparent 50%, var(--surface-color) 0);
+    }
+
+    &.own-note {
+        border-top: 2px solid var(--button-bg-color);
+
+        &::before {
+            top: -2px;
+            border-top: 2px solid var(--button-bg-color);
+            // background: linear-gradient(45deg, transparent 50%, var(--button-bg-color) 5%, var(--button-bg-color) 60%, var(--surface-color) 50%); // full border
+        }
+    }
+}
+
+.ticket-note-card {
+    .note-header {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 16px;
+    }
+
+    .note-timestamp {
+        font-size: 12px;
+        opacity: 0.7;
+    }
+
+    .note-actions {
+        display: flex;
+        align-items: center;
+
+        opacity: 0.6;
+        transition: all 0.3s ease;
+
+        .open-modal-menu-item {
+            padding: 0;
+
+            margin-top: -10px;
+        }
+
+        .btn-action {
+            width: 24px;
+            height: 24px;
+
+            .btn-icon-icon {
+                width: 14px;
+                height: 14px;
+            }
+        }
+    }
+
+    &:hover {
+        .note-actions {
+            opacity: 1;
+        }
+    }
+}

@@ -3,7 +3,7 @@ import { useModal } from "../../context/Modal";
 import { useEffect, useState } from "react";
 import { editPartThunk } from "../../store/parts";
 
-import '../AddPart/AddPart.css';
+import '../AddPart/AddPart.scss';
 
 export default function EditPart({ part, setPartChecker }) {
     const dispatch = useDispatch();

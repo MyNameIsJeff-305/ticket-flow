@@ -180,7 +180,7 @@ button:hover:not(:disabled) {
 }
 
 @-moz-keyframes AnimationName {
-    0% {z
+    0% {
         background-position: 0% 50%
     }
 

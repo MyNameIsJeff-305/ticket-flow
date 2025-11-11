@@ -10,6 +10,8 @@ export function ModalProvider({ children }) {
 
     const [onModalClose, setOnModalClose] = useState(null);
 
+    const [dismisable, setDismisable] = useState(true);
+
     const closeModal = () => {
         setModalContent(null);
 
@@ -24,7 +26,9 @@ export function ModalProvider({ children }) {
         modalContent,
         setModalContent,
         setOnModalClose,
-        closeModal
+        closeModal,
+        dismisable,
+        setDismisable,
     };
 
     return (
@@ -38,13 +42,17 @@ export function ModalProvider({ children }) {
 }
 
 export function Modal() {
-    const { modalRef, modalContent, closeModal } = useContext(ModalContext);
+    const { modalRef, modalContent, closeModal, dismisable } = useContext(ModalContext);
 
     if (!modalRef || !modalRef.current || !modalContent) return null;
 
+    function onBackgroundClick() {
+        if (dismisable != false) closeModal();
+    }
+
     return ReactDOM.createPortal(
-        <div id="modal">
-            <div id="modal-background" onClick={closeModal} />
+        <div id="modal" className={dismisable != false ? "dismisable" : ""}>
+            <div id="modal-background" onClick={onBackgroundClick} />
             <div id="modal-content">{modalContent}</div>
         </div>,
         modalRef.current

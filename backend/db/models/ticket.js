@@ -22,7 +22,15 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'ticketId',
         onDelete: 'CASCADE'
       })
-      Ticket.hasMany(models.Part, {
+      Ticket.hasMany(models.TicketEmployee, {
+        foreignKey: 'ticketId',
+        onDelete: 'CASCADE'
+      })
+      Ticket.hasMany(models.Signature, {
+        foreignKey: 'ticketId',
+        onDelete: 'CASCADE'
+      })
+      Ticket.hasMany(models.TwilioCall, {
         foreignKey: 'ticketId',
         onDelete: 'CASCADE'
       })
@@ -52,7 +60,7 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: "CASCADE"
     },
     description: {
-      type: DataTypes.STRING(255),
+      type: DataTypes.TEXT,
       allowNull: true
     },
     checkIn: {

@@ -38,7 +38,7 @@ module.exports = {
         onDelete: 'CASCADE'
       },
       description: {
-        type: Sequelize.STRING(256),
+        type: Sequelize.TEXT,
         allowNull: true
       },
       checkIn: {

@@ -1,42 +1,25 @@
 /* My Work Tab Main Container */
 .my-work-tab {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
     width: 100%;
-    padding-left: 20px;
-    padding-right: 20px;
-    /* background-color: var(--background-color); */
-    color: var(--text-color);
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease, color 0.3s ease;
-    overflow-y: auto;
-    min-height: 75vh;
-    /* max-height: 1024px; */
-}
-
-.my-work-tab {
-    width: "100%";
 }
 
 /* Section Titles */
 .my-work-tab h3 {
-    font-size: 1.5rem;
-    color: var(--text-color);
-    /* Adapt text color based on theme */
-    margin-bottom: 15px;
-    border-bottom: 2px solid var(--semitransparent-bg);
-    /* Themed underlining */
-    padding-bottom: 8px;
+    font-size: 18px;
 }
 
 /* Main Title */
 .my-work-tab h1 {
     font-size: 2rem;
     color: var(--text-color);
-    /* Adapt text color based on theme */
     margin-bottom: 15px;
+    text-align: left;
+}
+
+.my-work-section {
+    /* padding: 24px; */
+    margin-bottom: 24px;
+
 }
 
 /* Ticket List Container */

@@ -1,0 +1,21 @@
+section.app-section {
+    .spacer {
+        flex-grow: 1;
+    }
+
+    .section-header {
+        display: flex;
+        align-items: center;
+
+        min-height: 58px;
+
+        margin-bottom: 24px;
+
+        h1 {
+            margin: 0;
+
+            font-size: 24px;
+            font-weight: 600;
+        }
+    }
+}

@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
-import { FaSun, FaMoon } from 'react-icons/fa';
+import { MdLightMode, MdNightlight } from "react-icons/md";
 import './IconThemeSwitch.css';
 
 const IconThemeSwitch = () => {
@@ -13,8 +13,11 @@ const IconThemeSwitch = () => {
             className="icon-theme-switch"
             onClick={toggleTheme}
             style={{ cursor: 'pointer', fontSize: '24px', display: 'flex', alignItems: 'center' }}
-        >
-            {isDarkMode ? <FaMoon /> : <FaSun />}
+            title={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+        >{isDarkMode ?
+            <MdNightlight className='zoom-in' /> :
+            <MdLightMode className='spin-in' />
+            }
         </div>
     );
 };

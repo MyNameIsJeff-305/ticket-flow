@@ -1,4 +1,4 @@
-const { generateRandomPassword } = require('js-random-generator');
+const generateAlphanumericId = require('../../utils/randomGenerator');
 
 const { Ticket } = require('../models');
 
@@ -13,10 +13,12 @@ module.exports = {
       {
         "title": "Network Connectivity Issues",
         "createdBy": 1,
-        "clientId": 1,
+        "clientId": 28,
         "description": "The office network is not working, can't connect to the internet.",
         "statusId": 1,
-        hashedId: generateRandomPassword(10)
+        hashedId: generateAlphanumericId(10),
+        "createdAt": "2021-05-20 08:30:00",
+        "updatedAt": "2021-05-20 08:30:00"
       },
       {
         "title": "Slow Computer Performance",
@@ -24,81 +26,83 @@ module.exports = {
         "clientId": 2,
         "description": "My computer is very slow, it takes a long time to load applications.",
         "statusId": 1,
-        hashedId: generateRandomPassword(10)
+        hashedId: generateAlphanumericId(10)
       },
       {
         "title": "Need Help with Email Setup",
         "createdBy": 3,
         "clientId": 3,
-        "description": "I'm having trouble setting up my email on Outlook.",
+        "description": "I'm having trouble setting up my email on Outlook. I tried to follow the instructions but it's not working. I'm having trouble setting up my email on Outlook. I tried to follow the instructions but it's not working.",
         "checkIn": "2021-06-01 10:00:00",
         "statusId": 2,
-        hashedId: generateRandomPassword(10)
+        hashedId: generateAlphanumericId(10),
+        "createdAt": "2021-06-01 10:00:00",
+        "updatedAt": "2021-06-01 10:00:00"
       },
       {
         "title": "Keyboard Not Responding",
         "createdBy": 4,
-        "clientId": 4,
+        "clientId": 3,
         "description": "My keyboard isn't working even after reconnecting it to my desktop.",
         "checkIn": "2021-06-01 09:00:00",
         "checkOut": "2021-06-01 11:00:00",
         "statusId": 3,
-        hashedId: generateRandomPassword(10)
+        hashedId: generateAlphanumericId(10)
 
       },
       {
         "title": "Phone System Malfunction",
         "createdBy": 4,
-        "clientId": 5,
+        "clientId": 1,
         "description": "The office phone system is malfunctioning, can't make or receive calls.",
         "statusId": 1,
-        hashedId: generateRandomPassword(10)
+        hashedId: generateAlphanumericId(10)
       },
       {
         "title": "Printer Jamming Frequently",
         "createdBy": 5,
-        "clientId": 6,
+        "clientId": 3,
         "description": "The printer keeps jamming every time we print multiple pages.",
         "checkIn": "2024-09-10 08:30:00",
         "statusId": 2,
-        hashedId: generateRandomPassword(10)
+        hashedId: generateAlphanumericId(10)
       },
       {
         "title": "Monitor Flickering",
         "createdBy": 5,
-        "clientId": 7,
+        "clientId": 2,
         "description": "My monitor flickers on and off randomly.",
         "checkIn": "2024-09-10 10:00:00",
         "checkOut": "2024-09-10 12:00:00",
         "statusId": 3,
-        hashedId: generateRandomPassword(10)
+        hashedId: generateAlphanumericId(10)
       },
       {
         "title": "Wi-Fi Not Reaching All Areas",
         "createdBy": 5,
-        "clientId": 8,
+        "clientId": 1,
         "description": "The Wi-Fi signal is weak and not reaching all areas of the office.",
         "statusId": 1,
-        hashedId: generateRandomPassword(10)
+        hashedId: generateAlphanumericId(10)
       },
       {
         "title": "Computer Freezes During Work",
         "createdBy": 6,
-        "clientId": 9,
+        "clientId": 2,
         "description": "My computer freezes randomly while working, forcing me to restart.",
         "checkIn": "2024-09-11 13:00:00",
         "statusId": 2,
-        hashedId: generateRandomPassword(10)
+        hashedId: generateAlphanumericId(10)
       },
       {
         "title": "Software Update Issues",
         "createdBy": 6,
-        "clientId": 10,
+        "clientId": 3,
         "description": "Unable to install the latest software update, getting error codes.",
         "checkIn": "2024-09-11 14:00:00",
         "checkOut": "2024-09-11 16:00:00",
         "statusId": 3,
-        hashedId: generateRandomPassword(10)
+        hashedId: generateAlphanumericId(10)
       }
     ], options);
   },

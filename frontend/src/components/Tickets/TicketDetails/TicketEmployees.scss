@@ -1,0 +1,70 @@
+.ticket-employees {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    
+    margin-top: 16px;
+
+    padding: 16px;
+
+    background-color: var(--surface-color);
+    border-radius: 8px;
+}
+
+.ticket-employees {
+    .employees-title {
+        font-size: 14px;
+        opacity: 0.6;
+
+        margin-bottom: 8px;
+    }
+
+    .author {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        .author-image {
+            position: relative;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 24px;
+            height: 24px;
+
+            border-radius: 50%;
+            overflow: hidden;
+
+            &::before {
+                content: "";
+                position: absolute;
+
+                width: 100%;
+                height: 100%;
+
+                background-color: var(--text-color);
+                opacity: 0.05;
+            }
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+            }
+        }
+
+        .author-info {
+            font-size: 14px;
+            opacity: 0.7;
+        }
+    }
+
+    .employee-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+}

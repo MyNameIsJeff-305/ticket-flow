@@ -1,0 +1,115 @@
+.ticket-part-card {
+    flex-shrink: 0;
+    
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    width: 200px;
+
+    padding: 8px;
+
+    background-color: var(--surface-color);
+    border-radius: 16px;
+
+    border: 2px solid var(--surface-color);
+
+    overflow: hidden;
+
+    user-select: none;
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+
+    &:hover {
+        border-color: var(--button-bg-color);
+    }
+}
+
+.ticket-part-card {
+    .image {
+        position: relative;
+        flex-shrink: 0;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 100%;
+        aspect-ratio: 1;
+
+        border-radius: 8px;
+
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .part-icon {
+            width: 50%;
+            height: 50%;
+
+            opacity: 0.5;
+        }
+
+        &::before {
+            content: "";
+            position: absolute;
+
+            width: 100%;
+            height: 100%;
+
+            background-color: var(--text-color);
+            opacity: 0.05;
+        }
+    }
+
+    .part-info {
+        display: flex;
+        flex-direction: column;
+
+        width: 100%;
+
+        padding: 0 8px 8px;
+
+        overflow: hidden;
+
+        .part-name {
+            font-weight: 600;
+
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .part-description {
+            height: 40px;
+
+            overflow: hidden;
+
+            opacity: 0.5;
+        }
+
+        .part-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            width: 100%;
+            margin-top: 8px;
+
+            font-size: 14px;
+        }
+
+        .part-sku {
+            flex-grow: 1;
+        }
+
+        .part-total-stock {
+            flex-shrink: 0;
+        }
+    }
+}

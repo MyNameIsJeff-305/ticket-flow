@@ -1,0 +1,134 @@
+.add-ticket-form {
+    background-color: var(--surface-color);
+    color: var(--text-color);
+    border-radius: 16px;
+    width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    animation: fadeIn 0.25s ease-in-out;
+    
+    h1 {
+        font-weight: 600;
+        font-size: 36px;
+        text-align: center;
+        color: var(--text-color);
+        margin: 10px 0px;
+        margin-bottom: 20px;
+    }
+
+    
+    .add-ticket-form-inputs {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        width: 100%;
+        
+        .add-ticket-form-input {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            width: 100%;
+    
+            label {
+                font-size: 12px;
+                text-transform: uppercase;
+                opacity: 0.7;
+                letter-spacing: 0.5px;
+            }
+    
+            input,
+            textarea,
+            select {
+                width: 100%;
+                background-color: var(--light-white);
+                border: 1px solid rgba(0, 0, 0, 0.1);
+                border-radius: 8px;
+                padding: 8px 10px;
+                font-size: 12px;
+                color: var(--light-black);
+                outline: none;
+            }
+    
+            textarea {
+                resize: none;
+                min-height: 120px;
+            }
+    
+            input:focus,
+            textarea:focus,
+            select:focus {
+                border-color: var(--tiffany-blue);
+            }
+    
+            select {
+                cursor: pointer;
+            }
+    
+            .add-ticket-form-error {
+                font-size: 12px;
+                color: var(--razzmatazz);
+                margin-top: 2px;
+            }
+        }
+    }
+
+
+    .add-ticket-form-button {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+
+        button {
+            background-color: var(--tiffany-blue);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+
+            &:hover:not(:disabled) {
+                opacity: 0.9;
+                transform: translateY(-1px);
+            }
+
+            &:disabled {
+                background-color: #b8b8b8;
+                cursor: not-allowed;
+                opacity: 0.8;
+            }
+        }
+    }
+
+    /* =============================== */
+    /* Animation                       */
+    /* =============================== */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* =============================== */
+    /* Dark Mode Tweaks                */
+    /* =============================== */
+    .dark-mode & {
+        input,
+        textarea,
+        select {
+            background-color: var(--dark-input-bg);
+            border-color: var(--dark-border-color);
+            color: var(--text-color);
+        }
+
+        button:disabled {
+            background-color: #555;
+        }
+    }
+}

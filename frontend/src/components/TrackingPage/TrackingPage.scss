@@ -1,0 +1,406 @@
+.app-section-ticket-tracking {
+    color: var(--text-color);
+    background: var(--surface-color);
+    border-radius: 12px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    gap: 24px;
+
+    .tracking-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 24px;
+
+        h1 {
+            font-size: 28px;
+            font-weight: 600;
+            text-align: left;
+            padding: 0;
+            margin: 0;
+        }
+
+        .header-left {
+            display: flex;
+            flex-direction: row;
+            gap: 4px;
+
+            .logo-container {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding-right: 12px;
+                border-right: 1px solid var(--border-color);
+                
+                .company-logo {
+                    height: 40px;
+                    width: auto;
+                }
+            }
+
+            .header-left-dates {
+                display: flex;
+                gap: 12px;
+            }
+        }
+
+        .ticket-status {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-color-constant);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+
+            span {
+                margin-left: 8px;
+                color: var(--text-color-constant);
+            }
+        }
+    }
+
+    .perforated-zone {
+        --perforation-color: #e1d7e2;
+
+        position: relative;
+
+        display: flex;
+        align-items: center;
+
+        height: 24px;
+        margin: 12px -24px;
+
+        .perforated-line {
+            width: 100%;
+            border-top: 2px dashed var(--perforation-color);
+        }
+
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            z-index: 1;
+            height: 100%;
+            aspect-ratio: 1;
+            background-color: var(--background-color);
+            border-radius: 50%;
+        }
+
+        &::before {
+            left: -20px;
+            box-shadow: -1px 0 1px var(--card-shadow-color) inset;
+        }
+
+        &::after {
+            right: -20px;
+            box-shadow: 1px 0 1px var(--card-shadow-color) inset;
+        }
+    }
+
+    .tracking-card {
+        display: flex;
+        flex-direction: column;
+        align-content: space-between;
+        gap: 16px;
+
+        h2 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .client {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+
+            .client-image {
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                background: var(--surface-color-dark);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+
+                svg {
+                    width: 24px;
+                    height: 24px;
+                    color: var(--text-color);
+                }
+            }
+
+            .client-info {
+                display: flex;
+                flex-direction: column;
+
+                .client-name {
+                    font-size: 14px;
+                    font-weight: 600;
+                }
+
+                .client-company {
+                    font-size: 12px;
+                    opacity: 0.7;
+                }
+            }
+        }
+
+        .tracking-details {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+
+            .tracking-field {
+                display: flex;
+                flex-direction: column;
+
+                .label {
+                    font-size: 12px;
+                    text-transform: uppercase;
+                    opacity: 0.6;
+                    margin-bottom: 2px;
+                }
+
+                span {
+                    font-size: 14px;
+                }
+            }
+        }
+
+        &.error {
+            border-left: 4px solid #e40613;
+        }
+
+        &.not-found {
+            border-left: 4px solid #f0ad4e;
+        }
+    }
+
+    .ticket-details-tab {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 200px;
+
+        .loader {
+            width: 32px;
+            height: 32px;
+            border: 3px solid var(--text-color);
+            border-top: 3px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    }
+
+    /* ----------- Tablet (max-width: 1024px) ----------- */
+    @media (max-width: 1024px) {
+        margin: 15px;
+        padding: 32px;
+
+        .tracking-header {
+            flex-direction: row;
+            justify-content: space-between;
+            gap: 10px;
+
+            .header-left {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+
+                .logo-container {
+                    border-right: none;
+                    padding-right: 0;
+                    padding-bottom: 8px;
+
+                    .company-logo {
+                        height: 36px;
+                    }
+                }
+
+                .ticket-title-and-dates {
+                    h1 {
+                        font-size: 24px;
+                    }
+                }
+
+                .header-left-dates {
+                    flex-direction: row;
+                    gap: 4px;
+                }
+            }
+
+            .ticket-status {
+                align-self: flex-end;
+                font-size: 16px;
+            }
+        }
+
+        .tracking-card {
+            h2 {
+                font-size: 32px;
+            }
+
+            .client {
+                .client-image {
+                    width: 30px;
+                    height: 30px;
+
+                    svg {
+                        width: 24px;
+                        height: 24px;
+                    }
+                }
+
+                .client-info {
+                    .client-name {
+                        font-size: 16px;
+                    }
+
+                    .client-company {
+                        font-size: 14px;
+                    }
+                }
+            }
+
+            .tracking-details .tracking-field {
+                .label {
+                    font-size: 12px;
+                }
+
+                span {
+                    font-size: 14px;
+                }
+            }
+
+            .download-pdf-report {
+                width: 100%;
+                display: flex;
+                justify-content: start;
+                align-items: center;
+                text-align: center;
+            }
+        }
+    }
+
+    /* ----------- Mobile (max-width: 768px) ----------- */
+    @media (max-width: 768px) {
+        margin: 10px;
+        padding: 32px;
+
+        .tracking-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+
+            .header-left {
+                align-items: center;
+                text-align: center;
+                margin-bottom: 10px;
+
+                .logo-container {
+                    justify-content: center;
+                }
+
+                .ticket-title-and-dates {
+                    
+                    h1 {
+                        font-size: 20px;
+                        text-align: center;
+                        margin-bottom: 5px;
+                    }
+                }
+
+                .header-left-dates {
+                    flex-direction: column;
+                    align-items: center;
+                    
+                    span {
+                        font-size: 12px;
+                    }
+
+                    .divider {
+                        display: none;
+                    }
+                }
+            }
+
+            .ticket-status {
+                align-self: center;
+                font-size: 16px;
+                padding: 4px 10px;
+            }
+        }
+
+        .tracking-card {
+            h2 {
+                font-size: 24px;
+                text-align: center;
+            }
+
+            .client {
+                justify-content: center;
+                text-align: center;
+
+                .client-image {
+                    width: 30px;
+                    height: 30px;
+
+                    svg {
+                        width: 28px;
+                        height: 28px;
+                    }
+                }
+
+                .client-info {
+                    .client-name {
+                        font-size: 16px;
+                    }
+
+                    .client-company {
+                        font-size: 14px;
+                    }
+                }
+            }
+
+            .tracking-details .tracking-field {
+                .label {
+                    font-size: 11px;
+                }
+
+                span {
+                    font-size: 13px;
+                }
+            }
+
+            .download-pdf-report {
+                width: 100%;
+                display: flex;
+                justify-content: start;
+                align-items: center;
+                text-align: center;
+            }
+        }
+    }
+}

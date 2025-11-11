@@ -2,11 +2,11 @@ const express = require('express');
 const { Op } = require('sequelize');
 const bcrypt = require('bcryptjs');
 
-const { setTokenCookie, restoreUser } = require('../../utils/auth');
-const { User } = require('../../db/models');
+const { setTokenCookie, restoreUser } = require('@utils/auth');
+const { User, UserRole, Role } = require('@db/models');
 
 const { check } = require('express-validator');
-const { handleValidationErrors } = require('../../utils/validation');
+const { handleValidationErrors } = require('@utils/validation');
 
 const router = express.Router();
 
@@ -30,6 +30,12 @@ router.get('/', async (req, res, next) => {
             })
 
         const currentUser = await User.findByPk(parseInt(req.user.id));
+        
+        // Get the Roles associated with the user and add them to the user object
+        const roles = await UserRole.findAll({
+            where: { userId: currentUser.id },
+            include: Role
+        });
 
         res.json({
             user: {
@@ -38,9 +44,10 @@ router.get('/', async (req, res, next) => {
                 lastName: currentUser.lastName,
                 email: currentUser.email,
                 username: currentUser.username,
-                profilePicUrl: currentUser.profilePicUrl
+                profilePicUrl: currentUser.profilePicUrl,
+                roles: roles.map((userRole) => userRole.Role.name)
             }
-        } || { user: null });
+        });
     } catch (error) {
         next(error);
     }
@@ -61,6 +68,14 @@ router.post(
                 }
             }
         });
+
+        if(user && !user.isActive) {
+            const err = new Error('The provided account is inactive. Contact an administrator for help');
+            err.status = 401;
+            err.title = 'The provided account is inactive. Contact an administrator for help.';
+            err.errors = { credential: 'The provided account is inactive.' };
+            return next(err);
+        }
 
         if (!user || !bcrypt.compareSync(password, user.hashedPassword.toString())) {
             const err = new Error('Login failed');
@@ -88,11 +103,11 @@ router.post(
 );
 
 //Log out
-router.delete('/', (_req, res) => {
+router.delete('/', (_req, res, next) => {
     try {
         res.clearCookie('token');
         return res.json({ message: 'success' })
-    } catch (error) {
+    } catch (err) {
         next({
             message: 'Logout error. (DELETE) backend/routes/api/session.js'
         })

@@ -1,0 +1,255 @@
+.assign-to-client {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 750px;
+    height: 650px;
+    background-color: var(--surface-color);
+    color: var(--text-color);
+    border-radius: 10px;
+    padding: 20px;
+
+    h1 {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .assign-to-client-wrapper {
+        display: flex;
+        flex: 1;
+        gap: 25px;
+        margin-bottom: 20px;
+
+        .assign-to-client-left {
+            width: 50%;
+            max-height: 480px;
+            overflow-y: auto;
+
+            .filter-block {
+                width: 100%;
+                display: flex;
+                margin-bottom: 20px;
+                flex-direction: column;
+                align-content: space-between;
+                justify-content: start;
+                gap: 4px;
+                position: sticky;
+                top: 0;
+                background-color: var(--surface-color);
+                z-index: 1;
+            }
+
+            .title {
+                font-size: 12px;
+                opacity: 0.6;
+            }
+
+            .search-filter-wrapper {
+                position: relative;
+
+                display: flex;
+                align-items: center;
+                gap: 8px;
+
+                border: 2px solid var(--border-color);
+                border-radius: 8px;
+
+                overflow: hidden;
+
+                .search-filter-icon {
+                    position: absolute;
+                    top: 50%;
+                    left: 12px;
+                    transform: translateY(-50%);
+                    z-index: 1;
+
+                    pointer-events: none;
+                    user-select: none;
+                }
+
+                input {
+                    border: none;
+                    outline: none;
+                    background: none;
+
+                    padding-left: 36px;
+
+                    color: var(--text-color);
+                }
+            }
+
+            .clients-list {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px;
+            }
+
+            .client-card-selectable {
+                display: flex;
+                align-items: center;
+                background-color: var(--background-color);
+                border-radius: 10px;
+                padding: 12px;
+                border: 2px solid transparent;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                cursor: pointer;
+                transition: all 0.2s ease;
+
+                &:hover {
+                    border-color: var(--tiffany-blue);
+                    transform: scale(1.01);
+                }
+
+                &.selected {
+                    background-color: var(--tiffany-blue);
+                    color: #fff;
+                    border-color: var(--tiffany-blue);
+                }
+
+                .client-card-info {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+
+                    img {
+                        width: 45px;
+                        height: 45px;
+                        border-radius: 50%;
+                        object-fit: cover;
+                        border: 2px solid #ddd;
+                    }
+
+                    .client-card-texts {
+                        display: flex;
+                        flex-direction: column;
+
+                        h4 {
+                            font-size: 1.1rem;
+                            margin: 0;
+                            font-weight: 500;
+                        }
+
+                        p {
+                            font-size: 0.9rem;
+                            opacity: 0.8;
+                            margin: 0;
+                        }
+                    }
+                }
+            }
+        }
+
+        .assign-to-client-right {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+
+            h2 {
+                font-size: 1.2rem;
+                margin-bottom: 10px;
+                text-align: start;
+            }
+
+            h3 {
+                margin: 10px 0 5px 0;
+                text-align: start;
+                font-size: 1rem;
+            }
+
+            .phone-number-information {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                gap: 10px;
+
+                input {
+                    width: 100%;
+                    background-color: var(--light-white);
+                    border: 1px solid rgba(0, 0, 0, 0.1);
+                    border-radius: 8px;
+                    padding: 8px 10px;
+                    font-size: 12px;
+                    color: var(--light-black);
+                    outline: none;
+
+                &:focus {
+                    border-color: var(--tiffany-blue);
+                }
+                }
+
+                input[readonly] {
+                    width: 100%;
+                    background-color: var(--light-white);
+                    border: 1px solid rgba(0, 0, 0, 0.1);
+                    border-radius: 8px;
+                    padding: 8px 10px;
+                    font-size: 12px;
+                    color: var(--light-black);
+                    outline: none;
+
+                &:focus {
+                    border-color: var(--tiffany-blue);
+                }
+                }
+            }
+
+            .locations-list {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                width: 100%;
+                max-height: 200px;
+                overflow-y: auto;
+                padding: 10px;
+                border: 1px solid var(--border-color);
+                border-radius: 8px;
+
+                .location-card-location {
+                    padding: 10px;
+                    background-color: var(--background-color);
+                    border-radius: 8px;
+                    border: 2px solid transparent;
+                    transition: all 0.2s ease;
+
+                    &:hover {
+                        border-color: var(--tiffany-blue);
+                        cursor: pointer;
+                    }
+
+                    &.selected {
+                        background-color: var(--tiffany-blue);
+                        color: #fff;
+                    }
+
+                    h4 {
+                        font-size: 1rem;
+                        margin-bottom: 4px;
+                    }
+
+                    p {
+                        font-size: 0.85rem;
+                        opacity: 0.8;
+                    }
+                }
+            }
+        }
+    }
+
+    button {
+        width: fit-content;
+        padding: 6px 20px;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        // font-size: 14px;
+
+        &:hover {
+            opacity: 0.9;
+        }
+    }
+}

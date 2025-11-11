@@ -6,9 +6,6 @@ import './TicketDetails.css';
 export default function TicketQR({ ticketHashedId }) {
     const trackingUrl = `${window.location.origin}/track/${ticketHashedId}`;
 
-    console.log(ticketHashedId, "THIS IS THE TICKET HASHED ID");
-    console.log(trackingUrl, "THIS IS THE TRACKING URL");
-
     const handleShare = async () => {
         if (navigator.share) {
             try {
@@ -17,7 +14,6 @@ export default function TicketQR({ ticketHashedId }) {
                     text: 'Check the status of your ticket here:',
                     url: trackingUrl,
                 });
-                console.log('Ticket link shared successfully!');
             } catch (error) {
                 console.error('Error sharing:', error);
             }

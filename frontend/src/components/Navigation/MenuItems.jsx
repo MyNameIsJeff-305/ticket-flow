@@ -1,6 +1,5 @@
-import { FaHome } from "react-icons/fa";
-import { FaTicketAlt } from "react-icons/fa";
-import { FaUsers } from "react-icons/fa6";
+import { FaHome, FaTicketAlt } from "react-icons/fa";
+import { FaUsers, FaBoxArchive } from "react-icons/fa6";
 
 import { NavLink } from "react-router-dom";
 
@@ -20,6 +19,10 @@ export default function MenuItems() {
             <NavLink to="/clients" className="menu-item">
                 <FaUsers />
                 Clients
+            </NavLink>
+            <NavLink to="/inventory" className="menu-item">
+                <FaBoxArchive />
+                Inventory
             </NavLink>
         </menu>
     )

@@ -1,135 +1,149 @@
 const express = require('express');
 
-const { Part, Ticket } = require('../../db/models');
-const { requireAuth } = require('../../utils/auth');
-const { properPartValidation } = require('../../utils/validation');
-const { singleMulterUpload, singleFileUpload } = require('../../awsS3');
+const { Part, PartImage, PartStock, InventoryLocation } = require('@db/models');
+const { requireAuth } = require('@utils/auth');
+
+const { singleMulterUpload, singleFileUpload } = require('@backend/awsS3');
 
 
 const router = express.Router();
 
-// Get all Parts
-router.get('/', requireAuth, async (req, res, next) => {
+// GET /api/parts
+// List all parts
+router.get('/', requireAuth, async (req, res) => {
     try {
-        const parts = await Part.findAll();
+        const page = parseInt(req.query.page) || null;
+        const size = parseInt(req.query.size) || null;
 
-        const Parts = [];
+        const where = {};
 
-        for (const part of parts) {
-            const ticket = await Ticket.findByPk(part.ticketId);
+        const parts = await Part.findAll({
+            where,
+            limit: size,
+            offset: (page - 1) * size
+        });
 
-            const value = {};
-            value.id = part.id;
-            value.name = part.name;
-            value.description = part.description;
-            value.imageUrl = part.imageUrl;
-            value.Ticket = ticket;
-
-            Parts.push(value);
+        if (!parts) {
+            return res.status(404).json({ error: 'No parts found' });
         }
 
-        return res.json(Parts);
-    } catch (error) {
-        next(error);
+        return res.json(parts);
+    }
+    catch (error) {
+        return res.status(500).json({ error: 'Error fetching parts' });
     }
 });
 
-//Get a Part
-router.get('/:id', requireAuth, async (req, res, next) => {
+// GET /api/parts/:id
+// Get Details of a specific Part
+router.get('/:id', requireAuth, async (req, res) => {
     try {
         const part = await Part.findByPk(req.params.id);
-
-        const ticket = await Ticket.findByPk(part.ticketId);
-
-        const value = {};
-        value.id = part.id;
-        value.name = part.name;
-        value.description = part.description;
-        value.imageUrl = part.imageUrl;
-        value.Ticket = ticket;
-
-        return res.json(value);
-    } catch (error) {
-        next(error);
-    }
-});
-
-//Create a Part
-router.post('/', requireAuth, singleMulterUpload('image'), async (req, res, next) => {
-    try {
-        const { name, description, ticketId } = req.body;
-
-        // console.log(req.file, "THIS IS THE REQ.FILE");
-
-        const imageUrl = req.file 
-        ? await singleFileUpload({ file: req.file, public: true }) : 
-        null;
-
-        let part = {};
-
-        if (!imageUrl || !imageUrl.startsWith('https')) {
-            part = {
-                name,
-                description,
-                ticketId,
-                imageUrl: 'https://archive.org/download/placeholder-image/placeholder-image.jpg'
-            }
-        } else {
-            part = {
-                name,
-                description,
-                ticketId,
-                imageUrl
-            }
+        if (!part) {
+            return res.status(404).json({ error: 'Part not found' });
         }
 
-        const newPart = await Part.create(part);
+        const stocks = await part.getPartStocks();
+        part.dataValues.stocks = stocks;
+        part.dataValues.totalStock = stocks.reduce((acc, stock) => acc + stock.quantity, 0);
 
-        return res.json(newPart);
-    } catch (error) {
-        next(error);
-    }
-});
-
-//Edit a Part
-router.put(
-    '/:id', 
-    requireAuth, 
-    properPartValidation, 
-    singleMulterUpload('image'), 
-    async (req, res, next) => {
-    try {
-        const part = await Part.findByPk(req.params.id);
-
-        const { name, description } = req.body;
-        const partImageUrl = req.file ?
-        await singleFileUpload({ file: req.file, public: true }) :
-        null;
-
-        part.name = name || part.name;
-        part.description = description || part.description;
-        part.imageUrl = partImageUrl || part.imageUrl;
-
-        await part.save();
+        const partImages = await PartImage.findAll({ where: { partId: part.id } });
+        part.dataValues.images = partImages;
 
         return res.json(part);
-
     } catch (error) {
-        next(error);
+        return res.status(500).json({ error: 'Error fetching part' });
     }
 });
 
-//Delete a Part
-router.delete('/:id', requireAuth, properPartValidation, async (req, res, next) => {
+// POST /api/parts
+// Create a new Part
+router.post(
+    '/',
+    requireAuth,
+    singleMulterUpload("image"),   // 👈 este middleware parsea el FormData
+    async (req, res, next) => {
+        try {
+            const { sku, name, description, brand, model, unit, defaultPrice, active, imageUrl } = req.body;
+
+            const partImageURL = req.file ? await singleFileUpload({ file: req.file, public: true }) : null;
+
+            const newPart = await Part.create({
+                sku,
+                name,
+                description,
+                brand,
+                model,
+                unit,
+                defaultPrice,
+                active,
+                imageUrl: partImageURL || "https://www.svgrepo.com/show/508699/landscape-placeholder.svg"
+            });
+
+
+            const partImage = await PartImage.create({
+                partId: newPart.id,
+                partImageURL: partImageURL || "https://www.svgrepo.com/show/508699/landscape-placeholder.svg"
+            });
+
+            return res.status(201).json(newPart);
+        } catch (error) {
+            return next(error);
+        }
+    }
+);
+
+// PUT /api/parts/:id
+// Update Part
+router.put('/:id', requireAuth, async (req, res, next) => {
+    try {
+        const { name, description, brand, model, imageUrl, unit, defaultPrice, active } = req.body;
+        const part = await Part.findByPk(req.params.id);
+        if (!part) {
+            return res.status(404).json({ error: 'Part not found' });
+        }
+
+        // Upload image to S3 if provided
+        let finalImageUrl = imageUrl;
+        if (req.file) {
+            finalImageUrl = await singleFileUpload({ file: req.file, public: true });
+        }
+
+        await part.update({ name, description, brand, model, imageUrl: finalImageUrl, unit, defaultPrice, active });
+        return res.json(part);
+    } catch (error) {
+        return next(error);
+    }
+});
+
+// DELETE /api/parts/:id
+// Delete Part
+router.delete('/:id', requireAuth, async (req, res, next) => {
     try {
         const part = await Part.findByPk(req.params.id);
-
+        if (!part) {
+            return res.status(404).json({ error: 'Part not found' });
+        }
         await part.destroy();
-
-        return res.json({ message: 'Part deleted' });
-
+        return res.status(204).json({ message: 'Part deleted' });
     } catch (error) {
-        next(error);
+        return next(error);
+    }
+});
+
+//GET /api/parts/:partId/stock
+//Get the stock of a part per location
+router.get('/:partId/stock', requireAuth, async (req, res, next) => {
+    try {
+        const partId = req.params.partId;
+        const stock = await PartStock.findAll({
+            where: { partId },
+            include: [InventoryLocation],
+            attributes: { exclude: ['createdAt', 'updatedAt'] }
+        });
+        return res.json(stock);
+    } catch (error) {
+        return next(error);
     }
 });
 

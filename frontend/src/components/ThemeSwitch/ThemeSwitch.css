@@ -3,6 +3,7 @@
     align-items: center;
     height: fit-content;
     gap: 10px;
+    padding: 20px;
     /* color: var(--text-color); */
     /* Adapt text color based on theme */
 }

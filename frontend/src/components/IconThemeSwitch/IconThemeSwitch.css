@@ -1,9 +1,10 @@
 .icon-theme-switch {
     display: flex;
     align-items: center;
-    transition: transform 0.2s ease;
+    transition: all 0.3s ease;
 }
 
 .icon-theme-switch:hover {
     transform: scale(1.1);
+    color: var(--button-bg-color);
 }

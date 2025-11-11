@@ -2,17 +2,17 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useModal } from '../../context/Modal';
 
-import './AddTicket.css';
+import './AddTicket.scss';
 
 import { getAllClientsThunk } from '../../store/clients';
 import { addTicketThunk } from '../../store/tickets';
 
-export default function AddTicket({ setTicketsChecker }) {
+export default function AddTicket({ setTicketsChecker, clientIdClient }) {
     const dispatch = useDispatch();
 
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [clientId, setClientId] = useState(null);
+    const [clientId, setClientId] = useState(clientIdClient || null);
 
     const [errors, setErrors] = useState({});
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
@@ -42,9 +42,12 @@ export default function AddTicket({ setTicketsChecker }) {
         if (!clientId) {
             newErrors.clientId = 'Please select a client';
         }
+        if (clientIdClient) {
+            newErrors.clientId = null;
+        }
         setErrors(newErrors);
-        setIsButtonDisabled(Object.keys(newErrors).length > 0);
-    }, [title, clientId]);
+        setIsButtonDisabled(Object.keys(newErrors).length > 0 && clientIdClient === null);
+    }, [title, clientId, clientIdClient]);
 
     if (!clients) return <div>Loading...</div>;
 
@@ -52,7 +55,7 @@ export default function AddTicket({ setTicketsChecker }) {
         e.preventDefault();
         setErrors({});
 
-        return dispatch(addTicketThunk({ title, description, clientId }))
+        return dispatch(addTicketThunk({ title, description, clientId: clientId || clientIdClient }))
             .then(() => {
                 setTicketsChecker(true);
                 closeModal();
@@ -66,51 +69,54 @@ export default function AddTicket({ setTicketsChecker }) {
     };
 
     return (
-        <form className='add-ticket-form' onSubmit={handleSubmit}>
-            <h1>Add Ticket</h1>
-            <div className='add-ticket-form-inputs'>
-                <div className='add-ticket-form-input'>
-                    <label htmlFor='title'>Title</label>
-                    <input
-                        id='title'
-                        type='text'
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                    />
-                    {errors.title && <div className='add-ticket-form-error'>{errors.title}</div>}
+            <form className='add-ticket-form' onSubmit={handleSubmit}>
+                <h1>Add Ticket</h1>
+                <div className='add-ticket-form-inputs'>
+                    <div className='add-ticket-form-input'>
+                        <label htmlFor='title'>Title</label>
+                        <input
+                            id='title'
+                            type='text'
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                        />
+                        {errors.title && <div className='add-ticket-form-error'>{errors.title}</div>}
+                    </div>
+                    <div className='add-ticket-form-input'>
+                        <label htmlFor='description'>Description</label>
+                        <textarea
+                            id='description'
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                        />
+                    </div>
+                    <div className='add-ticket-form-input'>
+                        <label htmlFor='client'>Client</label>
+                        <select
+                            id='client'
+                            value={clientId}
+                            disabled={clientIdClient}
+                            onChange={(e) => setClientId(e.target.value)}
+                        >
+                            <option value=''>Select a client</option>
+                            {
+                                clients.map(client => (
+                                    <option key={client.id} value={client.id}>
+                                        {client.firstName === '' ? (
+                                            `${client.companyName}`
+                                        ) : (
+                                            `${client.firstName} ${client.lastName}`
+                                        )}
+                                    </option>
+                                ))
+                            }
+                        </select>
+                        {errors.clientId && <div className='add-ticket-form-error'>{errors.clientId}</div>}
+                    </div>
                 </div>
-                <div className='add-ticket-form-input'>
-                    <label htmlFor='description'>Description</label>
-                    <textarea
-                        id='description'
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                    />
+                <div className='add-ticket-form-button'>
+                    <button disabled={isButtonDisabled}>Add Ticket</button>
                 </div>
-                <div className='add-ticket-form-input'>
-                    <label htmlFor='client'>Client</label>
-                    <select
-                        id='client'
-                        value={clientId}
-                        onChange={(e) => setClientId(e.target.value)}
-                    >
-                        <option value=''>Select a client</option>
-                        {
-                            clients.map(client => (
-                                <option key={client.id} value={client.id}>
-                                    {client.firstName === '' ? (
-                                        `${client.companyName}`
-                                    ) : (
-                                        `${client.firstName} ${client.lastName}`
-                                    )}
-                                </option>
-                            ))
-                        }
-                    </select>
-                    {errors.clientId && <div className='add-ticket-form-error'>{errors.clientId}</div>}
-                </div>
-            </div>
-            <button type='submit' disabled={isButtonDisabled}>Add Ticket</button>
-        </form>
+            </form>
     )
 }

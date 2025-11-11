@@ -1,0 +1,289 @@
+.edit-user-container {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--surface-color);
+    color: var(--text-color);
+    border-radius: 16px;
+    width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    gap: 20px;
+    animation: fadeIn 0.25s ease-in-out;
+
+    /* =============================== */
+    /* Header title                    */
+    /* =============================== */
+    .edit-user-header {
+        font-weight: 600;
+        font-size: 18px;
+        text-align: center;
+        color: var(--text-color);
+        margin: 10px 0px;
+        margin-bottom: 20px;
+    }
+
+    /* =============================== */
+    /* Form container layout            */
+    /* =============================== */
+    .edit-user-form {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding: 0;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+
+        @media (max-width: 760px) {
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+
+    .edit-user-content {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        align-content: space-between;
+        gap: 20px;
+
+        /* =============================== */
+        /* Left column - image section     */
+        /* =============================== */
+        .edit-user-left {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 50%;
+
+            .image-wrapper {
+                position: relative;
+                cursor: pointer;
+                display: inline-block;
+
+                .user-image {
+                    width: 260px;
+                    height: 260px;
+                    border-radius: 16px;
+                    object-fit: cover;
+                    transition: all 0.25s ease-in-out;
+                    border: 1px solid var(--box-bg-border);
+                    background-color: var(--box-bg);
+                }
+
+                .image-overlay {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 16px;
+                    background-color: rgba(0, 0, 0, 0.5);
+                    color: #fff;
+                    font-size: 14px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    opacity: 0;
+                    transition: opacity 0.3s ease-in-out;
+                    text-transform: uppercase;
+                    letter-spacing: 0.5px;
+                }
+
+                &:hover .client-image {
+                    transform: scale(1.03);
+                    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+                }
+
+                &:hover .image-overlay {
+                    opacity: 1;
+                }
+            }
+
+            .user-image {
+                width: 250px;
+                height: 250px;
+                border-radius: 16px;
+                object-fit: cover;
+                transition: all 0.2s ease-in-out;
+                border: 1px solid var(--box-bg-border);
+                background-color: var(--box-bg);
+
+                &:hover {
+                transform: scale(1.03);
+                box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+                }   
+            }
+
+            input[type='file'] {
+                margin-top: 10px;
+                font-size: 12px;
+                text-align: center;
+                color: var(--text-color);
+                cursor: pointer;
+                text-overflow: ellipsis;
+                background: transparent;
+                border: none;
+                opacity: 0.8;
+            }
+        }
+
+        /* =============================== */
+        /* Right column - form fields      */
+        /* =============================== */
+        .edit-user-right {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            width: 50%;
+
+            .first-last-name {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 16px;
+
+                .edit-user-input {
+                    display: flex;
+                    width: 100%;
+                    flex-direction: column;
+                    gap: 5px;
+
+                    label {
+                        font-size: 12px;
+                        text-transform: uppercase;
+                        opacity: 0.7;
+                        letter-spacing: 0.5px;
+                    }
+
+                    input[type='text'],
+                    select {
+                        width: 100%;
+                        background-color: var(--light-white);
+                        border: 1px solid rgba(0, 0, 0, 0.1);
+                        border-radius: 8px;
+                        padding: 8px 10px;
+                        font-size: 12px;
+                        color: var(--light-black);
+                        outline: none;
+
+                        &:focus {
+                            border-color: var(--tiffany-blue);
+                        }
+                    }
+
+                    .error {
+                        font-size: 12px;
+                        color: red;
+                    }
+                }
+            }
+
+            .username-email {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 16px;
+
+                .edit-user-input {
+                    display: flex;
+                    width: 100%;
+                    flex-direction: column;
+                    gap: 5px;
+
+                    label {
+                        font-size: 12px;
+                        text-transform: uppercase;
+                        opacity: 0.7;
+                        letter-spacing: 0.5px;
+                    }
+
+                    input,
+                    select {
+                        width: 100%;
+                        background-color: var(--light-white);
+                        border: 1px solid rgba(0, 0, 0, 0.1);
+                        border-radius: 8px;
+                        padding: 8px 10px;
+                        font-size: 12px;
+                        color: var(--light-black);
+                        outline: none;
+
+                        &:focus {
+                            border-color: var(--tiffany-blue);
+                        }
+                    }
+
+                    .error {
+                        font-size: 12px;
+                        color: red;
+                    }
+                }
+            }
+        }
+    }
+
+    .edit-employee-buttons {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+
+        button {
+            width: fit-content;
+            // padding: 6px 12px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 12px;
+            // font-weight: 500;
+
+            &:first-child {
+            background-color: var(--tiffany-blue);
+            color: white;
+
+                &:hover {
+                    opacity: 0.9;
+                }
+            }
+
+            &:last-child {
+                padding: 6px 12px;
+                background-color: transparent;
+                color: var(--text-color);
+
+                &:hover {
+                    background-color: #dedede8a;
+
+                }
+            }
+        }
+
+        .btn-submit-edit-employee, .btn-cancel-edit-employee {
+            // width: 50%;
+            padding: 6px 12px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            // font-size: 14px;
+
+            &:hover {
+                opacity: 0.9;
+            }
+        }
+    }
+
+    /* =============================== */
+    /* Animation & dark mode tweaks    */
+    /* =============================== */
+    @keyframes fadeIn {
+        from {
+        opacity: 0;
+        transform: translateY(-10px);
+        }
+        to {
+        opacity: 1;
+        transform: translateY(0);
+        }
+    }
+}

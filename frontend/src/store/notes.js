@@ -47,7 +47,6 @@ export const getNoteThunk = (noteId) => async (dispatch) => {
 };
 
 export const addNoteThunk = (note) => async (dispatch) => {
-    console.log(note, "THIS IS NOTE");
     const res = await csrfFetch('/api/notes', {
         method: 'POST',
         headers: {

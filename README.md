@@ -50,6 +50,8 @@ Ticket Flow is an IT Ticketing System designed to streamline the management of I
 
 ### **Styling**:
 ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+![Sass](https://img.shields.io/badge/sass-%23BF4080.svg?style=for-the-badge&logo=css3&logoColor=white)
+
 
 ### **Deployment**:
 ![Render](https://img.shields.io/badge/Render-%46E3B7.svg?style=for-the-badge&logo=render&logoColor=white)
