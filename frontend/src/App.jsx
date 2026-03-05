@@ -13,6 +13,7 @@ import TopBar from "./components/Layout/TopBar/TopBar";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Tickets from "./components/Tickets";
 import MyWork from "./components/MyWork";
+import Assessments from "./components/Assessments";
 import TicketDetailsOld from "./components/TicketDetails";
 import TicketDetails from "./components/Tickets/TicketDetails/TicketDetails";
 import Employees from "./components/Employees/Employees";
@@ -22,6 +23,7 @@ import ClientDetails from "./components/Clients/ClientDetails";
 import TrackingPage from "./components/TrackingPage/TrackingPage";
 import Inventory from "./components/Inventory";
 import PartDetails from "./components/Parts/PartDetails";
+import Calls from "./components/Calls/Calls";
 
 function Layout() {
   const dispatch = useDispatch();
@@ -119,7 +121,15 @@ const router = createBrowserRouter([
       {
         path: '/inventory/:partId',
         element: <PartDetails />
-      }
+      },
+      {
+        path: '/assessments',
+        element: <Assessments />
+      },
+      {
+        path: '/calls',
+        element: <Calls />
+      },
     ]
   }
 ])

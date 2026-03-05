@@ -7,6 +7,9 @@ const cookieParser = require('cookie-parser');
 const { ValidationError } = require('sequelize');
 require('express-async-errors');
 const publicWebhookPaths = require('./routes/api/integrations/twilio').publicWebhookPaths;
+const cron = require('node-cron');
+const { checkOutgoingCalls } = require('./utils/twilio');
+const twilioConfig = require('./config/twilio');
 
 const { environment } = require('./config');
 const routes = require('./routes');
@@ -78,6 +81,12 @@ app.use((err, _req, res, _next) => {
         message: err.message,
         errors: err.errors,
     });
+});
+
+cron.schedule(`*/${twilioConfig.checkCallsInterval} * * * *`, (ctx) => {
+    const ts = ctx.triggeredAt.toISOString();
+    console.log(`Checking outgoing calls at ${ts}`);
+    checkOutgoingCalls();
 });
 
 module.exports = app;

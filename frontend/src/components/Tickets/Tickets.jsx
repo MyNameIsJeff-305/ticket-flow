@@ -40,16 +40,16 @@ export default function Tickets() {
 
     // Eliminado el estado innecesario para el debounce
     useEffect(() => {
-    const handler = setTimeout(() => {
-        dispatch(getAllTicketsThunk(page, TICKETS_PER_PAGE, {
-            statusList: selectedStatus,
-            client: selectedClient,
-            search: searchFilter
-        }, sortOption.label, sortOption.value));
-        dispatch(getTotalTicketsAmountThunk());
-    }, 500);
-    return () => clearTimeout(handler);
-}, [page, selectedStatus, selectedClient, searchFilter, sortOption, dispatch]);
+        const handler = setTimeout(() => {
+            dispatch(getAllTicketsThunk(page, TICKETS_PER_PAGE, {
+                statusList: selectedStatus,
+                client: selectedClient,
+                search: searchFilter
+            }, sortOption.label, sortOption.value));
+            dispatch(getTotalTicketsAmountThunk());
+        }, 500);
+        return () => clearTimeout(handler);
+    }, [page, selectedStatus, selectedClient, searchFilter, sortOption, dispatch]);
 
     const toggleStatus = (status) => {
         if (selectedStatus.includes(status)) {
@@ -59,25 +59,75 @@ export default function Tickets() {
         }
     }
 
+    const [todayFilter, setTodayFilter] = useState(false);
+    const [last7DaysFilter, setLast7DaysFilter] = useState(false);
+    const [dateRangeFilter, setDateRangeFilter] = useState(null);
+
     const clearFilters = () => {
         setSelectedStatus([]);
         setSearchFilter('');
+        setTodayFilter(false);
+        setLast7DaysFilter(false);
+        setDateRangeFilter(null);
         setSelectedClient(null);
     };
 
+    const selectTodayFilter = () => {
+        setTodayFilter(true);
+        setLast7DaysFilter(false);
+        setDateRangeFilter(null);
+    };
+
+    const selectLast7DaysFilter = () => {
+        setTodayFilter(false);
+        setLast7DaysFilter(true);
+        setDateRangeFilter(null);
+    };
+
+    const selectDateRangeFilter = (range) => {
+        setTodayFilter(false);
+        setLast7DaysFilter(false);
+        setDateRangeFilter(range);
+    };
 
     useEffect(() => {
+        const getStartDateString = (date) => {
+            return date.toISOString().split('T')[0] + 'T00:00:00.000Z';
+        }
+
+        const getEndDateString = (date) => {
+            return date.toISOString().split('T')[0] + 'T23:59:59.999Z';
+        }
+
+        const getFinalDateRangeFilter = () => {
+            if (dateRangeFilter) return {
+                startDate: getStartDateString(dateRangeFilter.startDate),
+                endDate: getEndDateString(dateRangeFilter.endDate)
+            };
+
+            if (last7DaysFilter) {
+                const endDate = new Date();
+                const startDate = new Date();
+                startDate.setDate(endDate.getDate() - 7);
+                return { startDate: getStartDateString(startDate), endDate: getEndDateString(endDate) };
+            }
+
+            return { startDate: null, endDate: null };
+        };
+
         dispatch(getTotalTicketsAmountThunk());
         dispatch(getAllTicketsThunk(page, TICKETS_PER_PAGE, {
             statusList: selectedStatus,
             client: selectedClient,
-            search: searchFilter
+            search: searchFilter,
+            today: todayFilter,
+            ...getFinalDateRangeFilter()
         }, sortOption.label, sortOption.value));
         dispatch(getMyTicketsThunk());
         setDeleteTicketChecker(false);
         setTicketsChecker(false);
 
-    }, [dispatch, page, ticketsChecker, deleteTicketChecker, sortOption, selectedStatus, selectedClient, searchFilter]);
+    }, [dispatch, page, ticketsChecker, deleteTicketChecker, sortOption, selectedStatus, selectedClient, searchFilter, todayFilter, last7DaysFilter, dateRangeFilter]);
 
     const lastPage = Math.ceil(totalTickets / TICKETS_PER_PAGE);
 
@@ -179,6 +229,12 @@ export default function Tickets() {
                 clearFilters={clearFilters}
                 setSelectedClient={setSelectedClient}
                 setSearchFilter={setSearchFilter}
+                today={todayFilter}
+                last7Days={last7DaysFilter}
+                dateRange={dateRangeFilter}
+                selectToday={selectTodayFilter}
+                selectLast7Days={selectLast7DaysFilter}
+                selectDateRange={selectDateRangeFilter}
             />}
 
             <div className='tickets-container'>

@@ -25,6 +25,8 @@ router.get('/', requireAuth, async (req, res, next) => {
         const sortLabel = req.query.sort || 'createdAt';
         const sortValue = req.query.value || 'ASC';
 
+        const { startDate, endDate } = req.query;
+
         const where = {};
 
         if (status) {
@@ -64,6 +66,12 @@ router.get('/', requireAuth, async (req, res, next) => {
                     [Op.like]: `%${search.toLowerCase()}%`
                 })
             ];
+        }
+
+        if (startDate && endDate) {
+            where.createdAt = {
+                [Op.between]: [new Date(startDate), new Date(endDate)]
+            };
         }
 
         const tickets = await Ticket.findAll({

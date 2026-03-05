@@ -9,6 +9,8 @@ import {
     HiOutlineClipboardCheck
 } from "react-icons/hi";
 
+import { MdOutlineAssessment } from "react-icons/md";
+
 import './SideBar.scss';
 import ProfileControl from '../ProfileControl';
 
@@ -36,6 +38,12 @@ export default function SideBar() {
                     <NavLink to="/clients" className="nav-item">
                         <HiOutlineUserGroup className='nav-icon' />
                         Clients
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink to="/assessments" className="nav-item">
+                        <MdOutlineAssessment className='nav-icon' />
+                        Assessments
                     </NavLink>
                 </li>
                 <li>

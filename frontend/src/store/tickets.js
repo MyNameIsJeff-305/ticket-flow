@@ -15,7 +15,7 @@ const GET_TICKET_BY_HASH = 'tickets/getTicketByHash';
 
 const ADD_NOTE_TO_TICKET = 'tickets/addNoteToTicket';
 
-//ACTION CREATORS
+// region ACTION CREATORS
 const getAllTickets = (tickets) => ({
     type: GET_ALL_TICKETS,
     payload: tickets
@@ -76,15 +76,19 @@ const addNoteToTicket = (note) => ({
     payload: note
 });
 
-//THUNKS
+// region THUNKS
 export const getAllTicketsThunk = (page, size, filters = null, sortLabel, sortValue) => async (dispatch) => {
     let query = `/api/tickets?page=${page}&size=${size}&sort=${sortLabel}&value=${sortValue}`;
 
     if (filters) {
-        const { statusList, client, search } = filters;
+        const { statusList, client, search, today, startDate, endDate } = filters;
+
         if (statusList) query += `&statusList=${statusList.join(',')}`;
         if (client) query += `&client=${client}`;
         if (search) query += `&search=${search}`;
+        if (today) query += `&today=true`;
+        if (startDate) query += `&startDate=${startDate}`;
+        if (endDate) query += `&endDate=${endDate}`;
     }
 
     const res = await csrfFetch(query);
@@ -183,7 +187,7 @@ export const addNoteToTicketThunk = (note, ticketId) => async (dispatch) => {
 }
 
 
-//REDUCER
+// region REDUCER
 const initialState = {
     allTickets: [],
     todayTickets: [],
@@ -234,7 +238,7 @@ const ticketsReducer = (state = initialState, action) => {
                 })
             };
         }
-        
+
         case UNASSIGN_TICKET_FROM_USER: {
             return {
                 ...state,

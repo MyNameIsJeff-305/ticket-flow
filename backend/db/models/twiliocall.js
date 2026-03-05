@@ -67,7 +67,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     applicationSid: {
       type: DataTypes.STRING(64),
-      allowNull: false
+      allowNull: true
     },
     caller: {
       type: DataTypes.STRING(32),
